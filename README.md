@@ -25,6 +25,10 @@
 > ### 🚥 사용자 시나리오 <br/>
 > <img src="https://github.com/heejinssss/project-moic/blob/master/A208_FlowChart.png?raw=true" width=700> <br/>
 
+> ### 인프라 구조 <br/>
+> **`개발 서버와 운영 서버의 구조는 동일`** <br/>
+> ![image__3_](/uploads/bfdacd6333899d454970ac5b0bde637a/image__3_.png)
+
 <hr/>
 
 | 기획서 | URL |

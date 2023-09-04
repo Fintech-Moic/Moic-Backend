@@ -30,8 +30,9 @@
 > ![image__3_](/uploads/bfdacd6333899d454970ac5b0bde637a/image__3_.png)
 
 <hr/>
+
 | 기획서 | URL |
-|:-------------:|:-------------:|
+| :-------------: | :-------------: |
 | ERD | https://www.erdcloud.com/d/896pMJBeE8ehic9kB |
 | 와이어프레임 | https://www.figma.com/file/u16PFq6r076BbD3u2BE19u/A208?type=design&node-id=5%3A8&mode=design&t=N59zFVHcw7CEKPFl-1 |
 | 목업 | https://www.figma.com/file/HjKzbmqABJ1DIyrdBsxyKp/A208-Mockup?type=design&node-id=0%3A1&mode=design&t=uuPyU7XmuUxtSoTx-1 |

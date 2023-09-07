@@ -44,3 +44,8 @@
 > - Tailwind CSS v3.3.2
 > - TurboPack
 > - pnpm v8.7.1
+> - React Query v4.33
+> - Jotai v2.4.1
+> - Framer-Motion v10.16.4
+> - Eslint
+> - Prettier

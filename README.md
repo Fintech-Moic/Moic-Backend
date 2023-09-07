@@ -11,7 +11,7 @@
 > ### :ok_woman: 사용자 맞춤 카드 혜택 정보 제공 서비스 <br/>
 
 > ### :map: 지도로 보기 <br/>
-> **`주변에서 받을 수 있는 할인을 지도로 쉽게!`** <br/>
+> **`주변에서 받을 수 있는 할인 혜택을 지도로 쉽게!`** <br/>
 > **`가고싶은 가맹점이 있다면 지도를 활용해서 장소를 검색!`**
 
 > ### :tent: 코스 추천 <br/>
@@ -39,13 +39,13 @@
 
 ## :ski: [기술 스택](https://ssafy-fintech.notion.site/eafdde71c7ee4bc7bbb84aea3c13c108?pvs=4)
 > ### :bullettrain_front: Front-end
-> - Next.js v13.4.19
-> - Typescript v5.1
-> - Tailwind CSS v3.3.2
+> - Next.js (v13.4.19)
+> - Typescript (v5.1)
+> - Tailwind CSS (v3.3.2)
 > - TurboPack
-> - pnpm v8.7.1
-> - React Query v4.33
-> - Jotai v2.4.1
-> - Framer-Motion v10.16.4
+> - pnpm (v8.7.1)
+> - React Query (v4.33)
+> - Jotai (v2.4.1)
+> - Framer-Motion (v10.16.4)
 > - Eslint
 > - Prettier

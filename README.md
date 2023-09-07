@@ -36,3 +36,11 @@
 | ERD | https://www.erdcloud.com/d/896pMJBeE8ehic9kB |
 | 와이어프레임 | https://www.figma.com/file/u16PFq6r076BbD3u2BE19u/A208?type=design&node-id=5%3A8&mode=design&t=N59zFVHcw7CEKPFl-1 |
 | 목업 | https://www.figma.com/file/HjKzbmqABJ1DIyrdBsxyKp/A208-Mockup?type=design&node-id=0%3A1&mode=design&t=uuPyU7XmuUxtSoTx-1 |
+
+## :ski: [기술 스택](https://ssafy-fintech.notion.site/eafdde71c7ee4bc7bbb84aea3c13c108?pvs=4)
+> ### :bullettrain_front: Front-end
+> - Next.js v13.4.19
+> - Typescript v5.1
+> - Tailwind CSS v3.3.2
+> - TurboPack
+> - pnpm v8.7.1

@@ -58,6 +58,8 @@
         "optionalDependencies": true,
         "peerDependencies": true
       }
-    ]
+    ],
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

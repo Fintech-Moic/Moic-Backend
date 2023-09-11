@@ -1,5 +1,7 @@
 'use client';
 
-export default function Home() {
-  return <div>Main</div>;
+type Props = {};
+
+export default function Home({}: Props) {
+  return <div>Home</div>;
 }

@@ -10,14 +10,17 @@
     "airbnb-typescript",
     "airbnb/hooks",
     "plugin:prettier/recommended",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "overrides": [
     {
       "env": {
         "node": true
       },
-      "files": [".eslintrc.{js,cjs}"],
+      "files": [
+        ".eslintrc.{js,cjs}"
+      ],
       "parserOptions": {
         "sourceType": "script"
       }
@@ -29,11 +32,22 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "prettier", "import"],
-  "ignorePatterns": ["node_modules/"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier",
+    "import"
+  ],
+  "ignorePatterns": [
+    "node_modules/"
+  ],
   "rules": {
     "linebreak-style": 0,
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "no-empty-pattern": "off",
@@ -44,6 +58,8 @@
         "optionalDependencies": true,
         "peerDependencies": true
       }
-    ]
+    ],
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   }
 }

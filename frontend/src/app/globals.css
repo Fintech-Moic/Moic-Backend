@@ -16,6 +16,109 @@
   }
 }
 
+@font-face {
+  font-family: 'SUIT';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SUIT';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JALNAN';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+  .t1 {
+    @apply font-jalnan text-80 font-normal leading-120;
+  }
+
+  .t2 {
+    @apply font-JALNAN text-36 font-normal leading-120;
+  }
+
+  .t3 {
+    @apply font-JALNAN text-28 font-normal leading-120;
+  }
+
+  .t4 {
+    @apply font-JALNAN text-24 font-normal leading-120;
+  }
+
+  .h1b {
+    @apply font-suit text-32 font-semibold leading-120;
+  }
+
+  .h1r {
+    @apply font-suit text-32 font-normal leading-120;
+  }
+
+  .h2b {
+    @apply font-suit text-28 font-semibold leading-120;
+  }
+
+  .h2r {
+    @apply font-suit text-28 font-normal leading-120;
+  }
+
+  .h3b {
+    @apply font-suit text-24 font-semibold leading-120;
+  }
+
+  .h3r {
+    @apply font-suit text-24 font-normal leading-120;
+  }
+
+  .h4b {
+    @apply font-suit text-20 font-semibold leading-130;
+  }
+
+  .h4r {
+    @apply font-suit text-20 font-normal leading-130;
+  }
+
+  .p1b {
+    @apply font-suit text-18 font-semibold leading-140;
+  }
+
+  .p1r {
+    @apply font-suit text-18 font-normal leading-140;
+  }
+
+  .p2b {
+    @apply font-suit text-16 font-semibold leading-140;
+  }
+
+  .p2r {
+    @apply font-suit text-16 font-normal leading-140;
+  }
+
+  .p3b {
+    @apply font-suit text-14 font-semibold leading-140;
+  }
+
+  .p3r {
+    @apply font-suit text-14 font-normal leading-140;
+  }
+
+  .captionb {
+    @apply font-suit text-12 font-semibold leading-140;
+  }
+
+  .captionr {
+    @apply font-suit text-12 font-normal leading-140;
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

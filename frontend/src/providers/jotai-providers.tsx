@@ -6,10 +6,7 @@ import { atom, useAtom } from 'jotai';
 
 export const countAtom = atom(0);
 
-export function JotaiWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <JotaiProvider>
-      {children}
-    </JotaiProvider>
-  );
+function JotaiWrapper({ children }: { children: React.ReactNode }) {
+  return <JotaiProvider>{children}</JotaiProvider>;
 }
+export default JotaiWrapper;

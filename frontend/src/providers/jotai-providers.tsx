@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { Provider as JotaiProvider } from 'jotai';
-import { atom, useAtom } from 'jotai';
 
-export const countAtom = atom(0);
-
-function JotaiWrapper({ children }: { children: React.ReactNode }) {
-  return <JotaiProvider>{children}</JotaiProvider>;
+export default function JotaiWrapper({
+  children
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <JotaiProvider>
+      {children}
+    </JotaiProvider>
+  )
 }
-export default JotaiWrapper;

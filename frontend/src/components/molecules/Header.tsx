@@ -23,7 +23,7 @@ export default function Header({
 }: HeaderProps) {
   const router = useRouter();
   return (
-    <header className="w-100% h-14 bg-[#FFBF69] flex flex-row justify-between items-center gap-2 pr-2 pl-2">
+    <header className="w-100% h-14 bg-y4 flex flex-row justify-between items-center gap-2 pr-2 pl-2">
       {isPrevButton ? (
         <IconButton
           src={WhiteRightArrowIcon}
@@ -34,7 +34,7 @@ export default function Header({
       ) : (
         <div />
       )}
-      <span className="text-[20px]">{title}</span>
+      <span className="h4r">{title}</span>
       {isFilterButton ? (
         <IconButton
           src={WhiteFilterIcon}

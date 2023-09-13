@@ -1,10 +1,8 @@
-'use client';
-
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Provider as JotaiProvider } from 'jotai';
 import Providers from './providers';
+import JotaiWrapper from '@/providers/jotai-providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,9 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <JotaiProvider>
+        <JotaiWrapper>
           <Providers>{children}</Providers>
-        </JotaiProvider>
+        </JotaiWrapper>
       </body>
     </html>
   );

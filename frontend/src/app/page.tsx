@@ -1,5 +1,5 @@
 type Props = {};
 
 export default function Home({}: Props) {
-  return <div className="t1">Home</div>;
+  return <div className="t1">splash</div>;
 }

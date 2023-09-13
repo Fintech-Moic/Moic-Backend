@@ -3,6 +3,7 @@ const nextConfig = {};
 
 module.exports = {
   reactStrictMode: true,
+  output: 'standalone',
   experimental: {
     appDir: true,
   },

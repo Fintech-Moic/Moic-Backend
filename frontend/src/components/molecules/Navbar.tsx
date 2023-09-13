@@ -28,7 +28,7 @@ function Navbar() {
   };
 
   return (
-    <div className="h-20 w-96 flex justify-between">
+    <div className="h-20 w-full flex justify-evenly">
       <NavbarButton
         src={selectedNav === 'map' ? mapOn : map}
         alt="map"

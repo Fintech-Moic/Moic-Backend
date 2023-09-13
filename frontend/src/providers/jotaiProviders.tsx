@@ -4,13 +4,9 @@ import React from 'react';
 import { Provider as JotaiProvider } from 'jotai';
 
 export default function JotaiWrapper({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return (
-    <JotaiProvider>
-      {children}
-    </JotaiProvider>
-  )
+  return <JotaiProvider>{children}</JotaiProvider>;
 }

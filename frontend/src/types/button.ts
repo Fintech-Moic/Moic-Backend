@@ -8,9 +8,9 @@
  */
 export default interface ButtonProps {
   type: 'button' | 'submit';
-  title: string;
+  title?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   width: string;
   height: string;
-  borderRadius: string;
+  borderRadius?: string;
 }

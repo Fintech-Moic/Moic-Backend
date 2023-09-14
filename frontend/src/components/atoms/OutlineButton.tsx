@@ -7,6 +7,11 @@ interface OutlineButtonProps extends ButtonProps {
   lineColor: string;
 }
 
+/** 테투리 선이 보이는 Button Component
+ * @param {String} lineColor 테두리 선의 색깔
+ * @returns {JSX.Element} 테투리 선이 보이는 Button Component 반환
+ */
+
 export default function OutlineButton({
   type,
   lineColor,

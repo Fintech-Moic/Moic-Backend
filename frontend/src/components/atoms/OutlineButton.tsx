@@ -1,23 +1,36 @@
-/*
-테두리와 흰색 바탕색이 존재하는 버튼
+'use client';
 
-모바일 기준 사이징
-height : 32px, 48px
-weight : 80px, 120px, 320px
-*/
+import { useCallback } from 'react';
+import ButtonProps from '@/types/button';
 
-interface OutlineButtonProps {
-  bgColor: string;
+interface OutlineButtonProps extends ButtonProps {
   lineColor: string;
-  title: string;
 }
+
 export default function OutlineButton({
-  bgColor,
+  type,
   lineColor,
   title,
+  onClick,
+  width,
+  height,
+  borderRadius,
 }: OutlineButtonProps) {
+  const handleOnClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (onClick) {
+        onClick(event);
+      }
+    },
+    [onClick]
+  );
+
   return (
-    <button type="button" className={`bg-${bgColor} border-${lineColor}`}>
+    <button
+      type={type === 'submit' ? 'submit' : 'button'}
+      className={`${width} ${height} captionr bg-white border-solid ${borderRadius} rounded-[10px] flex justify-center items-center ${lineColor}`}
+      onClick={handleOnClick}
+    >
       {title}
     </button>
   );

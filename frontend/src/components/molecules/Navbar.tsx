@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
-import { atom, useAtom } from 'jotai';
+import { useRouter, usePathname } from 'next/navigation';
+
 import NavbarButton from '@/components/atoms/NavbarButton';
 import map from '@/../public/assets/images/map.svg';
 import mapOn from '@/../public/assets/images/mapOn.svg';
@@ -10,44 +13,33 @@ import cardOn from '@/../public/assets/images/cardOn.svg';
 import gifticon from '@/../public/assets/images/gifticon.svg';
 import gifticonOn from '@/../public/assets/images/gifticonOn.svg';
 
-const selectedNavAtom = atom('');
-
 function Navbar() {
-  const [selectedNav, setSelectedNav] = useAtom(selectedNavAtom);
-  const mapButtonClick = () => {
-    setSelectedNav('map');
+  const pathname = usePathname();
+  const router = useRouter();
+  const navButtonClick = (target: string) => {
+    router.push(`${target}`);
   };
-  const homeButtonClick = () => {
-    setSelectedNav('home');
-  };
-  const cardButtonClick = () => {
-    setSelectedNav('card');
-  };
-  const gifticonButtonClick = () => {
-    setSelectedNav('gifticon');
-  };
-
   return (
-    <div className="h-20 w-full flex justify-evenly">
+    <div className="h-20 w-full max-w-xl flex justify-evenly items-center">
       <NavbarButton
-        src={selectedNav === 'map' ? mapOn : map}
+        src={pathname === '/map/dest' ? mapOn : map}
         alt="map"
-        onClick={mapButtonClick}
+        onClick={() => navButtonClick('/map/dest')}
       />
       <NavbarButton
-        src={selectedNav === 'home' ? homeOn : home}
+        src={pathname === '/home' ? homeOn : home}
         alt="home"
-        onClick={homeButtonClick}
+        onClick={() => navButtonClick('/home')}
       />
       <NavbarButton
-        src={selectedNav === 'card' ? cardOn : card}
+        src={pathname === '/profit/card' ? cardOn : card}
         alt="card"
-        onClick={cardButtonClick}
+        onClick={() => navButtonClick('/profit/card')}
       />
       <NavbarButton
-        src={selectedNav === 'gifticon' ? gifticonOn : gifticon}
+        src={pathname === '/profit/gifticon' ? gifticonOn : gifticon}
         alt="gifticon"
-        onClick={gifticonButtonClick}
+        onClick={() => navButtonClick('/profit/gifticon')}
       />
     </div>
   );

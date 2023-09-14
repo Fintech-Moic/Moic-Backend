@@ -26,7 +26,11 @@ export default function Header({
     <header className="w-100% h-14 bg-y4 flex flex-row justify-between items-center gap-2 pr-2 pl-2">
       {isPrevButton ? (
         <IconButton
+          type="button"
+          width="w-10"
+          height="h-10"
           src={WhiteRightArrowIcon}
+          alt="headerPrevButton"
           onClick={() => {
             router.back();
           }}
@@ -37,7 +41,11 @@ export default function Header({
       <span className="h4r">{title}</span>
       {isFilterButton ? (
         <IconButton
+          type="button"
+          width="w-10"
+          height="h-10"
           src={WhiteFilterIcon}
+          alt="headerFilterButton"
           onClick={() => {
             // fix me! 추후, Card 구현 시 로직 추가
           }}

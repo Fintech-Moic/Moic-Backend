@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-
-import NavbarButton from '@/components/atoms/NavbarButton';
+import IconButton from '../atoms/IconButton';
 import map from '@/../public/assets/images/map.svg';
 import mapOn from '@/../public/assets/images/mapOn.svg';
 import home from '@/../public/assets/images/home.svg';
@@ -21,22 +20,34 @@ function Navbar() {
   };
   return (
     <div className="h-20 w-full max-w-xl flex justify-evenly items-center">
-      <NavbarButton
+      <IconButton
+        type="button"
+        width="w-6"
+        height="h-6"
         src={pathname === '/map/dest' ? mapOn : map}
         alt="map"
         onClick={() => navButtonClick('/map/dest')}
       />
-      <NavbarButton
+      <IconButton
+        type="button"
+        width="w-6"
+        height="h-6"
         src={pathname === '/home' ? homeOn : home}
         alt="home"
         onClick={() => navButtonClick('/home')}
       />
-      <NavbarButton
+      <IconButton
+        type="button"
+        width="w-6"
+        height="h-6"
         src={pathname === '/profit/card' ? cardOn : card}
         alt="card"
         onClick={() => navButtonClick('/profit/card')}
       />
-      <NavbarButton
+      <IconButton
+        type="button"
+        width="w-6"
+        height="h-6"
         src={pathname === '/profit/gifticon' ? gifticonOn : gifticon}
         alt="gifticon"
         onClick={() => navButtonClick('/profit/gifticon')}

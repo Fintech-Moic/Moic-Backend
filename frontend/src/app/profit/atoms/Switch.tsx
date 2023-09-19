@@ -1,13 +1,11 @@
 'use client';
 
-import { atom, useAtom } from 'jotai';
-/*
-width: 52px;
-height: 28px;
-*/
-const switchAtom = atom(false);
-export default function Switch() {
-  const [isOn, setIsOn] = useAtom(switchAtom);
+interface SwitchProps {
+  isOn: boolean;
+  setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Switch({ isOn, setIsOn }: SwitchProps) {
   const handleClickSwitch = () => {
     setIsOn((prev) => !prev);
   };

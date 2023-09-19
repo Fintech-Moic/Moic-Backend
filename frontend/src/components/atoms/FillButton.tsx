@@ -16,6 +16,7 @@ export default function FillButton({
   type,
   bgColor,
   title,
+  font = 'captionr',
   onClick,
   width,
   height,
@@ -33,7 +34,7 @@ export default function FillButton({
   return (
     <button
       type={type === 'submit' ? 'submit' : 'button'}
-      className={`${width} ${height} captionr ${bgColor} ${borderRadius} rounded-[10px] flex justify-center items-center`}
+      className={`${width} ${height} ${font} ${bgColor} rounded-lg ${borderRadius} rounded-[10px] flex justify-center items-center text-white`}
       onClick={handleOnClick}
     >
       {title}

@@ -16,7 +16,7 @@ function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const navButtonClick = (target: string) => {
-    router.push(`${target}`);
+    router.push(target);
   };
   return (
     <div className="h-20 w-full max-w-xl flex justify-evenly items-center">

@@ -44,9 +44,9 @@ export default function Dropdown({
   }, [isOpen]);
 
   return (
-    <div className="relative w-36 cursor-pointer">
+    <div className="relative w-36 cursor-pointer p2r">
       <div
-        className="rounded-[10px] border-[#9BA5B7] border-2 h-12 flex justify-between items-center"
+        className="px-2 rounded-[10px] border-[#9BA5B7] bg-white border-2 h-12 flex justify-between items-center"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-hidden="true"
       >
@@ -66,11 +66,11 @@ export default function Dropdown({
       </div>
       <ul
         ref={dropdownListRef}
-        className={`absolute mt-2 w-full h-40 border-[#9BA5B7] rounded-lg border-2 grid grid-cols-1 divide-y 
+        className={`absolute mt-2 w-full max-h-40 bg-white border-[#9BA5B7] rounded-lg border-2 grid grid-cols-1 divide-y 
              ${
                isOpen
-                 ? 'max-h-40 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-100 visibility-visible'
-                 : 'max-h-0 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-0 visibility-hidden'
+                 ? 'max-h-40 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-100 visibility-visible pointer-events-auto'
+                 : 'max-h-0 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-0 visibility-hidden pointer-events-none'
              }`}
         onClick={handleClickListItem}
         aria-hidden="true"

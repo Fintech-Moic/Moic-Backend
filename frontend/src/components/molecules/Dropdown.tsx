@@ -46,7 +46,7 @@ export default function Dropdown({
   return (
     <div className="relative w-36 cursor-pointer p2r">
       <div
-        className="px-2 rounded-[10px] border-[#9BA5B7] bg-white border-2 h-12 flex justify-between items-center"
+        className="px-2 rounded-[10px] border-Secondary bg-white border-2 h-12 flex justify-between items-center"
         onClick={() => setIsOpen((prev) => !prev)}
         aria-hidden="true"
       >
@@ -66,7 +66,7 @@ export default function Dropdown({
       </div>
       <ul
         ref={dropdownListRef}
-        className={`absolute mt-2 w-full max-h-40 bg-white border-[#9BA5B7] rounded-lg border-2 grid grid-cols-1 divide-y 
+        className={`absolute mt-2 w-full max-h-40 bg-white border-Secondary rounded-lg border-2 grid grid-cols-1 divide-y 
              ${
                isOpen
                  ? 'max-h-40 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-100 visibility-visible pointer-events-auto'

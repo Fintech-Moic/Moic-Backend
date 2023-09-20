@@ -54,7 +54,7 @@ const config: Config = {
         g10: '#104540',
 
         Primary: '#667080',
-        Secondary: '#EEF1F4',
+        Secondary: '#9BA5B7',
         Tertiary: '#EEF1F4',
         White: '#FFFFFF',
         Annotations: '#F6CA56',

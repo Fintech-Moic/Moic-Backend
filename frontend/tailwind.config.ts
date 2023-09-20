@@ -53,11 +53,11 @@ const config: Config = {
         g9: '#155852',
         g10: '#104540',
 
-        Primary: '#667080',
-        Secondary: '#EEF1F4',
+        Primary: '#545F71',
+        Secondary: '#9BA5B7',
         Tertiary: '#EEF1F4',
         White: '#FFFFFF',
-        Annotations: '#F6CA56',
+        Annotations: '#F6BE2C',
       },
       fontFamily: {
         suit: ['SUIT', 'sans-serif'],

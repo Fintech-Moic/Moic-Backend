@@ -1,7 +1,11 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { useSetAtom } from 'jotai';
 import IconButton from '../atoms/IconButton';
 import WhiteRightArrowIcon from '@/../public/assets/WhiteRightArrowIcon.svg';
 import WhiteFilterIcon from '@/../public/assets/WhilteFilterIcon.svg';
+import { filterOpenAtom } from '@/store/atoms/header';
 
 interface HeaderProps {
   title: string;
@@ -22,8 +26,9 @@ export default function Header({
   isFilterButton,
 }: HeaderProps) {
   const router = useRouter();
+  const setFilterOpen = useSetAtom(filterOpenAtom);
   return (
-    <header className="w-100% h-14 bg-y4 flex flex-row justify-between items-center gap-2 pr-2 pl-2">
+    <header className="w-100% h-14 bg-y4 flex flex-row justify-between items-center gap-2 pr-2 pl-2 text-white">
       {isPrevButton ? (
         <IconButton
           type="button"
@@ -47,7 +52,7 @@ export default function Header({
           src={WhiteFilterIcon}
           alt="headerFilterButton"
           onClick={() => {
-            // fix me! 추후, Card 구현 시 로직 추가
+            setFilterOpen((prev) => !prev);
           }}
         />
       ) : (

@@ -1,7 +1,7 @@
 'use client';
 
 import { useAtomValue } from 'jotai';
-import ProfitFilter from '../molecules/ProfitFilter';
+import ProfitFilter from '../organisms/ProfitFilter';
 import { filterOpenAtom } from '@/store/atoms/header';
 
 export default function Page() {

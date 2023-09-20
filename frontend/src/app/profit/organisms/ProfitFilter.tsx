@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Switch from '../atoms/Switch';
-import BlackUpIcon from '@/../public/assets/BlackUpIcon.svg';
-import IconButton from '@/components/atoms/IconButton';
+import SearchInputBar from '../molecules/SearchInputBar';
 import Dropdown from '@/components/molecules/Dropdown';
 
 export default function ProfitFilter() {
@@ -17,6 +16,7 @@ export default function ProfitFilter() {
     value: string;
   } | null>(null);
 
+  // fix me! : server에서 가져온 list로 수정 예정
   const companyList = [
     { id: '1', value: 'KB국민' },
     { id: '2', value: '신한' },
@@ -29,19 +29,23 @@ export default function ProfitFilter() {
     { id: '2t', value: '신용' },
   ];
 
+  const handleSubmitSearch = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const currentInput = (e.currentTarget as HTMLFormElement).search.value;
+      if (!currentInput) return;
+      console.log(currentInput);
+    },
+    []
+  );
+
   return (
-    <div className="z-10 mt-4 p-4 absolute left-1/2 h-40 w-[360px] -translate-x-1/2 rounded-[10px] bg-Secondary flex flex-col justify-between">
-      <div className="flex justify-between items-center">
+    <div className="z-10 mt-4 p-4 absolute left-1/2 w-[360px] -translate-x-1/2 rounded-[10px] bg-Secondary flex flex-col justify-between gap-4">
+      <div className="flex justify-start items-center gap-1">
+        <span className="p2r">전체 보기</span>
         <Switch isOn={isSwitchOn} setIsOn={setIsSwitchOn} />
-        <IconButton
-          type="button"
-          width="w-10"
-          height="h-10"
-          src={BlackUpIcon}
-          alt="필터더보기"
-        />
       </div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center relative z-20">
         <Dropdown
           placeholder="카드사"
           list={companyList}
@@ -55,7 +59,7 @@ export default function ProfitFilter() {
           setSelectItem={setSelectedType}
         />
       </div>
-      <div className="">검색차아아아ㅏ아아아ㅏㅇ!!!!</div>
+      <SearchInputBar onSubmit={handleSubmitSearch} />
     </div>
   );
 }

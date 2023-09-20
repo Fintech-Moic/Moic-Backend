@@ -12,7 +12,7 @@ export default function Switch({ isOn, setIsOn }: SwitchProps) {
   return (
     <div
       className={`w-14 h-7 rounded-2xl relative items-center transition-all duration-500 ease-in-out${
-        isOn ? 'justify-end bg-g4' : 'justify-start bg-[#E8E8E8]'
+        isOn ? 'justify-end bg-g4' : 'justify-start bg-Tertiary'
       }`}
     >
       <button

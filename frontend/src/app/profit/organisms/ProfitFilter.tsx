@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import Switch from '../atoms/Switch';
 import SearchInputBar from '../molecules/SearchInputBar';
-import Dropdown from '@/components/molecules/Dropdown';
+import Dropdown from '@/components/atoms/Dropdown';
 
 export default function ProfitFilter() {
   const [isSwitchOn, setIsSwitchOn] = useState(false);

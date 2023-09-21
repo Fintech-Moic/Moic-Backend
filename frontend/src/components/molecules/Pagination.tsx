@@ -22,7 +22,6 @@ export default function Pagination({
 }: PaginationProps) {
   // 사용자의 눈에 보이는 실 페이지 순서
   const pageIdx = idx + 1;
-
   const handleClickPrevIdx = () => {
     if (idx === 0) return;
     setIdx((prev) => prev - 1);

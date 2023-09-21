@@ -21,7 +21,7 @@ export default function Page() {
         type: filterOption.type,
         cardName: filterOption.cardName,
       });
-      setData(response.data.data);
+      setData(response.data);
     })();
   }, [filterOption, setFilterOption]);
 

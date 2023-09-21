@@ -32,14 +32,14 @@ export default function ProfitFilter({ data }: ProfitFilterProps) {
   }, [selectedCompany, selectedType, setFilterOption]);
 
   const companyList =
-    'companyList' in data
+    data && 'companyList' in data
       ? data?.companyList.map((cur: string, idx: number) => {
           return { id: `${idx}_cur`, value: cur };
         })
       : [];
 
   const typeList =
-    'typeList' in data
+    data && 'typeList' in data
       ? data?.typeList.map((cur: string, idx: number) => {
           return { id: `${idx}_cur`, value: cur };
         })

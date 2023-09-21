@@ -1,6 +1,6 @@
 'use client';
 
-import AuthForm from '../molecules/AuthForm';
+import AuthForm from '../molecules/InputForm';
 import TextButton from '../atoms/TextButton';
 import SocialLoginButton from '../atoms/SocialLoginButton';
 

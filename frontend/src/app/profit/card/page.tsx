@@ -1,20 +1,34 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
-import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import PaginatedCardList from '../organisms/PaginatedCardList';
 import ProfitFilter from '../organisms/ProfitFilter';
-import { filterOpenAtom } from '@/store/atoms/header';
-import Pagination from '@/components/molecules/Pagination';
+import { getCardSearch } from '@/api/card';
+import { filterOptionAtom } from '@/store/atoms/header';
 
-// fix me! : 카드 리스트 렌더링 필요
 export default function Page() {
-  const filterOpen = useAtomValue(filterOpenAtom);
-  const [idx, setIdx] = useState(0);
+  const [filterOption, setFilterOption] = useAtom(filterOptionAtom);
+  const [data, setData] = useState({
+    typeList: [],
+    cardList: [],
+    companyList: [],
+  });
+  useEffect(() => {
+    (async () => {
+      const response = await getCardSearch({
+        company: filterOption.company,
+        type: filterOption.type,
+        cardName: filterOption.cardName,
+      });
+      setData(response.data.data);
+    })();
+  }, [filterOption, setFilterOption]);
+
   return (
     <div className="w-full h-full relative">
-      {filterOpen && <ProfitFilter />}
-      <div className="" />
-      <Pagination idx={idx} setIdx={setIdx} pageLength={10} />
+      <ProfitFilter data={data} />
+      <PaginatedCardList data={data} />
     </div>
   );
 }

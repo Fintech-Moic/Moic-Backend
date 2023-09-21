@@ -12,12 +12,12 @@ type InputFormProps = {
 };
 
 /** InputForm Component
- * @param {String} register Submit을 위한 FillButton의 Title
- * @param {String} name input data name
- * @param {String} type 로그인/아이디찾기/비밀번호 찾기 판별용
- * @param {String} placeholder
- * @param {Boolean} isError
- * @param {String} notice
+ * @param {String} register react-form-hook의 register
+ * @param {String} name InputBox 이름
+ * @param {String} type InputBox type
+ * @param {String} placeholder InputBox placeholder
+ * @param {Boolean} isError inputBox에 error여부 보내줄 props
+ * @param {String} notice inputBox 아래에 출력할 메시지
  * @returns {JSX.Element} InputBox와 Error 출력 메시지를 가진 InputForm Component 반환
  */
 

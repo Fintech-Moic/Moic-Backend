@@ -8,8 +8,8 @@ type InputBoxProps = {
 
 /** InputBox Component
  * @param {ForwardedRef<HTMLInputElement>} ref
- * @param {String} name input data name
- * @param {String} type input type
+ * @param {String} name InputBox 이름
+ * @param {String} type InputBox type
  * @param {String} placeholder InputBox placeholder
  * @returns {JSX.Element} InputBox Component 반환
  */

@@ -58,6 +58,7 @@ const config: Config = {
         Tertiary: '#EEF1F4',
         White: '#FFFFFF',
         Annotations: '#F6BE2C',
+        CardSubtitle: '#7E7E7E',
       },
       fontFamily: {
         suit: ['SUIT', 'sans-serif'],

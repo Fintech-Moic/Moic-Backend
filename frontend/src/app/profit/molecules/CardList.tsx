@@ -6,6 +6,7 @@ interface CardListProps {
     type: string;
     name: string;
     cardImage: string;
+    mine: boolean;
   }>;
   currentPage: number;
 }

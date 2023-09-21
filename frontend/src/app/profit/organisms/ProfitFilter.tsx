@@ -23,12 +23,15 @@ export default function ProfitFilter({ data }: ProfitFilterProps) {
     id: string;
     value: string;
   } | null>(null);
+
+  // Fix me! : filterOption에 영향가지 않도록 Request 수정하기
   useEffect(() => {
-    setFilterOption((prev) => ({
-      ...(prev as any),
-      company: selectedCompany?.value,
-      type: selectedType?.value,
-    }));
+    setFilterOption((prev) => {
+      const updatedFilter = { ...prev };
+      updatedFilter.company = selectedCompany?.value || '';
+      updatedFilter.type = selectedType?.value || '';
+      return updatedFilter;
+    });
   }, [selectedCompany, selectedType, setFilterOption]);
 
   const companyList =
@@ -50,9 +53,13 @@ export default function ProfitFilter({ data }: ProfitFilterProps) {
       e.preventDefault();
       const currentInput = (e.currentTarget as HTMLFormElement).search.value;
       if (!currentInput) return;
-      console.log(currentInput);
+      setFilterOption((prev) => {
+        const updatedFilter = { ...prev };
+        updatedFilter.cardName = currentInput;
+        return updatedFilter;
+      });
     },
-    []
+    [setFilterOption]
   );
 
   return (

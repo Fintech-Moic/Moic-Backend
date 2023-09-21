@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 
 export async function getSearchData() {
-  const res = await fetch(`https://moic.site/api/v1/autocomplete?word=안경`, {
+
+  // const res = await fetch(`https://moic.site/api/v1/autocomplete?word=${inputValue}`, {
+  const res = await fetch(`https://moic.site/api/v1/autocomplete?word=강남`, {
     method: 'POST',
   })
   const data = await res.json()
@@ -11,13 +13,13 @@ export async function getSearchData() {
   return data;
 }
 
-export async function listOfSearch() {
+// export async function listOfSearch() {
 
-  const posts = await getSearchData();
-  console.log('SEARCH DATA CHECK ===>', posts)
+//   const posts = await getSearchData();
+//   console.log('SEARCH DATA CHECK ===>', posts)
 
-  return posts
-}
+//   return posts
+// }
 
 export default function searchShop() {
 
@@ -33,7 +35,8 @@ export default function searchShop() {
         id="inputValue"
         name="inputValue"
         placeholder="검색어를 입력하세요"
-        onChange={onChangeInput}
+        onKeyDown={onChangeInput}
+        onChange={getSearchData}
       />
     </div>
   )

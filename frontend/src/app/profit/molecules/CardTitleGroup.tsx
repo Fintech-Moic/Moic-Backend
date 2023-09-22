@@ -11,6 +11,13 @@ interface CardTitleGroupProps {
     size: string;
   };
 }
+
+/** 카드 관심사에서 사용되는 메인, 서브 타이틀로 구성된 타이틀 컴포넌트
+ * @param {Object} mainTitle 메인 타이틀의 폰트 사이즈, 텍스트를 가진 object
+ * @param {Object} subTitle 서브 타이틀의 폰트 사이즈, 텍스트를 가진 object
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
+
 export default function CardTitleGroup({
   mainTitle,
   subTitle,
@@ -22,11 +29,3 @@ export default function CardTitleGroup({
     </div>
   );
 }
-
-/*
-
-      <span className="h1b">{cardDetail?.company}</span>
-      <span className="break-words h4r text-CardSubtitle">
-        {cardDetail?.name}
-      </span>
-*/

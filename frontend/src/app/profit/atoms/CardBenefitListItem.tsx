@@ -22,6 +22,10 @@ function createBenefitText(benefit: CardBenefit) {
   return benefitText;
 }
 
+/** 카드 혜택 하나를 렌더링 해주는 컴포넌트
+ * @param {Object} benefit 카드 혜택 객체
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function CardBenefitListItem({
   benefit,
 }: {

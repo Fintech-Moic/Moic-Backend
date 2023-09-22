@@ -19,6 +19,11 @@ interface CardBenefit {
   cashBack: string;
 }
 
+/** 카드 상세 페이지의 테두리부터 내용까지 렌더링하는 컴포넌트
+ * @param {String} cardName 현재 페이지 url의 param
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
+
 export default async function CardDetailContainer({
   cardName,
 }: {

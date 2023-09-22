@@ -7,6 +7,10 @@ import Pagination from '@/components/molecules/Pagination';
 import { filterOptionAtom } from '@/store/atoms/header';
 import { getCardSearch } from '@/api/card';
 
+/** 페이지네이션과 카드 리스트가 융합된 컴포넌트
+ * @param {Array} data CardList를 렌더링하기 위한 서치 데이터의 배열
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function PaginatedCardList({ data }: any) {
   const [idx, setIdx] = useState(0);
   const filterOption = useAtomValue(filterOptionAtom);

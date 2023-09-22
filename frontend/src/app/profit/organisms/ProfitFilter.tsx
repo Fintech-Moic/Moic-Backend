@@ -11,6 +11,10 @@ interface ProfitFilterProps {
   data: any;
 }
 
+/** 헤더의 우측 클릭시, 렌더링되는 필터 컴포넌트
+ * @param {Object} data getAllCard 시 반환되는 companyList, typeList를 감싼 Object
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function ProfitFilter({ data }: ProfitFilterProps) {
   const filterOpen = useAtomValue(filterOpenAtom);
   const [isSwitchOn, setIsSwitchOn] = useState(false);

@@ -27,3 +27,14 @@ export async function getCardSearch({
   const result = await response.json();
   return result;
 }
+
+export async function getCardDetail(cardName: string) {
+  const response = await fetch(
+    `${ENDPOINT}/card/detail?cardName=${cardName}&userId=test1234`,
+    {
+      method: 'GET',
+    }
+  );
+  const result = await response.json();
+  return result;
+}

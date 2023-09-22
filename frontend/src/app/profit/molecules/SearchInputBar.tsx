@@ -6,6 +6,11 @@ interface SearchInputBarProps {
   onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
+/** 검색 입력과 검색 버튼이 존재하는 컴포넌트
+ * @param {React.FormEventHandler<HTMLFormElement>} onSubmit onSubmit 이벤트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
+
 export default function SearchInputBar({ onSubmit }: SearchInputBarProps) {
   return (
     <form className="relative" onSubmit={onSubmit}>

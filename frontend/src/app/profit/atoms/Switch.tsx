@@ -5,6 +5,11 @@ interface SwitchProps {
   setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * @param {Boolean} isOn 전체보기/내 카드 보기를 구분짓는 상태
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} setIsOn isOn 상태를 수정하는 setState 함수
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function Switch({ isOn, setIsOn }: SwitchProps) {
   const handleClickSwitch = () => {
     setIsOn((prev) => !prev);

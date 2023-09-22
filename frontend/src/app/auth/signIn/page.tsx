@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form';
 import SocialLoginButton from '../atoms/SocialLoginButton';
 import SignInForm from '../organisms/SignInForm';
 import TextButton from '../atoms/TextButton';
-import Divider from '../atoms/divider';
+import Divider from '../atoms/Divider';
+import signInApi from '@/api/auth';
 
 export default function Page() {
   const {
@@ -15,6 +16,7 @@ export default function Page() {
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    signInApi(data);
   });
   const socialLoginHandle = () => {
     console.log('소셜로그인');

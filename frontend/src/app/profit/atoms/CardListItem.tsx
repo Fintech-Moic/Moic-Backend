@@ -9,7 +9,6 @@ interface CardListItemProps {
   mine: boolean;
 }
 
-// fix me! 내 카드일 경우 추가 아이콘 띄우기 필요
 export default function CardListItem({
   company,
   name,
@@ -17,7 +16,7 @@ export default function CardListItem({
   mine,
 }: CardListItemProps) {
   return (
-    <div className="flex flex-row align-center gap-4 justify-center">
+    <div className="flex flex-row align-center gap-4 justify-center" id={name}>
       <img src={cardImage} className="w-[140px] h-[80px]" alt="카드이미지" />
       <div className="flex flex-col justify-start items-start">
         <div className="flex flex-row justify-start items-center gap-0.5">

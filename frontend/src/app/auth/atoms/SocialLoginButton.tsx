@@ -4,6 +4,8 @@ import Kakao from '@/../../public/assets/images/Kakao.svg';
 import Google from '@/../../public/assets/images/Google.svg';
 
 interface SocialLoginButtonProps {
+  width: string;
+  height: string;
   isKakao: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -15,6 +17,8 @@ interface SocialLoginButtonProps {
  */
 
 export default function SocialLoginButton({
+  width,
+  height,
   isKakao,
   onClick,
 }: SocialLoginButtonProps) {
@@ -30,7 +34,7 @@ export default function SocialLoginButton({
   return (
     <button
       type="button"
-      className="h3b bg-white border-solid border-2 rounded-[10px] flex justify-center items-center"
+      className={`${width} ${height} h3b bg-white border-solid border-2 rounded-[10px] flex justify-center items-center`}
       onClick={handleOnClick}
     >
       <div className="flex">

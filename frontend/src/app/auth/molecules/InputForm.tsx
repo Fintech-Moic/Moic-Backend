@@ -1,18 +1,21 @@
-import { UseFormRegister, FieldValues } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import InputBox from '../atoms/InputBox';
 import InputNoticeMessage from '../atoms/InputNoticeMessage';
 
 type InputFormProps = {
   register: UseFormRegister<FieldValues>;
+  id: string;
   name: string;
   type: string;
   placeholder: string;
   isError: boolean;
   notice?: string;
+  width: string;
+  height: string;
 };
 
 /** InputForm Component
- * @param {String} register react-form-hook의 register
+ * @param {UseFormRegister<FieldValues>} register react-form-hook의 register
  * @param {String} name InputBox 이름
  * @param {String} type InputBox type
  * @param {String} placeholder InputBox placeholder
@@ -23,6 +26,9 @@ type InputFormProps = {
 
 export default function InputForm({
   register,
+  width,
+  height,
+  id,
   name,
   type,
   notice,
@@ -33,9 +39,13 @@ export default function InputForm({
     <>
       <InputBox
         {...register(name)}
+        id={id}
         name={name}
         type={type}
         placeholder={placeholder}
+        register={register}
+        width={width}
+        height={height}
       />
       {notice && (
         <InputNoticeMessage isError={isError}>{notice}</InputNoticeMessage>

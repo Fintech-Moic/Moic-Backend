@@ -15,7 +15,6 @@ export default function Page() {
   } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     signInApi(data);
   });
   const socialLoginHandle = () => {

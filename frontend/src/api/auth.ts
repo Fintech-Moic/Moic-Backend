@@ -12,11 +12,10 @@ const signInApi = async (formData: FieldValues) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      localStorage.setItem('access_token', data.access_token);
-      console.log(data);
+      localStorage.setItem('access_token', data.data.accessToken);
     })
-    .catch(() => {
-      console.log(JSON.stringify(formData));
+    .catch((error: Error) => {
+      console.log(error);
     });
 };
 

@@ -5,7 +5,7 @@ import SocialLoginButton from '../atoms/SocialLoginButton';
 import SignInForm from '../organisms/SignInForm';
 import TextButton from '../atoms/TextButton';
 import Divider from '../atoms/Divider';
-import signInApi from '@/api/auth';
+import { signInApi } from '@/api/auth';
 
 export default function Page() {
   const {

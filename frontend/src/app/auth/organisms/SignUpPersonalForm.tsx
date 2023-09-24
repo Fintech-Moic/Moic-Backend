@@ -1,14 +1,6 @@
 import { forwardRef } from 'react';
-import { UseFormRegister, FieldValues } from 'react-hook-form';
 import InputForm from '../molecules/InputForm';
-
-interface SignUpFormProps {
-  register: UseFormRegister<FieldValues>;
-  errors: any;
-  onSubmit: (
-    e?: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => Promise<void>;
-}
+import { SignUpFormProps } from '@/types/auth';
 
 const SignUpPersonalForm = forwardRef(
   (
@@ -23,8 +15,8 @@ const SignUpPersonalForm = forwardRef(
           name="name"
           type="text"
           placeholder="이름"
-          isError={Boolean(errors.id)}
-          notice={errors.id?.message}
+          isError={Boolean(errors.name)}
+          notice={errors.name?.message}
           width="w-80"
           height="h-12"
         />
@@ -34,8 +26,8 @@ const SignUpPersonalForm = forwardRef(
           name="email"
           type="text"
           placeholder="이메일"
-          isError={Boolean(errors.id)}
-          notice={errors.id?.message}
+          isError={Boolean(errors.email)}
+          notice={errors.email?.message}
           width="w-80"
           height="h-12"
         />

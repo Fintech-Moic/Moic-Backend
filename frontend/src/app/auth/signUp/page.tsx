@@ -83,10 +83,10 @@ export default function Page() {
         )}
         {step === 3 && (
           <SignUpAccountForm
-          // ref={accountFormRef}
-          // register={register}
-          // errors={errors}
-          // onSubmit={onSubmit}
+            ref={accountFormRef}
+            register={register}
+            errors={errors}
+            onSubmit={onSubmit}
           />
         )}
         {step === 4 && <SignUpSuccessForm />}

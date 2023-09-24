@@ -19,4 +19,17 @@ const signInApi = async (formData: FieldValues) => {
     });
 };
 
-export default signInApi;
+const signUpApi = async (formData: FieldValues) => {
+  await fetch(`${SERVER_URL}/user/regist`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'applacation/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((res) => res.json)
+    .catch((error: Error) => {
+      console.log(error);
+    });
+};
+export { signInApi, signUpApi };

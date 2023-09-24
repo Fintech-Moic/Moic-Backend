@@ -26,7 +26,7 @@ export default function IconButton({
       className={`${width} ${height} relative`}
       onClick={onClick}
     >
-      <Image fill src={src} alt={alt} />
+      <Image src={src} alt={alt} />
     </button>
   );
 }

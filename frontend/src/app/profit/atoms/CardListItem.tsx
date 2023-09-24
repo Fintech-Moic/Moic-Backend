@@ -1,7 +1,10 @@
+'use client';
+
 /* eslint-disable react/no-unused-prop-types */
 import Image from 'next/image';
 
 interface CardListItemProps {
+  listType: string;
   company: string;
   name: string;
   type: string;
@@ -10,13 +13,25 @@ interface CardListItemProps {
 }
 
 export default function CardListItem({
+  listType,
   company,
   name,
   cardImage,
   mine,
 }: CardListItemProps) {
   return (
-    <div className="flex flex-row align-center gap-4 justify-center" id={name}>
+    <div
+      className="flex flex-row align-center gap-4 justify-center cursor-pointer"
+      id={name}
+    >
+      {!mine && listType === 'register' && (
+        <Image
+          src="/assets/BlackAddIcon.svg"
+          alt="등록아이콘"
+          width={20}
+          height={20}
+        />
+      )}
       <img src={cardImage} className="w-[140px] h-[80px]" alt="카드이미지" />
       <div className="flex flex-col justify-start items-start">
         <div className="flex flex-row justify-start items-center gap-0.5">

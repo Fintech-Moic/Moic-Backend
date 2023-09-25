@@ -2,10 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import Carousel from '@/components/atoms/CardCarousel';
-import Header from '@/components/molecules/Header';
 import { getShopData } from '@/app/api/map';
-
 
 /**
  * 검색어 입력 및 검색 결과 출력 함수
@@ -49,8 +46,6 @@ export default function SearchShop() {
 
   return (
     <div>
-      <Header title="위치 검색" isPrevButton />
-      <Carousel />
       <input
         id="inputValue"
         name="inputValue"

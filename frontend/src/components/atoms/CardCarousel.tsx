@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import WheelPicker from "react-simple-wheel-picker";
-import styled from "styled-components";
 
 export default function CardCarousel() {
 
   /**
-   * 함수 정의
+   * 카테고리 Object
    */
   const setKeyValue = (arr : string[]) => {
     return arr.map(item => {
@@ -18,7 +17,7 @@ export default function CardCarousel() {
   };
 
   /**
-   * 함수 정의
+   * 새로운 옵션 선택시 Object 변경
    */
   const newOptionGroups = (optionGroups : string[]) => {
     let groups : {id? : string, value? : string} = {};
@@ -29,50 +28,36 @@ export default function CardCarousel() {
     return groups;
   };
   const optionGroups = {
-    category: ["카페", "베이커리", "서점", "맛집"],
+    category: ["쇼핑", "음식", "리빙", "스포츠", "교육", "여행", "문화"],
   };
 
   const opGroups = newOptionGroups(optionGroups);
-
-  /**
-   * 현재 선택된 옵션
-   */
-  const handleOnChange = (target) => {
-    console.log(target);
-  };
 
   let pickerColumn = [];
   for (const group in opGroups) {
     const data = opGroups[group];
 
     pickerColumn.push(
-      <StyledWheelPicker
+      <WheelPicker
         key={group}
         data={data}
-        onChange={handleOnChange}
-        height={100}
-        width={364}
-        itemHeight={36}
+        onChange={()=>{}}
+        height={240}
+        width={180}
+        itemHeight={48}
         selectedID={data[0].id}
-        color="#999999"
-        activeColor="#fff"
+        fontSize={24}
+        color="#9BA5B7"
+        activeColor="#545F71"
+        backgroundColor="none"
+        shadowColor="none"
       />
     );
   }
 
   return (
     <div>
-      <PickerContainer>{pickerColumn}</PickerContainer>
+      <div className="flex content-around">{pickerColumn}</div>
     </div>
   );
 }
-
-const PickerContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const StyledWheelPicker = styled(WheelPicker)`
-  box-shadow: none;
-  background-color: red;
-`;

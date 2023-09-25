@@ -46,7 +46,7 @@ export default function Page() {
             isKakao={false}
             onClick={socialLoginHandle}
           />
-          <TextButton going="auth/find">
+          <TextButton going="auth/signUp">
             혹시 회원가입을 하지 않으셨나요?
           </TextButton>
         </div>

@@ -1,5 +1,11 @@
 import { UseFormRegister, FieldValues } from 'react-hook-form';
 
+/** SignUpFormProps Component
+ * @param {String} register
+ * @param {Any} errors
+ * @param {(e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>} onSubmit
+ * @returns {JSX.Element} SignUpFormProps Component 반환
+ */
 export interface SignUpFormProps {
   register: UseFormRegister<FieldValues>;
   errors: any;

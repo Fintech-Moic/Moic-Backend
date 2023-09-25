@@ -45,7 +45,7 @@ export default function CardList({
       case 'read':
         router.push(`/profit/card/detail/${curCardName}`);
         break;
-      case 'register':
+      case 'regist':
         mutation.mutate(curCardName, {
           onSuccess() {
             queryClient.setQueryData<any>(

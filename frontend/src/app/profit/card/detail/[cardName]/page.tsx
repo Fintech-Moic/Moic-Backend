@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <Header title="카드 상세 조회" isFilterButton isPrevButton />
-      <div className="w-full h-full relative px-5 py-9">
+      <div className="relative px-5 py-9 flex-1 overflow-y-auto">
         <CardDetailContainer cardName={params.cardName as string} />
       </div>
       <div className="flex justify-center">

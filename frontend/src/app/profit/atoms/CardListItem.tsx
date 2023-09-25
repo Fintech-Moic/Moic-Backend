@@ -24,7 +24,7 @@ export default function CardListItem({
       className="flex flex-row align-center gap-4 justify-center cursor-pointer"
       id={name}
     >
-      {!mine && listType === 'register' && (
+      {!mine && listType === 'regist' && (
         <Image
           src="/assets/BlackAddIcon.svg"
           alt="등록아이콘"

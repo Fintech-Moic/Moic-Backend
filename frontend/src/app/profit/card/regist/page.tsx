@@ -12,7 +12,7 @@ export default async function page() {
       <Header title="카드 등록" isFilterButton isPrevButton />
       <div className="w-full h-full relative">
         <ProfitFilter data={searchOption.data} />
-        <PaginatedCardList listType="register" />
+        <PaginatedCardList listType="regist" />
       </div>
       <div className="flex justify-center">
         <Navbar />

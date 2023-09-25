@@ -50,3 +50,11 @@ export async function postCardRegist(cardName: string) {
   const result = await response.json();
   return result;
 }
+
+export async function getMyCard() {
+  const response = await fetch(`${ENDPOINT}/card/mycards?userId=test1234`, {
+    method: 'GET',
+  });
+  const result = await response.json();
+  return result;
+}

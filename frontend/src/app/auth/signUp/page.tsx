@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useState, useEffect, useRef } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -38,6 +40,17 @@ export default function Page() {
     yearsList,
   };
 
+  const personalFormRef = useRef<any>();
+  const accountFormRef = useRef<any>();
+
+  const forwardStep = () => {
+    setStep(step + 1);
+  };
+
+  const backStep = () => {
+    setStep(step - 1);
+  };
+
   useEffect(() => {
     const settingProgress = () => {
       if (step === 1) {
@@ -54,36 +67,33 @@ export default function Page() {
     settingProgress();
   }, [step]);
 
-  const personalFormRef = useRef<any>();
-  const accountFormRef = useRef<any>();
-
-  const forwardStep = () => {
-    setStep(step + 1);
-  };
-
-  const backStep = () => {
-    setStep(step - 1);
-  };
   const handleUserDataUpdate = (newData: FieldValues) => {
     setUserData({
       ...userData,
       ...selectedData,
       ...newData,
     });
-    console.log(userData);
   };
 
-  const onSubmit = handleSubmit(async (data) => {
-    await handleUserDataUpdate(data);
-    if (step === 3) {
-      const result = await signUpApi(userData);
-      console.log(result);
-      if (result !== undefined) {
+  useEffect(() => {
+    const signUp = async () => {
+      if (step === 3) {
+        const result = await signUpApi(userData);
+        if (result !== null && result.message !== undefined) {
+          console.log(result);
+          forwardStep();
+        } else {
+          console.log('회원가입 실패');
+        }
+      } else if (step === 2) {
         forwardStep();
       }
-    } else {
-      forwardStep();
-    }
+    };
+    signUp();
+  }, [userData]);
+
+  const onSubmit = handleSubmit((data) => {
+    handleUserDataUpdate(data);
   });
 
   const nextStep = () => {
@@ -100,7 +110,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between">
+    <div className="flex flex-col h-full justify-around">
       <ProgressBar percent={percent} />
       <div className="h-2/3">
         {step === 1 && <SignUpTextForm />}

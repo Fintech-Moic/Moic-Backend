@@ -1,4 +1,4 @@
-const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
+const ENDPOINT = 'https://moic.site/api/v1';
 export default async function getAllCard() {
   const response = await fetch(`${ENDPOINT}/card/all?userId="test1234"`, {
     method: 'GET',
@@ -35,6 +35,18 @@ export async function getCardDetail(cardName: string) {
       method: 'GET',
     }
   );
+  const result = await response.json();
+  return result;
+}
+
+export async function postCardRegist(cardName: string) {
+  const response = await fetch(`${ENDPOINT}/card/regist`, {
+    method: 'POST',
+    body: JSON.stringify({ cardName, userId: 'test1234' }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   const result = await response.json();
   return result;
 }

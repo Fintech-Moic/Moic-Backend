@@ -10,7 +10,7 @@ export default async function Page() {
   return (
     <>
       <Header title="전체 카드 조회" isFilterButton isPrevButton />
-      <div className="w-full h-full relative">
+      <div className="relative flex-1 overflow-y-auto">
         <ProfitFilter data={searchOption.data} />
         <PaginatedCardList listType="read" />
       </div>

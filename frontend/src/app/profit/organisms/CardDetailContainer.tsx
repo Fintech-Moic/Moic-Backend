@@ -32,7 +32,7 @@ export default async function CardDetailContainer({
   const cardDetail: CardDetail = (await getCardDetail(cardName)).data;
 
   return (
-    <div className="shadow-md h-full flex flex-col justify-start items-center gap-16 rounded-3xl bg-white px-9 py-12">
+    <div className="h-full shadow-md flex flex-col justify-start items-center gap-16 rounded-3xl bg-white px-9 py-12 overflow-scroll">
       <img
         src={cardDetail?.cardImage}
         alt="카드상세이미지"

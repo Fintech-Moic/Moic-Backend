@@ -33,7 +33,7 @@ export default function Page(props: (string | number)[]) {
     dots: false,
     arrow: true,
     infinite: false,
-    speed: 100,
+    speed: 500,
     // slidesToShow: 1,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -52,7 +52,7 @@ export default function Page(props: (string | number)[]) {
     <div className="w-56 h-32 place-content-center ml-10 cursor-pointer">
       <Slider {...settings}>
         <div>
-          <h3><img className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-xl" src='/CardRegist.png' onClick={handleClick} /></h3>
+          <img className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]" src='/CardRegist.png' onClick={handleClick} />
         </div>
         {
           props.data.map((cardImageList: {
@@ -63,7 +63,7 @@ export default function Page(props: (string | number)[]) {
             type: string
           }, i: number) =>
             <div>
-              <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-xl" src={cardImageList.cardImage} /></h3>
+              <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
             </div>
           )
         }

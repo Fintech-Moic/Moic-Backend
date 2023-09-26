@@ -154,16 +154,14 @@ body {
   width: 100vw;
 }
 
+/* Card Carousel 버튼 최상단으로 레이어로 올리기 */
 .slick-prev {
   left: 3% !important;
   z-index: 1;
 }
 
+/* Card Carousel 버튼 최상단으로 레이어로 올리기 */
 .slick-next {
   right: 3% !important;
-  z-index: 1;
-}
-
-.slick-center.slick-current {
   z-index: 1;
 }

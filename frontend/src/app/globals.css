@@ -153,3 +153,17 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
+.slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+
+.slick-center.slick-current {
+  z-index: 1;
+}

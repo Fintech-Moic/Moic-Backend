@@ -11,6 +11,14 @@ interface DropdownProps {
     React.SetStateAction<{ id: string; value: string } | null>
   >;
 }
+
+/** 공통 Dropdown Component
+ * @param {String} placeholder : Dropdown의 값 미선택 시 나오는 placeholder 지정
+ * @param {Array<{ id: string; value: string }>} list : 드롭다운 클릭 시 나오는 선택 가능한 리스트들. id는 key를 대응하며, value는 실제 보이는 값
+ * @param {{ id: string; value: string } | null} selectItem : 현재 선택된 값. null 가능성 존재
+ * @param {React.Dispatch<React.SetStateAction<{ id: string; value: string } | null>>} setSelectItem selectItem의 상태를 변경해주는 함수
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function Dropdown({
   placeholder,
   list,

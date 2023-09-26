@@ -20,7 +20,10 @@ export default function CardBenefitList({ cardBenefit }: CardBenefitListProps) {
   return (
     <ul className="flex flex-col justify-start item-start gap-4">
       {cardBenefit?.map((curBenefit) => (
-        <CardBenefitListItem benefit={curBenefit} />
+        <CardBenefitListItem
+          benefit={curBenefit}
+          key={`${curBenefit.shopName}_${curBenefit.content}`}
+        />
       ))}
     </ul>
   );

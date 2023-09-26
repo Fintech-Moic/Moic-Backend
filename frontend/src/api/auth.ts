@@ -8,6 +8,7 @@ const signInApi = async (formData: FieldValues) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify(formData),
   })
     .then((res) => res.json())
@@ -48,6 +49,7 @@ const signOutApi = async () => {
         headers: {
           Authorization: localStorage.getItem('access_token') as string,
         },
+        credentials: 'include',
       });
       console.log(response);
       if (!response.ok) {

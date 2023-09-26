@@ -23,7 +23,7 @@ export default function Page() {
   } = useForm();
   const router = useRouter();
   const [percent, setPercent] = useState('w-0');
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [userData, setUserData] = useState([]);
   const [selectedData, setSelectedData] = useState<{
     gender: string | null;
@@ -33,7 +33,7 @@ export default function Page() {
   const genderList = ['선택안함', '남성', '여성'];
   const yearsList = [
     '선택안함',
-    ...Array.from({ length: 124 }, (_, i) => (1900 + i).toString()),
+    ...Array.from({ length: 124 }, (_, i) => (2023 - i).toString()),
   ];
   const dropDownData = {
     genderList,
@@ -53,16 +53,16 @@ export default function Page() {
 
   useEffect(() => {
     const settingProgress = () => {
-      if (step === 1) {
+      if (step === 0) {
         setPercent('w-0');
         setFillButtonTitle('다음으로');
-      } else if (step === 2) {
+      } else if (step === 1) {
         setPercent('w-1/3');
         setFillButtonTitle('다음으로');
-      } else if (step === 3) {
+      } else if (step === 2) {
         setPercent('w-2/3');
         setFillButtonTitle('회원가입 하기');
-      } else if (step === 4) setPercent('w-full');
+      } else if (step === 3) setPercent('w-full');
     };
     settingProgress();
   }, [step]);
@@ -77,15 +77,14 @@ export default function Page() {
 
   useEffect(() => {
     const signUp = async () => {
-      if (step === 3) {
+      if (step === 2) {
         const result = await signUpApi(userData);
         if (result !== null && result.message !== undefined) {
-          console.log(result);
           forwardStep();
         } else {
           console.log('회원가입 실패');
         }
-      } else if (step === 2) {
+      } else if (step === 1) {
         forwardStep();
       }
     };
@@ -97,44 +96,42 @@ export default function Page() {
   });
 
   const nextStep = () => {
-    if (step === 2 && personalFormRef.current) {
+    if (step === 1 && personalFormRef.current) {
       personalFormRef.current.requestSubmit();
-    } else if (step === 3 && accountFormRef.current) {
+    } else if (step === 2 && accountFormRef.current) {
       accountFormRef.current.requestSubmit();
-    } else if (step === 1) forwardStep();
+    } else if (step === 0) forwardStep();
   };
 
   const prevStep = () => {
-    if (step > 1) backStep();
+    if (step > 0) backStep();
     else router.push('/auth/signIn');
   };
+  const SignUpContentArr = [
+    <SignUpTextForm />,
 
+    <SignUpPersonalForm
+      ref={personalFormRef}
+      register={register}
+      errors={errors}
+      dropDownData={dropDownData}
+      onSubmit={onSubmit}
+      setSelectedData={setSelectedData}
+    />,
+
+    <SignUpAccountForm
+      ref={accountFormRef}
+      register={register}
+      errors={errors}
+      onSubmit={onSubmit}
+    />,
+    <SignUpSuccessForm />,
+  ];
   return (
     <div className="flex flex-col h-full justify-around">
       <ProgressBar percent={percent} />
-      <div className="h-2/3">
-        {step === 1 && <SignUpTextForm />}
-        {step === 2 && (
-          <SignUpPersonalForm
-            ref={personalFormRef}
-            register={register}
-            errors={errors}
-            dropDownData={dropDownData}
-            onSubmit={onSubmit}
-            setSelectedData={setSelectedData}
-          />
-        )}
-        {step === 3 && (
-          <SignUpAccountForm
-            ref={accountFormRef}
-            register={register}
-            errors={errors}
-            onSubmit={onSubmit}
-          />
-        )}
-        {step === 4 && <SignUpSuccessForm />}
-      </div>
-      {step < 4 && (
+      <div className="h-2/3">{SignUpContentArr[step]}</div>
+      {step < 3 && (
         <div className="flex h-1/4 w-full justify-between">
           <OutlineButton
             type="button"

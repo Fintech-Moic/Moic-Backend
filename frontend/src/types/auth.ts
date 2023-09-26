@@ -1,9 +1,9 @@
 import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 /** SignUpFormProps Component
- * @param {String} register
- * @param {Any} errors
- * @param {(e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>} onSubmit
+ * @param {String} register React-Hook-Form에서 값 등록에 사용되는 props
+ * @param {Any} errors React-Hook-Form에서 error처리에 사용되는 props
+ * @param {(e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>} onSubmit React-Hook-Form에서 등록에 사용되는 함수
  * @returns {JSX.Element} SignUpFormProps Component 반환
  */
 export interface SignUpFormProps {

@@ -33,7 +33,7 @@ export default function OutlineButton({
   return (
     <button
       type={type === 'submit' ? 'submit' : 'button'}
-      className={`${width} ${height} captionr bg-white border-solid ${borderRadius} rounded-[10px] flex justify-center items-center ${lineColor}`}
+      className={`${width} ${height} captionr bg-white border-solid ${borderRadius} rounded-[10px] flex justify-center border-2 items-center ${lineColor}`}
       onClick={handleOnClick}
     >
       {title}

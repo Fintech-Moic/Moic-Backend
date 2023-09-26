@@ -77,7 +77,7 @@ export default function Dropdown({
         className={`absolute mt-2 w-full max-h-40 bg-white border-Secondary rounded-lg border-2 grid grid-cols-1 divide-y 
              ${
                isOpen
-                 ? 'max-h-40 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-100 visibility-visible pointer-events-auto'
+                 ? 'max-h-40 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-100 visibility-visible pointer-events-auto z-10'
                  : 'max-h-0 overflow-auto transition-[max-height,opacity] duration-300 ease-in-out opacity-0 visibility-hidden pointer-events-none'
              }`}
         onClick={handleClickListItem}

@@ -5,7 +5,7 @@ import SocialLoginButton from '../atoms/SocialLoginButton';
 import SignInForm from '../organisms/SignInForm';
 import TextButton from '../atoms/TextButton';
 import Divider from '../atoms/Divider';
-import signInApi from '@/api/auth';
+import { signInApi } from '@/api/auth';
 
 export default function Page() {
   const {
@@ -46,7 +46,7 @@ export default function Page() {
             isKakao={false}
             onClick={socialLoginHandle}
           />
-          <TextButton going="auth/find">
+          <TextButton going="auth/signUp">
             혹시 회원가입을 하지 않으셨나요?
           </TextButton>
         </div>

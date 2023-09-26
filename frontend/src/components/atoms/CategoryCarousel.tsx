@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import WheelPicker from "react-simple-wheel-picker";
 
-export default function CardCarousel() {
+export default function CategoryCarousel() {
 
   /**
    * 카테고리 Object
@@ -28,7 +28,7 @@ export default function CardCarousel() {
     return groups;
   };
   const optionGroups = {
-    category: ["쇼핑", "음식", "리빙", "스포츠", "교육", "여행", "문화"],
+    category: ["쇼핑", "음식", "리빙", "운동", "교육", "여행", "문화"],
   };
 
   const opGroups = newOptionGroups(optionGroups);
@@ -42,11 +42,11 @@ export default function CardCarousel() {
         key={group}
         data={data}
         onChange={()=>{}}
-        height={240}
-        width={180}
-        itemHeight={48}
+        height={300}
+        width={160}
+        itemHeight={80}
         selectedID={data[0].id}
-        fontSize={24}
+        fontSize={32}
         color="#9BA5B7"
         activeColor="#545F71"
         backgroundColor="none"
@@ -56,8 +56,8 @@ export default function CardCarousel() {
   }
 
   return (
-    <div>
-      <div className="flex content-around">{pickerColumn}</div>
-    </div>
+    <>
+    <div className="flex justify-center">{pickerColumn}</div>
+    </>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import Navbar from '@/components/molecules/Navbar';
-import Header from '@/components/molecules/Header';
 import { useParams } from 'next/navigation';
 
 export default function layout({ children }: { children: React.ReactNode }) {

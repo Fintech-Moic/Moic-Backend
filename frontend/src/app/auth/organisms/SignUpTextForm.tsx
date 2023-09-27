@@ -1,4 +1,4 @@
-import TextBox from '../molecules/TextBox';
+import TextBox from '../atoms/TextBox';
 
 export default function SignUpTextForm() {
   return (

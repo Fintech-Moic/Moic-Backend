@@ -37,24 +37,30 @@ export default function PaginatedCardList({ listType }: { listType: string }) {
     staleTime: 1000 * 60 * 100,
     refetchOnWindowFocus: false,
   });
-  // Fix me! : Suspense 추가 및 적당한 스켈레톤 디자인으로 변경 필요
+
   if (isLoading) return <div>로딩중...</div>;
+  const totalPageLength = Math.round(
+    (getfilteredCardList(listType, data.data.cardList) as Array<Card>).length /
+      4
+  );
 
   return (
     <div className="flex flex-col items-center h-full pb-6 justify-between gap-8 pt-14">
-      <CardList
-        list={getfilteredCardList(listType, data.data.cardList)}
-        currentPage={idx + 1}
-        listType={listType}
-      />
-      <Pagination
-        idx={idx}
-        setIdx={setIdx}
-        pageLength={Math.round(
-          (getfilteredCardList(listType, data.data.cardList) as Array<Card>)
-            .length / 4
-        )}
-      />
+      {totalPageLength === 0 ? (
+        <div className="h3b text-black opacity-50 h-full flex items-center flex-col justify-center break-words">
+          <span>추가할 카드가 없어요!</span>
+          <span>모든 카드를 다 가지고 계시군요!</span>
+        </div>
+      ) : (
+        <>
+          <CardList
+            list={getfilteredCardList(listType, data.data.cardList)}
+            currentPage={idx + 1}
+            listType={listType}
+          />
+          <Pagination idx={idx} setIdx={setIdx} pageLength={totalPageLength} />
+        </>
+      )}
     </div>
   );
 }

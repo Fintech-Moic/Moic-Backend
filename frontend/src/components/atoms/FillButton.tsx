@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+
 'use client';
 
 import { useCallback } from 'react';
@@ -5,6 +7,7 @@ import ButtonProps from '@/types/button';
 
 interface FillButtonProps extends ButtonProps {
   bgColor: string;
+  disabled: boolean;
 }
 
 /** 배경 색이 존재하는 Button Component
@@ -13,7 +16,7 @@ interface FillButtonProps extends ButtonProps {
  */
 
 export default function FillButton({
-  type,
+  type = 'button',
   bgColor,
   title,
   font = 'captionr',
@@ -21,6 +24,7 @@ export default function FillButton({
   width,
   height,
   borderRadius,
+  disabled,
 }: FillButtonProps) {
   const handleOnClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,12 +34,13 @@ export default function FillButton({
     },
     [onClick]
   );
-
+    
   return (
     <button
-      type={type === 'submit' ? 'submit' : 'button'}
-      className={`${width} ${height} ${font} ${bgColor} rounded-lg ${borderRadius} rounded-[10px] flex justify-center items-center text-white`}
+      className={`${width} ${height} ${font} ${bgColor} rounded-lg ${borderRadius} rounded-[10px] flex justify-center items-center text-white disabled:bg-black disabled:opacity-50`}
       onClick={handleOnClick}
+      type={type}
+      disabled={disabled}
     >
       {title}
     </button>

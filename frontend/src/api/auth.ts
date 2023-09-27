@@ -8,6 +8,7 @@ const signInApi = async (formData: FieldValues) => {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify(formData),
   })
     .then((res) => res.json())
@@ -39,4 +40,31 @@ const signUpApi = async (formData: FieldValues) => {
     return null;
   }
 };
-export { signInApi, signUpApi };
+
+const signOutApi = async () => {
+  if (localStorage.getItem('access_token') != null) {
+    try {
+      const response = await fetch(`${SERVER_URL}/user/logout`, {
+        method: 'POST',
+        headers: {
+          Authorization: localStorage.getItem('access_token') as string,
+        },
+        credentials: 'include',
+      });
+      console.log(response);
+      if (!response.ok) {
+        console.error(`HTTP Error: ${response.status}`);
+        return null;
+      }
+      localStorage.clear();
+      sessionStorage.clear();
+      return 'SUCCESS';
+    } catch (error: any) {
+      console.error(error);
+      return null;
+    }
+  } else {
+    return '로그인 정보가 존재하지 않습니다';
+  }
+};
+export { signInApi, signUpApi, signOutApi };

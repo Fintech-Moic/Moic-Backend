@@ -1,4 +1,4 @@
-import GifticonRegist from '../../templates/GifticonRegist';
+import GifticonRegist from '../../organisms/GifticonRegist';
 import Header from '@/components/molecules/Header';
 import Navbar from '@/components/molecules/Navbar';
 

@@ -3,18 +3,19 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import GifticonRegistTitle from '../atoms/GifticonRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
 import postGifticonRegist from '@/api/gifticon';
 
-export default function GifticonRegistImage({
-  setIdx,
-  setGifticonResponse,
-}: {
-  setIdx: React.Dispatch<React.SetStateAction<number>>;
-  setGifticonResponse: React.Dispatch<React.SetStateAction<any>>;
-}) {
+/** 기프티콘 이미지를 통한 등록을 지원하는 컴포넌트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
+export default function GifticonRegist() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadThumbnail, setUploadThumbnail] = useState<string | null>(null);
+  const router = useRouter();
+
   const hasUploaded = () => {
     if (uploadFile && uploadThumbnail) return true;
     return false;
@@ -30,16 +31,8 @@ export default function GifticonRegistImage({
 
   const mutation = useMutation({
     mutationFn: (formData: any) => postGifticonRegist(formData),
-    onSuccess: (data) => {
-      switch (data.type) {
-        case 200:
-          setGifticonResponse(data.data);
-          setIdx((prev) => prev + 1);
-          break;
-        default:
-          alert('실패했습니다! 다시 시도해주세요!');
-          break;
-      }
+    onSuccess: () => {
+      router.back();
     },
     onError: () => {
       alert('실패했습니다! 다시 시도해주세요!');
@@ -60,16 +53,11 @@ export default function GifticonRegistImage({
 
   return (
     <>
-      <h2
-        className={`${
-          hasUploaded() ? '' : 'opacity-50'
-        } h3b break-words text-center`}
-      >
-        {hasUploaded()
-          ? '기프티콘 업로드에 성공했습니다.'
-          : '기프티콘을 업로드해주세요.'}
-      </h2>
-
+      <GifticonRegistTitle
+        isTrue={hasUploaded()}
+        trueText="기프티콘 업로드에 성공했습니다."
+        falseText="기프티콘을 업로드해주세요."
+      />
       <label
         htmlFor="gifticonUploadFile"
         className="flex justify-center items-center flex-col cursor-pointer"

@@ -41,7 +41,7 @@ interface CardData {
   data: DetailCardData[]
 }
 
-export default function Page(props : { data: CardData }) {
+export default function Page(props: { data: CardData }) {
 
   const router = useRouter();
 
@@ -66,9 +66,6 @@ export default function Page(props : { data: CardData }) {
   return (
     <div className="w-56 h-32 cursor-pointer">
       <Slider {...settings}>
-        <div>
-          <img className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]" src='/CardRegist.png' onClick={handleClick} />
-        </div>
         {
           props.data.map((cardImageList: {
             cardImage: string,
@@ -76,10 +73,28 @@ export default function Page(props : { data: CardData }) {
             id: string,
             name: string,
             type: string
-          }, i: number) =>
-            <div key={i}>
-              <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
-            </div>
+          }, i: number) => {
+            if (i === 0) {
+              return (
+                <>
+                  <div>
+                    <img className="mr-5 w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]" src='/CardRegist.png' onClick={handleClick} />
+                  </div>
+                  <div key={i}>
+                    <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
+                  </div>
+                </>
+              )
+            } else {
+              return (
+                <>
+                  <div key={i}>
+                    <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
+                  </div>
+                </>
+              )
+            }
+          }
           )
         }
       </Slider>

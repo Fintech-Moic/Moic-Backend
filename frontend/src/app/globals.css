@@ -154,14 +154,14 @@ body {
   width: 100vw;
 }
 
-/* Card Carousel 버튼 최상단으로 레이어로 올리기 */
-.slick-prev {
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-prev {
   left: 3% !important;
   z-index: 1;
-}
+} */
 
-/* Card Carousel 버튼 최상단으로 레이어로 올리기 */
-.slick-next {
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-next {
   right: 3% !important;
   z-index: 1;
-}
+} */

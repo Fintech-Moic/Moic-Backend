@@ -12,7 +12,7 @@ interface CategoryButtonProps extends ButtonProps {
  * @returns {JSX.Element} 아이콘 Button Component 반환
  */
 
-export default function IconButton({
+export default function CategoryButton({
   type,
   width,
   height,

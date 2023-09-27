@@ -17,7 +17,7 @@ export default function SimpleSearchBox() {
   const [searchResult, setSearchResult] = useAtom(searchResultAtom);
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
 
-  const onChangeInput = useCallback(
+  const autocompletedShopList = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       e.preventDefault();
       const newValue = e.currentTarget.value;
@@ -32,7 +32,6 @@ export default function SimpleSearchBox() {
    */
   const listOfShop = async (value: string | number) => {
     const posts = await getShopData(value);
-    console.log('SEARCH DATA CHECK ===>', posts);
     setSearchResult(posts);
   };
 
@@ -56,7 +55,7 @@ export default function SimpleSearchBox() {
       id="inputValue"
       name="inputValue"
       placeholder="검색어를 입력하세요"
-      onChange={onChangeInput}
+      onChange={autocompletedShopList}
       value={inputValue}
       className="relative font-suit text-xl ml-4 w-4/5 h-14 focus:outline-none"
     />

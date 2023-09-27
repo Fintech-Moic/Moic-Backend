@@ -4,11 +4,8 @@ import banner from "@/../../public/banner.png"
 import Image from "next/image";
 import Carousel from '@/components/atoms/CategoryCarousel';
 import Header from '@/components/molecules/Header';
-import { useParams } from 'next/navigation';
 
 export default function Page() {
-
-  const params = useParams();
 
   return (
     <>

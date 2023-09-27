@@ -1,6 +1,7 @@
 'use client';
 
 import React from "react";
+import { useRouter } from 'next/navigation';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -42,26 +43,28 @@ interface CardData {
 
 export default function Page(props : { data: CardData }) {
 
+  const router = useRouter();
+
   const settings = {
     dots: false,
     arrow: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: '0px', // 카드 간 간격
+    centerPadding: '60px', // 카드 간 간격
     nextArrow: <SampleNextArrow className={undefined} style={undefined} onClick={undefined} />,
     preArrow: <SamplePrevArrow className={undefined} style={undefined} onClick={undefined} />
   };
 
   const handleClick = (e: any) => {
     e.preventDefault();
-    window.location.href = 'https://moic.site/profit/card/regist';
+    router.push('/profit/card/regist')
   }
 
   return (
-    <div className="w-56 h-32 place-content-center ml-10 cursor-pointer">
+    <div className="w-56 h-32 cursor-pointer">
       <Slider {...settings}>
         <div>
           <img className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]" src='/CardRegist.png' onClick={handleClick} />

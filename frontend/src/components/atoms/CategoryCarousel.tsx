@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import WheelPicker from "react-simple-wheel-picker";
 
 export default function CategoryCarousel() {

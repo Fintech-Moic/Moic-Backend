@@ -21,3 +21,22 @@ export interface SignUpFormProps {
 export interface ProgressBarProps {
   percent: string;
 }
+
+/** BothButtonGroupProps Component
+ * @param {String} topTitle
+ * @param {String} topBg
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClicktop
+ * @param {String} bottomTitle
+ * @param {String} bottomBg
+ * @param {React.MouseEventHandler<HTMLButtonElement>}
+ * @returns {JSX.Element}
+ */
+export interface BothButtonGroupProps {
+  height: string;
+  topTitle: string;
+  topBg: string;
+  onClicktop: React.MouseEventHandler<HTMLButtonElement>;
+  bottomTitle: string;
+  bottomBg: string;
+  onClickbottom: React.MouseEventHandler<HTMLButtonElement>;
+}

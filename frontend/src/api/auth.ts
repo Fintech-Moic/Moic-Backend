@@ -67,4 +67,27 @@ const signOutApi = async () => {
     return '로그인 정보가 존재하지 않습니다';
   }
 };
-export { signInApi, signUpApi, signOutApi };
+
+const findIdApi = async (formData: FieldValues) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/user/lookup/id`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      console.log('imNotOk');
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error: any) {
+    console.error(error);
+    return null;
+  }
+};
+const findPasswordApi = async () => {};
+
+export { signInApi, signUpApi, signOutApi, findIdApi, findPasswordApi };

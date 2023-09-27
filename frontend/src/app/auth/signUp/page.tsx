@@ -11,8 +11,6 @@ import SignUpTextForm from '../organisms/SignUpTextForm';
 import SignUpPersonalForm from '../organisms/SignUpPersonalForm';
 import SignUpAccountForm from '../organisms/SignUpAccountForm';
 import SignUpSuccessForm from '../organisms/SignUpSuccessForm';
-import FillButton from '@/components/atoms/FillButton';
-import OutlineButton from '@/components/atoms/OutlineButton';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { signUpApi } from '@/api/auth';
 
@@ -110,7 +108,6 @@ export default function Page() {
   };
   const SignUpContentArr = [
     <SignUpTextForm />,
-
     <SignUpPersonalForm
       ref={personalFormRef}
       register={register}
@@ -119,7 +116,6 @@ export default function Page() {
       onSubmit={onSubmit}
       setSelectedData={setSelectedData}
     />,
-
     <SignUpAccountForm
       ref={accountFormRef}
       register={register}

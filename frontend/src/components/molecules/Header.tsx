@@ -41,7 +41,7 @@ export default function Header({
           }}
         />
       ) : (
-        <div />
+        <div className="w-10 h-10" />
       )}
       <span className="h4r">{title}</span>
       {isFilterButton ? (
@@ -56,7 +56,7 @@ export default function Header({
           }}
         />
       ) : (
-        <div />
+        <div className="w-10 h-10" />
       )}
     </header>
   );

@@ -23,12 +23,12 @@ export default function Pagination({
   // 사용자의 눈에 보이는 실 페이지 순서
   const pageIdx = idx + 1;
   const handleClickPrevIdx = () => {
-    if (idx === 0) return;
+    if (idx === 0 || pageLength === 0) return;
     setIdx((prev) => prev - 1);
   };
 
   const handleClickNextIdx = () => {
-    if (idx === pageLength - 1) return;
+    if (idx === pageLength - 1 || pageLength === 0) return;
     setIdx((prev) => prev + 1);
   };
 
@@ -43,13 +43,13 @@ export default function Pagination({
         onClick={handleClickPrevIdx}
       />
       <button type="button" className="w-10 p2r" onClick={handleClickPrevIdx}>
-        {pageIdx === 1 ? ' ' : pageIdx - 1}
+        {pageIdx === 1 || pageLength === 0 ? ' ' : pageIdx - 1}
       </button>
       <button type="button" className="w-10 h2b text-y4">
         {pageIdx}
       </button>
       <button type="button" className="w-10 p2r" onClick={handleClickNextIdx}>
-        {pageIdx === pageLength ? ' ' : pageIdx + 1}
+        {pageIdx === pageLength || pageLength === 0 ? ' ' : pageIdx + 1}
       </button>
       <IconButton
         src={PaginationRightIcon}

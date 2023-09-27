@@ -78,7 +78,7 @@ export default function CardList({
   };
   return (
     <div
-      className="flex flex-col gap-16 justify-center items-start"
+      className="flex flex-col gap-10 justify-center items-start"
       onClick={handleClickCardItem}
       aria-hidden="true"
     >

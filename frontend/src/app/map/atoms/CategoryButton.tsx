@@ -23,7 +23,7 @@ export default function IconButton({
   return (
     <button
       type={'button'}
-      className={`${width} ${height} ml-4`}
+      className={`${width} ${height}`}
       onClick={onClick}
     >
       <Image src={src} alt={alt} />

@@ -17,12 +17,13 @@ interface FunctionalSearchBoxProps {
  */
 
 export default function FunctionalSearchBox({ onSubmit }: FunctionalSearchBoxProps) {
+
   const router = useRouter();
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-row items-center justify-between w-10/12 h-14 shadow-md rounded-[10px] focus:outline-none">
+    <form onSubmit={onSubmit} className="bg-white flex flex-row items-center justify-between w-10/12 h-14 shadow-md rounded-[10px] focus:outline-none">
 
-      <div>
+      <div className="ml-4 mt-1">
         <CategoryButton
           type="button"
           width="w-10"
@@ -37,7 +38,7 @@ export default function FunctionalSearchBox({ onSubmit }: FunctionalSearchBoxPro
 
       <SearchBox />
 
-      <div className="mr-4">
+      <div className="mx-4 mt-1">
         <IconButton
           type="submit"
           src={PrimarySearchIcon}

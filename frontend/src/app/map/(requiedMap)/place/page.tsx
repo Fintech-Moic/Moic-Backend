@@ -1,20 +1,29 @@
 'use client';
 
-import { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 
 export default function Page() {
 
   return (
     <div className="flex justify-center">
-    <SearchBox onSubmit={function (event: FormEvent<HTMLFormElement>): void {
+      <SearchBox onSubmit={function (event: FormEvent<HTMLFormElement>): void {
         throw new Error('Function not implemented.');
-      } } />
+      }}
+      />
     </div>
   )
 }
 
-/* Card Carousel Test Code */
+
+
+
+
+
+
+
+
+/* Card Carousel Test Code for Suhwan */
 // import CardCarousel from '@/components/atoms/CardCarousel'
 // import SearchBox from '../../molecules/FunctionalSearchBox';
 // import { getMyCard } from '@/api/card';

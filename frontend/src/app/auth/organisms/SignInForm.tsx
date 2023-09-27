@@ -8,12 +8,12 @@ interface SignInFormProps {
   onSubmit: () => void;
 }
 /** SignInForm Component
+ * @todo error 설정 및 타입 변경
+ *
  * @param {UseFormRegister<FieldValues>} register react-form-hook의 register
  * @param {any} errors errors
- * @param {String} onSubmit onSubmit callback
+ * @param {() => void} onSubmit onSubmit callback
  * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 SignInForm
- *
- * @todo error 설정 및 타입 변경
  */
 // const idPattern = {
 //   value: /^[a-z0-9]{6,12}$/,

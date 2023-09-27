@@ -1,3 +1,16 @@
+'use client';
+
+import { signOutApi } from '@/api/auth';
+
 export default function page() {
-  return <div className="t1">home</div>;
+  const signOut = async () => {
+    const result = await signOutApi();
+    console.log(result);
+  };
+  return (
+    <div>
+      <div className="t1">모익</div>
+      <button onClick={signOut}>로그아웃이에용</button>
+    </div>
+  );
 }

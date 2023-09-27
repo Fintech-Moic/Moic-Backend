@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function SampleNextArrow(props) {
+function SampleNextArrow(props: { className: any; style: any; onClick: any; }) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -16,7 +16,7 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
+function SamplePrevArrow(props: { className: any; style: any; onClick: any; }) {
   const { className, style, onClick } = props;
   return (
     <div
@@ -27,20 +27,32 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function Page(props: (string | number)[]) {
+interface DetailCardData {
+  cardImage: string;
+  company: string;
+  id: string;
+  name: string;
+  type: string;
+}
+
+interface CardData {
+  [x: string]: any;
+  data: DetailCardData[]
+}
+
+export default function Page(props : { data: CardData }) {
 
   const settings = {
     dots: false,
     arrow: true,
     infinite: false,
     speed: 500,
-    // slidesToShow: 1,
     slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: '0px', // 카드 간 간격
-    nextArrow: <SampleNextArrow />,
-    preArrow: <SamplePrevArrow />
+    nextArrow: <SampleNextArrow className={undefined} style={undefined} onClick={undefined} />,
+    preArrow: <SamplePrevArrow className={undefined} style={undefined} onClick={undefined} />
   };
 
   const handleClick = (e: any) => {
@@ -62,7 +74,7 @@ export default function Page(props: (string | number)[]) {
             name: string,
             type: string
           }, i: number) =>
-            <div>
+            <div key={i}>
               <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
             </div>
           )

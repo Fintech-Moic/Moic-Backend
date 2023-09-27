@@ -153,3 +153,15 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+} */
+
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-next {
+  right: 3% !important;
+  z-index: 1;
+} */

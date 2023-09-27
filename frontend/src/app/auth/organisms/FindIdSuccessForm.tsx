@@ -1,10 +1,15 @@
 import TwinsButtonGroup from '@/components/molecules/TwinsButtonGroup';
-import { BothButtonGroupProps } from '@/types/auth';
+import { TwinsButtonGroupProps } from '@/types/auth';
 
-interface FindIdSuccessFormProps extends BothButtonGroupProps {
+interface FindIdSuccessFormProps extends TwinsButtonGroupProps {
   id: string;
 }
-
+/** FindIdSuccessForm Component
+ * @todo id값 별표 처리해주기
+ *
+ * @param {String} id 찾아낸 id값
+ * @returns {JSX.Element} 찾아낸 id값과 TwinsButtonGroup Component를 보여주는 FindIdSuccessForm Component
+ */
 export default function FindIdSuccessForm({
   id,
   height,

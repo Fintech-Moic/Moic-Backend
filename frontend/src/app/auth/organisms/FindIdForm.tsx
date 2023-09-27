@@ -1,18 +1,12 @@
-import { UseFormRegister, FieldValues } from 'react-hook-form';
 import InputForm from '../molecules/InputForm';
 import FillButton from '@/components/atoms/FillButton';
+import { ReactHookFormType } from '@/types/auth';
 
-interface FindIdFormProps {
-  register: UseFormRegister<FieldValues>;
-  errors: any;
-  onSubmit: () => void;
-}
+interface FindIdFormProps extends ReactHookFormType {}
+
 /** FindIdForm Component
  * @todo error 설정 및 타입 변경
  *
- * @param {UseFormRegister<FieldValues>} register react-form-hook의 register
- * @param {any} errors errors
- * @param {() => void} onSubmit onSubmit callback
  * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 FindIdForm
  */
 

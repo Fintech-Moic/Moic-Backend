@@ -1,37 +1,26 @@
 import { UseFormRegister, FieldValues } from 'react-hook-form';
 
-/** SignUpFormProps Component
- * @param {String} register React-Hook-Form에서 값 등록에 사용되는 props
- * @param {Any} errors React-Hook-Form에서 error처리에 사용되는 props
- * @param {(e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>} onSubmit React-Hook-Form에서 등록에 사용되는 함수
- * @returns {JSX.Element} SignUpFormProps Component 반환
- */
-export interface SignUpFormProps {
+export interface ReactHookFormType {
   register: UseFormRegister<FieldValues>;
   errors: any;
-  onSubmit: (
-    e?: React.BaseSyntheticEvent<object, any, any> | undefined
-  ) => Promise<void>;
+  onSubmit: () => void;
+}
+/**
+ * @param {UseFormRegister<FieldValues>} register React-Hook-Form에서 값 등록에 사용되는 props
+ * @param {any} errors React-Hook-Form에서 error처리에 사용되는 props
+ * @param {() => void} onSubmit React-Hook-Form에서 등록에 사용되는 함수
+ */
+
+export interface ProgressBarProps {
+  percent: string;
 }
 
 /** ProgressBar Component
  * @param {String} percent ProgressBar의 퍼센테이지, width를 이용해 작성
  * @returns {JSX.Element} ProgressBar Component 반환
  */
-export interface ProgressBarProps {
-  percent: string;
-}
 
-/** BothButtonGroupProps Component
- * @param {String} topTitle
- * @param {String} topBg
- * @param {React.MouseEventHandler<HTMLButtonElement>} onClicktop
- * @param {String} bottomTitle
- * @param {String} bottomBg
- * @param {React.MouseEventHandler<HTMLButtonElement>}
- * @returns {JSX.Element}
- */
-export interface BothButtonGroupProps {
+export interface TwinsButtonGroupProps {
   height: string;
   topTitle: string;
   topBg: string;
@@ -40,3 +29,13 @@ export interface BothButtonGroupProps {
   bottomBg: string;
   onClickbottom: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+/** TwinsButtonGroup Component
+ * @param {String} topTitle 위쪽 버튼의 title
+ * @param {String} topBg 위쪽 버튼의 배경색
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClicktop 위쪽 버튼의 callback 함수
+ * @param {String} bottomTitle 아래쪽 버튼의 title
+ * @param {String} bottomBg 아래쪽 버튼의 배경색
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickbottom 아래쪽 버튼의 callback 함수
+ * @returns {JSX.Element} 위아래로 FillButton Component가 있는 TwinsButtonGroup Component
+ */

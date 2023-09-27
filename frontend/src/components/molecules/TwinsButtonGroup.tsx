@@ -1,7 +1,7 @@
 import FillButton from '../atoms/FillButton';
-import { BothButtonGroupProps } from '@/types/auth';
+import { TwinsButtonGroupProps } from '@/types/auth';
 
-export default function BothButtonGroup({
+export default function TwinsButtonGroup({
   height,
   topTitle,
   topBg,
@@ -9,7 +9,7 @@ export default function BothButtonGroup({
   bottomTitle,
   bottomBg,
   onClickbottom,
-}: BothButtonGroupProps) {
+}: TwinsButtonGroupProps) {
   return (
     <div className={`${height} flex flex-col justify-evenly`}>
       <FillButton

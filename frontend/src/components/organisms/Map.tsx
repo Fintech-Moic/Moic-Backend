@@ -11,8 +11,7 @@ declare global {
 export default function Map() {
     const mapScript = document.createElement("script");
     mapScript.async = true;
-    // mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services,clusterer,drawing`;
-    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=a79013a1fb611c447a445af754108b5c&autoload=false&libraries=services,clusterer,drawing`;
+    mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services,clusterer,drawing`;
     document.head.appendChild(mapScript);
 
     useEffect(() => {

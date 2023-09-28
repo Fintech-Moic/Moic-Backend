@@ -9,9 +9,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
+import { useSetAtom } from 'jotai';
 import CarouselCardItem from '../atoms/CarouselCardItem';
 import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
+import cardDeleteModalAtom from '@/store/atoms/modal';
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any }) {
   const { className, style, onClick } = props;
@@ -56,7 +58,6 @@ interface DetailCardData {
   name: string;
   type: string;
 }
-
 interface CardData {
   [x: string]: any;
   data: DetailCardData[];
@@ -72,6 +73,7 @@ export default function ProfitCardCarousel({
   onClickPrev,
 }: CardData) {
   const router = useRouter();
+  const setOpenCardDeleteModal = useSetAtom(cardDeleteModalAtom);
   const settings = {
     dots: false,
     arrow: true,
@@ -108,6 +110,17 @@ export default function ProfitCardCarousel({
   const handleClickCard = (name: string) => {
     router.push(`/profit/card/detail/${name}`);
   };
+  const handleClickCardDelete = (
+    name: string,
+    cardImage: string,
+    company: string
+  ) => {
+    setOpenCardDeleteModal((prev) => ({
+      ...prev,
+      isOpen: true,
+      deleteCardInfo: { name, cardImage, company },
+    }));
+  };
   return (
     <div className="w-80 h-32 cursor-pointer [&_.slick-slide]:w-20 [&_.slick-slide]:h-32 [&_.slick-slide]:relative">
       <Slider {...settings}>
@@ -125,16 +138,21 @@ export default function ProfitCardCarousel({
             cardImage,
             id,
             name,
+            company,
           }: {
             cardImage: string;
             id: string;
             name: string;
+            company: string;
           }) => (
             <CarouselCardItem
               key={`CarouselCardItem_${id}`}
               canDelete={canDelete}
               cardImage={cardImage}
               onClick={() => handleClickCard(name)}
+              onClickDelete={() =>
+                handleClickCardDelete(name, cardImage, company)
+              }
             />
           )
         )}

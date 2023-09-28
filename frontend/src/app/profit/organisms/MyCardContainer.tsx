@@ -1,11 +1,16 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useAtom } from 'jotai';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitCardCarousel from '../molecules/ProfitCardCarousel';
-import { getMyCard } from '@/api/card';
+import { getMyCard, postCardDelete } from '@/api/card';
 import CarouselTitleSentence from '@/components/atoms/CarouselTitleSentence';
+import Modal from '@/components/atoms/Modal';
+import TitleSentence from '@/components/atoms/TitleSentence';
+import cardDeleteModalAtom from '@/store/atoms/modal';
+import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 
 interface MyCardContainerProps {
   myCard: any;
@@ -16,7 +21,12 @@ export default function MyCardContainer({ myCard }: MyCardContainerProps) {
     queryFn: () => getMyCard(),
     initialData: myCard,
   });
+  const cardDeletMutation = useMutation({
+    mutationFn: (name: string) => postCardDelete(name),
+  });
   const [currentCardProgress, setCurrentCardProgress] = useState(1);
+  const [{ isOpen, deleteCardInfo }, setOpenCardDeleteModal] =
+    useAtom(cardDeleteModalAtom);
   const { cardList } = data.data;
 
   if (isLoading) <div>로딩중...</div>;
@@ -31,8 +41,63 @@ export default function MyCardContainer({ myCard }: MyCardContainerProps) {
     setCurrentCardProgress((prev) => prev + 1);
   };
 
+  const handleClickModalClose = () => {
+    setOpenCardDeleteModal((prev) => ({
+      ...prev,
+      isOpen: false,
+      deleteCardInfo: {},
+    }));
+  };
+
+  const handleClickCardDelete = () => {
+    cardDeletMutation.mutate(deleteCardInfo.name, {
+      onSuccess: () => {
+        setOpenCardDeleteModal((prev) => ({
+          ...prev,
+          isOpen: false,
+          deleteCardInfo: {},
+        }));
+      },
+      onError() {
+        setOpenCardDeleteModal((prev) => ({
+          ...prev,
+          isOpen: false,
+          deleteCardInfo: {},
+        }));
+        alert('카드 삭제 실패! 다시, 시도해주세요');
+      },
+    });
+  };
+
   return (
     <div className="flex justify-center items-center flex-col gap-5">
+      {isOpen &&
+        deleteCardInfo.name &&
+        deleteCardInfo.company &&
+        deleteCardInfo.cardImage && (
+          <Modal>
+            <div className="flex flex-col gap-16 justify-center items-center w-full h-full">
+              <TitleSentence title="" sentence="이 카드를 삭제하실 건가요?" />
+              <div className="flex flex-col justify-center items-center gap-4">
+                <img
+                  src={deleteCardInfo.cardImage}
+                  alt="삭제카드이미지"
+                  className="w-32 h-20"
+                />
+                <CarouselTitleSentence
+                  firstTitle={deleteCardInfo.company}
+                  secondTitle={deleteCardInfo.name}
+                />
+              </div>
+              <BothButtonGroup
+                leftTitle="뒤로가기"
+                rightTitle="삭제하기"
+                onClickLeft={handleClickModalClose}
+                onClickRight={handleClickCardDelete}
+              />
+            </div>
+          </Modal>
+        )}
       <NumberProgress
         startTitle="카드 등록이 가능합니다!"
         maxLength={cardList.length}

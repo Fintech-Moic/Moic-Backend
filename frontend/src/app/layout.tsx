@@ -20,7 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <JotaiProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <div id="modal" />
+            {children}
+          </ReactQueryProvider>
         </JotaiProvider>
       </body>
     </html>

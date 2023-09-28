@@ -2,7 +2,6 @@ import FillButton from '../atoms/FillButton';
 import { TwinsButtonGroupProps } from '@/types/auth';
 
 export default function TwinsButtonGroup({
-  height,
   topTitle,
   topBg,
   onClicktop,
@@ -11,7 +10,7 @@ export default function TwinsButtonGroup({
   onClickbottom,
 }: TwinsButtonGroupProps) {
   return (
-    <div className={`${height} flex flex-col justify-evenly`}>
+    <div className="h-36 flex flex-col justify-evenly">
       <FillButton
         type="button"
         title={topTitle}

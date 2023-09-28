@@ -10,7 +10,7 @@ import ProgressBar from '../atoms/ProgressBar';
 import SignUpTextForm from '../organisms/SignUpTextForm';
 import SignUpPersonalForm from '../organisms/SignUpPersonalForm';
 import SignUpAccountForm from '../organisms/SignUpAccountForm';
-import SignUpSuccessForm from '../organisms/SignUpSuccessForm';
+import AuthSuccessForm from '../organisms/AuthSuccessForm';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { signUpApi } from '@/api/auth';
 
@@ -107,7 +107,20 @@ export default function Page() {
     else router.push('/auth/signIn');
   };
   const SignUpContentArr = [
-    <SignUpTextForm />,
+    <SignUpTextForm>
+      <div>
+        <h1 className="h1b">개인정보 처리방침</h1>
+        <br />
+        <p className="p2r">
+          핀프들(이하 &quot;회사&quot;라 함)은 개인정보보호법을 준수하며, 관련
+          법령에 의거한 개인정보처리방침을 정하여 이용자 권익 보호에 최선을
+          다하고 있습니다. 회사의 개인정보처리방침은 다음과 같은 내용을 담고
+          있습니다.
+        </p>
+        <br />
+        <h3 className="p2b"> 1. 개인정보의 처리 목적 및 수집 항목</h3>
+      </div>
+    </SignUpTextForm>,
     <SignUpPersonalForm
       ref={personalFormRef}
       register={register}
@@ -122,10 +135,20 @@ export default function Page() {
       errors={errors}
       onSubmit={onSubmit}
     />,
-    <SignUpSuccessForm />,
+    <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
+      <section className="flex flex-col items-center">
+        <div className="h3b flex">
+          <h2 className="text-y4">모익</h2>
+          <h2>에 오신걸 환영해요</h2>
+        </div>
+        <p className="p2r text-Primary">
+          로그인 후, 다양한 서비스를 누려보세요!
+        </p>
+      </section>
+    </AuthSuccessForm>,
   ];
   return (
-    <div className="flex flex-col h-full justify-around">
+    <div className="flex flex-col h-full">
       <ProgressBar percent={percent} />
       <div className="h-2/3">{SignUpContentArr[step]}</div>
       {step < 3 && (

@@ -46,6 +46,7 @@ export async function postCardRegist(cardName: string) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   });
   const result = await response.json();
   return result;
@@ -54,6 +55,19 @@ export async function postCardRegist(cardName: string) {
 export async function getMyCard() {
   const response = await fetch(`${ENDPOINT}/card/mycards?userId=test1234`, {
     method: 'GET',
+  });
+  const result = await response.json();
+  return result;
+}
+
+export async function postCardDelete(cardName: string) {
+  const response = await fetch(`${ENDPOINT}/card/delete`, {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ cardName, userId: 'test1234' }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
   const result = await response.json();
   return result;

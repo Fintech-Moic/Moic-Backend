@@ -1,10 +1,16 @@
 import { forwardRef } from 'react';
 import InputForm from '../molecules/InputForm';
-import { SignUpFormProps } from '@/types/auth';
+import { ReactHookFormType } from '@/types/auth';
+
+interface SignUpAccountFormProps extends ReactHookFormType {}
+
+/** SignUpAccountForm Components
+ * @returns {JSX.Element} 회원가입시 계정 정보를 입력할 SignUpAccountForm
+ */
 
 const SignUpAccountForm = forwardRef(
   (
-    { register, errors, onSubmit }: SignUpFormProps,
+    { register, errors, onSubmit }: SignUpAccountFormProps,
     ref: React.Ref<HTMLFormElement>
   ) => {
     return (

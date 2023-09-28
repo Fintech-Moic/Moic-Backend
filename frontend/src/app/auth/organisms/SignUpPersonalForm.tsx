@@ -2,17 +2,17 @@
 
 import { forwardRef, useEffect, useState } from 'react';
 import InputForm from '../molecules/InputForm';
-import { SignUpFormProps } from '@/types/auth';
+import { ReactHookFormType } from '@/types/auth';
 import Dropdown from '@/components/atoms/Dropdown';
 
-/**
+/** SignUpPersonalForm Components
  * @todo dropDownData 타입 변경
  *
  * @param {Any} dropDownData Dropdown에서 출력할 데이터
  * @param {React.Dispatch<React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>>} setSelectedData DropDown에서 선택된 데이터
  * @returns {JSX.Element} 회원가입시 개인 정보를 입력할 SignUnPersonalForm
  */
-interface SignUpPersonalFormProps extends SignUpFormProps {
+interface SignUpPersonalFormProps extends ReactHookFormType {
   dropDownData: any;
   setSelectedData: React.Dispatch<
     React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>

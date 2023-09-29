@@ -6,12 +6,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import GifticonRegistTitle from '../atoms/GifticonRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
-import postGifticonRegist from '@/api/gifticon';
+import postGiftRegist from '@/api/giftCard';
 
 /** 기프티콘 이미지를 통한 등록을 지원하는 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
-export default function GifticonRegist() {
+export default function GiftCardRegist() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadThumbnail, setUploadThumbnail] = useState<string | null>(null);
   const router = useRouter();
@@ -30,8 +30,17 @@ export default function GifticonRegist() {
   };
 
   const mutation = useMutation({
-    mutationFn: (formData: any) => postGifticonRegist(formData),
-    onSuccess: () => {
+    mutationFn: (formData: any) => postGiftRegist(formData),
+    onSuccess: (data) => {
+      if (
+        data &&
+        ((Object.keys(data).includes('status') &&
+          data.status.toString()[0] !== '2') ||
+          Object.keys(data).includes('errorCode'))
+      ) {
+        alert('실패했습니다! 다시 시도해주세요!');
+        return;
+      }
       router.back();
     },
     onError: () => {

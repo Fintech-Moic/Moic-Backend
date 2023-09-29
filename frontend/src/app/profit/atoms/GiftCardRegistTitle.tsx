@@ -1,4 +1,4 @@
-interface GifticonRegistTitleProps {
+interface GiftCardRegistTitleProps {
   isTrue: boolean;
   trueText: string;
   falseText: string;
@@ -10,11 +10,11 @@ interface GifticonRegistTitleProps {
  * @param {String} falseText 실패 시 보여주는 텍스트
  * @returns {JSX.Element} 컴포넌트 반환
  */
-export default function GifticonRegistTitle({
+export default function GiftCardRegistTitle({
   isTrue,
   trueText,
   falseText,
-}: GifticonRegistTitleProps) {
+}: GiftCardRegistTitleProps) {
   return (
     <h2 className={`${isTrue ? '' : 'opacity-50'} h3b break-words text-center`}>
       {isTrue ? trueText : falseText}

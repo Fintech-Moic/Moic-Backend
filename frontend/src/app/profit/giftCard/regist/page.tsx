@@ -1,4 +1,4 @@
-import GifticonRegist from '../../organisms/GifticonRegist';
+import GiftCardRegist from '../../organisms/GiftCardRegist';
 import Header from '@/components/molecules/Header';
 import Navbar from '@/components/molecules/Navbar';
 
@@ -8,7 +8,7 @@ export default function Page() {
       <Header title="기프티콘 등록" isPrevButton isFilterButton={false} />
       <div className="relative px-5 py-9 flex-1 overflow-y-auto">
         <div className="shadow-md h-full flex flex-col justify-between items-center gap-16 rounded-3xl bg-white px-9 py-12">
-          <GifticonRegist />
+          <GiftCardRegist />
         </div>
       </div>
       <div className="flex justify-center">

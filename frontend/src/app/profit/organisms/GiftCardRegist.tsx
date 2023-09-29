@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import GifticonRegistTitle from '../atoms/GifticonRegistTitle';
+import GiftCardRegistTitle from '../atoms/GiftCardRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
 import postGiftRegist from '@/api/giftCard';
 
@@ -62,7 +62,7 @@ export default function GiftCardRegist() {
 
   return (
     <>
-      <GifticonRegistTitle
+      <GiftCardRegistTitle
         isTrue={hasUploaded()}
         trueText="기프티콘 업로드에 성공했습니다."
         falseText="기프티콘을 업로드해주세요."

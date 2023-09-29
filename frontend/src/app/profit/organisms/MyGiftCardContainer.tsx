@@ -12,6 +12,10 @@ import TitleSentence from '@/components/atoms/TitleSentence';
 import { giftDeleteModalAtom } from '@/store/atoms/modal';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 
+/** 내 기프티콘 조회 페이지에서, 현재 순서, 캐러셀 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
+
 export default function MyGiftCardContainer() {
   const queryClient = useQueryClient();
   const { data: giftData, isLoading } = useQuery({

@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import CardSubTitle from './CardSubTitle';
 
+/** 내 기프티콘 조회 페이지에서, 내 기프티콘이 없을 시 보여주는 컴포넌트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function GiftCardEmptyRegistButton() {
   const router = useRouter();
   const handleClick = useCallback(() => {

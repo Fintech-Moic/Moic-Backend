@@ -7,6 +7,14 @@ interface CarouselGiftItemProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickDelete?: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+/** 기프티콘 케러셀의 아이템 컴포넌트
+ * @param {Boolean} canDelete 기프티콘 삭제 기능 가능여부
+ * @param {String} cardImage 기프티콘 이미지
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClick 기프티콘 클릭 이벤트
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickDelete 기프티콘 삭제 클릭 이벤트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function CarouselGiftItem({
   canDelete,
   giftImage,

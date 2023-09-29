@@ -7,6 +7,14 @@ interface CarouselCardItemProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   onClickDelete?: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+/** 카드 케러셀의 아이템 컴포넌트
+ * @param {Boolean} canDelete 카드 삭제 기능 가능여부
+ * @param {String} cardImage 카드 이미지
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClick 카드 클릭 이벤트
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickDelete 카드 삭제 클릭 이벤트
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function CarouselCardItem({
   canDelete,
   cardImage,

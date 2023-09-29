@@ -13,7 +13,7 @@ import { useSetAtom } from 'jotai';
 import CarouselCardItem from '../atoms/CarouselCardItem';
 import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
-import cardDeleteModalAtom from '@/store/atoms/modal';
+import { cardDeleteModalAtom } from '@/store/atoms/modal';
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any }) {
   const { className, style, onClick } = props;

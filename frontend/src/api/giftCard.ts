@@ -11,7 +11,7 @@ export default async function postGiftRegist(formData: FormData) {
 }
 
 export async function getMyGift() {
-  const response = await fetch(`${ENDPOINT}/gift/mygifts?id=test1111`, {
+  const response = await fetch(`${ENDPOINT}/gift/mygifts`, {
     method: 'GET',
     credentials: 'include',
   });
@@ -24,6 +24,9 @@ export async function postGiftDelete(imageUrl: string) {
     method: 'POST',
     body: JSON.stringify({ imageUrl }),
     credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
   const result = await response.json();
   return result;

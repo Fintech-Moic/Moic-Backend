@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import GifticonRegistTitle from '../atoms/GifticonRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
-import postGifticonRegist from '@/api/gifticon';
+import { postGifticonRegist } from '@/api/giftCard';
 
 /** 기프티콘 이미지를 통한 등록을 지원하는 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환

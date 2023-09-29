@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import NumberProgress from '../atoms/NumberProgress';
@@ -16,6 +16,7 @@ interface MyCardContainerProps {
   myCard: any;
 }
 export default function MyCardContainer({ myCard }: MyCardContainerProps) {
+  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ['getMyCard'],
     queryFn: () => getMyCard(),
@@ -57,6 +58,7 @@ export default function MyCardContainer({ myCard }: MyCardContainerProps) {
           isOpen: false,
           deleteCardInfo: {},
         }));
+        queryClient.invalidateQueries(['getMyCard']);
       },
       onError() {
         setOpenCardDeleteModal((prev) => ({

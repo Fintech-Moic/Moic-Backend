@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import NumberProgress from '../atoms/NumberProgress';
@@ -13,6 +13,7 @@ import { giftDeleteModalAtom } from '@/store/atoms/modal';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 
 export default function MyGiftCardContainer() {
+  const queryClient = useQueryClient();
   const { data: giftData, isLoading } = useQuery({
     queryKey: ['getMyGift'],
     queryFn: () => getMyGift(),
@@ -25,6 +26,7 @@ export default function MyGiftCardContainer() {
     useAtom(giftDeleteModalAtom);
 
   if (isLoading) return <div>로딩중...</div>;
+
   const giftList = giftData.data;
 
   const handleClickPrev = () => {
@@ -58,6 +60,9 @@ export default function MyGiftCardContainer() {
             isOpen: false,
             deleteCardInfo: {},
           }));
+          queryClient.invalidateQueries(['getMyGift']);
+
+          return;
         }
         alert('기프티콘 삭제 실패! 다시, 시도해주세요');
       },

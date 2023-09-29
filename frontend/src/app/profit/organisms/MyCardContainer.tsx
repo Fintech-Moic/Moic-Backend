@@ -9,8 +9,8 @@ import { getMyCard, postCardDelete } from '@/api/card';
 import CarouselTitleSentence from '@/components/atoms/CarouselTitleSentence';
 import Modal from '@/components/atoms/Modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
-import cardDeleteModalAtom from '@/store/atoms/modal';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
+import { cardDeleteModalAtom } from '@/store/atoms/modal';
 
 interface MyCardContainerProps {
   myCard: any;

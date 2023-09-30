@@ -7,7 +7,7 @@ import ButtonProps from '@/types/button';
 
 interface FillButtonProps extends ButtonProps {
   bgColor: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 /** 배경 색이 존재하는 Button Component
@@ -24,7 +24,7 @@ export default function FillButton({
   width,
   height,
   borderRadius,
-  disabled,
+  disabled = false,
 }: FillButtonProps) {
   const handleOnClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,7 +34,7 @@ export default function FillButton({
     },
     [onClick]
   );
-    
+
   return (
     <button
       className={`${width} ${height} ${font} ${bgColor} rounded-lg ${borderRadius} rounded-[10px] flex justify-center items-center text-white disabled:bg-black disabled:opacity-50`}

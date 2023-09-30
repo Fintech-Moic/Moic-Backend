@@ -11,6 +11,14 @@ interface BookmarkButtonGroupProps {
   onClickDelete: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+/** 북마크 페이지에서, 한 줄로 나열된 버튼을 모아둔 컴포넌트
+ * @param {String} listType 현재 북마크의 타입 (일반 읽기, 수정)
+ * @param {React.Dispatch<React.SetStateAction<string>>} setListType 북마크의 타입 상태를 수정하는 함수
+ * @param {boolean} isEmptyBookmark 사용자 계정의 북마크가 하나도 없는지 보여주는 조건값
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickTotalSelect 전체 선택 버튼 클릭 시, 동작하는 함수
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickDelete 삭제 버튼 클릭 시, 동작하는 함수
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function BookmarkTopButtonGroup({
   listType,
   setListType,

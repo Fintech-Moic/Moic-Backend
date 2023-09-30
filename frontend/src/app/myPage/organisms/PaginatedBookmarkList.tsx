@@ -24,7 +24,7 @@ interface Bookmark {
   isSelected: boolean;
 }
 
-/** 페이지네이션과 북마크 리스트 융합된 컴포넌트
+/** 페이지네이션과 북마크 리스트 융합된 organisms 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
 

@@ -12,7 +12,7 @@ export default async function Page() {
     name: string;
     type: string;
   }
-  
+
   interface CardData {
     [x: string]: any;
     data: DetailCardData[]

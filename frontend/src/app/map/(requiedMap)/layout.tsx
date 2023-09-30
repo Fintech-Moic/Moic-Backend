@@ -4,12 +4,6 @@ import Navbar from '@/components/molecules/Navbar';
 import Map from "@/components/organisms/Map";
 import React, { useEffect } from "react";
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 export default function layout({ children }: { children: React.ReactNode }) {
 
   return (

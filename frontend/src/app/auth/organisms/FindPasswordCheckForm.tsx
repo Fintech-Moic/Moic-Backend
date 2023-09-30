@@ -25,8 +25,8 @@ export default function FindPasswordCheckForm({
       <form onSubmit={onSubmit} className="h-full flex w-full justify-between">
         <InputForm
           register={register}
-          id="verify"
-          name="verify"
+          id="certification"
+          name="certification"
           type="text"
           placeholder="인증번호"
           isError={Boolean(errors.email)}

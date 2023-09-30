@@ -23,7 +23,7 @@ export default function Page() {
   const router = useRouter();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [selectedData, setSelectedData] = useState<{
     gender: string | null;
     yearOfBirth: string | null;

@@ -22,9 +22,10 @@ export default function Page() {
   } = useForm();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
-  const [id, setId] = useState([]);
-  const [checkForm, setCheckForm] = useState(true);
-  const [showToChangePassword, setShowToChangePassword] = useState(true);
+  const [id, setId] = useState<{ id: string } | null>(null);
+  const [idData, setIdData] = useState<{} | null>(null);
+  const [checkForm, setCheckForm] = useState(false);
+  const [showToChangePassword, setShowToChangePassword] = useState(false);
 
   const forwardStep = () => {
     setStep(step + 1);
@@ -46,28 +47,47 @@ export default function Page() {
   const sendPassword = handleSubmit(async (data) => {
     console.log(data);
     const result = await sendPasswordApi(data);
-    if (result !== null) setCheckForm(true);
+    if (result !== null) {
+      setCheckForm(true);
+    }
   });
-  const checkPassword = handleSubmit(async (data) => {
-    const result = await checkPasswordApi(data);
-    if (result !== null) setShowToChangePassword(true);
+  const checkPassword = handleSubmit((data) => {
+    console.log('idData 업데이트');
+    setIdData({
+      id: data.id,
+      certification: data.certification,
+    });
   });
 
+  useEffect(() => {
+    const passwordCheck = async () => {
+      console.log('passwordCheck');
+      console.log(idData);
+      if (idData !== null) {
+        const result = await checkPasswordApi(idData);
+        if (result !== null) setShowToChangePassword(true);
+      }
+    };
+    if (idData !== null) passwordCheck();
+  }, [idData]);
+
   const findPasswordContentArr = [
-    <div className="w-full h-full flex flex-col justify-around">
+    <div className="w-full h-full flex flex-col justify-between">
       <FindPasswordSendForm
         register={register}
         errors={errors}
         onSubmit={sendPassword}
       />
       {checkForm && (
-        <FindPasswordCheckForm
-          register={register}
-          errors={errors}
-          onSubmit={checkPassword}
-          showToChangePassword={showToChangePassword}
-          onClick={forwardStep}
-        />
+        <div className="h-1/3 flex flex-col justify-between">
+          <FindPasswordCheckForm
+            register={register}
+            errors={errors}
+            onSubmit={checkPassword}
+            showToChangePassword={showToChangePassword}
+            onClick={forwardStep}
+          />
+        </div>
       )}
     </div>,
     <FindPasswordChangeForm

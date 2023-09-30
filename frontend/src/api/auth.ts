@@ -128,7 +128,24 @@ const checkPasswordApi = async (formData: FieldValues) => {
     return null;
   }
 };
-const changePasswordApi = async () => {};
+const changePasswordApi = async (formData: FieldValues) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/user/reset/password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      console.log('imNotOk');
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 export {
   signInApi,

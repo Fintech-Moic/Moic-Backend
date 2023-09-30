@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import ProgressBar from '../../atoms/ProgressBar';
 import FindPasswordSendForm from '../../organisms/FindPasswordSendForm';
@@ -22,8 +24,8 @@ export default function Page() {
   } = useForm();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
-  const [id, setId] = useState<{ id: string } | null>(null);
   const [idData, setIdData] = useState<{} | null>(null);
+  const [passwordData, setPasswordData] = useState<{} | null>(null);
   const [checkForm, setCheckForm] = useState(false);
   const [showToChangePassword, setShowToChangePassword] = useState(false);
 
@@ -45,24 +47,27 @@ export default function Page() {
   }, [step]);
 
   const sendPassword = handleSubmit(async (data) => {
-    console.log(data);
     const result = await sendPasswordApi(data);
     if (result !== null) {
       setCheckForm(true);
     }
   });
   const checkPassword = handleSubmit((data) => {
-    console.log('idData 업데이트');
     setIdData({
       id: data.id,
       certification: data.certification,
     });
   });
+  const changePassword = handleSubmit((data) => {
+    setPasswordData({
+      ...idData,
+      password: data.password,
+      passwordCheck: data.passwordCheck,
+    });
+  });
 
   useEffect(() => {
-    const passwordCheck = async () => {
-      console.log('passwordCheck');
-      console.log(idData);
+    const passwordCheck = async () => {;
       if (idData !== null) {
         const result = await checkPasswordApi(idData);
         if (result !== null) setShowToChangePassword(true);
@@ -70,6 +75,16 @@ export default function Page() {
     };
     if (idData !== null) passwordCheck();
   }, [idData]);
+
+  useEffect(() => {
+    const passwordChange = async () => {
+      if (passwordData !== null) {
+        const result = await changePasswordApi(passwordData);
+        if (result !== null) forwardStep();
+      }
+    };
+    if (passwordData !== null) passwordChange();
+  }, [passwordData]);
 
   const findPasswordContentArr = [
     <div className="w-full h-full flex flex-col justify-between">
@@ -93,7 +108,7 @@ export default function Page() {
     <FindPasswordChangeForm
       register={register}
       errors={errors}
-      onSubmit={forwardStep}
+      onSubmit={changePassword}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
       <section className="flex flex-col items-center">

@@ -7,7 +7,7 @@ interface FindPasswordChangeFormProps extends ReactHookFormType {}
 /** FindPasswordChangeForm Component
  * @todo error 설정 및 타입 변경
  *
- * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 FindIdForm
+ * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 FindPasswordChangeForm
  */
 
 export default function FindPasswordChangeForm({
@@ -20,7 +20,7 @@ export default function FindPasswordChangeForm({
       onSubmit={onSubmit}
       className="w-full flex flex-col h-1/2 justify-between"
     >
-      <div className="flex flex-col h-1/2 justify-evenly">
+      <div className="flex flex-col h-full justify-evenly">
         <InputForm
           register={register}
           id="password"
@@ -46,7 +46,7 @@ export default function FindPasswordChangeForm({
       </div>
       <FillButton
         type="submit"
-        title="아이디 찾기"
+        title="비밀번호 설정하기"
         font="h3b"
         width="w-80"
         height="h-12"

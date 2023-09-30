@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import NumberProgress from '../atoms/NumberProgress';
@@ -9,13 +9,18 @@ import { getMyCard, postCardDelete } from '@/api/card';
 import CarouselTitleSentence from '@/components/atoms/CarouselTitleSentence';
 import Modal from '@/components/atoms/Modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
-import cardDeleteModalAtom from '@/store/atoms/modal';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
+import { cardDeleteModalAtom } from '@/store/atoms/modal';
 
 interface MyCardContainerProps {
   myCard: any;
 }
+/** 내 카드 조회 페이지에서, 현재 순서, 캐러셀, 카드사, 카드명 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
+ * @param {any} myCard 내 카드 정보
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 export default function MyCardContainer({ myCard }: MyCardContainerProps) {
+  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ['getMyCard'],
     queryFn: () => getMyCard(),
@@ -57,6 +62,7 @@ export default function MyCardContainer({ myCard }: MyCardContainerProps) {
           isOpen: false,
           deleteCardInfo: {},
         }));
+        queryClient.invalidateQueries(['getMyCard']);
       },
       onError() {
         setOpenCardDeleteModal((prev) => ({

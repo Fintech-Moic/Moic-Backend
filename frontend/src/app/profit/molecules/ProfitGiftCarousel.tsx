@@ -10,11 +10,24 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 import { useSetAtom } from 'jotai';
-import CarouselCardItem from '../atoms/CarouselCardItem';
+import CarouselGiftItem from '../atoms/CarouselGiftItem';
 import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
-import { cardDeleteModalAtom } from '@/store/atoms/modal';
+import { giftDeleteModalAtom } from '@/store/atoms/modal';
 
+interface DetailGiftData {
+  id: string;
+  imageUrl: string;
+  dueDate: string;
+}
+
+interface ProfitGiftCarouselProps {
+  [x: string]: any;
+  data: DetailGiftData[];
+  canDelete: boolean;
+  onClickNext: () => void;
+  onClickPrev: () => void;
+}
 function SampleNextArrow(props: { className: any; style: any; onClick: any }) {
   const { className, style, onClick } = props;
   return (
@@ -51,29 +64,14 @@ function SamplePrevArrow(props: { className: any; style: any; onClick: any }) {
   );
 }
 
-interface DetailCardData {
-  cardImage: string;
-  company: string;
-  id: string;
-  name: string;
-  type: string;
-}
-interface CardData {
-  [x: string]: any;
-  data: DetailCardData[];
-  canDelete: boolean;
-  onClickNext: () => void;
-  onClickPrev: () => void;
-}
-
-export default function ProfitCardCarousel({
+export default function ProfitGiftCarousel({
   data,
   canDelete,
   onClickNext,
   onClickPrev,
-}: CardData) {
+}: ProfitGiftCarouselProps) {
   const router = useRouter();
-  const setOpenCardDeleteModal = useSetAtom(cardDeleteModalAtom);
+  const setOpenGiftDeleteModal = useSetAtom(giftDeleteModalAtom);
   const settings = {
     dots: false,
     arrow: true,
@@ -104,21 +102,17 @@ export default function ProfitCardCarousel({
 
   const handleClickRegist = (e: any) => {
     e.preventDefault();
-    router.push('/profit/card/regist');
+    router.push('/profit/giftCard/regist');
   };
 
-  const handleClickCard = (name: string) => {
-    router.push(`/profit/card/detail/${name}`);
+  const handleClickGift = (id: string) => {
+    router.push(`/profit/giftCard/detail/${id}`);
   };
-  const handleClickCardDelete = (
-    name: string,
-    cardImage: string,
-    company: string
-  ) => {
-    setOpenCardDeleteModal((prev) => ({
+  const handleClickGiftDelete = (props: DetailGiftData) => {
+    setOpenGiftDeleteModal((prev) => ({
       ...prev,
       isOpen: true,
-      deleteCardInfo: { name, cardImage, company },
+      deleteGiftInfo: { ...props },
     }));
   };
   return (
@@ -129,33 +123,24 @@ export default function ProfitCardCarousel({
             className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px] transform"
             src="/CardRegist.png"
             onClick={handleClickRegist}
-            alt="카드등록"
+            alt="기프티콘등록"
           />
         </h3>
-
-        {data.map(
-          ({
-            cardImage,
-            id,
-            name,
-            company,
-          }: {
-            cardImage: string;
-            id: string;
-            name: string;
-            company: string;
-          }) => (
-            <CarouselCardItem
-              key={`CarouselCardItem_${id}`}
-              canDelete={canDelete}
-              cardImage={cardImage}
-              onClick={() => handleClickCard(name)}
-              onClickDelete={() =>
-                handleClickCardDelete(name, cardImage, company)
-              }
-            />
-          )
-        )}
+        {data.map(({ id, imageUrl, dueDate }: DetailGiftData) => (
+          <CarouselGiftItem
+            key={`CarouselGiftItem_${imageUrl}`}
+            canDelete={canDelete}
+            giftImage={imageUrl}
+            onClick={() => handleClickGift(id)}
+            onClickDelete={() =>
+              handleClickGiftDelete({
+                id,
+                imageUrl,
+                dueDate,
+              })
+            }
+          />
+        ))}
       </Slider>
     </div>
   );

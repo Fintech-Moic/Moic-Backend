@@ -19,6 +19,7 @@ export default function TwinsButtonGroup({
         height="h-12"
         bgColor={topBg}
         onClick={onClicktop}
+        disabled={false}
       />
       <FillButton
         type="button"
@@ -28,6 +29,7 @@ export default function TwinsButtonGroup({
         height="h-12"
         bgColor={bottomBg}
         onClick={onClickbottom}
+        disabled={false}
       />
     </div>
   );

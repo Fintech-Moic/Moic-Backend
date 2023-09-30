@@ -39,7 +39,7 @@ export default function PaginatedCardList({ listType }: { listType: string }) {
   });
 
   if (isLoading) return <div>로딩중...</div>;
-  const totalPageLength = Math.round(
+  const totalPageLength = Math.ceil(
     (getfilteredCardList(listType, data.data.cardList) as Array<Card>).length /
       4
   );

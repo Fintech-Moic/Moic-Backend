@@ -57,6 +57,7 @@ export default function SignInForm({
         width="w-80"
         height="h-12"
         bgColor="bg-g4"
+        disabled={false}
       />
     </form>
   );

@@ -24,6 +24,7 @@ export default function SignUpSuccessForm() {
           font="h3b"
           width="w-80"
           height="h-12"
+          disabled={false}
         />
       </Link>
     </div>

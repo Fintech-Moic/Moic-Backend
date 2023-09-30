@@ -1,6 +1,6 @@
 const ENDPOINT = 'https://moic.site/api/v1';
 
-export default async function postGiftRegist(formData: FormData) {
+export async function postGiftRegist(formData: FormData) {
   const response = await fetch(`${ENDPOINT}/gift/regist`, {
     method: 'POST',
     credentials: 'include',

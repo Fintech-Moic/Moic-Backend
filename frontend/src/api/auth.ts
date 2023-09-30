@@ -59,7 +59,7 @@ const signOutApi = async () => {
       localStorage.clear();
       sessionStorage.clear();
       return 'SUCCESS';
-    } catch (error: any) {
+    } catch (error) {
       console.error(error);
       return null;
     }
@@ -83,11 +83,59 @@ const findIdApi = async (formData: FieldValues) => {
     }
     const data = await response.json();
     return data;
-  } catch (error: any) {
+  } catch (error) {
     console.error(error);
     return null;
   }
 };
-const findPasswordApi = async () => {};
+const sendPasswordApi = async (formData: FieldValues) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/user/temp/password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      console.log('imNotOk');
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+const checkPasswordApi = async (formData: FieldValues) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/user/verify/password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      console.log('imNotOk');
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+const changePasswordApi = async () => {};
 
-export { signInApi, signUpApi, signOutApi, findIdApi, findPasswordApi };
+export {
+  signInApi,
+  signUpApi,
+  signOutApi,
+  findIdApi,
+  sendPasswordApi,
+  checkPasswordApi,
+  changePasswordApi,
+};

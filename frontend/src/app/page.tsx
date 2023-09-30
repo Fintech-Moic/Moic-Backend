@@ -11,10 +11,9 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push('/home');
-    }, 2000);
-    // Cleanup 함수를 반환하여 타이머를 제거합니다. (옵션)
+    }, 1000);
     return () => clearTimeout(timer);
-  }, [router]); // 빈 의존성 배열로 useEffect는 마운트될 때만 실행됩니다.
+  }, [router]);
 
   return (
     <div className="w-full h-full bg-o1 flex justify-center items-center">

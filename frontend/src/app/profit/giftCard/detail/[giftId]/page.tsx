@@ -1,15 +1,17 @@
-import GifticonRegist from '../../organisms/GifticonRegist';
+'use client';
+
+import { useParams } from 'next/navigation';
 import Header from '@/components/molecules/Header';
 import Navbar from '@/components/molecules/Navbar';
+import GiftDetailContainer from '@/app/profit/organisms/GiftDetailContainer';
 
 export default function Page() {
+  const params = useParams();
   return (
     <>
-      <Header title="기프티콘 등록" isPrevButton isFilterButton={false} />
+      <Header title="기프티콘 상세 조회" isFilterButton={false} isPrevButton />
       <div className="relative px-5 py-9 flex-1 overflow-y-auto">
-        <div className="shadow-md h-full flex flex-col justify-between items-center gap-16 rounded-3xl bg-white px-9 py-12">
-          <GifticonRegist />
-        </div>
+        <GiftDetailContainer giftId={params.giftId as string} />
       </div>
       <div className="flex justify-center">
         <Navbar />

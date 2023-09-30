@@ -3,6 +3,15 @@
 /* eslint-disable react/no-unused-prop-types */
 import Image from 'next/image';
 
+/** 카드 전체 조회 또는 등록 시의 리스트 아이템 컴포넌트
+ * @param {String} listType 현재 리스트가 조회인지, 등록인지 타입
+ * @param {String} company 카드사
+ * @param {String} name 카드의 이름
+ * @param {String} type 카드의 신용/체크 카드 타입
+ * @param {String} cardImage 카드 이미지
+ * @param {Boolean} mine 내 카드 여부
+ * @returns {JSX.Element} 컴포넌트 반환
+ */
 interface CardListItemProps {
   listType: string;
   company: string;

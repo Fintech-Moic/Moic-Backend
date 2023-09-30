@@ -1,3 +1,4 @@
 import { atom } from 'jotai';
 
-export const searchResultAtom = atom([]);
+const searchResultAtom = atom([]);
+export default searchResultAtom;

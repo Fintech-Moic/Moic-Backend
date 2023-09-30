@@ -1,18 +1,11 @@
-import { UseFormRegister, FieldValues } from 'react-hook-form';
 import InputForm from '../molecules/InputForm';
 import FillButton from '@/components/atoms/FillButton';
+import { ReactHookFormType } from '@/types/auth';
 
-interface SignInFormProps {
-  register: UseFormRegister<FieldValues>;
-  errors: any;
-  onSubmit: () => void;
-}
+interface SignInFormProps extends ReactHookFormType {}
 /** SignInForm Component
  * @todo error 설정 및 타입 변경
  *
- * @param {UseFormRegister<FieldValues>} register react-form-hook의 register
- * @param {any} errors errors
- * @param {() => void} onSubmit onSubmit callback
  * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 SignInForm
  */
 // const idPattern = {
@@ -64,6 +57,7 @@ export default function SignInForm({
         width="w-80"
         height="h-12"
         bgColor="bg-g4"
+        disabled={false}
       />
     </form>
   );

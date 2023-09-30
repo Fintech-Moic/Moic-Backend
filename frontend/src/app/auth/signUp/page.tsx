@@ -11,8 +11,7 @@ import SignUpTextForm from '../organisms/SignUpTextForm';
 import SignUpPersonalForm from '../organisms/SignUpPersonalForm';
 import SignUpAccountForm from '../organisms/SignUpAccountForm';
 import SignUpSuccessForm from '../organisms/SignUpSuccessForm';
-import FillButton from '@/components/atoms/FillButton';
-import OutlineButton from '@/components/atoms/OutlineButton';
+import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { signUpApi } from '@/api/auth';
 
 export default function Page() {
@@ -109,7 +108,6 @@ export default function Page() {
   };
   const SignUpContentArr = [
     <SignUpTextForm />,
-
     <SignUpPersonalForm
       ref={personalFormRef}
       register={register}
@@ -118,7 +116,6 @@ export default function Page() {
       onSubmit={onSubmit}
       setSelectedData={setSelectedData}
     />,
-
     <SignUpAccountForm
       ref={accountFormRef}
       register={register}
@@ -132,26 +129,12 @@ export default function Page() {
       <ProgressBar percent={percent} />
       <div className="h-2/3">{SignUpContentArr[step]}</div>
       {step < 3 && (
-        <div className="flex h-1/4 w-full justify-between">
-          <OutlineButton
-            type="button"
-            title="뒤로 가기"
-            font="captionb"
-            width="w-32"
-            height="h-8"
-            lineColor="border-g4"
-            onClick={prevStep}
-          />
-          <FillButton
-            type="button"
-            title={fillButtonTitle}
-            font="captionb"
-            width="w-32"
-            height="h-8"
-            bgColor="bg-g4"
-            onClick={nextStep}
-          />
-        </div>
+        <BothButtonGroup
+          leftTitle="이전으로"
+          onClickLeft={prevStep}
+          rightTitle={fillButtonTitle}
+          onClickRight={nextStep}
+        />
       )}
     </div>
   );

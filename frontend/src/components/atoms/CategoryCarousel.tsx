@@ -1,46 +1,50 @@
-import WheelPicker from "react-simple-wheel-picker";
+import WheelPicker from 'react-simple-wheel-picker';
+
+type DataSet = {
+  id: string;
+  value: string;
+};
 
 export default function CategoryCarousel() {
-
   /**
    * 카테고리 Object
    */
-  const setKeyValue = (arr : string[]) => {
-    return arr.map(item => {
-      const dataSet = {
-        id: item,
-        value: item
-      };
-      return dataSet;
-    });
+  const setKeyValue = (arr: string[]): DataSet[] => {
+    return arr.map((item) => ({
+      id: item,
+      value: item,
+    }));
   };
 
   /**
    * 새로운 옵션 선택시 Object 변경
    */
-  const newOptionGroups = (optionGroups : string[]) => {
-    let groups : {id? : string, value? : string} = {};
-    let group : string;
-    for (group in optionGroups) {
+  const newOptionGroups = (
+    optionGroups: Record<string, string[]>
+  ): Record<string, DataSet[]> => {
+    const groupKeys = Object.keys(optionGroups);
+
+    const groups: Record<string, DataSet[]> = {};
+    groupKeys.forEach((group) => {
       groups[group] = setKeyValue(optionGroups[group]);
-    }
+    });
     return groups;
   };
+
   const optionGroups = {
-    category: ["쇼핑", "음식", "리빙", "운동", "교육", "여행", "문화"],
+    category: ['쇼핑', '음식', '리빙', '운동', '교육', '여행', '문화'],
   };
 
   const opGroups = newOptionGroups(optionGroups);
 
-  let pickerColumn = [];
-  for (const group in opGroups) {
+  const pickerColumn = Object.keys(opGroups).map((group) => {
     const data = opGroups[group];
 
-    pickerColumn.push(
+    return (
       <WheelPicker
         key={group}
         data={data}
-        onChange={()=>{}}
+        onChange={() => {}}
         height={300}
         width={160}
         itemHeight={80}
@@ -52,11 +56,7 @@ export default function CategoryCarousel() {
         shadowColor="none"
       />
     );
-  }
+  });
 
-  return (
-    <>
-    <div className="flex justify-center">{pickerColumn}</div>
-    </>
-  );
+  return <div className="flex justify-center">{pickerColumn}</div>;
 }

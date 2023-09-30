@@ -8,3 +8,7 @@ export interface TitleSentenceProps {
   title: string;
   sentence: string;
 }
+
+export interface ProgressBarProps {
+  percent: string;
+}

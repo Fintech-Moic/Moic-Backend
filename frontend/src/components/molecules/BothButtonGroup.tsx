@@ -32,6 +32,7 @@ export default function BothButtonGroup({
         height="h-8"
         bgColor="bg-g4"
         onClick={onClickRight}
+        disabled={false}
       />
     </div>
   );

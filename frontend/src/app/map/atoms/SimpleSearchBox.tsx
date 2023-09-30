@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
 import { useParams } from 'next/navigation';
-import { getShopData } from '@/api/map';
 import { useAtom } from 'jotai';
-import { searchResultAtom } from '@/store/atoms/searchResultAtom';
+import { getShopData } from '@/api/map';
+import searchResultAtom from '@/store/atoms/searchResultAtom';
 
 /**
  * 검색어 입력 및 검색 결과 출력 함수
  */
 export default function SimpleSearchBox() {
-
   const params = useParams();
 
   const [inputValue, setInputValue] = useState('');
@@ -22,7 +21,7 @@ export default function SimpleSearchBox() {
       e.preventDefault();
       const newValue = e.currentTarget.value;
       setInputValue(newValue);
-      clearTimeout(debounceTimer)
+      clearTimeout(debounceTimer);
     },
     []
   );
@@ -59,5 +58,5 @@ export default function SimpleSearchBox() {
       value={inputValue}
       className="relative font-suit text-xl ml-4 w-4/5 h-14 focus:outline-none"
     />
-  )
+  );
 }

@@ -1,5 +1,5 @@
 /* Card Carousel */
-import CardCarousel from '@/components/atoms/CardCarousel'
+import CardCarousel from '@/components/atoms/CardCarousel';
 import { getMyCard } from '@/api/card';
 
 export default async function Page() {
@@ -15,14 +15,10 @@ export default async function Page() {
 
   interface CardData {
     [x: string]: any;
-    data: DetailCardData[]
+    data: DetailCardData[];
   }
 
-  const data : CardData = MyCardInfo.data.cardList
+  const data: CardData = MyCardInfo.data.cardList;
 
-  return (
-    <>
-    <CardCarousel data={data} className="z-50"/>
-    </>
-  )
+  return <CardCarousel data={data} />;
 }

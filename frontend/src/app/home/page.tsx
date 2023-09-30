@@ -10,7 +10,9 @@ export default function page() {
   return (
     <div>
       <div className="t1">모익</div>
-      <button onClick={signOut}>로그아웃이에용</button>
+      <button type="button" onClick={signOut}>
+        로그아웃이에용
+      </button>
     </div>
   );
 }

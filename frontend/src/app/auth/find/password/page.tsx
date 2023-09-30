@@ -67,7 +67,7 @@ export default function Page() {
   });
 
   useEffect(() => {
-    const passwordCheck = async () => {;
+    const passwordCheck = async () => {
       if (idData !== null) {
         const result = await checkPasswordApi(idData);
         if (result !== null) setShowToChangePassword(true);

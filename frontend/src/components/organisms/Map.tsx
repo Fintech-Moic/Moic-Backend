@@ -17,7 +17,7 @@ export default function Map() {
 
   useEffect(() => {
 
-    /* curMapScript 생성 */
+    /* curMapScript */
     const curMapScript = document.createElement('script');
     curMapScript.async = true;
     curMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services,clusterer,drawing`;
@@ -25,7 +25,7 @@ export default function Map() {
     document.head.appendChild(curMapScript);
 
     return () => {
-      /* curMapScript 제거 */
+      /* Remove curMapScript */
       if (curMapScript.parentNode) {
         curMapScript.parentNode.removeChild(curMapScript);
       }

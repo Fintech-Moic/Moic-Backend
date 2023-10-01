@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import React, { FormEvent } from 'react';
@@ -12,7 +14,7 @@ export default function Page() {
     <>
       <div className="flex justify-center">
         <SearchBox
-          onSubmit={function (event: FormEvent<HTMLFormElement>): void {
+          onSubmit={(event: FormEvent<HTMLFormElement>) => {
             throw new Error('Function not implemented.');
           }}
         />
@@ -20,9 +22,7 @@ export default function Page() {
       {/* 검색 결과 출력 */}
       <div className="bg-Annotations rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
         {searchResult.map((result, index) => (
-          <div className="px-2 py-2" key={index}>
-            색깔 바꿀 거에용 {result}
-          </div>
+          <div className="px-2 py-2">색깔 바꿀 거에용 {result}</div>
         ))}
       </div>
     </>

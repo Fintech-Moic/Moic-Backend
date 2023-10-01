@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import TextArea from '../atoms/TextArea';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import TitleSentence from '@/components/atoms/TitleSentence';
-import postVocSuggest from '@/api/myPage';
+import { postVocSuggest } from '@/api/myPage';
 
 /** Voc 페이지의 코어를 구성하는 organisms 계층 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환

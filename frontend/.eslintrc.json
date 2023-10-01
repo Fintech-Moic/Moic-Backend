@@ -32,6 +32,7 @@
   "plugins": ["@typescript-eslint", "prettier", "import"],
   "ignorePatterns": ["node_modules/"],
   "rules": {
+    "react/no-unused-prop-types": "off",
     "linebreak-style": 0,
     "prettier/prettier": [
       "error",

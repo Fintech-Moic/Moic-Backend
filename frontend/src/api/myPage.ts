@@ -1,12 +1,9 @@
-export default async function postVocSuggest(content: string) {
-  const response = await fetch('https://moic.site/api/v1/voc', {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify({ id: 'text123', content }),
-  });
-  const result = await response.json();
-  return result;
-}
+import { authFetchGet, authFetchPost } from '@/util/api';
+
+export const postVocSuggest = async (content: string) =>
+  authFetchPost({ url: '/voc', data: { content } });
+
+export const getMyBookmark = async () => authFetchGet({ url: '/bkm/lookup' });
+
+export const postBookmarkDelete = async (data: any) =>
+  authFetchPost({ url: 'bkm/delete', data });

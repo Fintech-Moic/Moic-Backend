@@ -1,7 +1,5 @@
-interface HomeNameProps {
-  children: JSX.Element;
-}
+import { HomeNameProps } from '@/types/home';
 
-export default function HomeName({ children }: HomeNameProps) {
-  return <p className="p2r">{children}</p>;
+export default function HomeName({ name }: HomeNameProps) {
+  return <p className="p2r">{name}</p>;
 }

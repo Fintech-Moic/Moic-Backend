@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 
 interface HomeADBoxProps {
@@ -14,7 +13,9 @@ export default function HomeADBox({
   imgSrc,
   going,
 }: HomeADBoxProps) {
-  <Link href={`/${going}`} className={`${width} ${height} `}>
-    <Image src={imgSrc} alt={imgSrc} />
-  </Link>;
+  return (
+    <a href={`/${going}`} className={`${width} ${height} `}>
+      <Image src={imgSrc} alt={imgSrc} className={`${width} ${height} `} />
+    </a>
+  );
 }

@@ -12,11 +12,10 @@ declare global {
 }
 
 export default function Map() {
-  const [mounted, setMounted] = useState<boolean>(false);
+  // const [mounted, setMounted] = useState<boolean>(false);
   const [mapScript, setMapScript] = useState<HTMLScriptElement>();
 
   useEffect(() => {
-
     /* curMapScript */
     const curMapScript = document.createElement('script');
     curMapScript.async = true;

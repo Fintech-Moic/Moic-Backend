@@ -14,8 +14,8 @@ export default function HomeADBox({
   going,
 }: HomeADBoxProps) {
   return (
-    <a href={`/${going}`} className={`${width} ${height} `}>
-      <Image src={imgSrc} alt={imgSrc} className={`${width} ${height} `} />
+    <a href={`/${going}`} className={`${width} ${height} flex justify-center`}>
+      <Image src={imgSrc} alt={imgSrc} className={`${width} ${height}`} />
     </a>
   );
 }

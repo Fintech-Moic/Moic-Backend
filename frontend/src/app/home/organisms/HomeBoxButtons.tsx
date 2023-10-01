@@ -1,3 +1,5 @@
+'use client';
+
 import HomeBoxButton from '../atoms/HomeBoxButton';
 
 interface BoxItems {
@@ -13,18 +15,17 @@ interface HomeBoxButtonsProps {
 
 export default function HomeBoxButtons({ boxs }: HomeBoxButtonsProps) {
   return (
-    <div>
+    <div className="flex flex-wrap justify-between">
       {boxs.map((box) => (
-        <div>
-          <HomeBoxButton
-            width=""
-            height=""
-            going={box.going}
-            imgSrc={box.imgSrc}
-            title={box.title}
-            sentence={box.sentence}
-          />
-        </div>
+        <HomeBoxButton
+          key={box.going}
+          width="w-36"
+          height="h-56"
+          going={box.going}
+          imgSrc={box.imgSrc}
+          title={box.title}
+          sentence={box.sentence}
+        />
       ))}
     </div>
   );

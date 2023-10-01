@@ -26,14 +26,17 @@ export default function HomeBoxButton({
   going,
 }: HomeBoxButtonProps) {
   return (
-    <Link href={`/${going}`} className={`${width} ${height} `}>
-      <TitleSentence
-        title={title}
-        titleSize="h4b"
-        sentence={sentence}
-        sentenceSize="captionr"
-      />
-      <Image src={imgSrc} alt={imgSrc} />
+    <Link href={`/${going}`}>
+      <div className={`${width} ${height} p-2 mt-8 border-2 rounded-[10px]`}>
+        <TitleSentence
+          title={title}
+          titleSize="h4b"
+          sentence={sentence}
+          sentenceSize="captionr"
+          width="w-32"
+        />
+        <Image src={imgSrc} alt={imgSrc} />
+      </div>
     </Link>
   );
 }

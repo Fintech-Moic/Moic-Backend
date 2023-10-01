@@ -9,6 +9,7 @@ export interface TitleSentenceProps {
   sentence: string;
   titleSize?: string;
   sentenceSize?: string;
+  width?: string;
 }
 
 export interface ProgressBarProps {

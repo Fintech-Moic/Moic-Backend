@@ -6,6 +6,8 @@ export interface DropdownItem {
 export interface HomeDropDownProps {
   isOpen: boolean;
   items: DropdownItem[];
+  signOut: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 }
 
 export interface HomeNameProps {

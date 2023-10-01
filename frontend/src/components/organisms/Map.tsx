@@ -16,15 +16,20 @@ export default function Map() {
   const [mapScript, setMapScript] = useState<HTMLScriptElement>();
 
   useEffect(() => {
-    setMounted(true);
 
+    /* curMapScript 생성 */
     const curMapScript = document.createElement('script');
     curMapScript.async = true;
     curMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services,clusterer,drawing`;
-    setMapScript(mapScript);
+    setMapScript(curMapScript);
     document.head.appendChild(curMapScript);
 
-    return () => setMounted(false);
+    return () => {
+      /* curMapScript 제거 */
+      if (curMapScript.parentNode) {
+        curMapScript.parentNode.removeChild(curMapScript);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -53,10 +58,18 @@ export default function Map() {
         marker.setMap(map);
       });
     };
-    if (!mapScript) return undefined;
-    mapScript.addEventListener('load', onLoadKakaoMap);
 
-    return () => mapScript.removeEventListener('load', onLoadKakaoMap);
+    if (mapScript) {
+      /* LoadKakaoMap Event Listener */
+      mapScript.addEventListener('load', onLoadKakaoMap);
+    }
+
+    return () => {
+      if (mapScript) {
+        /* Remove LoadKakaoMap Event Listener */
+        mapScript.removeEventListener('load', onLoadKakaoMap);
+      }
+    };
   }, [mapScript]);
 
   return <div id="map" />;

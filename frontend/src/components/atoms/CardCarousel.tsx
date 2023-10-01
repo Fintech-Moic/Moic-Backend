@@ -81,37 +81,6 @@ export default function Page({ data }: { data: CardData }) {
   return (
     <div className="w-56 h-32 cursor-pointer z-50">
       <Slider {...settings}>
-<<<<<<< HEAD
-        {
-          props.data.map((cardImageList: {
-            cardImage: string,
-            company: string,
-            id: string,
-            name: string,
-            type: string
-          }, i: number) => {
-            if (i === 0) {
-              return (
-                <>
-                  <div>
-                    <img className="mr-5 w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]" src='/CardRegist.png' onClick={handleClick} />
-                  </div>
-                  <div key={i}>
-                    <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
-                  </div>
-                </>
-              )
-            } else {
-              return (
-                <>
-                  <div key={i}>
-                    <h3 className="origin-top-left rotate-90 w-32"><img className="border-solid border-2 border-white shadow-md rounded-[10px]" src={cardImageList.cardImage} /></h3>
-                  </div>
-                </>
-              )
-            }
-          }
-=======
         <div>
           <img
             className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]"
@@ -137,7 +106,6 @@ export default function Page({ data }: { data: CardData }) {
                 />
               </h3>
             </div>
->>>>>>> 11eb60a60a9f93efaec8bd0a0849d1501a0bf13b
           )
         )}
       </Slider>

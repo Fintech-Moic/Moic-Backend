@@ -8,7 +8,8 @@ export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col justify-between h-screen">
       <div className="absolute z-50 w-full mt-7">{children}</div>
-      <div id="map" style={{ width: '100vw', height: '100vh' }}>
+      {/* <div id="map" style={{ width: '100vw', height: '100vh' }}> */}
+      <div id="map" className="w-100% h-100%">
         <Map />
       </div>
       <div className="flex justify-center">

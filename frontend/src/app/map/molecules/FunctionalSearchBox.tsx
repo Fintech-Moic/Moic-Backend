@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import CategoryButton from '../atoms/CategoryButton'
+import CategoryButton from '../atoms/CategoryButton';
 import SearchBox from '../atoms/SimpleSearchBox';
 import PrimaryFilterIcon from '@/../../public/assets/PrimaryFilterIcon.svg';
 import PrimarySearchIcon from '@/../public/assets/PrimarySearchIcon.svg';
@@ -16,13 +16,16 @@ interface FunctionalSearchBoxProps {
  * @returns {JSX.Element} 컴포넌트 반환
  */
 
-export default function FunctionalSearchBox({ onSubmit }: FunctionalSearchBoxProps) {
-
+export default function FunctionalSearchBox({
+  onSubmit,
+}: FunctionalSearchBoxProps) {
   const router = useRouter();
 
   return (
-    <form onSubmit={onSubmit} className="bg-white flex flex-row items-center justify-between w-10/12 h-14 shadow-md rounded-[10px] focus:outline-none">
-
+    <form
+      onSubmit={onSubmit}
+      className="bg-white flex flex-row items-center justify-between w-10/12 h-14 shadow-md rounded-[10px] focus:outline-none"
+    >
       <div className="ml-4 mt-1">
         <CategoryButton
           type="button"
@@ -47,7 +50,6 @@ export default function FunctionalSearchBox({ onSubmit }: FunctionalSearchBoxPro
           height="h-9"
         />
       </div>
-
     </form>
   );
 }

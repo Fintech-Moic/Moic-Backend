@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import Image from 'next/image';
 import ButtonProps from '@/types/button';
 
@@ -13,7 +14,7 @@ interface CategoryButtonProps extends ButtonProps {
  */
 
 export default function CategoryButton({
-  type,
+  type = 'button',
   width,
   height,
   src,
@@ -21,11 +22,7 @@ export default function CategoryButton({
   onClick,
 }: CategoryButtonProps) {
   return (
-    <button
-      type={'button'}
-      className={`${width} ${height}`}
-      onClick={onClick}
-    >
+    <button type={type} className={`${width} ${height}`} onClick={onClick}>
       <Image src={src} alt={alt} />
     </button>
   );

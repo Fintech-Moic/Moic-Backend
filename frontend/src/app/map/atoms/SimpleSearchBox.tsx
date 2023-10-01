@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
 import { useParams } from 'next/navigation';
 import { useAtom } from 'jotai';
-import { getShopData } from '@/api/map';
+import getShopData from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 
 /**
  * 검색어 입력 및 검색 결과 출력 함수
  */
 export default function SimpleSearchBox() {
-  const params = useParams();
-
   const [inputValue, setInputValue] = useState('');
   const [searchResult, setSearchResult] = useAtom(searchResultAtom);
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
@@ -23,16 +23,19 @@ export default function SimpleSearchBox() {
       setInputValue(newValue);
       clearTimeout(debounceTimer);
     },
-    []
+    [debounceTimer]
   );
 
   /** 가맹점 데이터 API 호출 함수
    * @param {String | Number} value 검색어
    */
-  const listOfShop = async (value: string | number) => {
-    const posts = await getShopData(value);
-    setSearchResult(posts);
-  };
+  const listOfShop = useCallback(
+    async (value: string | number) => {
+      const posts = await getShopData(value);
+      setSearchResult(posts);
+    },
+    [setSearchResult]
+  );
 
   /** Debounce -> 검색 타이머 초기화 -> 기존 검색어 요청 대기 상태 초기화
    */
@@ -46,7 +49,7 @@ export default function SimpleSearchBox() {
       }
     }, delay);
     return () => clearTimeout(timerId);
-  }, [inputValue]);
+  }, [inputValue, listOfShop, setSearchResult]);
 
   return (
     <input

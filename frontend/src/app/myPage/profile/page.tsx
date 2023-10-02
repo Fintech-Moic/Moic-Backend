@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import ProfileContainer from '../organisms/ProfileContainer';
 import Header from '@/components/molecules/Header';
 import Navbar from '@/components/molecules/Navbar';
-import { fetchProfile } from '@/api/myPage';
+import { fetchProfile, updateProfile } from '@/api/myPage';
 
 export default function Page() {
   const [profileData, setProfileData] = useState<{
@@ -26,13 +26,14 @@ export default function Page() {
     genderList,
     yearsList,
   };
-  const onSubmit = async () => {
-    await console.log(selectedData);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const updateData = await updateProfile(selectedData);
+    if (updateData.message !== undefined) alert('수정 성공');
   };
   useEffect(() => {
     const datafetch = async () => {
-      const accessToken = localStorage.getItem('access_token');
-      const fetchData = await fetchProfile(accessToken as string);
+      const fetchData = await fetchProfile();
       setProfileData(fetchData.data);
     };
     datafetch();

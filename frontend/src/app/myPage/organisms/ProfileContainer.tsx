@@ -67,13 +67,28 @@ export default function ProfileContainer({
   }, [selectedGender, selectedYear, setSelectedData]);
 
   useEffect(() => {
-    if (fetchSelectedGender !== null)
-      setSelectedGender({ id: '0_cur', value: fetchSelectedGender });
-    if (fetchSelectedYear !== null)
-      setSelectedYear({ id: '0_cur', value: fetchSelectedYear });
+    let genderValue: string | null = null;
+    let yearValue: string | null = null;
+
+    if (fetchSelectedGender === null) {
+      genderValue = '선택안함';
+    } else if (fetchSelectedGender === 'male') {
+      genderValue = '남성';
+    } else if (fetchSelectedGender === 'female') {
+      genderValue = '여성';
+    }
+
+    if (fetchSelectedYear === null) {
+      yearValue = '선택안함';
+    } else if (fetchSelectedYear !== undefined) {
+      yearValue = fetchSelectedYear;
+    }
+    if (genderValue !== null)
+      setSelectedGender({ id: '0_cur', value: genderValue });
+    if (yearValue !== null) setSelectedYear({ id: '0_cur', value: yearValue });
     setSelectedData({
-      gender: fetchSelectedGender,
-      yearOfBirth: fetchSelectedYear,
+      gender: genderValue,
+      yearOfBirth: yearValue,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchSelectedGender, fetchSelectedYear]);

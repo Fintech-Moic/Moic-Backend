@@ -16,7 +16,7 @@ import FillButton from '@/components/atoms/FillButton';
 interface ProfileContainerProps {
   name: string;
   email: string;
-  onSubmit: () => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   dropDownData: any;
   setSelectedData: React.Dispatch<
     React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>

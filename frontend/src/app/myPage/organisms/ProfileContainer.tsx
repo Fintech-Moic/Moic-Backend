@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Dropdown from '@/components/atoms/Dropdown';
 import FillButton from '@/components/atoms/FillButton';
+import TextButton from '@/components/atoms/TextButton';
 
 /** ProfileContainerProps Components
  * @todo dropDownData 타입 변경
@@ -102,48 +103,54 @@ export default function ProfileContainer({
   });
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="w-80 h-2/3 flex flex-col justify-evenly "
-    >
-      <div className="flex w-full justify-between items-center">
-        <p className="p3b">이름</p>
-        <p>{name}</p>
+    <div className="w-80 h-full flex flex-col justify-between">
+      <form
+        onSubmit={onSubmit}
+        className="w-full h-2/3 flex flex-col justify-evenly"
+      >
+        <div className="flex w-full justify-between items-center">
+          <p className="h4b">이름</p>
+          <p className="p2r">{name}</p>
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <p className="h4b">이메일</p>
+          <p className="p2r">{email}</p>
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <p className="h4b">성별</p>
+          <Dropdown
+            placeholder="선택안함"
+            list={genderList}
+            selectItem={selectedGender}
+            setSelectItem={setSelectedGender}
+          />
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <p className="h4b">년도</p>
+          <Dropdown
+            placeholder="선택안함"
+            list={yearsList}
+            selectItem={selectedYear}
+            setSelectItem={setSelectedYear}
+          />
+        </div>
+        <div className="flex w-full justify-between items-center">
+          <div />
+          <FillButton
+            type="submit"
+            title="저장하기"
+            font="h3b"
+            width="w-80"
+            height="h-12"
+            bgColor="bg-g4"
+            disabled={false}
+          />
+        </div>
+      </form>
+      <div className="h-1/3 flex flex-col justify-between self-end">
+        {/* <TextButton>비밀번호 수정</TextButton>
+        <TextButton textColor="text-Secondary">회원 탈퇴</TextButton> */}
       </div>
-      <div className="flex w-full justify-between items-center">
-        <p className="p3b">이메일</p>
-        <p>{email}</p>
-      </div>
-      <div className="flex w-full justify-between items-center">
-        <p className="p3b">성별</p>
-        <Dropdown
-          placeholder="선택안함"
-          list={genderList}
-          selectItem={selectedGender}
-          setSelectItem={setSelectedGender}
-        />
-      </div>
-      <div className="flex w-full justify-between items-center">
-        <p className="p3b">년도</p>
-        <Dropdown
-          placeholder="선택안함"
-          list={yearsList}
-          selectItem={selectedYear}
-          setSelectItem={setSelectedYear}
-        />
-      </div>
-      <div className="flex w-full justify-between items-center">
-        <div />
-        <FillButton
-          type="submit"
-          title="저장하기"
-          font="h3b"
-          width="w-80"
-          height="h-12"
-          bgColor="bg-g4"
-          disabled={false}
-        />
-      </div>
-    </form>
+    </div>
   );
 }

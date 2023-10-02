@@ -63,10 +63,9 @@ export default function Page() {
   ];
 
   const signOut = async () => {
-    const result = await signOutApi();
-    if (result !== null) alert('로그아웃 성공');
-    else alert('로그아웃 실패');
+    await signOutApi();
   };
+
   return (
     <div className="flex flex-col w-80">
       <HomeContents

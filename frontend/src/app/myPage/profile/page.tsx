@@ -28,8 +28,7 @@ export default function Page() {
   };
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updateData = await updateProfile(selectedData);
-    if (updateData.message !== undefined) alert('수정 성공');
+    await updateProfile(selectedData);
   };
   useEffect(() => {
     const datafetch = async () => {

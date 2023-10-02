@@ -9,6 +9,8 @@ import FillButton from '@/components/atoms/FillButton';
  * @param {() => void} onSubmit
  * @param {Any} dropDownData
  * @param {React.Dispatch<React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>>} setSelectedData DropDown에서 선택된 데이터
+ * @param {String | Null} fetchSelectedYear fetch해서 가져온 year
+ * @param {String | Null} fetchSelectedGender fetch해서 가져온 gender
  * @returns {JSX.Element}
  */
 interface ProfileContainerProps {
@@ -58,7 +60,6 @@ export default function ProfileContainer({
     } else if (selectedYear?.value !== undefined) {
       yearValue = selectedYear.value;
     }
-    console.log(genderValue, yearValue);
     setSelectedData({
       gender: genderValue,
       yearOfBirth: yearValue,

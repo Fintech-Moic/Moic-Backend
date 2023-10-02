@@ -11,7 +11,7 @@ export default function Page() {
     name: string;
     email: string;
     gender: string;
-    yearOfBirth: number;
+    yearOfBirth: string;
   } | null>(null);
   const [selectedData, setSelectedData] = useState<{
     gender: string | null;

@@ -7,6 +7,10 @@ import banner from '@/../public/assets/images/banner.svg';
 
 interface HomeContentsProps extends HomeDDnNameProps {}
 
+/** HomeContentsProps
+ * @returns {JSX.Element} HomeContents Component
+ */
+
 export default function HomeContents({
   isOpen,
   items,

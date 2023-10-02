@@ -1,22 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import TitleSentence from '@/components/atoms/TitleSentence';
+import { BoxItems } from '@/types/home';
 
-interface HomeBoxButtonProps {
+interface HomeBoxButtonProps extends BoxItems {
   width: string;
   height: string;
-  title: string;
-  sentence: string;
-  imgSrc: string;
-  going: string;
 }
 
 /** HomeBoxButton Component
- * @param {String} going 이동 경로
- * @param {String} imgSrc 이동 경로
- * @param {String} sentence 이동 경로
+ * @param {String} width 너비
+ * @param {String} height 높이
  * @return {JSX.Element} 사각형 Button Component
  */
+
 export default function HomeBoxButton({
   width,
   height,

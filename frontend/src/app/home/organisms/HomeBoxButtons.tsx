@@ -1,14 +1,12 @@
 'use client';
 
-import HomeBoxButton from '../atoms/HomeBoxButton';
+import HomeBoxButton from '../molecules/HomeBoxButton';
+import { BoxItems } from '@/types/home';
 
-interface BoxItems {
-  going: string;
-  imgSrc: string;
-  title: string;
-  sentence: string;
-}
-
+/** HomeBoxButtonsProps
+ * @param {BoxItems[]} boxs HomeBoxButton에 전달할 배열
+ * @returns {JSX.Element} HomeBoxButtons Component
+ */
 interface HomeBoxButtonsProps {
   boxs: BoxItems[];
 }

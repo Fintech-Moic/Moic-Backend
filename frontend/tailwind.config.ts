@@ -62,6 +62,7 @@ const config: Config = {
         White: '#FFFFFF',
         Annotations: '#F6BE2C',
         CardSubtitle: '#7E7E7E',
+        Warning: '#F00',
       },
       fontFamily: {
         suit: ['SUIT', 'sans-serif'],

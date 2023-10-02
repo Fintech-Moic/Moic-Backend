@@ -7,7 +7,6 @@ import ButtonProps from '@/types/button';
 
 interface FillButtonProps extends ButtonProps {
   bgColor: string;
-  disabled?: boolean;
 }
 
 /** 배경 색이 존재하는 Button Component

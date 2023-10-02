@@ -8,11 +8,12 @@
  * @param {String} borderRadius button의 테두리 기울기
  */
 export default interface ButtonProps {
-  type: 'submit' | 'reset' | 'button';
+  type?: 'submit' | 'reset' | 'button';
   title?: string;
   font?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   width: string;
   height: string;
   borderRadius?: string;
+  disabled?: boolean;
 }

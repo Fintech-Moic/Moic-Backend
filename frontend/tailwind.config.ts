@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      width: {
+        38: '152px',
+      },
       colors: {
         o1: '#fff5e8',
         o2: '#fff1dd',

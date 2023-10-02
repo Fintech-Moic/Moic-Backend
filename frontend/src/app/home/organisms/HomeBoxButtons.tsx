@@ -19,7 +19,7 @@ export default function HomeBoxButtons({ boxs }: HomeBoxButtonsProps) {
       {boxs.map((box) => (
         <HomeBoxButton
           key={box.going}
-          width="w-36"
+          width="w-38"
           height="h-56"
           going={box.going}
           imgSrc={box.imgSrc}

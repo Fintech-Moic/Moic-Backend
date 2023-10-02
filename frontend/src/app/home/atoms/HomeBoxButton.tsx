@@ -27,7 +27,7 @@ export default function HomeBoxButton({
 }: HomeBoxButtonProps) {
   return (
     <Link href={`/${going}`}>
-      <div className={`${width} ${height} p-2 mt-8 border-2 rounded-[10px]`}>
+      <div className={`${width} ${height} p-2 mb-4 border-2 rounded-[10px]`}>
         <TitleSentence
           title={title}
           titleSize="h4b"

@@ -19,6 +19,8 @@ interface ProfileContainerProps {
   setSelectedData: React.Dispatch<
     React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>
   >;
+  fetchSelectedYear: string | null;
+  fetchSelectedGender: string | null;
 }
 
 export default function ProfileContainer({
@@ -27,6 +29,8 @@ export default function ProfileContainer({
   onSubmit,
   dropDownData,
   setSelectedData,
+  fetchSelectedGender,
+  fetchSelectedYear,
 }: ProfileContainerProps) {
   const [selectedGender, setSelectedGender] = useState<{
     id: string;
@@ -54,12 +58,24 @@ export default function ProfileContainer({
     } else if (selectedYear?.value !== undefined) {
       yearValue = selectedYear.value;
     }
-
+    console.log(genderValue, yearValue);
     setSelectedData({
       gender: genderValue,
       yearOfBirth: yearValue,
     });
   }, [selectedGender, selectedYear, setSelectedData]);
+
+  useEffect(() => {
+    if (fetchSelectedGender !== null)
+      setSelectedGender({ id: '0_cur', value: fetchSelectedGender });
+    if (fetchSelectedYear !== null)
+      setSelectedYear({ id: '0_cur', value: fetchSelectedYear });
+    setSelectedData({
+      gender: fetchSelectedGender,
+      yearOfBirth: fetchSelectedYear,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchSelectedGender, fetchSelectedYear]);
 
   const genderList = dropDownData.genderList.map((cur: string, idx: number) => {
     return { id: `${idx}_cur`, value: cur };

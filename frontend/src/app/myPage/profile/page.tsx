@@ -49,6 +49,8 @@ export default function Page() {
             dropDownData={dropDownData}
             setSelectedData={setSelectedData}
             onSubmit={onSubmit}
+            fetchSelectedGender={profileData.gender}
+            fetchSelectedYear={profileData.yearOfBirth}
           />
         )}
       </div>

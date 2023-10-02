@@ -11,11 +11,12 @@ export default function HomeDDnName({
   name,
   signOut,
   onClick,
+  innerRef,
 }: HomeDDnNameProps) {
   return (
     <div className="flex w-20 justify-between items-center">
       <HomeName name={name} />
-      <div className="relative">
+      <div className="relative" ref={innerRef}>
         <button onClick={onClick} type="button" className="flex items-center">
           <Image
             src={isOpen ? DropDownOn : DropDownOff}

@@ -13,6 +13,7 @@ export default function HomeContents({
   name,
   signOut,
   onClick,
+  innerRef,
 }: HomeContentsProps) {
   return (
     <article className="flex flex-col justify-evenly h-56">
@@ -24,6 +25,7 @@ export default function HomeContents({
           name={name}
           signOut={signOut}
           onClick={onClick}
+          innerRef={innerRef}
         />
       </div>
       <HomeTipBar width="w-full" height="h-10">

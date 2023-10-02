@@ -12,7 +12,23 @@ import { signOutApi } from '@/api/auth';
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const dropdownItems = [
     { name: '계정 관리', link: '/myPage' },
@@ -59,6 +75,7 @@ export default function Page() {
         items={dropdownItems}
         name="이의찬"
         signOut={signOut}
+        innerRef={dropdownRef}
       />
       <HomeBoxButtons boxs={boxs} />
     </div>

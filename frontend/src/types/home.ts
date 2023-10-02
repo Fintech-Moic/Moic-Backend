@@ -14,4 +14,6 @@ export interface HomeNameProps {
   name: string;
 }
 
-export interface HomeDDnNameProps extends HomeDropDownProps, HomeNameProps {}
+export interface HomeDDnNameProps extends HomeDropDownProps, HomeNameProps {
+  innerRef: React.RefObject<any>;
+}

@@ -48,9 +48,9 @@ function Navbar() {
         type="button"
         width="w-6"
         height="h-6"
-        src={pathname === '/profit/gifticon' ? gifticonOn : gifticon}
+        src={pathname === '/profit/giftCard/myGiftCard' ? gifticonOn : gifticon}
         alt="gifticon"
-        onClick={() => navButtonClick('/profit/gifticon')}
+        onClick={() => navButtonClick('/profit/giftCard/myGiftCard')}
       />
     </div>
   );

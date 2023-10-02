@@ -7,3 +7,80 @@ export default async function getShopData(word: string | number) {
   const data = await res.json();
   return data;
 }
+
+export async function getCategoryShop(category: string) {
+  const res = await fetch(`${ENDPOINT}/map/category?category=${category}&latitude=37.5013168&longitude=127.0396597&userId=test1234`, {
+    method: 'GET',
+  });
+  const data = await res.json();
+  return data;
+}
+
+export async function getSearchedPlace(keyword: string) {
+  const res = await fetch(`${ENDPOINT}/map/shops?keyword=${keyword}&latitude=37.5013168&longitude=127.0396597&userId=test1234`, {
+    method: 'GET',
+  });
+  const data = await res.json();
+  return data;
+}
+
+// export async function getLogoImage() {
+//   const name = 'Starbucks';
+//   const apiUrl = `https://api.api-ninjas.com/v1/logo?name=${name}`;
+//   const apiKey = process.env.NEXT_PUBLIC_LOGO_APPKEY;
+
+//   try {
+//     const response = await fetch(apiUrl, {
+//       headers: {
+//         'X-Api-Key': apiKey
+//       }
+//     });
+
+//     if (response.status === 200) {
+//       const data = await response.json();
+//       console.log(data);
+//       return data;
+//     } else {
+//       console.error('Error:', response.status, response.statusText);
+//     }
+//   } catch (error) {
+//     console.error('Request failed:', error.message);
+//   }
+// }
+
+export async function getDirection(locationInfo : object) {
+  const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
+  const url = 'https://apis-navi.kakaomobility.com/v1/directions';
+
+  // 출발지(origin), 목적지(destination)의 좌표를 문자열로 변환합니다.
+  const origin = `${locationInfo.lng},${locationInfo.lat}`;
+  const destination = `${locationInfo.lng},${locationInfo.lat}`;
+
+  const headers = {
+    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_APPKEY}`,
+    'Content-Type': 'application/json'
+  };
+
+  const queryParams = new URLSearchParams({
+    origin: origin,
+    destination: destination,
+  });
+
+  const requestUrl = `${url}?${queryParams}`; // 파라미터까지 포함된 전체 URL
+
+  try {
+    const response = await fetch(requestUrl, {
+      method: 'GET',
+      headers: headers
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    console.log(data)
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}

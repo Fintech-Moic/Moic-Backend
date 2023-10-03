@@ -1,3 +1,5 @@
+/* eslint-disable jsx-no-useless-fragment */
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -59,8 +61,7 @@ export default function KakaoMap() {
 
   return (
     <>
-      <div>
-        {/* <Map
+      {/* <Map
         center={state.center}
         style={{ width: "100%", height: "100%" }}
         level={3}>
@@ -73,7 +74,6 @@ export default function KakaoMap() {
           </MapMarker>
         )}
       </Map> */}
-      </div>
     </>
   );
 }

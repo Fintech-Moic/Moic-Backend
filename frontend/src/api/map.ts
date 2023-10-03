@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+
 const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export default async function getShopData(word: string | number) {
@@ -74,8 +76,10 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
   };
 
   const queryParams = new URLSearchParams({
-    origin: origin,
-    destination: destination,
+    origin,
+    destination,
+    // origin: origin,
+    // destination: destination,
   });
 
   const requestUrl = `${url}?${queryParams}`;

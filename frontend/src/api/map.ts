@@ -59,9 +59,6 @@ export async function getDirection(str : Coordinates, fin : Coordinates) {
   const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
-  console.log("str", str)
-
-  // 출발지(origin), 목적지(destination)의 좌표를 문자열로 변환합니다.
   const origin = `${str.lng},${str.lat}`;
   const destination = `${fin.lng},${fin.lat}`;
 
@@ -75,7 +72,7 @@ export async function getDirection(str : Coordinates, fin : Coordinates) {
     destination: destination,
   });
 
-  const requestUrl = `${url}?${queryParams}`; // 파라미터까지 포함된 전체 URL
+  const requestUrl = `${url}?${queryParams}`;
 
   try {
     const response = await fetch(requestUrl, {

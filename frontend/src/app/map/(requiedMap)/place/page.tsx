@@ -7,7 +7,8 @@ import { useAtom } from 'jotai';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 import curLocAtom from '@/store/atoms/curLocAtom';
-import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
+// import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
+import { getSearchedPlace, getDirection } from '@/api/map';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 export default function Page() {
@@ -31,7 +32,18 @@ export default function Page() {
     }
   };
 
-  const handleMarkerClick = async (shop) => {
+  interface shop {
+    category : string,
+    shopName : string,
+    shopLocation : string,
+    address : string,
+    latitude : number,
+    longitude : number,
+    benefits : boolean,
+    gifts : boolean
+  }
+  
+  const handleMarkerClick = async (shop : shop) => {
     setSelectedShop(shop);
     try {
       const str = {lat: curLoc.lat, lng: curLoc.lng}

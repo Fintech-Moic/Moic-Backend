@@ -57,8 +57,10 @@ export default function KakaoMap() {
   setCurLoc(state.center);
   console.log(curLoc);
 
-  return {
-    /* <Map
+  return (
+    <>
+      <div>
+        {/* <Map
         center={state.center}
         style={{ width: "100%", height: "100%" }}
         level={3}>
@@ -70,6 +72,8 @@ export default function KakaoMap() {
             </div>
           </MapMarker>
         )}
-      </Map> */
-  };
+      </Map> */}
+      </div>
+    </>
+  );
 }

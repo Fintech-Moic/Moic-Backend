@@ -78,7 +78,6 @@ export default function Page() {
               }}
               onKeyDown={() => {}}
               role="presentation"
-              tabIndex={0}
             >
               {result}
             </div>

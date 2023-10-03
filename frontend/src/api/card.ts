@@ -1,4 +1,5 @@
 const ENDPOINT = 'https://moic.site/api/v1';
+
 export default async function getAllCard() {
   const response = await fetch(`${ENDPOINT}/card/all?userId="test1234"`, {
     method: 'GET',

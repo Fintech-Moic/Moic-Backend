@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Swal from 'sweetalert2';
+import { FieldValues } from 'react-hook-form';
 import { authFetchGet, authFetchPost } from '@/util/api';
 
 export const postVocSuggest = async (content: string) =>
@@ -27,5 +27,20 @@ export const updateProfile = async (data: {
       text: '그렇습니다.',
     });
   }
+  return result;
+};
+
+export const checkPassword = async (data: string) => {
+  const result = authFetchPost({ url: '/user/check/password', data });
+  return result;
+};
+
+export const updatePassword = async (data: FieldValues) => {
+  const result = authFetchPost({ url: '/user/modify/password', data });
+  return result;
+};
+
+export const WithdrawalApi = async () => {
+  const result = authFetchPost({ url: '/user/delete' });
   return result;
 };

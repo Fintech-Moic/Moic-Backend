@@ -4,8 +4,6 @@ import { ReactHookFormType } from '@/types/auth';
 
 interface SignInFormProps extends ReactHookFormType {}
 /** SignInForm Component
- * @todo error 설정 및 타입 변경
- *
  * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 SignInForm
  */
 // const idPattern = {

@@ -29,6 +29,9 @@ dependencies:
   jotai:
     specifier: ^2.4.2
     version: 2.4.2(@types/react@18.2.21)(react@18.2.0)
+  kakao.maps.d.ts:
+    specifier: ^0.1.39
+    version: 0.1.39
   next:
     specifier: 13.4.19
     version: 13.4.19(@babel/core@7.22.20)(react-dom@18.2.0)(react@18.2.0)
@@ -44,6 +47,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.46.1
     version: 7.46.2(react@18.2.0)
+  react-kakao-maps-sdk:
+    specifier: ^1.1.21
+    version: 1.1.21(react-dom@18.2.0)(react@18.2.0)
   react-simple-wheel-picker:
     specifier: ^1.2.0
     version: 1.2.0(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.8)
@@ -3595,6 +3601,10 @@ packages:
       object.values: 1.1.7
     dev: true
 
+  /kakao.maps.d.ts@0.1.39:
+    resolution: {integrity: sha512-KXENJ8hHYtjb5G+0vf8TXx/PwWW4j5ndDiQTSMvGtF7EFWu2P3N/+Zivcj9/UKn3j29Iz/sIUaA7WL8Ug3IDGQ==}
+    dev: false
+
   /keyv@4.5.3:
     resolution: {integrity: sha512-QCiSav9WaX1PgETJ+SpNnx2PRRapJ/oRSXM4VO5OGYGSjrxbKPVFVhB3l2OCbLCk329N8qyAtsJjSjvVBWzEug==}
     dependencies:
@@ -4168,6 +4178,18 @@ packages:
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
+
+  /react-kakao-maps-sdk@1.1.21(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-LOtrgYjsFy3zoeu6yZqbbEOS7nHhpV5Nns+0jBEcm9KgFsETaEn71+pfMm9Lu2R2nIu4+PvlIImocCccF4jTtA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
+    dependencies:
+      '@babel/runtime': 7.22.15
+      kakao.maps.d.ts: 0.1.39
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-simple-wheel-picker@1.2.0(react-dom@18.2.0)(react@18.2.0)(styled-components@6.0.8):
     resolution: {integrity: sha512-+W56p4O8NgWk6ps7521Ca7bpYvvALQvQy4F56z6aj2klX64m1ngiDDsGQY6DwD5T5J0yBy+jr1IDlpYvzkJW/g==}

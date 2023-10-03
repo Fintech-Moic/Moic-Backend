@@ -1,17 +1,18 @@
 import Swal from 'sweetalert2';
 import { FieldValues } from 'react-hook-form';
-import { authFetchGet, authFetchPost } from '@/util/api';
+import { fetchGet, fetchPost } from '@/util/api';
 
 export const postVocSuggest = async (content: string) =>
-  authFetchPost({ url: '/voc', data: { content } });
+  fetchPost({ url: '/voc', data: { content }, isAuth: true });
 
-export const getMyBookmark = async () => authFetchGet({ url: '/bkm/lookup' });
+export const getMyBookmark = async () =>
+  fetchGet({ url: '/bkm/lookup', isAuth: true });
 
 export const postBookmarkDelete = async (data: any) =>
-  authFetchPost({ url: 'bkm/delete', data });
+  fetchPost({ url: '/bkm/delete', data, isAuth: true });
 
 export const fetchProfile = async () => {
-  const result = authFetchPost({ url: '/user/detail' });
+  const result = fetchPost({ url: '/user/detail', isAuth: true });
   return result;
 };
 
@@ -19,7 +20,7 @@ export const updateProfile = async (data: {
   gender: string | null;
   yearOfBirth: string | null;
 }) => {
-  const result = await authFetchPost({ url: '/user/modify', data });
+  const result = await fetchPost({ url: '/user/modify', data, isAuth: true });
   if (result.message !== undefined) {
     Swal.fire({
       icon: 'success',
@@ -31,16 +32,20 @@ export const updateProfile = async (data: {
 };
 
 export const checkPassword = async (data: string) => {
-  const result = authFetchPost({ url: '/user/check/password', data });
+  const result = fetchPost({ url: '/user/check/password', data, isAuth: true });
   return result;
 };
 
 export const updatePassword = async (data: FieldValues) => {
-  const result = authFetchPost({ url: '/user/modify/password', data });
+  const result = fetchPost({
+    url: '/user/modify/password',
+    data,
+    isAuth: true,
+  });
   return result;
 };
 
 export const WithdrawalApi = async () => {
-  const result = authFetchPost({ url: '/user/delete' });
+  const result = fetchPost({ url: '/user/delete', isAuth: true });
   return result;
 };

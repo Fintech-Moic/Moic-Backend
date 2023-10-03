@@ -37,7 +37,7 @@ export default function Page() {
   ];
   const boxs = [
     {
-      going: 'map/dest',
+      going: 'map/place',
       imgSrc: mainMap,
       title: '지도 확인하기',
       sentence: '지도에서 혜택 지역을 찾아볼까요?',

@@ -1,75 +1,75 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
+import { useAtom } from 'jotai';
+import curLocAtom from '@/store/atoms/curLocAtom';
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
+export default function KakaoMap() {
+  const [curLoc, setCurLoc] = useAtom(curLocAtom);
+  const [state, setState] = useState({
+    center: {
+      lat: 37.50135,
+      lng: 127.0397,
+    } as any,
+    errMsg: null as string | null,
+    isLoading: true,
+  });
 
-export default function Map() {
-  // const [mounted, setMounted] = useState<boolean>(false);
-  const [mapScript, setMapScript] = useState<HTMLScriptElement>();
-
+  /**
+   * 현 위치 찾기
+   */
   useEffect(() => {
-    /* curMapScript */
-    const curMapScript = document.createElement('script');
-    curMapScript.async = true;
-    curMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAOMAP_APPKEY}&autoload=false&libraries=services,clusterer,drawing`;
-    setMapScript(curMapScript);
-    document.head.appendChild(curMapScript);
-
-    return () => {
-      /* Remove curMapScript */
-      if (curMapScript.parentNode) {
-        curMapScript.parentNode.removeChild(curMapScript);
-      }
-    };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setState((prev) => ({
+            ...prev,
+            center: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+            isLoading: false,
+          }));
+        },
+        (err) => {
+          setState((prev) => ({
+            ...prev,
+            errMsg: err.message,
+            isLoading: false,
+          }));
+        }
+      );
+    } else {
+      setState((prev) => ({
+        ...prev,
+        errMsg: '일시적인 오류로 내 위치 찾기 기능을 사용할 수 없습니다',
+        isLoading: false,
+      }));
+    }
   }, []);
 
-  useEffect(() => {
-    const onLoadKakaoMap = () => {
-      window.kakao.maps.load(() => {
-        // 지도 생성
-        const mapContainer = document.getElementById('map'); // 지도를 표시할 div
-        const mapOption = {
-          center: new window.kakao.maps.LatLng(37.501339, 127.039663), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
+  const { error }: any = useKakaoLoader({
+    appkey: process.env.NEXT_PUBLIC_APPKEY!,
+  });
+  if (error) return <div>Error</div>;
 
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
-        const markerPosition = new window.kakao.maps.LatLng(
-          33.450701,
-          126.570667
-        );
+  setCurLoc(state.center);
+  console.log(curLoc);
 
-        // 결과값을 마커로 표시
-        const marker = new window.kakao.maps.Marker({
-          map,
-          position: markerPosition,
-        });
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동
-        marker.setMap(map);
-      });
-    };
-
-    if (mapScript) {
-      /* LoadKakaoMap Event Listener */
-      mapScript.addEventListener('load', onLoadKakaoMap);
-    }
-
-    return () => {
-      if (mapScript) {
-        /* Remove LoadKakaoMap Event Listener */
-        mapScript.removeEventListener('load', onLoadKakaoMap);
-      }
-    };
-  }, [mapScript]);
-
-  return <div id="map" />;
+  return (
+    <Map
+      center={state.center}
+      style={{ width: '100%', height: '100%' }}
+      level={3}
+    >
+      {!state.isLoading && (
+        <MapMarker position={state.center}>
+          <div className="p-1 text-black">
+            {state.errMsg ? state.errMsg : '내 위치'}
+          </div>
+        </MapMarker>
+      )}
+    </Map>
+  );
 }

@@ -26,7 +26,7 @@ function Navbar() {
         height="h-6"
         src={pathname === '/map/dest' ? mapOn : map}
         alt="map"
-        onClick={() => navButtonClick('/map/dest')}
+        onClick={() => navButtonClick('/map/place')}
       />
       <IconButton
         type="button"

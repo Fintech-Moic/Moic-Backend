@@ -1,24 +1,28 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
+import { useQuery } from '@tanstack/react-query';
 import Switch from '../atoms/Switch';
 import SearchInputBar from '../molecules/SearchInputBar';
 import Dropdown from '@/components/atoms/Dropdown';
 import { filterOpenAtom, filterOptionAtom } from '@/store/atoms/header';
-
-interface ProfitFilterProps {
-  data: any;
-}
+import { getAllCard } from '@/api/card';
 
 /** 헤더의 우측 클릭시, 렌더링되는 필터 컴포넌트
- * @param {Object} data getAllCard 시 반환되는 companyList, typeList를 감싼 Object
  * @returns {JSX.Element} 컴포넌트 반환
  */
-export default function ProfitFilter({ data }: ProfitFilterProps) {
+// const searchOption = await getAllCard();
+export default function ProfitFilter() {
+  const { data } = useQuery({
+    queryKey: ['getAllCard'],
+    queryFn: () => getAllCard(),
+    staleTime: 1000 * 60 * 100,
+    refetchOnWindowFocus: false,
+  });
   const filterOpen = useAtomValue(filterOpenAtom);
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
   const setFilterOption = useSetAtom(filterOptionAtom);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState<{
     id: string;
     value: string;
@@ -27,10 +31,8 @@ export default function ProfitFilter({ data }: ProfitFilterProps) {
     id: string;
     value: string;
   } | null>(null);
-
-  // Fix me! : filterOption에 영향가지 않도록 Request 수정하기
   useEffect(() => {
-    setFilterOption((prev) => {
+    setFilterOption((prev: any) => {
       const updatedFilter = { ...prev };
       updatedFilter.company = selectedCompany?.value || '';
       updatedFilter.type = selectedType?.value || '';
@@ -38,26 +40,34 @@ export default function ProfitFilter({ data }: ProfitFilterProps) {
     });
   }, [selectedCompany, selectedType, setFilterOption]);
 
-  const companyList =
-    data && 'companyList' in data
-      ? data?.companyList.map((cur: string, idx: number) => {
-          return { id: `${idx}_cur`, value: cur };
-        })
-      : [];
+  const companyList = useMemo(
+    () =>
+      data && 'companyList' in data
+        ? data?.companyList.map((cur: string, idx: number) => {
+            return { id: `${idx}_cur`, value: cur };
+          })
+        : [],
+    [data]
+  );
 
-  const typeList =
-    data && 'typeList' in data
-      ? data?.typeList.map((cur: string, idx: number) => {
-          return { id: `${idx}_cur`, value: cur };
-        })
-      : [];
+  const typeList = useMemo(
+    () =>
+      data && 'typeList' in data
+        ? data?.typeList.map((cur: string, idx: number) => {
+            return { id: `${idx}_cur`, value: cur };
+          })
+        : [],
+    [data]
+  );
 
   const handleSubmitSearch = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const currentInput = (e.currentTarget as HTMLFormElement).search.value;
+
       if (!currentInput) return;
-      setFilterOption((prev) => {
+
+      setFilterOption((prev: any) => {
         const updatedFilter = { ...prev };
         updatedFilter.cardName = currentInput;
         return updatedFilter;

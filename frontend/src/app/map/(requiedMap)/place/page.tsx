@@ -70,22 +70,23 @@ export default function Page() {
 
         <div className="bg-Annotations rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
           {searchResult.map((result, index) => (
-            <div
-              key={index}
+            <button
+              key={result}
               className="px-2 py-2 cursor-pointer"
               onClick={() => {
                 ResultClickEvent(result);
               }}
+              role="presentation"
             >
               {result}
-            </div>
+            </button>
           ))}
         </div>
 
         {/* 인포 메시지 */}
-        {shopLocs.map((loc: any, index: number) => (
+        {shopLocs.map((loc: any, index) => (
           <MapMarker
-            key={index}
+            key={loc}
             position={{ lat: loc.latitude, lng: loc.longitude }}
             onClick={() => handleMarkerClick(loc)} // 마커 클릭 이벤트 처리
           />

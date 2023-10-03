@@ -42,7 +42,8 @@ export default function CategoryCarousel() {
 
   const opGroups = newOptionGroups(optionGroups);
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // 선택한 항목 상태 추가
+  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // 선택한 항목 상태 추가
+  const selectedCategory : (string | null) = null; // 선택한 항목 상태 추가
 
   // const handleCategoryClick = (selectedItem: string) => {
   //   setSelectedCategory(selectedItem); // 선택한 항목 저장
@@ -90,7 +91,6 @@ export default function CategoryCarousel() {
           );
         })}
       </div>
-      {/* <div className="absolute bottom-0 right-5"> */}
       <div className="absolute end-10 mt-5">
         <OutlineButton
           onClick={handleConfirmButtonClick}

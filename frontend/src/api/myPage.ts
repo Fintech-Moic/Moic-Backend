@@ -1,9 +1,10 @@
-import { authFetchGet, authFetchPost } from '@/util/api';
+import { fetchGet, fetchPost } from '@/util/api';
 
 export const postVocSuggest = async (content: string) =>
-  authFetchPost({ url: '/voc', data: { content } });
+  fetchPost({ url: '/voc', data: { content }, isAuth: true });
 
-export const getMyBookmark = async () => authFetchGet({ url: '/bkm/lookup' });
+export const getMyBookmark = async () =>
+  fetchGet({ url: '/bkm/lookup', isAuth: true });
 
 export const postBookmarkDelete = async (data: any) =>
-  authFetchPost({ url: 'bkm/delete', data });
+  fetchPost({ url: '/bkm/delete', data, isAuth: true });

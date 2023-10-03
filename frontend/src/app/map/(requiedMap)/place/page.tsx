@@ -3,10 +3,10 @@
 'use client';
 
 import React, { FormEvent, useState } from 'react';
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
-import curLocAtom from '@/store/atoms/curLocAtom';
+import { curLocAtom } from '@/store/atoms/curLocAtom';
 // import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
 import { getSearchedPlace, getDirection } from '@/api/map';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
@@ -14,8 +14,8 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 export default function Page() {
 
   const [searchResult, setSearchResult] = useAtom(searchResultAtom);
-  const [curLoc, setCurLoc] = useAtom<curLoc>(curLocAtom);
-  const [shopLocs, setShopLocs] = useState<shopLocs>([])
+  const [curLoc, setCurLoc] = useAtom(curLocAtom);
+  const [shopLocs, setShopLocs] = useState({})
   // const [shopLogo, setShopLogo] = useState([])
   const [selectedShop, setSelectedShop] = useState<shop | null>(null);
 
@@ -29,17 +29,7 @@ export default function Page() {
     benefits : boolean,
     gifts : boolean
   }
- 
-  interface shopLocs {
-    map(arg0: (loc: shop, index: number) => React.JSX.Element): React.ReactNode;
-    shops: shop[];
-  }
- 
-  interface curLoc {
-    lat : number,
-    lng : number
-  }
-  
+
   /**
    * 검색어 클릭 시 가맹점 정보 불러오기
   */
@@ -49,6 +39,7 @@ export default function Page() {
       // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
       setShopLocs(data.data.shopList)
       // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
+      console.log("shopLocs", shopLocs)
     } catch (error) {
       console.error("가맹점 정보 불러오기 실패", error);
     }

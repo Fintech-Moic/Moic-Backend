@@ -24,6 +24,7 @@ export async function getSearchedPlace(keyword: string) {
   return data;
 }
 
+/* 브랜드 로고 API [S] 호출 횟수 제한으로 임시 주석 처리 */
 // export async function getLogoImage() {
 //   const name = 'Starbucks';
 //   const apiUrl = `https://api.api-ninjas.com/v1/logo?name=${name}`;
@@ -47,17 +48,18 @@ export async function getSearchedPlace(keyword: string) {
 //     console.error('Request failed:', error.message);
 //   }
 // }
+/* 브랜드 로고 API [E] */
 
-export async function getDirection(locationInfo : object) {
+export async function getDirection(str : object, fin : object) {
   const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
   // 출발지(origin), 목적지(destination)의 좌표를 문자열로 변환합니다.
-  const origin = `${locationInfo.lng},${locationInfo.lat}`;
-  const destination = `${locationInfo.lng},${locationInfo.lat}`;
+  const origin = `${str.lng},${str.lat}`;
+  const destination = `${fin.lng},${fin.lat}`;
 
   const headers = {
-    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_APPKEY}`,
+    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`,
     'Content-Type': 'application/json'
   };
 

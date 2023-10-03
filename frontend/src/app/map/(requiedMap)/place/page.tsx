@@ -76,7 +76,8 @@ export default function Page() {
               onClick={() => {
                 ResultClickEvent(result);
               }}
-              role="button"
+              onKeyDown={() => {}}
+              role="presentation"
               tabIndex={0}
             >
               {result}

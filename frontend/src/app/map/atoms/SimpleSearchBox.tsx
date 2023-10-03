@@ -39,7 +39,7 @@ export default function SimpleSearchBox() {
   /** Debounce -> 검색 타이머 초기화 -> 기존 검색어 요청 대기 상태 초기화
    */
   useEffect(() => {
-    const delay = 1000;
+    const delay = 500;
     const timerId = setTimeout(() => {
       if (inputValue) {
         listOfShop(inputValue);
@@ -55,7 +55,7 @@ export default function SimpleSearchBox() {
       type="text"
       id="inputValue"
       name="inputValue"
-      placeholder="검색어를 입력하세요"
+      placeholder="내 카드 혜택, 여기서 쓰자!"
       onChange={autocompletedShopList}
       value={inputValue}
       className="relative font-suit text-xl ml-4 w-11/12 h-14 focus:outline-none"

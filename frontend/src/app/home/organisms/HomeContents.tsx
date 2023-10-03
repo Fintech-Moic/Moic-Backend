@@ -1,5 +1,5 @@
 import HomeADBox from '../atoms/HomeADBox';
-import HomeLogo from '../atoms/HomeLogo';
+import HomeLogo from '../atoms/Homelogo';
 import HomeTipBar from '../atoms/HomeTipBar';
 import HomeDDnName from '../molecules/HomeDDnName';
 import { HomeDDnNameProps } from '@/types/home';

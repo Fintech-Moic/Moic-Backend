@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { FormEvent, useState, useRef, useEffect } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useAtom } from 'jotai';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
@@ -12,25 +12,12 @@ import { getSearchedPlace, getDirection } from '@/api/map';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 export default function Page() {
-  const [searchResult, setSearchResult] = useAtom(searchResultAtom);
-  const [curLoc, setCurLoc] = useAtom(curLocAtom);
-  const [shopLocs, setShopLocs] = useState([])
-  const [shopLogo, setShopLogo] = useState([])
-  const [selectedShop, setSelectedShop] = useState(null);
 
-  /**
-   * 검색어 클릭 시 가맹점 정보 불러오기
-   */
-  const ResultClickEvent = async (result: string) => {
-    try {
-      const data = await getSearchedPlace(result);
-      // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
-      setShopLocs(data.data.shopList)
-      // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
-    } catch (error) {
-      console.error("가맹점 정보 불러오기 실패", error);
-    }
-  };
+  const [searchResult, setSearchResult] = useAtom(searchResultAtom);
+  const [curLoc, setCurLoc] = useAtom<curLoc>(curLocAtom);
+  const [shopLocs, setShopLocs] = useState<shopLocs>([])
+  // const [shopLogo, setShopLogo] = useState([])
+  const [selectedShop, setSelectedShop] = useState<shop | null>(null);
 
   interface shop {
     category : string,
@@ -42,9 +29,34 @@ export default function Page() {
     benefits : boolean,
     gifts : boolean
   }
+ 
+  interface shopLocs {
+    map(arg0: (loc: shop, index: number) => React.JSX.Element): React.ReactNode;
+    shops: shop[];
+  }
+ 
+  interface curLoc {
+    lat : number,
+    lng : number
+  }
+  
+  /**
+   * 검색어 클릭 시 가맹점 정보 불러오기
+  */
+ const ResultClickEvent = async (result: string) => {
+    try {
+      const data = await getSearchedPlace(result);
+      // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
+      setShopLocs(data.data.shopList)
+      // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
+    } catch (error) {
+      console.error("가맹점 정보 불러오기 실패", error);
+    }
+  };
   
   const handleMarkerClick = async (shop : shop) => {
-    setSelectedShop(shop);
+    setSelectedShop(shop);  
+
     try {
       const str = {lat: curLoc.lat, lng: curLoc.lng}
       const fin = {lat: shop.latitude, lng: shop.longitude}
@@ -88,11 +100,11 @@ export default function Page() {
         </div>
 
         {/* 인포 메시지 */}
-        {shopLocs.map((shopLoc, index) => (
+        {shopLocs.map((loc : shop, index : number) => (
           <MapMarker
             key={index}
-            position={{ lat: shopLoc.latitude, lng: shopLoc.longitude }}
-            onClick={() => handleMarkerClick(shopLoc)} // 마커 클릭 이벤트 처리
+            position={{ lat: loc.latitude, lng: loc.longitude }}
+            onClick={() => handleMarkerClick(loc)} // 마커 클릭 이벤트 처리
           />
         ))}
 

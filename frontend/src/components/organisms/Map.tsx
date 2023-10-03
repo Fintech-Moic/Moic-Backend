@@ -23,6 +23,11 @@ export default function KakaoMap() {
 
   const [curLoc, setCurLoc] = useAtom(curLocAtom);
 
+  interface curLoc {
+    lat: number,
+    lng: number
+  }
+
   /**
    * 현 위치 찾기
    */

@@ -14,10 +14,10 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 export default function Page() {
 
   const [searchResult, setSearchResult] = useAtom(searchResultAtom);
-  const [curLoc, setCurLoc] = useAtom(curLocAtom);
+  const [curLoc, setCurLoc] = useAtom<any>(curLocAtom);
   const [shopLocs, setShopLocs] = useState([])
   // const [shopLogo, setShopLogo] = useState([])
-  const [selectedShop, setSelectedShop] = useState(null);
+  const [selectedShop, setSelectedShop] = useState<any>(null);
 
   /**
    * 검색어 클릭 시 가맹점 정보 불러오기

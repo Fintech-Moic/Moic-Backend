@@ -69,7 +69,7 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
   const destination = `${fin.lng},${fin.lat}`;
 
   const headers = {
-    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`,
+    Authorization: `KakaoAK ${REST_API_KEY}`,
     'Content-Type': 'application/json',
   };
 

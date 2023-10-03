@@ -77,7 +77,7 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
 
   const queryParams = new URLSearchParams({
     origin,
-    destination,
+    destination
     // origin: origin,
     // destination: destination,
   });
@@ -87,7 +87,7 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
   try {
     const response = await fetch(requestUrl, {
       method: 'GET',
-      headers: headers,
+      headers
     });
 
     if (!response.ok) {

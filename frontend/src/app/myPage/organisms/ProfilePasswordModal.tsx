@@ -6,6 +6,11 @@ interface ProfilePasswordModalProps extends ReactHookFormType {
   closeModal: () => void;
 }
 
+/**
+ * @param {() => void} closeModal modal을 닫는 callback함수
+ * @returns ProfilePasswordModal Component
+ */
+
 export default function ProfilePasswordModal({
   closeModal,
   register,

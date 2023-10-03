@@ -7,11 +7,13 @@ import TextButton from '@/components/atoms/TextButton';
 
 /** ProfileContainerProps Components
  * @todo dropDownData 타입 변경
- * @param {(e: React.FormEvent<HTMLFormElement>) => Promise<void>} onSubmit
- * @param {Any} dropDownData
+ * @param {(e: React.FormEvent<HTMLFormElement>) => Promise<void>} onSubmit dropdown으로 선택된대로 data를 전달할 submit 함수
+ * @param {Any} dropDownData dropdown에 출력될 data
  * @param {React.Dispatch<React.SetStateAction<{ gender: string | null; yearOfBirth: string | null }>>} setSelectedData DropDown에서 선택된 데이터
  * @param {String | Null} fetchSelectedYear fetch해서 가져온 year
  * @param {String | Null} fetchSelectedGender fetch해서 가져온 gender
+ * @param {() => void} passwordCheckToModal 비밀번호 변경 button callback 함수
+ * @param {() => void} Withdrawal 회원탈퇴 callback함수
  * @returns {JSX.Element}
  */
 interface ProfileContainerProps {
@@ -24,7 +26,7 @@ interface ProfileContainerProps {
   >;
   fetchSelectedYear: string | null;
   fetchSelectedGender: string | null;
-  modifyCurrentPassword: () => void;
+  passwordCheckToModal: () => void;
   Withdrawal: () => void;
 }
 
@@ -36,7 +38,7 @@ export default function ProfileContainer({
   setSelectedData,
   fetchSelectedGender,
   fetchSelectedYear,
-  modifyCurrentPassword,
+  passwordCheckToModal,
   Withdrawal,
 }: ProfileContainerProps) {
   const [selectedGender, setSelectedGender] = useState<{
@@ -152,7 +154,7 @@ export default function ProfileContainer({
         </div>
       </form>
       <div className="h-1/3 flex flex-col justify-between self-end">
-        <TextButton onClick={modifyCurrentPassword}>비밀번호 수정</TextButton>
+        <TextButton onClick={passwordCheckToModal}>비밀번호 수정</TextButton>
         <TextButton onClick={Withdrawal} textColor="text-Secondary">
           회원 탈퇴
         </TextButton>

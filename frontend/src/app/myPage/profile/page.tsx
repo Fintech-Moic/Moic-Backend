@@ -125,7 +125,7 @@ export default function Page() {
             onSubmit={modifyProfile}
             fetchSelectedGender={profileData.gender}
             fetchSelectedYear={profileData.yearOfBirth}
-            modifyCurrentPassword={passwordCheckToModal}
+            passwordCheckToModal={passwordCheckToModal}
             Withdrawal={Withdrawal}
           />
         )}

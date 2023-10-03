@@ -9,6 +9,16 @@ interface BothButtonGroupProps {
   onClickRight?: React.MouseEventHandler<HTMLButtonElement>;
   rightType?: 'submit' | 'reset' | 'button';
 }
+/** BothButtonGroup Component
+ * @param {String} leftTitle OutlineButton Title
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickLeft OutlineButton Callback 함수
+ * @param {'submit' | 'reset' | 'button'} leftType OutlineButton Type
+ * @param {String} rightTitle FillButton Title
+ * @param {React.MouseEventHandler<HTMLButtonElement>} onClickRight FillButton Callback 함수
+ * @param {'submit' | 'reset' | 'button'} rightType FillButton Type
+ * @returns 좌측에 OutlineButton 우측에 FillButton이 있는 BothButtonGroup Component
+ */
+
 export default function BothButtonGroup({
   leftTitle,
   onClickLeft,

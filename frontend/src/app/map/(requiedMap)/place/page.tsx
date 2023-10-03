@@ -70,16 +70,17 @@ export default function Page() {
 
         <div className="bg-Annotations rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
           {searchResult.map((result, index) => (
-            <button
+            <div
               key={result}
               className="px-2 py-2 cursor-pointer"
               onClick={() => {
                 ResultClickEvent(result);
               }}
-              role="presentation"
+              role="button"
+              tabIndex={0}
             >
               {result}
-            </button>
+            </div>
           ))}
         </div>
 

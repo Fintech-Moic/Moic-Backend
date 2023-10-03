@@ -1,9 +1,7 @@
-/* eslint-disable jsx-no-useless-fragment */
-
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useKakaoLoader } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useAtom } from 'jotai';
 import curLocAtom from '@/store/atoms/curLocAtom';
 
@@ -61,7 +59,7 @@ export default function KakaoMap() {
 
   return (
     <>
-      {/* <Map
+      <Map
         center={state.center}
         style={{ width: "100%", height: "100%" }}
         level={3}>
@@ -73,7 +71,7 @@ export default function KakaoMap() {
             </div>
           </MapMarker>
         )}
-      </Map> */}
+      </Map>
     </>
   );
 }

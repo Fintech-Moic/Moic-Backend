@@ -3,7 +3,6 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
-import { useParams } from 'next/navigation';
 import { useAtom } from 'jotai';
 import getShopData from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
@@ -59,7 +58,7 @@ export default function SimpleSearchBox() {
       placeholder="검색어를 입력하세요"
       onChange={autocompletedShopList}
       value={inputValue}
-      className="relative font-suit text-xl ml-4 w-4/5 h-14 focus:outline-none"
+      className="relative font-suit text-xl ml-4 w-11/12 h-14 focus:outline-none"
     />
   );
 }

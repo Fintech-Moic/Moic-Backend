@@ -1,4 +1,4 @@
-const ENDPOINT = 'https://moic.site/api/v1';
+const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export async function postGiftRegist(formData: FormData) {
   const response = await fetch(`${ENDPOINT}/gift/regist`, {

@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+
 const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export default async function getShopData(word: string | number) {
@@ -9,17 +11,23 @@ export default async function getShopData(word: string | number) {
 }
 
 export async function getCategoryShop(category: string) {
-  const res = await fetch(`${ENDPOINT}/map/category?category=${category}&latitude=37.5013168&longitude=127.0396597&userId=test1234`, {
-    method: 'GET',
-  });
+  const res = await fetch(
+    `${ENDPOINT}/map/category?category=${category}&latitude=37.5013168&longitude=127.0396597&userId=test1234`,
+    {
+      method: 'GET',
+    }
+  );
   const data = await res.json();
   return data;
 }
 
 export async function getSearchedPlace(keyword: string) {
-  const res = await fetch(`${ENDPOINT}/map/shops?keyword=${keyword}&latitude=37.5013168&longitude=127.0396597&userId=test1234`, {
-    method: 'GET',
-  });
+  const res = await fetch(
+    `${ENDPOINT}/map/shops?keyword=${keyword}&latitude=37.5013168&longitude=127.0396597&userId=test1234`,
+    {
+      method: 'GET',
+    }
+  );
   const data = await res.json();
   return data;
 }
@@ -55,7 +63,7 @@ interface Coordinates {
   lng: number;
 }
 
-export async function getDirection(str : Coordinates, fin : Coordinates) {
+export async function getDirection(str: Coordinates, fin: Coordinates) {
   const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
@@ -63,13 +71,15 @@ export async function getDirection(str : Coordinates, fin : Coordinates) {
   const destination = `${fin.lng},${fin.lat}`;
 
   const headers = {
-    Authorization: `KakaoAK ${process.env.NEXT_PUBLIC_REST_API_KEY}`,
-    'Content-Type': 'application/json'
+    Authorization: `KakaoAK ${REST_API_KEY}`,
+    'Content-Type': 'application/json',
   };
 
   const queryParams = new URLSearchParams({
-    origin: origin,
-    destination: destination,
+    origin,
+    destination,
+    // origin: origin,
+    // destination: destination,
   });
 
   const requestUrl = `${url}?${queryParams}`;
@@ -77,14 +87,14 @@ export async function getDirection(str : Coordinates, fin : Coordinates) {
   try {
     const response = await fetch(requestUrl, {
       method: 'GET',
-      headers: headers
+      headers,
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);

@@ -1,11 +1,5 @@
 import { atom } from 'jotai';
 
-interface curLoc {
-  lat: number;
-  lng: number;
-}
+const curLocAtom = atom([]);
 
-export const curLocAtom = atom<curLoc>({
-  lat: 0,
-  lng: 0,
-});
+export default curLocAtom;

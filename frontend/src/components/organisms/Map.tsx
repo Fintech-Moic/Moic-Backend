@@ -58,20 +58,18 @@ export default function KakaoMap() {
   console.log(curLoc);
 
   return (
-    <>
-      <Map
-        center={state.center}
-        style={{ width: "100%", height: "100%" }}
-        level={3}>
-
-        {!state.isLoading && (
-          <MapMarker position={state.center}>
-            <div className="p-1 text-black">
-              {state.errMsg ? state.errMsg : "내 위치"}
-            </div>
-          </MapMarker>
-        )}
-      </Map>
-    </>
+    <Map
+      center={state.center}
+      style={{ width: '100%', height: '100%' }}
+      level={3}
+    >
+      {!state.isLoading && (
+        <MapMarker position={state.center}>
+          <div className="p-1 text-black">
+            {state.errMsg ? state.errMsg : '내 위치'}
+          </div>
+        </MapMarker>
+      )}
+    </Map>
   );
 }

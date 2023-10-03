@@ -1,14 +1,31 @@
-interface AuthFetchProps {
+const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
+
+interface FetchProps {
   url: string;
   data?: any;
+  isAuth: boolean;
+  ContentType?: string;
 }
-export async function authFetchGet({ url }: AuthFetchProps) {
-  const response = await fetch(`https://moic.site/api/v1${url}`, {
+
+export async function fetchGet({
+  url,
+  isAuth,
+  ContentType = 'application/json',
+}: FetchProps) {
+  const headers: Record<string, string> = {
+    'Content-type': ContentType,
+  };
+
+  if (isAuth) {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      headers.Authorization = accessToken;
+    }
+  }
+
+  const response = await fetch(`${ENDPOINT}${url}`, {
     method: 'GET',
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: localStorage.getItem('access_token') as string,
-    },
+    headers,
     credentials: 'include',
   });
 
@@ -16,13 +33,26 @@ export async function authFetchGet({ url }: AuthFetchProps) {
   return result;
 }
 
-export async function authFetchPost({ url, data }: AuthFetchProps) {
-  const response = await fetch(`https://moic.site/api/v1${url}`, {
+export async function fetchPost({
+  url,
+  data,
+  isAuth,
+  ContentType = 'application/json',
+}: FetchProps) {
+  const headers: Record<string, string> = {
+    'Content-type': ContentType,
+  };
+
+  if (isAuth) {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      headers.Authorization = accessToken;
+    }
+  }
+
+  const response = await fetch(`${ENDPOINT}${url}`, {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: localStorage.getItem('access_token') as string,
-    },
+    headers,
     body: JSON.stringify(data),
     credentials: 'include',
   });

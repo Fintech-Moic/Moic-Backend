@@ -16,6 +16,20 @@ export default function VocContainer() {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const mutation = useMutation({
     mutationFn: (suggestedText: string) => postVocSuggest(suggestedText),
+    onSuccess: (data) => {
+      if (
+        data &&
+        !Object.keys(data).includes('errorCode') &&
+        !Object.keys(data).includes('status')
+      ) {
+        alert('서버로 제출되었습니다!');
+        router.back();
+      }
+      alert('제출 실패하였습니다! 네트워크 상태를 확인해주세요!');
+    },
+    onError: () => {
+      alert('제출 실패하였습니다! 네트워크 상태를 확인해주세요!');
+    },
   });
   const handleClickPrev = useCallback(() => {
     router.back();
@@ -30,9 +44,7 @@ export default function VocContainer() {
       return;
     }
     mutation.mutate(suggestedText);
-    alert('서버로 제출되었습니다!');
-    router.back();
-  }, [mutation, router]);
+  }, [mutation]);
 
   return (
     <div className="flex flex-col items-center pb-6 justify-start gap-8 pt-14 max-w-xs">

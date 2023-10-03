@@ -34,9 +34,8 @@ export default function GiftCardRegist() {
     onSuccess: (data) => {
       if (
         data &&
-        ((Object.keys(data).includes('status') &&
-          data.status.toString()[0] !== '2') ||
-          Object.keys(data).includes('errorCode'))
+        !Object.keys(data).includes('errorCode') &&
+        !Object.keys(data).includes('status')
       ) {
         alert('실패했습니다! 다시 시도해주세요!');
         return;

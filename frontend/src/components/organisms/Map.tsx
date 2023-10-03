@@ -1,16 +1,12 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { useKakaoLoader } from "react-kakao-maps-sdk"
+import { useEffect, useState } from 'react';
+import { useKakaoLoader } from 'react-kakao-maps-sdk';
 import { useAtom } from 'jotai';
-import curLocAtom from "@/store/atoms/curLocAtom";
+import curLocAtom from '@/store/atoms/curLocAtom';
 
 export default function KakaoMap() {
-  const { error } : any = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_APPKEY!
-  })
-  if (error) return <div>Error</div>
-
+  const [curLoc, setCurLoc] = useAtom(curLocAtom);
   const [state, setState] = useState({
     center: {
       lat: 37.50135,
@@ -18,9 +14,7 @@ export default function KakaoMap() {
     } as any,
     errMsg: null as string | null,
     isLoading: true,
-  })
-
-  const [curLoc, setCurLoc] = useAtom(curLocAtom);
+  });
 
   /**
    * 현 위치 찾기
@@ -36,30 +30,35 @@ export default function KakaoMap() {
               lng: position.coords.longitude,
             },
             isLoading: false,
-          }))
+          }));
         },
         (err) => {
           setState((prev) => ({
             ...prev,
             errMsg: err.message,
             isLoading: false,
-          }))
+          }));
         }
-      )
+      );
     } else {
       setState((prev) => ({
         ...prev,
-        errMsg: "일시적인 오류로 내 위치 찾기 기능을 사용할 수 없습니다",
+        errMsg: '일시적인 오류로 내 위치 찾기 기능을 사용할 수 없습니다',
         isLoading: false,
-      }))
+      }));
     }
-  }, [])
+  }, []);
 
-  setCurLoc(state.center)
+  const { error }: any = useKakaoLoader({
+    appkey: process.env.NEXT_PUBLIC_APPKEY!,
+  });
+  if (error) return <div>Error</div>;
 
-  return (
-    <>
-      {/* <Map
+  setCurLoc(state.center);
+  console.log(curLoc);
+
+  return {
+    /* <Map
         center={state.center}
         style={{ width: "100%", height: "100%" }}
         level={3}>
@@ -71,7 +70,6 @@ export default function KakaoMap() {
             </div>
           </MapMarker>
         )}
-      </Map> */}
-    </>
-  )
+      </Map> */
+  };
 }

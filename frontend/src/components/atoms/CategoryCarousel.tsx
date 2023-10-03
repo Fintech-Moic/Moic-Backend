@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WheelPicker from 'react-simple-wheel-picker';
-import { getCategoryShop } from '@/api/map';
 import OutlineButton from './OutlineButton';
+import { getCategoryShop } from '@/api/map';
 
 interface Option {
   id: string;
@@ -27,22 +27,32 @@ export default function CategoryCarousel() {
   };
 
   const optionGroups = {
-    category: ['쇼핑', '음식', '커피', '리빙', '의료', '운동', '교육', '여행', '문화'],
+    category: [
+      '쇼핑',
+      '음식',
+      '커피',
+      '리빙',
+      '의료',
+      '운동',
+      '교육',
+      '여행',
+      '문화',
+    ],
   };
 
   const opGroups = newOptionGroups(optionGroups);
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null); // 선택한 항목 상태 추가
 
-  const handleCategoryClick = (selectedItem: string) => {
-    setSelectedCategory(selectedItem); // 선택한 항목 저장
-  };
+  // const handleCategoryClick = (selectedItem: string) => {
+  //   setSelectedCategory(selectedItem); // 선택한 항목 저장
+  // };
 
   const handleConfirmButtonClick = async () => {
     if (selectedCategory) {
       try {
         const data = await getCategoryShop(selectedCategory);
-        // console.log('데이터 가져오기 성공:', data.data);
+        console.log('데이터 가져오기 성공:', data.data);
       } catch (error) {
         console.error('데이터 가져오기 오류:', error);
       }
@@ -62,11 +72,11 @@ export default function CategoryCarousel() {
               data={data}
               /* 빌드 테스트를 위한 임시 주석 처리 */
               // onChange={(selectedItem) => {
-                //   const selectedCategory = selectedItem.value;
-                //   handleCategoryClick(selectedCategory);
-                // }}
+              //   const selectedCategory = selectedItem.value;
+              //   handleCategoryClick(selectedCategory);
+              // }}
               /* 빌드 테스트를 위한 임시 주석 처리 */
-              onChange={()=>{}}
+              onChange={() => {}}
               height={300}
               width={160}
               itemHeight={50}
@@ -86,7 +96,7 @@ export default function CategoryCarousel() {
           onClick={handleConfirmButtonClick}
           title="검색"
           lineColor="border-g4"
-          textColor='text-g4'
+          textColor="text-g4"
           width="w-20"
           height="h-8"
           borderRadius="rounded-lg"

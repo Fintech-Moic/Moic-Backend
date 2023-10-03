@@ -50,9 +50,16 @@ export async function getSearchedPlace(keyword: string) {
 // }
 /* 브랜드 로고 API [E] */
 
-export async function getDirection(str : object, fin : object) {
+interface Coordinates {
+  lat: number;
+  lng: number;
+}
+
+export async function getDirection(str : Coordinates, fin : Coordinates) {
   const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
+
+  console.log("str", str)
 
   // 출발지(origin), 목적지(destination)의 좌표를 문자열로 변환합니다.
   const origin = `${str.lng},${str.lat}`;

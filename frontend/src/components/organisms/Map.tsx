@@ -6,18 +6,17 @@ import { useAtom } from 'jotai';
 import curLocAtom from "@/store/atoms/curLocAtom";
 
 export default function KakaoMap() {
-  const { error }: any = useKakaoLoader({
+  const { error } : any = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_APPKEY!
   })
   if (error) return <div>Error</div>
 
   const [state, setState] = useState({
-
     center: {
       lat: 37.50135,
       lng: 127.0397,
-    },
-    errMsg: null,
+    } as any,
+    errMsg: null as string | null,
     isLoading: true,
   })
 

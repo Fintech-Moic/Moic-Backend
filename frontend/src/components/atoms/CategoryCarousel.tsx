@@ -3,17 +3,23 @@ import WheelPicker from 'react-simple-wheel-picker';
 import { getCategoryShop } from '@/api/map';
 import OutlineButton from './OutlineButton';
 
+interface Option {
+  id: string;
+  value: string;
+}
+
 export default function CategoryCarousel() {
   const setKeyValue = (arr: string[]) => {
     return arr.map((item) => ({
       id: item,
       value: item,
+      clicked: false,
     }));
   };
 
   const newOptionGroups = (optionGroups: Record<string, string[]>) => {
     const groupKeys = Object.keys(optionGroups);
-    const groups: Record<string, DataSet[]> = {};
+    const groups: Record<string, Option[]> = {};
     groupKeys.forEach((group) => {
       groups[group] = setKeyValue(optionGroups[group]);
     });
@@ -54,13 +60,16 @@ export default function CategoryCarousel() {
             <WheelPicker
               key={group}
               data={data}
-              onChange={(selectedItem) => {
-                const selectedCategory = selectedItem.value;
-                handleCategoryClick(selectedCategory);
-              }}
+              /* 빌드 테스트를 위한 임시 주석 처리 */
+              // onChange={(selectedItem) => {
+                //   const selectedCategory = selectedItem.value;
+                //   handleCategoryClick(selectedCategory);
+                // }}
+              /* 빌드 테스트를 위한 임시 주석 처리 */
+              onChange={()=>{}}
               height={300}
               width={160}
-              itemHeight={80}
+              itemHeight={50}
               selectedID={data[0].id}
               fontSize={32}
               color="#9BA5B7"

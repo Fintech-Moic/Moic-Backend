@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useAtom } from 'jotai';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitCardCarousel from '../molecules/ProfitCardCarousel';
+import CardEmptyRegistButton from '../atoms/CardEmptyRegistButton';
 import { getMyCard, postCardDelete } from '@/api/card';
 import CarouselTitleSentence from '@/components/atoms/CarouselTitleSentence';
 import Modal from '@/components/atoms/Modal';
@@ -12,29 +13,44 @@ import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { cardDeleteModalAtom } from '@/store/atoms/modal';
 
-interface MyCardContainerProps {
-  myCard: any;
-}
 /** 내 카드 조회 페이지에서, 현재 순서, 캐러셀, 카드사, 카드명 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
  * @param {any} myCard 내 카드 정보
  * @returns {JSX.Element} 컴포넌트 반환
  */
-export default function MyCardContainer({ myCard }: MyCardContainerProps) {
+export default function MyCardContainer() {
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery({
-    queryKey: ['getMyCard'],
-    queryFn: () => getMyCard(),
-    initialData: myCard,
-  });
-  const cardDeletMutation = useMutation({
-    mutationFn: (name: string) => postCardDelete(name),
-  });
   const [currentCardProgress, setCurrentCardProgress] = useState(1);
   const [{ isOpen, deleteCardInfo }, setOpenCardDeleteModal] =
     useAtom(cardDeleteModalAtom);
+  const { data, isLoading } = useQuery({
+    queryKey: ['getMyCard'],
+    queryFn: () => getMyCard(),
+    staleTime: 1000 * 60 * 100,
+    refetchOnWindowFocus: false,
+  });
+  const cardDeletMutation = useMutation({
+    mutationFn: (name: string) => postCardDelete(name),
+    onSuccess: () => {
+      setOpenCardDeleteModal((prev) => ({
+        ...prev,
+        isOpen: false,
+        deleteCardInfo: {},
+      }));
+      queryClient.invalidateQueries(['getMyCard']);
+    },
+    onError() {
+      setOpenCardDeleteModal((prev) => ({
+        ...prev,
+        isOpen: false,
+        deleteCardInfo: {},
+      }));
+      alert('카드 삭제 실패! 다시, 시도해주세요');
+    },
+  });
   const { cardList } = data.data;
 
   if (isLoading) <div>로딩중...</div>;
+  if (cardList.length === 0) return <CardEmptyRegistButton />;
 
   const handleClickPrev = () => {
     if (currentCardProgress === 1) return;
@@ -55,24 +71,7 @@ export default function MyCardContainer({ myCard }: MyCardContainerProps) {
   };
 
   const handleClickCardDelete = () => {
-    cardDeletMutation.mutate(deleteCardInfo.name, {
-      onSuccess: () => {
-        setOpenCardDeleteModal((prev) => ({
-          ...prev,
-          isOpen: false,
-          deleteCardInfo: {},
-        }));
-        queryClient.invalidateQueries(['getMyCard']);
-      },
-      onError() {
-        setOpenCardDeleteModal((prev) => ({
-          ...prev,
-          isOpen: false,
-          deleteCardInfo: {},
-        }));
-        alert('카드 삭제 실패! 다시, 시도해주세요');
-      },
-    });
+    cardDeletMutation.mutate(deleteCardInfo.name);
   };
 
   return (

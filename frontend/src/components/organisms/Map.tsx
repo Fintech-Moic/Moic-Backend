@@ -49,13 +49,18 @@ export default function KakaoMap() {
     }
   }, []);
 
+  const { error }: any = useKakaoLoader({
+    appkey: process.env.NEXT_PUBLIC_APPKEY!,
+  });
+
+  // useEffect(() => {
+  //   setCurLoc(state.center);
+  // }, [state.center]);
+
   useEffect(() => {
     setCurLoc(state.center);
   }, [state.center, setCurLoc]);
 
-  const { error }: any = useKakaoLoader({
-    appkey: process.env.NEXT_PUBLIC_APPKEY!,
-  });
   if (error) return <div>Error</div>;
 
   return (

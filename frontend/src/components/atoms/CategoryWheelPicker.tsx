@@ -1,6 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import OutlineButton from './OutlineButton';
@@ -13,7 +10,7 @@ interface WheelPickerProps {
 
 function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const curLoc: any = useAtomValue(curLocAtom);
+  const curLoc = useAtomValue<any>(curLocAtom);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -39,19 +36,27 @@ function Picker({ options }: WheelPickerProps) {
   return (
     <div className="flex h-[300px] justify-center items-center">
       <div className="flex flex-col items-center gap-3 cursor-pointer">
-        {options.map((option, index) => (
+        {options.map((option) => (
           <div
-            key={index}
+            key={option}
             className={`${
               option === selectedOption
                 ? 'px-9 text-[20px] text-black transition-transform font-bold scale-125 bg-slate-500/10 animate-[shadow-drop-2-tb]'
                 : 'px-9 text-[16px] text-Secondary transition-transform'
             }`}
             onClick={() => handleOptionClick(option)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                handleOptionClick(option);
+              }
+            }}
+            role="button"
+            tabIndex={0}
           >
             {option}
           </div>
         ))}
+
         <OutlineButton
           lineColor="border-g4"
           textColor="text-g4"

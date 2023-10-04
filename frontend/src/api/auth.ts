@@ -30,7 +30,7 @@ const signUpApi = async (data: FieldValues) => {
 };
 
 const signOutApi = async () => {
-  if (localStorage.getItem('access_token') != null) {
+  if (localStorage.getItem('access_token') !== undefined) {
     const result = await fetchPost({ url: '/user/logout', isAuth: true });
     if (result.message !== undefined) {
       localStorage.clear();

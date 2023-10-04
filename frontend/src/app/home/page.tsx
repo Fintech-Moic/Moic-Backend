@@ -1,20 +1,22 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import HomeBoxButtons from './organisms/HomeBoxButtons';
 import HomeContents from './organisms/HomeContents';
 import mainMap from '@/../public/assets/images/mainMap.svg';
 import mainRoute from '@/../public/assets/images/mainRoute.svg';
 import mainGiftCard from '@/../public/assets/images/mainGiftCard.svg';
 import mainProfit from '@/../public/assets/images/mainProfit.svg';
-
 import { signOutApi } from '@/api/auth';
+import { fetchProfile } from '@/api/myPage';
 
 export default function Page() {
+  const [userName, setUserName] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleDropdown = () => setIsOpen(!isOpen);
-
+  const router = useRouter();
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -28,6 +30,13 @@ export default function Page() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, []);
+  useEffect(() => {
+    const getName = async () => {
+      const result = await fetchProfile();
+      setUserName(result.data.name);
+    };
+    getName();
   }, []);
 
   const dropdownItems = [
@@ -63,7 +72,8 @@ export default function Page() {
   ];
 
   const signOut = async () => {
-    await signOutApi();
+    const result = await signOutApi();
+    if (result) router.push('/auth/signIn');
   };
 
   return (
@@ -72,7 +82,7 @@ export default function Page() {
         isOpen={isOpen}
         onClick={toggleDropdown}
         items={dropdownItems}
-        name="이의찬"
+        name={userName}
         signOut={signOut}
         innerRef={dropdownRef}
       />

@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (localStorage.getItem('access_token') !== undefined) {
+      if (localStorage.getItem('access_token') !== null) {
         router.push('/home');
       } else {
         router.push('/auth/signIn');

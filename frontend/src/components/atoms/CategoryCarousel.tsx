@@ -33,7 +33,7 @@
 //   const handleCategoryChange = (category: string) => {
 //     setSelectedCategory(category);
 //   };
-  
+
 //   const optionGroups = {
 //     category: [
 //       '쇼핑',

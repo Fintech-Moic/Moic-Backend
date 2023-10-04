@@ -4,9 +4,9 @@
 
 import React, { FormEvent, useState } from 'react';
 import { useAtom } from 'jotai';
-import curLocAtom from '@/store/atoms/curLocAtom';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import SearchBox from '../../molecules/FunctionalSearchBox';
+import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 // import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
 import { getSearchedPlace, getDirection } from '@/api/map';

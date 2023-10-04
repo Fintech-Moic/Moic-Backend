@@ -18,16 +18,43 @@ import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 
 export default function MyGiftCardContainer() {
   const queryClient = useQueryClient();
-  const { data: giftData, isLoading } = useQuery({
-    queryKey: ['getMyGift'],
-    queryFn: () => getMyGift(),
-  });
-  const giftDeletMutation = useMutation({
-    mutationFn: (imageUrl: string) => postGiftDelete(imageUrl),
-  });
   const [currentGiftProgress, setCurrentGiftProgress] = useState(1);
   const [{ isOpen, deleteGiftInfo }, setOpenGiftDeleteModal] =
     useAtom(giftDeleteModalAtom);
+  const { data: giftData, isLoading } = useQuery({
+    queryKey: ['getMyGift'],
+    queryFn: () => getMyGift(),
+    staleTime: 1000 * 60 * 100,
+    refetchOnWindowFocus: false,
+  });
+  const giftDeletMutation = useMutation({
+    mutationFn: (imageUrl: string) => postGiftDelete(imageUrl),
+    onSuccess: (data) => {
+      if (
+        data &&
+        !Object.keys(data).includes('errorCode') &&
+        !Object.keys(data).includes('status')
+      ) {
+        setOpenGiftDeleteModal((prev) => ({
+          ...prev,
+          isOpen: false,
+          deleteCardInfo: {},
+        }));
+        queryClient.invalidateQueries(['getMyGift']);
+
+        return;
+      }
+      alert('기프티콘 삭제 실패! 다시, 시도해주세요');
+    },
+    onError() {
+      setOpenGiftDeleteModal((prev) => ({
+        ...prev,
+        isOpen: false,
+        deleteCardInfo: {},
+      }));
+      alert('기프티콘 삭제 실패! 다시, 시도해주세요');
+    },
+  });
 
   if (isLoading) return <div>로딩중...</div>;
 
@@ -52,33 +79,7 @@ export default function MyGiftCardContainer() {
   };
 
   const handleClickCardDelete = () => {
-    giftDeletMutation.mutate(deleteGiftInfo.imageUrl, {
-      onSuccess: (data) => {
-        if (
-          data &&
-          !Object.keys(data).includes('errorCode') &&
-          !Object.keys(data).includes('status')
-        ) {
-          setOpenGiftDeleteModal((prev) => ({
-            ...prev,
-            isOpen: false,
-            deleteCardInfo: {},
-          }));
-          queryClient.invalidateQueries(['getMyGift']);
-
-          return;
-        }
-        alert('기프티콘 삭제 실패! 다시, 시도해주세요');
-      },
-      onError() {
-        setOpenGiftDeleteModal((prev) => ({
-          ...prev,
-          isOpen: false,
-          deleteCardInfo: {},
-        }));
-        alert('기프티콘 삭제 실패! 다시, 시도해주세요');
-      },
-    });
+    giftDeletMutation.mutate(deleteGiftInfo.imageUrl);
   };
   return giftList.length === 0 ? (
     <GiftCardEmptyRegistButton />

@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import CardBenefitList from '../molecules/CardBenefitList';
 import CardTitleGroup from '../molecules/CardTitleGroup';
 import { getCardDetail } from '@/api/card';
@@ -29,7 +30,16 @@ export default async function CardDetailContainer({
 }: {
   cardName: string;
 }) {
-  const cardDetail: CardDetail = (await getCardDetail(cardName)).data;
+  const { data, isLoading } = useQuery({
+    queryKey: ['getCardDetail', cardName],
+    queryFn: () => getCardDetail(cardName),
+    staleTime: 1000 * 60 * 100,
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) <div>로딩중...</div>;
+
+  const cardDetail: CardDetail = data.data;
 
   return (
     <div className="h-full shadow-md flex flex-col justify-start items-center gap-16 rounded-3xl bg-white px-9 py-12 overflow-scroll">

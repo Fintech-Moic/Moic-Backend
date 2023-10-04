@@ -5,6 +5,8 @@ export default function GiftDetailContainer({ giftId }: { giftId: string }) {
   const { data: giftData, isLoading } = useQuery({
     queryKey: ['getMyGift'],
     queryFn: () => getMyGift(),
+    staleTime: 1000 * 60 * 100,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <div>loading...</div>;

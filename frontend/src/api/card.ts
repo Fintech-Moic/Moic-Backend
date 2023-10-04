@@ -1,11 +1,7 @@
-const ENDPOINT = 'https://moic.site/api/v1';
-export default async function getAllCard() {
-  const response = await fetch(`${ENDPOINT}/card/all?userId="test1234"`, {
-    method: 'GET',
-  });
-  const result = await response.json();
-  return result;
-}
+import { fetchGet, fetchPost } from '@/util/api';
+
+export const getAllCard = async () =>
+  fetchGet({ url: `/card/all?userId="test1234"`, isAuth: true });
 
 interface GetCardSearchProps {
   company?: string;
@@ -13,62 +9,35 @@ interface GetCardSearchProps {
   cardName?: string;
 }
 
-export async function getCardSearch({
+export const getCardSearch = async ({
   company,
   type,
   cardName,
-}: GetCardSearchProps) {
-  const response = await fetch(
-    `${ENDPOINT}/card/search?userId=test1234&company=${company}&type=${type}&cardName=${cardName}`,
-    {
-      method: 'GET',
-    }
-  );
-  const result = await response.json();
-  return result;
-}
-
-export async function getCardDetail(cardName: string) {
-  const response = await fetch(
-    `${ENDPOINT}/card/detail?cardName=${cardName}&userId=test1234`,
-    {
-      method: 'GET',
-    }
-  );
-  const result = await response.json();
-  return result;
-}
-
-export async function postCardRegist(cardName: string) {
-  const response = await fetch(`${ENDPOINT}/card/regist`, {
-    method: 'POST',
-    body: JSON.stringify({ cardName, userId: 'test1234' }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
+}: GetCardSearchProps) =>
+  fetchGet({
+    url: `/card/search?userId=test1234&company=${company}&type=${type}&cardName=${cardName}`,
+    isAuth: true,
   });
-  const result = await response.json();
-  return result;
-}
 
-export async function getMyCard() {
-  const response = await fetch(`${ENDPOINT}/card/mycards?userId=test1234`, {
-    method: 'GET',
+export const getCardDetail = async (cardName: string) =>
+  fetchGet({
+    url: `/card/detail?cardName=${cardName}&userId=test1234`,
+    isAuth: true,
   });
-  const result = await response.json();
-  return result;
-}
 
-export async function postCardDelete(cardName: string) {
-  const response = await fetch(`${ENDPOINT}/card/delete`, {
-    method: 'POST',
-    credentials: 'include',
-    body: JSON.stringify({ cardName, userId: 'test1234' }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const postCardRegist = async (cardName: string) =>
+  fetchPost({
+    url: '/card/regist',
+    data: { cardName, userId: 'test1234' },
+    isAuth: true,
   });
-  const result = await response.json();
-  return result;
-}
+
+export const getMyCard = async () =>
+  fetchGet({ url: '/card/mycards?userId=test1234', isAuth: true });
+
+export const postCardDelete = async (cardName: string) =>
+  fetchPost({
+    url: '/card/delete',
+    data: { cardName, userId: 'test1234' },
+    isAuth: true,
+  });

@@ -52,6 +52,32 @@ export default function PaginatedBookmarkList({
         userId: 'test1234',
         shopList: selectedBookmarkList,
       }),
+    onSuccess: (data) => {
+      if (
+        data &&
+        !Object.keys(data).includes('errorCode') &&
+        !Object.keys(data).includes('status')
+      ) {
+        setBookmarkDeleteModal((prev) => ({
+          ...prev,
+          isOpen: false,
+          selectedBookmarkList: [],
+        }));
+        return;
+      }
+      setBookmarkDeleteModal((prev) => ({
+        ...prev,
+        isOpen: false,
+      }));
+      alert('북마크 삭제 실패! 다시, 시도해주세요');
+    },
+    onError: () => {
+      setBookmarkDeleteModal((prev) => ({
+        ...prev,
+        isOpen: false,
+      }));
+      alert('삭제에 실패했습니다! 다시 시도해보세요!');
+    },
   });
 
   useEffect(() => {
@@ -81,34 +107,7 @@ export default function PaginatedBookmarkList({
   const totalPageLength = Math.ceil(shopList.length / listItemCount);
 
   const handleClickBookmarkDelete = () => {
-    bookmarkDeleteMutation.mutate(undefined, {
-      onSuccess: (data) => {
-        if (
-          data &&
-          !Object.keys(data).includes('errorCode') &&
-          !Object.keys(data).includes('status')
-        ) {
-          setBookmarkDeleteModal((prev) => ({
-            ...prev,
-            isOpen: false,
-            selectedBookmarkList: [],
-          }));
-          return;
-        }
-        setBookmarkDeleteModal((prev) => ({
-          ...prev,
-          isOpen: false,
-        }));
-        alert('북마크 삭제 실패! 다시, 시도해주세요');
-      },
-      onError: () => {
-        setBookmarkDeleteModal((prev) => ({
-          ...prev,
-          isOpen: false,
-        }));
-        alert('삭제에 실패했습니다! 다시 시도해보세요!');
-      },
-    });
+    bookmarkDeleteMutation.mutate(undefined);
   };
 
   const handleClickTotalSelect = () => {

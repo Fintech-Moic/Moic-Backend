@@ -31,7 +31,7 @@ export default function Page() {
   }, []);
 
   const dropdownItems = [
-    { name: '계정 관리', link: '/myPage' },
+    { name: '계정 관리', link: '/myPage/profile' },
     { name: '북마크 관리', link: '/myPage/bookMark' },
     { name: '문의사항', link: '/myPage/voc' },
   ];
@@ -63,10 +63,9 @@ export default function Page() {
   ];
 
   const signOut = async () => {
-    const result = await signOutApi();
-    if (result !== null) alert('로그아웃 성공');
-    else alert('로그아웃 실패');
+    await signOutApi();
   };
+
   return (
     <div className="flex flex-col w-80">
       <HomeContents

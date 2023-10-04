@@ -21,21 +21,23 @@ export default function FindPasswordChangeForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full flex flex-col h-1/2 justify-between"
+      className="w-full flex flex-col h-2/3 justify-between"
     >
       <div className="flex flex-col h-full justify-evenly">
-        <Timer key={timerKey} />
-        <InputForm
-          register={register}
-          id="password"
-          name="password"
-          type="password"
-          placeholder="비밀번호"
-          isError={Boolean(errors.password)}
-          notice={errors.password?.message}
-          width="w-80"
-          height="h-12"
-        />
+        <div>
+          <Timer key={timerKey} />
+          <InputForm
+            register={register}
+            id="password"
+            name="password"
+            type="password"
+            placeholder="비밀번호"
+            isError={Boolean(errors.password)}
+            notice={errors.password?.message}
+            width="w-80"
+            height="h-12"
+          />
+        </div>
         <InputForm
           register={register}
           id="passwordCheck"

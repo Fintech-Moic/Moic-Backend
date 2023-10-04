@@ -15,6 +15,7 @@ import {
   changePasswordApi,
 } from '@/api/auth';
 import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
+import TitleSentence from '@/components/atoms/TitleSentence';
 
 export default function Page() {
   useAlreadySignInChecker();
@@ -138,8 +139,14 @@ export default function Page() {
   ];
   return (
     <div className="flex flex-col h-full">
+      <div className="h-1/4 flex items-center">
+        <TitleSentence
+          title="비밀번호 찾기"
+          sentence="인증을 통해 계정 정보를 찾아보세요."
+        />
+      </div>
       <ProgressBar percent={percent} />
-      <div className="h-2/3">{findPasswordContentArr[step]}</div>
+      <div className="h-1/2">{findPasswordContentArr[step]}</div>
     </div>
   );
 }

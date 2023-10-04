@@ -47,9 +47,9 @@ export default function MyCardContainer() {
       alert('카드 삭제 실패! 다시, 시도해주세요');
     },
   });
-  const { cardList } = data.data;
 
   if (isLoading) <div>로딩중...</div>;
+  const cardList = data?.data?.cardList || [];
   if (cardList.length === 0) return <CardEmptyRegistButton />;
 
   const handleClickPrev = () => {

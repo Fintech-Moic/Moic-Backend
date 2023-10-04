@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { Map, MapMarker, useKakaoLoader } from 'react-kakao-maps-sdk';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import curLocAtom from '@/store/atoms/curLocAtom';
 
 export default function KakaoMap() {
-  const [curLoc, setCurLoc] = useAtom(curLocAtom);
+  const setCurLoc = useSetAtom(curLocAtom);
   const [state, setState] = useState({
     center: {
       lat: 37.50135,
@@ -49,15 +49,14 @@ export default function KakaoMap() {
     }
   }, []);
 
+  useEffect(() => {
+    setCurLoc(state.center);
+  }, [state.center, setCurLoc]);
+
   const { error }: any = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_APPKEY!,
   });
   if (error) return <div>Error</div>;
-
-  useEffect(() => {
-    setCurLoc(state.center);
-    console.log(curLoc);
-  }, [state.center]);
 
   return (
     <Map

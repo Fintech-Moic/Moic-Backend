@@ -1,16 +1,19 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import { getCategoryShop } from '@/api/map';
-import { useAtom } from 'jotai';
-import curLocAtom from '@/store/atoms/curLocAtom';
+import { useAtomValue } from 'jotai';
 import OutlineButton from './OutlineButton';
+import { getCategoryShop } from '@/api/map';
+import curLocAtom from '@/store/atoms/curLocAtom';
 
 interface WheelPickerProps {
   options: string[];
 }
 
-const Picker: React.FC<WheelPickerProps> = ({ options }) => {
+function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [curLoc, setCurLoc] = useAtom<any>(curLocAtom);
+  const curLoc: any = useAtomValue(curLocAtom);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -19,7 +22,11 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   const handleConfirmButtonClick = async () => {
     try {
       if (selectedOption) {
-        const data = await getCategoryShop(selectedOption, curLoc.lat, curLoc.lng);
+        const data = await getCategoryShop(
+          selectedOption,
+          curLoc.lat,
+          curLoc.lng
+        );
         console.log(selectedOption, data);
       } else {
         console.error('옵션이 선택되지 않았습니다.');
@@ -54,10 +61,10 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
           height="h-8"
           borderRadius="rounded-lg"
           font="SUIT"
-          />
+        />
       </div>
     </div>
   );
-};
+}
 
 export default Picker;

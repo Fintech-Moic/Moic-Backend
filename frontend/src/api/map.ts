@@ -10,9 +10,13 @@ export default async function getShopData(word: string | number) {
   return data;
 }
 
-export async function getCategoryShop(category: string) {
+export async function getCategoryShop(
+  category: string,
+  latitude: number,
+  longitude: number
+) {
   const res = await fetch(
-    `${ENDPOINT}/map/category?category=${category}&latitude=37.5013168&longitude=127.0396597&userId=test1234`,
+    `${ENDPOINT}/map/category?category=${category}&latitude=${latitude}&longitude=${longitude}&userId=test1234`,
     {
       method: 'GET',
     }
@@ -21,9 +25,13 @@ export async function getCategoryShop(category: string) {
   return data;
 }
 
-export async function getSearchedPlace(keyword: string) {
+export async function getSearchedPlace(
+  keyword: string,
+  latitude: number,
+  longitude: number
+) {
   const res = await fetch(
-    `${ENDPOINT}/map/shops?keyword=${keyword}&latitude=37.5013168&longitude=127.0396597&userId=test1234`,
+    `${ENDPOINT}/map/shops?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&userId=test1234`,
     {
       method: 'GET',
     }
@@ -78,8 +86,6 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
   const queryParams = new URLSearchParams({
     origin,
     destination,
-    // origin: origin,
-    // destination: destination,
   });
 
   const requestUrl = `${url}?${queryParams}`;

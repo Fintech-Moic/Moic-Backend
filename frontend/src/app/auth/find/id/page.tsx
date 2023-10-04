@@ -27,7 +27,6 @@ export default function Page() {
       forwardStep();
     };
     if (findedId !== '') {
-      console.log(findedId);
       findIdSuccess();
     }
   }, [findedId]);

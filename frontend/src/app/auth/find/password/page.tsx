@@ -48,7 +48,7 @@ export default function Page() {
 
   const sendPassword = handleSubmit(async (data) => {
     const result = await sendPasswordApi(data);
-    if (result !== null) {
+    if (result) {
       setCheckForm(true);
     }
   });
@@ -70,7 +70,7 @@ export default function Page() {
     const passwordCheck = async () => {
       if (idData !== null) {
         const result = await checkPasswordApi(idData);
-        if (result !== null) setShowToChangePassword(true);
+        if (result) setShowToChangePassword(true);
       }
     };
     if (idData !== null) passwordCheck();
@@ -80,7 +80,7 @@ export default function Page() {
     const passwordChange = async () => {
       if (passwordData !== null) {
         const result = await changePasswordApi(passwordData);
-        if (result !== null) forwardStep();
+        if (result) forwardStep();
       }
     };
     if (passwordData !== null) passwordChange();

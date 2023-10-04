@@ -6,7 +6,7 @@ const signInApi = async (data: FieldValues) => {
   const result = await fetchPost({ url: '/user/login', data, isAuth: false });
   if (result.message !== undefined) {
     localStorage.setItem('access_token', result.data.accessToken);
-    return true;
+    return result;
   }
   Swal.fire({
     icon: 'error',
@@ -19,7 +19,7 @@ const signInApi = async (data: FieldValues) => {
 const signUpApi = async (data: FieldValues) => {
   const result = await fetchPost({ url: '/user/regist', data, isAuth: false });
   if (result.message !== undefined) {
-    return true;
+    return result;
   }
   Swal.fire({
     icon: 'error',
@@ -40,7 +40,7 @@ const signOutApi = async () => {
         title: '로그아웃에 성공하였습니다.',
         text: '다음에 만나요!',
       });
-      return true;
+      return result;
     }
     Swal.fire({
       icon: 'error',
@@ -80,7 +80,7 @@ const sendPasswordApi = async (data: FieldValues) => {
     isAuth: false,
   });
   if (result.message !== undefined) {
-    return true;
+    return result;
   }
   Swal.fire({
     icon: 'error',
@@ -96,7 +96,7 @@ const checkPasswordApi = async (data: FieldValues) => {
     isAuth: false,
   });
   if (result.message !== undefined) {
-    return true;
+    return result;
   }
   Swal.fire({
     icon: 'error',
@@ -112,7 +112,7 @@ const changePasswordApi = async (data: FieldValues) => {
     isAuth: false,
   });
   if (result.message !== undefined) {
-    return true;
+    return result;
   }
   Swal.fire({
     icon: 'error',

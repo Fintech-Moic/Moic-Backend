@@ -36,7 +36,7 @@ export default function ProfitFilter() {
     value: string;
   } | null>(null);
   useEffect(() => {
-    setFilterOption((prev: any) => {
+    setFilterOption((prev) => {
       const updatedFilter = { ...prev };
       updatedFilter.company =
         selectedCompany?.value === '카드사' ? '' : selectedCompany?.value || '';
@@ -53,7 +53,7 @@ export default function ProfitFilter() {
       const formTarget = e.currentTarget as HTMLFormElement;
       if (!formTarget) return;
       const currentInput = formTarget.search.value;
-      setFilterOption((prev: any) => {
+      setFilterOption((prev) => {
         const updatedFilter = { ...prev };
         updatedFilter.cardName = currentInput;
         return updatedFilter;

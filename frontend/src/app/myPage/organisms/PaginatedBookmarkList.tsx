@@ -14,14 +14,9 @@ import Modal from '@/components/atoms/Modal';
 import { bookmarkDeleteModalAtom } from '@/store/atoms/modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
+import Shop from '@/types/shop';
 
-interface Bookmark {
-  category: string;
-  shopName: string;
-  shopLocation: string;
-  address: string;
-  latitude: string;
-  longitude: string;
+interface BookmarkShop extends Shop {
   isSelected: boolean;
 }
 
@@ -46,7 +41,9 @@ export default function PaginatedBookmarkList({
     staleTime: 1000 * 60 * 100,
     refetchOnWindowFocus: false,
   });
-  const [shopList, setShopList] = useState<Bookmark[]>([]);
+
+  const [shopList, setShopList] = useState<BookmarkShop[]>([]);
+
   const bookmarkDeleteMutation = useMutation({
     mutationFn: () =>
       postBookmarkDelete({
@@ -95,16 +92,6 @@ export default function PaginatedBookmarkList({
   });
 
   useEffect(() => {
-    if (!BookmarkData) return;
-    setShopList([
-      ...BookmarkData.data.shopList.map((cur: any) => ({
-        ...cur,
-        isSelected: false,
-      })),
-    ]);
-  }, []);
-
-  useEffect(() => {
     setBookmarkDeleteModal((prev) => ({
       ...prev,
       isOpen: false,
@@ -116,6 +103,13 @@ export default function PaginatedBookmarkList({
   }, [currentPage]);
 
   if (isLoading) return <div>로딩중...</div>;
+
+  setShopList([
+    ...BookmarkData.data.shopList.map((cur: Shop) => ({
+      ...cur,
+      isSelected: false,
+    })),
+  ]);
 
   const listItemCount = usePage === 'myPage' ? 5 : 4;
   const totalPageLength = Math.ceil(shopList.length / listItemCount);

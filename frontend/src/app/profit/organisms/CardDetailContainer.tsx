@@ -3,24 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import CardBenefitList from '../molecules/CardBenefitList';
 import CardTitleGroup from '../molecules/CardTitleGroup';
+import { CardDetail, CardBenefit } from '../../../types/card';
 import { getCardDetail } from '@/api/card';
-
-interface CardDetail {
-  company?: string;
-  type: string;
-  name?: string;
-  cardImage?: string;
-  cardBenefit: Array<CardBenefit>;
-}
-
-interface CardBenefit {
-  category: string;
-  shopName: string;
-  content: string;
-  discount: string;
-  point: string;
-  cashBack: string;
-}
 
 /** 카드 상세 페이지의 테두리부터 내용까지 렌더링하는 컴포넌트
  * @param {String} cardName 현재 페이지 url의 param
@@ -60,7 +44,7 @@ export default function CardDetailContainer({
             혜택
           </div>
           <CardBenefitList
-            cardBenefit={cardDetail?.cardBenefit as Array<CardBenefit>}
+            list={cardDetail?.cardBenefit as Array<CardBenefit>}
           />
         </div>
       </div>

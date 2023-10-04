@@ -4,18 +4,11 @@ import { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { useQuery } from '@tanstack/react-query';
 import CardList from '../molecules/CardList';
+import { Card } from '../../../types/card';
 import Pagination from '@/components/molecules/Pagination';
 import { filterOptionAtom } from '@/store/atoms/header';
 import { getCardSearch } from '@/api/card';
 
-interface Card {
-  id: string;
-  company: string;
-  type: string;
-  name: string;
-  cardImage: string;
-  mine: boolean;
-}
 /** 페이지네이션과 카드 리스트가 융합된 컴포넌트
  * @param {Array} data CardList를 렌더링하기 위한 서치 데이터의 배열
  * @returns {JSX.Element} 컴포넌트 반환

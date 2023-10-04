@@ -88,7 +88,9 @@ export default function MyGiftCardContainer() {
   };
 
   const handleClickCardDelete = () => {
-    giftDeletMutation.mutate(deleteGiftInfo.imageUrl);
+    if (deleteGiftInfo && deleteGiftInfo.imageUrl) {
+      giftDeletMutation.mutate(deleteGiftInfo.imageUrl);
+    }
   };
   return giftList.length === 0 ? (
     <GiftCardEmptyRegistButton />

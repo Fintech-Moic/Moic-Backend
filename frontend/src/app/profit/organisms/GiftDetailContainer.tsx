@@ -2,6 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getMyGift } from '@/api/giftCard';
+import GiftCard from '@/types/giftCard';
 
 export default function GiftDetailContainer({ giftId }: { giftId: string }) {
   const { data: giftData, isLoading } = useQuery({
@@ -14,7 +15,7 @@ export default function GiftDetailContainer({ giftId }: { giftId: string }) {
   if (isLoading) return <div>loading...</div>;
 
   const currentGift = giftData.data.find(
-    (curGift: any) => curGift.id === giftId
+    (curGift: GiftCard) => curGift.id === giftId
   );
 
   function calculateDaysRemaining(dueDate: string): string {

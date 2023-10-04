@@ -13,6 +13,7 @@ import Modal from '@/components/atoms/Modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { cardDeleteModalAtom } from '@/store/atoms/modal';
+import { ICardDeleteModalAtom } from '@/types/store/modal';
 
 /** 내 카드 조회 페이지에서, 현재 순서, 캐러셀, 카드사, 카드명 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
  * @param {any} myCard 내 카드 정보
@@ -69,7 +70,7 @@ export default function MyCardContainer() {
   };
 
   const handleClickModalClose = () => {
-    setOpenCardDeleteModal((prev) => ({
+    setOpenCardDeleteModal((prev: ICardDeleteModalAtom) => ({
       ...prev,
       isOpen: false,
       deleteCardInfo: {},
@@ -77,15 +78,17 @@ export default function MyCardContainer() {
   };
 
   const handleClickCardDelete = () => {
-    cardDeletMutation.mutate(deleteCardInfo.name);
+    if (deleteCardInfo.name) {
+      cardDeletMutation.mutate(deleteCardInfo.name);
+    }
   };
 
   return (
     <div className="flex justify-center items-center flex-col gap-5">
       {isOpen &&
-        deleteCardInfo.name &&
-        deleteCardInfo.company &&
-        deleteCardInfo.cardImage && (
+        deleteCardInfo?.name &&
+        deleteCardInfo?.company &&
+        deleteCardInfo?.cardImage && (
           <Modal>
             <div className="flex flex-col gap-16 justify-center items-center w-full h-full">
               <TitleSentence title="" sentence="이 카드를 삭제하실 건가요?" />

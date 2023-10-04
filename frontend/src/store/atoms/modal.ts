@@ -1,14 +1,19 @@
 import { atom } from 'jotai';
+import {
+  ICardDeleteModalAtom,
+  IGiftDeleteModalAtom,
+  IBookmarkDeleteModalAtom,
+} from '@/types/store/modal';
 
-export const cardDeleteModalAtom = atom({
+export const cardDeleteModalAtom = atom<ICardDeleteModalAtom>({
   isOpen: false,
-  deleteCardInfo: {} as any,
+  deleteCardInfo: {},
 });
-export const giftDeleteModalAtom = atom({
+export const giftDeleteModalAtom = atom<IGiftDeleteModalAtom>({
   isOpen: false,
-  deleteGiftInfo: {} as any,
+  deleteGiftInfo: {},
 });
-export const bookmarkDeleteModalAtom = atom({
+export const bookmarkDeleteModalAtom = atom<IBookmarkDeleteModalAtom>({
   isOpen: false,
-  selectedBookmarkList: [] as any,
+  selectedBookmarkList: [],
 });

@@ -27,10 +27,10 @@ export default function Page() {
       forwardStep();
     };
     if (findedId !== '') {
-      console.log(findedId);
       findIdSuccess();
     }
   }, [findedId]);
+
   const FindId = handleSubmit(async (data) => {
     const result = await findIdApi(data);
     setFindedId(result.data.id);

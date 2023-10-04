@@ -24,28 +24,57 @@ export const updateProfile = async (data: {
   if (result.message !== undefined) {
     Swal.fire({
       icon: 'success',
-      title: '수정에 성공하였습니다.',
+      title: '회원 정보 수정에 성공하였습니다.',
       text: '그렇습니다.',
     });
   }
+  Swal.fire({
+    icon: 'error',
+    title: '회원 정보 수정에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
   return result;
 };
 
-export const checkPassword = async (data: string) => {
+export const checkPassword = async (data: FieldValues) => {
   const result = fetchPost({ url: '/user/check/password', data, isAuth: true });
   return result;
 };
 
 export const updatePassword = async (data: FieldValues) => {
-  const result = fetchPost({
+  const result = await fetchPost({
     url: '/user/modify/password',
     data,
     isAuth: true,
+  });
+  if (result.message !== undefined) {
+    Swal.fire({
+      icon: 'success',
+      title: '비밀번호 변경에 성공하였습니다.',
+      text: '그렇습니다.',
+    });
+  }
+  Swal.fire({
+    icon: 'error',
+    title: '비밀번호 변경에 실패하였습니다.',
+    text: '다시 시도해주세요.',
   });
   return result;
 };
 
 export const WithdrawalApi = async () => {
-  const result = fetchPost({ url: '/user/delete', isAuth: true });
+  const result = await fetchPost({ url: '/user/delete', isAuth: true });
+  if (result.message !== undefined) {
+    Swal.fire({
+      icon: 'success',
+      title: '탈퇴에 성공하였습니다.',
+      text: '다시 돌아와주세요ㅠㅠ',
+    });
+  }
+  Swal.fire({
+    icon: 'error',
+    title: '탈퇴에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
   return result;
 };

@@ -45,6 +45,11 @@ export default function Page() {
     }
   };
 
+  // 에러 핸들링 함수
+  const handleSearchError = (error: Error) => {
+    console.error('검색 과정에서 오류가 발생하였습니다.', error);
+  };
+
   return (
     <>
       <Map

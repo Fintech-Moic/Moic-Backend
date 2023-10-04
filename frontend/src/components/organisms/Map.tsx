@@ -54,8 +54,10 @@ export default function KakaoMap() {
   });
   if (error) return <div>Error</div>;
 
-  setCurLoc(state.center);
-  console.log(curLoc);
+  useEffect(() => {
+    setCurLoc(state.center);
+    console.log(curLoc);
+  }, [state.center]);
 
   return (
     <Map

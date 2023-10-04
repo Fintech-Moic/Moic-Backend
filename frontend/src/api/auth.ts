@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { FieldValues } from 'react-hook-form';
 
 const SERVER_URL = 'https://moic.site/api/v1';
@@ -51,20 +52,37 @@ const signOutApi = async () => {
         },
         credentials: 'include',
       });
-      console.log(response);
       if (!response.ok) {
-        console.error(`HTTP Error: ${response.status}`);
+        Swal.fire({
+          icon: 'error',
+          title: '로그아웃에 실패하였습니다.',
+          text: '다시 시도해주세요.',
+        });
         return null;
       }
       localStorage.clear();
       sessionStorage.clear();
+      Swal.fire({
+        icon: 'success',
+        title: '로그아웃에 성공하였습니다.',
+        text: '안녕히 가세요.',
+      });
       return 'SUCCESS';
     } catch (error) {
-      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: '로그아웃에 실패하였습니다.',
+        text: '다시 시도해주세요.',
+      });
       return null;
     }
   } else {
-    return '로그인 정보가 존재하지 않습니다';
+    Swal.fire({
+      icon: 'error',
+      title: '로그인 정보가 존재하지 않습니다',
+      text: '다시 시도해주세요.',
+    });
+    return null;
   }
 };
 

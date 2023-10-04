@@ -48,8 +48,17 @@ export default function PaginatedCardList({ listType }: { listType: string }) {
     <div className="flex flex-col items-center h-full pb-6 justify-between gap-8 pt-14">
       {totalPageLength === 0 ? (
         <div className="h3b text-black opacity-50 h-full flex items-center flex-col justify-center break-words">
-          <span>추가할 카드가 없어요!</span>
-          <span>모든 카드를 다 가지고 계시군요!</span>
+          {listType === 'read' ? (
+            <>
+              <span>검색된 카드가 없어요!</span>
+              <span>다른 검색어를 입력해볼까요?</span>
+            </>
+          ) : (
+            <>
+              <span>추가할 카드가 없어요!</span>
+              <span>모든 카드를 다 가지고 계시군요!</span>
+            </>
+          )}
         </div>
       ) : (
         <>

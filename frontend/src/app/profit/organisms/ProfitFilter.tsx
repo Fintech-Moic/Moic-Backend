@@ -38,8 +38,10 @@ export default function ProfitFilter() {
   useEffect(() => {
     setFilterOption((prev: any) => {
       const updatedFilter = { ...prev };
-      updatedFilter.company = selectedCompany?.value || '';
-      updatedFilter.type = selectedType?.value || '';
+      updatedFilter.company =
+        selectedCompany?.value === '카드사' ? '' : selectedCompany?.value || '';
+      updatedFilter.type =
+        selectedType?.value === '카드종류' ? '' : selectedType?.value || '';
       return updatedFilter;
     });
   }, [selectedCompany, selectedType, setFilterOption]);
@@ -48,10 +50,9 @@ export default function ProfitFilter() {
   const handleSubmitSearch = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      const currentInput = (e.currentTarget as HTMLFormElement).search.value;
-
-      if (!currentInput) return;
-
+      const formTarget = e.currentTarget as HTMLFormElement;
+      if (!formTarget) return;
+      const currentInput = formTarget.search.value;
       setFilterOption((prev: any) => {
         const updatedFilter = { ...prev };
         updatedFilter.cardName = currentInput;
@@ -67,23 +68,23 @@ export default function ProfitFilter() {
 
   if (isLoading) return <div>loading ...</div>;
 
-  const companyList =
-    allCardData && 'companyList' in allCardData
-      ? allCardData?.companyList.map((cur: string, idx: number) => {
-          return { id: `${idx}_cur`, value: cur };
-        })
-      : [];
+  const companyList = [{ id: '카드사', value: '카드사' }];
+  if (allCardData && 'companyList' in allCardData) {
+    allCardData?.companyList.forEach((cur: string, idx: number) => {
+      companyList.push({ id: `${idx}_cur`, value: cur });
+    });
+  }
 
-  const typeList =
-    allCardData && 'typeList' in allCardData
-      ? allCardData?.typeList.map((cur: string, idx: number) => {
-          return { id: `${idx}_cur`, value: cur };
-        })
-      : [];
+  const typeList = [{ id: `카드종류`, value: '카드종류' }];
+  if (allCardData && 'typeList' in allCardData) {
+    allCardData?.typeList.forEach((cur: string, idx: number) => {
+      typeList.push({ id: `${idx}_cur`, value: cur });
+    });
+  }
 
   return (
     filterOpen && (
-      <div className="z-999 top-2 mt-4 p-4 absolute left-1/2 w-[360px] -translate-x-1/2 rounded-[10px] bg-Secondary flex flex-col justify-between gap-4">
+      <div className="z-40 top-2 mt-4 p-4 absolute left-1/2 w-[360px] -translate-x-1/2 rounded-[10px] bg-Secondary flex flex-col justify-between gap-4">
         <div className="flex justify-start items-center gap-1">
           <span className="p2r">전체 보기</span>
           <Switch isOn={isSwitchOn} onClick={handleClickSwitch} />

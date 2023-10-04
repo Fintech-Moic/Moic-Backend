@@ -14,6 +14,7 @@ import CarouselGiftItem from '../atoms/CarouselGiftItem';
 import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
 import { giftDeleteModalAtom } from '@/store/atoms/modal';
+import CardRegist from '@/../public/CardRegist.png';
 
 interface DetailGiftData {
   id: string;
@@ -119,9 +120,23 @@ export default function ProfitGiftCarousel({
     <div className="w-80 h-32 cursor-pointer [&_.slick-slide]:w-20 [&_.slick-slide]:h-32 [&_.slick-slide]:relative">
       <Slider {...settings}>
         <h3>
-          <img
+          <button
+            type="button"
             className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px] transform"
-            src="/CardRegist.png"
+            onClick={handleClickRegist}
+          >
+            <Image
+              width="80"
+              height="128"
+              src={CardRegist}
+              alt="기프티콘등록"
+            />
+          </button>
+          <Image
+            className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px] transform"
+            width="80"
+            height="128"
+            src={CardRegist}
             onClick={handleClickRegist}
             alt="기프티콘등록"
           />

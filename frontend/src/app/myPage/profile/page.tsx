@@ -97,6 +97,7 @@ export default function Page() {
     const result = await WithdrawalApi();
     if (result) closeModal();
   };
+
   const confirmPassword = handleSubmit(async (data) => {
     const result = await checkPassword(data);
     if (result) {

@@ -6,8 +6,8 @@ import React, { FormEvent, useState } from 'react';
 import { useAtom } from 'jotai';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import SearchBox from '../../molecules/FunctionalSearchBox';
-import searchResultAtom from '@/store/atoms/searchResultAtom';
 import curLocAtom from '@/store/atoms/curLocAtom';
+import searchResultAtom from '@/store/atoms/searchResultAtom';
 // import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
 import { getSearchedPlace, getDirection } from '@/api/map';
 
@@ -23,7 +23,7 @@ export default function Page() {
    */
   const ResultClickEvent = async (result: string) => {
     try {
-      const data = await getSearchedPlace(result);
+      const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
       // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
       setShopLocs(data.data.shopList);
       // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
@@ -43,6 +43,11 @@ export default function Page() {
     } catch (error) {
       console.error('경로 정보 불러오기 실패', error);
     }
+  };
+
+  // 에러 핸들링 함수
+  const handleSearchError = (error: Error) => {
+    console.error('검색 과정에서 오류가 발생하였습니다.', error);
   };
 
   return (
@@ -76,7 +81,9 @@ export default function Page() {
               onClick={() => {
                 ResultClickEvent(result);
               }}
-              onKeyDown={() => {}}
+              onKeyDown={() => {
+                ResultClickEvent(result);
+              }}
               role="presentation"
             >
               {result}
@@ -89,7 +96,7 @@ export default function Page() {
           <MapMarker
             key={loc}
             position={{ lat: loc.latitude, lng: loc.longitude }}
-            onClick={() => handleMarkerClick(loc)} // 마커 클릭 이벤트 처리
+            onClick={() => handleMarkerClick(loc)}
           />
         ))}
       </Map>

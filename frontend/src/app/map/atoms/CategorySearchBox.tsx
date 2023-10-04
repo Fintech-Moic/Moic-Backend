@@ -2,6 +2,8 @@
 
 'use client';
 
+/* 카테고리 검색 페이지 구현 */
+
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
 import { useAtom } from 'jotai';
 import { getShopData } from '@/api/map';

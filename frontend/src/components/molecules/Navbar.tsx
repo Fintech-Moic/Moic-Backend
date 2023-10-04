@@ -3,7 +3,7 @@
 import React, { useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import IconButton from '../atoms/IconButton';
-import useLoginChecker from '@/hooks/useLoginChecker';
+import { useNotSignInChecker } from '@/hooks/useSignInChecker';
 import map from '@/../public/assets/images/map.svg';
 import mapOn from '@/../public/assets/images/mapOn.svg';
 import home from '@/../public/assets/images/home.svg';
@@ -19,7 +19,7 @@ function Navbar() {
   const navButtonClick = (target: string) => {
     router.push(target);
   };
-  useLoginChecker();
+  useNotSignInChecker();
   const isIncloudePathname = useCallback(
     (checkingPathName: string) => {
       return pathname.includes(checkingPathName);

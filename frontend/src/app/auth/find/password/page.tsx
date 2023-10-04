@@ -15,8 +15,10 @@ import {
   checkPasswordApi,
   changePasswordApi,
 } from '@/api/auth';
+import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
 
 export default function Page() {
+  useAlreadySignInChecker();
   const {
     register,
     handleSubmit,

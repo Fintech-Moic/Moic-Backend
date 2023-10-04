@@ -8,8 +8,10 @@ import { useForm } from 'react-hook-form';
 import FindIdForm from '../../organisms/FindIdForm';
 import FindIdSuccessForm from '../../organisms/FindIdSuccessForm';
 import { findIdApi } from '@/api/auth';
+import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
 
 export default function Page() {
+  useAlreadySignInChecker();
   const {
     register,
     handleSubmit,

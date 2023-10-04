@@ -2,8 +2,10 @@
 
 import { useRouter } from 'next/navigation';
 import TwinsButtonGroup from '@/components/molecules/TwinsButtonGroup';
+import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
 
 export default function Page() {
+  useAlreadySignInChecker();
   const router = useRouter();
   const goToFindId = () => {
     router.push('/auth/find/id');

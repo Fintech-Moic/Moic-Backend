@@ -1,37 +1,23 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 export default function Page() {
-  const location = useLocation();
+  const router = useRouter();
+  const params = useSearchParams();
 
   useEffect(() => {
-    const { accessToken } = parseQueryString(location.search);
+    const accessToken = params.get('accessToken');
 
     if (accessToken) {
-      console.log(accessToken);
-      //   localStorage.setItem('access-token', accessToken);
+      localStorage.setItem('access-token', accessToken);
 
-      //   router.push(`/home`);
+      router.push(`/home`);
     } else {
-      console.log('accessToken이 없습니다.');
+      /* TO DO :: ERROR 처리 */
     }
   });
-
-  function parseQueryString(queryString: string): Record<string, string> {
-    const query: Record<string, string> = {};
-    const pairs = queryString.slice(1).split('&');
-
-    for (const pair of pairs) {
-      const [key, value] = pair.split('=');
-      if (key && value) {
-        query[key] = decodeURIComponent(value);
-      }
-    }
-
-    return query;
-  }
 
   return null;
 }

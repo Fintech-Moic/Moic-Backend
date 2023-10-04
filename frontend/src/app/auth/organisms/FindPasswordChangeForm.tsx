@@ -4,12 +4,11 @@ import FillButton from '@/components/atoms/FillButton';
 import { ReactHookFormType } from '@/types/auth';
 
 interface FindPasswordChangeFormProps extends ReactHookFormType {
-  remainingTime: number;
+  timerKey: number;
 }
 
 /** FindPasswordChangeForm Component
- * @todo error 설정 및 타입 변경
- * @param {Number} remainingTime Timer의 남은 시간
+ * @param {Number} timerKey Timer에 전달될 key
  * @returns {JSX.Element} 2개의 InputForm과 FillButton을 가진 FindPasswordChangeForm
  */
 
@@ -17,7 +16,7 @@ export default function FindPasswordChangeForm({
   register,
   errors,
   onSubmit,
-  remainingTime,
+  timerKey,
 }: FindPasswordChangeFormProps) {
   return (
     <form
@@ -25,7 +24,7 @@ export default function FindPasswordChangeForm({
       className="w-full flex flex-col h-1/2 justify-between"
     >
       <div className="flex flex-col h-full justify-evenly">
-        <Timer seconds={remainingTime} />
+        <Timer key={timerKey} />
         <InputForm
           register={register}
           id="password"

@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
 import ProgressBar from '../../atoms/ProgressBar';
 import FindPasswordSendForm from '../../organisms/FindPasswordSendForm';
 import FindPasswordCheckForm from '../../organisms/FindPasswordCheckForm';
@@ -26,34 +25,12 @@ export default function Page() {
   } = useForm();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
+  const [sendFormData, setSendFormData] = useState<{} | null>(null);
   const [idData, setIdData] = useState<{} | null>(null);
   const [passwordData, setPasswordData] = useState<{} | null>(null);
-  const [checkForm, setCheckForm] = useState(false);
+  const [checkForm, setCheckForm] = useState<boolean>(false);
   const [showToChangePassword, setShowToChangePassword] = useState(false);
-  const [remainingTime, setRemainingTime] = useState<number>(0);
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (showToChangePassword || step === 2) {
-      setRemainingTime(180);
-      timer = setInterval(() => {
-        setRemainingTime((prevTime) => {
-          if (prevTime <= 1) {
-            clearInterval(timer);
-            Swal.fire('알림', '인증이 만료되었습니다.', 'error');
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
-    }
-    return () => {
-      if (timer) {
-        clearInterval(timer);
-      }
-    };
-  }, [showToChangePassword, step]);
-
+  const [timerKey, setTimerKey] = useState(0);
   const forwardStep = () => {
     setStep(step + 1);
   };
@@ -71,26 +48,32 @@ export default function Page() {
     settingProgress();
   }, [step]);
 
-  const sendPassword = handleSubmit(async (data) => {
-    const result = await sendPasswordApi(data);
-    if (result) {
-      setCheckForm(true);
-    }
+  const sendPassword = handleSubmit((data) => {
+    setSendFormData({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+    });
+    setTimerKey((prev) => prev + 1);
   });
+  useEffect(() => {
+    const passwordSend = async () => {
+      if (sendFormData !== null) {
+        const result = await sendPasswordApi(sendFormData);
+        if (result) {
+          setCheckForm(true);
+        }
+      }
+    };
+    if (sendFormData !== null) passwordSend();
+  }, [sendFormData]);
+
   const checkPassword = handleSubmit((data) => {
     setIdData({
       id: data.id,
       certification: data.certification,
     });
   });
-  const changePassword = handleSubmit((data) => {
-    setPasswordData({
-      ...idData,
-      password: data.password,
-      passwordCheck: data.passwordCheck,
-    });
-  });
-
   useEffect(() => {
     const passwordCheck = async () => {
       if (idData !== null) {
@@ -101,6 +84,13 @@ export default function Page() {
     if (idData !== null) passwordCheck();
   }, [idData]);
 
+  const changePassword = handleSubmit((data) => {
+    setPasswordData({
+      ...idData,
+      password: data.password,
+      passwordCheck: data.passwordCheck,
+    });
+  });
   useEffect(() => {
     const passwordChange = async () => {
       if (passwordData !== null) {
@@ -126,7 +116,7 @@ export default function Page() {
             onSubmit={checkPassword}
             showToChangePassword={showToChangePassword}
             onClick={forwardStep}
-            remainingTime={remainingTime}
+            timerKey={timerKey}
           />
         </div>
       )}
@@ -135,7 +125,7 @@ export default function Page() {
       register={register}
       errors={errors}
       onSubmit={changePassword}
-      remainingTime={remainingTime}
+      timerKey={timerKey}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
       <section className="flex flex-col items-center">

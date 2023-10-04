@@ -6,13 +6,13 @@ import { ReactHookFormType } from '@/types/auth';
 interface FindPasswordCheckFormProps extends ReactHookFormType {
   showToChangePassword: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  remainingTime: number;
+  timerKey: number;
 }
 
 /**
  * @param {Boolean} showToChangePassword 이동 버튼 보여줄지 변수
  * @param {React.MouseEventHandler<HTMLButtonElement>} onClick 비밀번호 변경으로 이동시킬 callback 함수
- * @param {Number} remainingTime Timer의 남은 시간
+ * @param {Number} timerKey Timer에 전달될 key
  * @returns {JSX.Element} FindPasswordCheckForm Component 반환
  */
 
@@ -22,11 +22,11 @@ export default function FindPasswordCheckForm({
   onSubmit,
   showToChangePassword,
   onClick,
-  remainingTime,
+  timerKey,
 }: FindPasswordCheckFormProps) {
   return (
     <div>
-      <Timer seconds={remainingTime} />
+      <Timer key={timerKey} />
       <form onSubmit={onSubmit} className="h-full flex w-full justify-between">
         <InputForm
           register={register}

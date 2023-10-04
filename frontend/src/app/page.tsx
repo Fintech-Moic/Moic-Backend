@@ -10,7 +10,11 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/home');
+      if (localStorage.getItem('access_token') !== undefined) {
+        router.push('/home');
+      } else {
+        router.push('/auth/signIn');
+      }
     }, 1000);
     return () => clearTimeout(timer);
   }, [router]);

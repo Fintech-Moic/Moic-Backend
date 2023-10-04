@@ -10,7 +10,7 @@ interface WheelPickerProps {
 
 const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [curLoc] = useAtomValue<any>(curLocAtom);
+  const curLoc = useAtomValue<any>(curLocAtom);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { getCategoryShop } from '@/api/map';
-import { useAtom } from 'jotai';
-import curLocAtom from '@/store/atoms/curLocAtom';
 import OutlineButton from './OutlineButton';
+import { useAtom } from 'jotai';
+import { getCategoryShop } from '@/api/map';
+import curLocAtom from '@/store/atoms/curLocAtom';
 
 interface WheelPickerProps {
   options: string[];
@@ -10,7 +10,7 @@ interface WheelPickerProps {
 
 const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [curLoc, setCurLoc] = useAtom<any>(curLocAtom);
+  const [curLoc] = useAtom<any>(curLocAtom);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -19,7 +19,11 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   const handleConfirmButtonClick = async () => {
     try {
       if (selectedOption) {
-        const data = await getCategoryShop(selectedOption, curLoc.lat, curLoc.lng);
+        const data = await getCategoryShop(
+          selectedOption,
+          curLoc.lat,
+          curLoc.lng
+        );
         console.log(selectedOption, data);
       } else {
         console.error('옵션이 선택되지 않았습니다.');
@@ -34,17 +38,25 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
       <div className="flex flex-col items-center gap-3 cursor-pointer">
         {options.map((option, index) => (
           <div
-            key={index}
+            key={option}
             className={`${
               option === selectedOption
                 ? 'px-9 text-[20px] text-black transition-transform font-bold scale-125 bg-slate-500/10 animate-[shadow-drop-2-tb]'
                 : 'px-9 text-[16px] text-Secondary transition-transform'
             }`}
             onClick={() => handleOptionClick(option)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                handleOptionClick(option);
+              }
+            }}
+            role="button"
+            tabIndex={0}
           >
             {option}
           </div>
         ))}
+
         <OutlineButton
           lineColor="border-g4"
           textColor="text-g4"
@@ -54,7 +66,7 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
           height="h-8"
           borderRadius="rounded-lg"
           font="SUIT"
-          />
+        />
       </div>
     </div>
   );

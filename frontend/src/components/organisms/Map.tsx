@@ -52,12 +52,16 @@ export default function KakaoMap() {
   const { error }: any = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_APPKEY!,
   });
-  if (error) return <div>Error</div>;
+
+  // useEffect(() => {
+  //   setCurLoc(state.center);
+  // }, [state.center]);
 
   useEffect(() => {
     setCurLoc(state.center);
-    console.log(curLoc);
-  }, [state.center]);
+  }, [state.center, setCurLoc, curLoc]);
+
+  if (error) return <div>Error</div>;
 
   return (
     <Map

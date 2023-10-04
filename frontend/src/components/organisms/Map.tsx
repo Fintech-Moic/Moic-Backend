@@ -59,7 +59,7 @@ export default function KakaoMap() {
 
   useEffect(() => {
     setCurLoc(state.center);
-  }, [state.center, setCurLoc, curLoc]);
+  }, [state.center]);
 
   if (error) return <div>Error</div>;
 

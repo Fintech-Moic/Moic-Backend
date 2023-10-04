@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import OutlineButton from './OutlineButton';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
 
@@ -10,7 +10,7 @@ interface WheelPickerProps {
 
 const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [curLoc] = useAtom<any>(curLocAtom);
+  const [curLoc] = useAtomValue<any>(curLocAtom);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);

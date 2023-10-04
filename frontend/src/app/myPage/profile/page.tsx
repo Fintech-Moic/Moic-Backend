@@ -14,6 +14,7 @@ import {
   updatePassword,
   WithdrawalApi,
 } from '@/api/myPage';
+
 export default function Page() {
   const {
     register,

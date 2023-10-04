@@ -18,8 +18,9 @@ export default function Page() {
   const goingTo = (target: string) => {
     router.push(target);
   };
-  const onSubmit = handleSubmit((data) => {
-    signInApi(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const response = await signInApi(data);
+    if (response) goingTo('/home');
   });
   const socialLoginHandle = () => {
     console.log('소셜로그인');

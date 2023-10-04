@@ -1,168 +1,125 @@
 import Swal from 'sweetalert2';
 import { FieldValues } from 'react-hook-form';
+import { fetchPost } from '@/util/api';
 
-const SERVER_URL = 'https://moic.site/api/v1';
-
-const signInApi = async (formData: FieldValues) => {
-  await fetch(`${SERVER_URL}/user/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify(formData),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      localStorage.setItem('access_token', data.data.accessToken);
-    })
-    .catch((error: Error) => {
-      console.log(error);
-    });
+const signInApi = async (data: FieldValues) => {
+  const result = await fetchPost({ url: '/user/login', data, isAuth: false });
+  if (result.message !== undefined) {
+    localStorage.setItem('access_token', result.data.accessToken);
+    return true;
+  }
+  Swal.fire({
+    icon: 'error',
+    title: '로그인에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
 
-const signUpApi = async (formData: FieldValues) => {
-  try {
-    const response = await fetch(`${SERVER_URL}/user/regist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      console.error(`HTTP Error: ${response.status}`);
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error: any) {
-    console.error(error);
-    return null;
+const signUpApi = async (data: FieldValues) => {
+  const result = await fetchPost({ url: '/user/regist', data, isAuth: false });
+  if (result.message !== undefined) {
+    return true;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '회원가입에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
 
 const signOutApi = async () => {
   if (localStorage.getItem('access_token') != null) {
-    try {
-      const response = await fetch(`${SERVER_URL}/user/logout`, {
-        method: 'POST',
-        headers: {
-          Authorization: localStorage.getItem('access_token') as string,
-        },
-        credentials: 'include',
-      });
-      if (!response.ok) {
-        Swal.fire({
-          icon: 'error',
-          title: '로그아웃에 실패하였습니다.',
-          text: '다시 시도해주세요.',
-        });
-        return null;
-      }
+    const result = await fetchPost({ url: '/user/logout', isAuth: true });
+    if (result.message !== undefined) {
       localStorage.clear();
       sessionStorage.clear();
       Swal.fire({
-        icon: 'success',
-        title: '로그아웃에 성공하였습니다.',
-        text: '안녕히 가세요.',
-      });
-      return 'SUCCESS';
-    } catch (error) {
-      Swal.fire({
         icon: 'error',
-        title: '로그아웃에 실패하였습니다.',
-        text: '다시 시도해주세요.',
+        title: '로그아웃에 성공하였습니다.',
+        text: '다음에 만나요!',
       });
-      return null;
+      return true;
     }
-  } else {
     Swal.fire({
       icon: 'error',
-      title: '로그인 정보가 존재하지 않습니다',
+      title: '로그아웃에 실패하였습니다.',
       text: '다시 시도해주세요.',
     });
-    return null;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '로그인 정보가 존재하지 않습니다',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
 
-const findIdApi = async (formData: FieldValues) => {
-  try {
-    const response = await fetch(`${SERVER_URL}/user/lookup/id`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      console.log('imNotOk');
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
+const findIdApi = async (data: FieldValues) => {
+  const result = await fetchPost({
+    url: '/user/lookup/id',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return result;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '아이디 찾기에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
-const sendPasswordApi = async (formData: FieldValues) => {
-  try {
-    const response = await fetch(`${SERVER_URL}/user/temp/password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      console.log('imNotOk');
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
+
+const sendPasswordApi = async (data: FieldValues) => {
+  const result = await fetchPost({
+    url: '/user/temp/password',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return true;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '인증번호 전송에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
-const checkPasswordApi = async (formData: FieldValues) => {
-  try {
-    const response = await fetch(`${SERVER_URL}/user/verify/password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      console.log('imNotOk');
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
+const checkPasswordApi = async (data: FieldValues) => {
+  const result = await fetchPost({
+    url: '/user/verify/password',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return true;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '인증번호 확인에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
-const changePasswordApi = async (formData: FieldValues) => {
-  try {
-    const response = await fetch(`${SERVER_URL}/user/reset/password`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) {
-      console.log('imNotOk');
-      return null;
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
+const changePasswordApi = async (data: FieldValues) => {
+  const result = await fetchPost({
+    url: '/user/reset/password',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return true;
   }
+  Swal.fire({
+    icon: 'error',
+    title: '비밀번호 재설정에 실패하였습니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
 
 export {

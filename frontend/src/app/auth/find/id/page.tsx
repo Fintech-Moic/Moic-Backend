@@ -31,6 +31,7 @@ export default function Page() {
       findIdSuccess();
     }
   }, [findedId]);
+
   const FindId = handleSubmit(async (data) => {
     const result = await findIdApi(data);
     setFindedId(result.data.id);

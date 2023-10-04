@@ -78,7 +78,7 @@ export default function Page() {
     const signUp = async () => {
       if (step === 2) {
         const result = await signUpApi(userData);
-        if (result !== null && result.message !== undefined) {
+        if (result === true) {
           forwardStep();
         } else {
           console.log('회원가입 실패');

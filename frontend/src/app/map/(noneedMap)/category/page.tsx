@@ -3,10 +3,10 @@
 // import Image from 'next/image';
 // import banner from '@/../../public/banner.png';
 // import Carousel from '@/components/atoms/CategoryCarousel';
+import CategorySearchBox from '../../atoms/CategorySearchBox';
 import Header from '@/components/molecules/Header';
 import Picker from '@/components/atoms/CategoryWheelPicker';
 import Map from '@/components/organisms/Map';
-import CategorySearchBox from '../../atoms/CategorySearchBox';
 
 export default function Page() {
   const options = [

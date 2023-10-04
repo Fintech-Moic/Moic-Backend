@@ -1,7 +1,10 @@
 'use client';
 
-/* eslint-disable react/no-unused-prop-types */
 import Image from 'next/image';
+import BlackAddIcon from '@/../public/assets/BlackAddIcon.svg';
+import BlackPersonIcon from '@/../public/assets/BlackPersonIcon.svg';
+
+/* eslint-disable react/no-unused-prop-types */
 
 /** 카드 전체 조회 또는 등록 시의 리스트 아이템 컴포넌트
  * @param {String} listType 현재 리스트가 조회인지, 등록인지 타입
@@ -34,12 +37,7 @@ export default function CardListItem({
       id={name}
     >
       {!mine && listType === 'regist' && (
-        <Image
-          src="/assets/BlackAddIcon.svg"
-          alt="등록아이콘"
-          width={20}
-          height={20}
-        />
+        <Image src={BlackAddIcon} alt="등록아이콘" width={20} height={20} />
       )}
       <img src={cardImage} className="w-[140px] h-[80px]" alt="카드이미지" />
       <div className="flex flex-col justify-start items-start">
@@ -47,7 +45,7 @@ export default function CardListItem({
           <span className="h4b">{company}</span>
           {mine && (
             <Image
-              src="/assets/BlackPersonIcon.svg"
+              src={BlackPersonIcon}
               alt="마이아이콘"
               width={16}
               height={20}

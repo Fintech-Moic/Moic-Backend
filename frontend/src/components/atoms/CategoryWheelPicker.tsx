@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import OutlineButton from './OutlineButton';
 import { useAtomValue } from 'jotai';
+import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
 
@@ -8,7 +8,7 @@ interface WheelPickerProps {
   options: string[];
 }
 
-const Picker: React.FC<WheelPickerProps> = ({ options }) => {
+function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
 
@@ -36,7 +36,7 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
   return (
     <div className="flex h-[300px] justify-center items-center">
       <div className="flex flex-col items-center gap-3 cursor-pointer">
-        {options.map((option, index) => (
+        {options.map((option) => (
           <div
             key={option}
             className={`${
@@ -70,6 +70,6 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Picker;

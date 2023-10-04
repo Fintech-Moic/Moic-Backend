@@ -13,7 +13,7 @@ interface TextBoxProps {
 
 export default function TextBox({ width, height, children }: TextBoxProps) {
   return (
-    <article className={`${width} ${height} border-2 border-Secondary`}>
+    <article className={`${width} ${height} border-2 border-Secondary p-2`}>
       {children}
     </article>
   );

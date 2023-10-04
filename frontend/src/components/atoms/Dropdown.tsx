@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
+import BlackChevronLeftIcon from '@/../public/assets/BlackChevronLeftIcon.svg';
 
 interface DropdownProps {
   placeholder: string;
@@ -65,7 +66,7 @@ export default function Dropdown({
           }`}
         >
           <Image
-            src="/assets/BlackChevronLeftIcon.svg"
+            src={BlackChevronLeftIcon}
             alt="화살표이미지"
             width="18"
             height="18"

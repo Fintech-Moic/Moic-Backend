@@ -1,3 +1,5 @@
+'use client';
+
 import { useQuery } from '@tanstack/react-query';
 import CardBenefitList from '../molecules/CardBenefitList';
 import CardTitleGroup from '../molecules/CardTitleGroup';
@@ -25,7 +27,7 @@ interface CardBenefit {
  * @returns {JSX.Element} 컴포넌트 반환
  */
 
-export default async function CardDetailContainer({
+export default function CardDetailContainer({
   cardName,
 }: {
   cardName: string;
@@ -38,8 +40,8 @@ export default async function CardDetailContainer({
   });
 
   if (isLoading) <div>로딩중...</div>;
-
-  const cardDetail: CardDetail = data.data;
+  const cardDetail: CardDetail = data?.data || {};
+  if (Object.keys(cardDetail).length === 0) return <div>로딩중...</div>;
 
   return (
     <div className="h-full shadow-md flex flex-col justify-start items-center gap-16 rounded-3xl bg-white px-9 py-12 overflow-scroll">

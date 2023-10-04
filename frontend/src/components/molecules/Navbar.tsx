@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import IconButton from '../atoms/IconButton';
 import map from '@/../public/assets/images/map.svg';
@@ -18,13 +18,19 @@ function Navbar() {
   const navButtonClick = (target: string) => {
     router.push(target);
   };
+  const isIncloudePathname = useCallback(
+    (checkingPathName: string) => {
+      return pathname.includes(checkingPathName);
+    },
+    [pathname]
+  );
   return (
     <div className="h-20 w-full max-w-xl flex justify-evenly items-center">
       <IconButton
         type="button"
         width="w-6"
         height="h-6"
-        src={pathname === '/map/dest' ? mapOn : map}
+        src={isIncloudePathname('map') ? mapOn : map}
         alt="map"
         onClick={() => navButtonClick('/map/place')}
       />
@@ -32,7 +38,7 @@ function Navbar() {
         type="button"
         width="w-6"
         height="h-6"
-        src={pathname === '/home' ? homeOn : home}
+        src={isIncloudePathname('home') ? homeOn : home}
         alt="home"
         onClick={() => navButtonClick('/home')}
       />
@@ -40,7 +46,7 @@ function Navbar() {
         type="button"
         width="w-6"
         height="h-6"
-        src={pathname === '/profit/card' ? cardOn : card}
+        src={isIncloudePathname('profit/card') ? cardOn : card}
         alt="card"
         onClick={() => navButtonClick('/profit/card')}
       />
@@ -48,7 +54,7 @@ function Navbar() {
         type="button"
         width="w-6"
         height="h-6"
-        src={pathname === '/profit/giftCard/myGiftCard' ? gifticonOn : gifticon}
+        src={isIncloudePathname('profit/giftCard') ? gifticonOn : gifticon}
         alt="gifticon"
         onClick={() => navButtonClick('/profit/giftCard/myGiftCard')}
       />

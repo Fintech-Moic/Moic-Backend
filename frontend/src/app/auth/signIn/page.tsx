@@ -22,8 +22,12 @@ export default function Page() {
     const result = await signInApi(data);
     if (result) goingTo('/home');
   });
-  const socialLoginHandle = () => {
-    console.log('소셜로그인');
+  const socialLoginHandle = (isKakao: boolean) => {
+    if (isKakao) {
+      window.location.href = `${process.env.NEXT_PUBLIC_OAUTH_KAKAO}`;
+    } else {
+      window.location.href = `${process.env.NEXT_PUBLIC_OAUTH_GOOGLE}`;
+    }
   };
 
   return (
@@ -43,13 +47,13 @@ export default function Page() {
             width="w-80"
             height="h-12"
             isKakao
-            onClick={socialLoginHandle}
+            onClick={() => socialLoginHandle(true)}
           />
           <SocialLoginButton
             width="w-80"
             height="h-12"
             isKakao={false}
-            onClick={socialLoginHandle}
+            onClick={() => socialLoginHandle(false)}
           />
           <TextButton onClick={() => goingTo('/auth/signUp')}>
             혹시 회원가입을 하지 않으셨나요?

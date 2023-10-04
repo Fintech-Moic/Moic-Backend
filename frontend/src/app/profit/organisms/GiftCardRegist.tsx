@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 import GiftCardRegistTitle from '../atoms/GiftCardRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
 import { postGiftRegist } from '@/api/giftCard';
@@ -37,13 +38,21 @@ export default function GiftCardRegist() {
         !Object.keys(data).includes('errorCode') &&
         !Object.keys(data).includes('status')
       ) {
-        alert('실패했습니다! 다시 시도해주세요!');
+        Swal.fire({
+          icon: 'error',
+          title: '기프티콘 등록 실패',
+          text: '등록에 실패했습니다. 다시 시도해주세요!',
+        });
         return;
       }
       router.back();
     },
     onError: () => {
-      alert('실패했습니다! 다시 시도해주세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '기프티콘 등록 실패',
+        text: '등록에 실패했습니다. 다시 시도해주세요!',
+      });
     },
   });
 

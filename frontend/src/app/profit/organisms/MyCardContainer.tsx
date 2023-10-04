@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
+import Swal from 'sweetalert2';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitCardCarousel from '../molecules/ProfitCardCarousel';
 import CardEmptyRegistButton from '../atoms/CardEmptyRegistButton';
@@ -44,7 +45,11 @@ export default function MyCardContainer() {
         isOpen: false,
         deleteCardInfo: {},
       }));
-      alert('카드 삭제 실패! 다시, 시도해주세요');
+      Swal.fire({
+        icon: 'error',
+        title: '카드 삭제 실패',
+        text: '삭제에 실패했습니다. 다시 시도해주세요!',
+      });
     },
   });
 

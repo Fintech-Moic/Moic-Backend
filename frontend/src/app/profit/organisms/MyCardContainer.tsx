@@ -48,8 +48,9 @@ export default function MyCardContainer() {
     },
   });
 
-  if (isLoading) <div>로딩중...</div>;
-  const cardList = data?.data?.cardList || [];
+  if (isLoading) return <div>로딩중...</div>;
+  const { cardList } = data.data;
+
   if (cardList.length === 0) return <CardEmptyRegistButton />;
 
   const handleClickPrev = () => {

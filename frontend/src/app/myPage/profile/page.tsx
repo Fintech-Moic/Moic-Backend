@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import ProfileContainer from '../organisms/ProfileContainer';
-import ProfilePasswordModal from '../organisms/ProfilePasswordModal';
+import ProfilePasswordCheckModal from '../organisms/ProfilePasswordCheckModal';
+import ProfilePasswordUpdateModal from '../organisms/ProfilePasswordUpdateModal';
 import Header from '@/components/molecules/Header';
 import Navbar from '@/components/molecules/Navbar';
 import {
@@ -14,7 +14,6 @@ import {
   updatePassword,
   WithdrawalApi,
 } from '@/api/myPage';
-
 export default function Page() {
   const {
     register,
@@ -31,7 +30,10 @@ export default function Page() {
     gender: string | null;
     yearOfBirth: string | null;
   }>({ gender: null, yearOfBirth: null });
+  const [toUpdate, setToUpdate] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [ischeckModal, setIsCheckModal] = useState(true);
+  const [passwordData, setPasswordData] = useState<{} | null>(null);
   const genderList = ['선택안함', '남성', '여성'];
   const yearsList = [
     '선택안함',
@@ -48,53 +50,62 @@ export default function Page() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const toPasswordUpdate = () => {
+    setToUpdate(true);
+  };
+  const toWithdrawal = () => {
+    setToUpdate(false);
+  };
+  const openPasswordCheckModal = () => {
+    setIsCheckModal(true);
+  };
+  const openPasswordUpdateModal = () => {
+    setIsCheckModal(false);
+  };
 
-  const checkPasswordConfirm = async (): Promise<boolean> => {
-    const result = await Swal.fire({
-      title: '비밀번호 입력',
-      input: 'password',
-      inputPlaceholder: '비밀번호를 입력해주세요',
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value) {
-          return '비밀번호를 입력해주세요!';
-        }
-        return null;
-      },
-    });
-    if (result.isConfirmed && result.value) {
-      console.log(result);
-      try {
-        const response = await checkPassword(result.value);
-        if (response.message !== undefined) return true;
-        return false;
-      } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: '비밀번호가 잘못되었습니다.',
-          text: '다시 시도해주세요.',
-        });
-        return false;
-      }
-    }
-    return false;
+  const openCheckModalToUpdate = () => {
+    openPasswordCheckModal();
+    toPasswordUpdate();
+    openModal();
   };
-  const passwordCheckToModal = async () => {
-    const isPasswordValid = await checkPasswordConfirm();
-    if (isPasswordValid) {
-      openModal();
-    }
+  const openCheckModalToWithdrawal = () => {
+    openPasswordCheckModal();
+    toWithdrawal();
+    openModal();
   };
+
   const modifyPassword = handleSubmit(async (data) => {
+    setPasswordData({
+      newPassword: data.newPassword,
+      newPasswordCheck: data.newPasswordCheck,
+    });
     const response = await updatePassword(data);
     if (response.message !== null) closeModal();
   });
+  useEffect(() => {
+    const passwordCheck = async () => {
+      if (passwordData !== null) {
+        const response = await updatePassword(passwordData);
+        if (response.message !== null) closeModal();
+      }
+    };
+    if (passwordData !== null) passwordCheck();
+  }, [passwordData]);
+
   const Withdrawal = async () => {
-    const isPasswordValid = await checkPasswordConfirm();
-    if (isPasswordValid) {
-      WithdrawalApi();
-    }
+    const response = await WithdrawalApi();
+    if (response.message !== null) closeModal();
   };
+  const confirmPassword = handleSubmit(async (data) => {
+    const response = await checkPassword(data);
+    if (response.message !== null) {
+      if (toUpdate) {
+        openPasswordUpdateModal();
+      } else {
+        Withdrawal();
+      }
+    }
+  });
 
   const modifyProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -110,7 +121,9 @@ export default function Page() {
 
   return (
     <>
-      <Header title="계정 설정" isPrevButton isFilterButton={false} />
+      <div className={`${isModalOpen ? 'bg-black bg-opacity-50' : ''}`}>
+        <Header title="계정 설정" isPrevButton isFilterButton={false} />
+      </div>
       <div
         className={`relative flex-1 overflow-y-auto flex flex-col items-center w-full ${
           isModalOpen ? 'bg-black bg-opacity-50' : ''
@@ -125,19 +138,28 @@ export default function Page() {
             onSubmit={modifyProfile}
             fetchSelectedGender={profileData.gender}
             fetchSelectedYear={profileData.yearOfBirth}
-            passwordCheckToModal={passwordCheckToModal}
-            Withdrawal={Withdrawal}
+            passwordCheckToModal={openCheckModalToUpdate}
+            Withdrawal={openCheckModalToWithdrawal}
           />
         )}
       </div>
       {isModalOpen && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <ProfilePasswordModal
-            closeModal={closeModal}
-            register={register}
-            errors={errors}
-            onSubmit={modifyPassword}
-          />
+          {ischeckModal ? (
+            <ProfilePasswordCheckModal
+              closeModal={closeModal}
+              register={register}
+              errors={errors}
+              onSubmit={confirmPassword}
+            />
+          ) : (
+            <ProfilePasswordUpdateModal
+              closeModal={closeModal}
+              register={register}
+              errors={errors}
+              onSubmit={modifyPassword}
+            />
+          )}
         </div>
       )}
       <div

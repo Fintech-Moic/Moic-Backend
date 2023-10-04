@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
+import Swal from 'sweetalert2';
 import ProgressBar from '../../atoms/ProgressBar';
 import FindPasswordSendForm from '../../organisms/FindPasswordSendForm';
 import FindPasswordCheckForm from '../../organisms/FindPasswordCheckForm';
@@ -28,6 +28,29 @@ export default function Page() {
   const [passwordData, setPasswordData] = useState<{} | null>(null);
   const [checkForm, setCheckForm] = useState(false);
   const [showToChangePassword, setShowToChangePassword] = useState(false);
+  const [remainingTime, setRemainingTime] = useState<number>(0);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (showToChangePassword || step === 2) {
+      setRemainingTime(180);
+      timer = setInterval(() => {
+        setRemainingTime((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer);
+            Swal.fire('알림', '인증이 만료되었습니다.', 'error');
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [showToChangePassword, step]);
 
   const forwardStep = () => {
     setStep(step + 1);
@@ -101,6 +124,7 @@ export default function Page() {
             onSubmit={checkPassword}
             showToChangePassword={showToChangePassword}
             onClick={forwardStep}
+            remainingTime={remainingTime}
           />
         </div>
       )}
@@ -109,6 +133,7 @@ export default function Page() {
       register={register}
       errors={errors}
       onSubmit={changePassword}
+      remainingTime={remainingTime}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
       <section className="flex flex-col items-center">

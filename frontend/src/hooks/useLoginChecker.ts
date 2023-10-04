@@ -8,6 +8,7 @@ const useLoginChecker = () => {
     if (localStorage.getItem('access_token') === null) {
       router.push('/auth/signIn');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

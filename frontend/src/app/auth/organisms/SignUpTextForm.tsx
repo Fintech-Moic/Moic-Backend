@@ -12,7 +12,7 @@ interface SignUpTextFormProps {
 export default function SignUpTextForm({ children }: SignUpTextFormProps) {
   return (
     <div>
-      <TextBox width="w-80" height="h-80 rounded-[10px]">
+      <TextBox width="w-80" height="h-80">
         {children}
       </TextBox>
     </div>

@@ -14,6 +14,7 @@ import {
   updatePassword,
   WithdrawalApi,
 } from '@/api/myPage';
+
 export default function Page() {
   const {
     register,
@@ -79,26 +80,27 @@ export default function Page() {
       newPassword: data.newPassword,
       newPasswordCheck: data.newPasswordCheck,
     });
-    const response = await updatePassword(data);
-    if (response.message !== null) closeModal();
+    const result = await updatePassword(data);
+    if (result) closeModal();
   });
   useEffect(() => {
     const passwordCheck = async () => {
       if (passwordData !== null) {
-        const response = await updatePassword(passwordData);
-        if (response.message !== null) closeModal();
+        const result = await updatePassword(passwordData);
+        if (result) closeModal();
       }
     };
     if (passwordData !== null) passwordCheck();
   }, [passwordData]);
 
   const Withdrawal = async () => {
-    const response = await WithdrawalApi();
-    if (response.message !== null) closeModal();
+    const result = await WithdrawalApi();
+    if (result) closeModal();
   };
+
   const confirmPassword = handleSubmit(async (data) => {
-    const response = await checkPassword(data);
-    if (response.message !== null) {
+    const result = await checkPassword(data);
+    if (result) {
       if (toUpdate) {
         openPasswordUpdateModal();
       } else {
@@ -121,9 +123,7 @@ export default function Page() {
 
   return (
     <>
-      <div className={`${isModalOpen ? 'bg-black bg-opacity-50' : ''}`}>
-        <Header title="계정 설정" isPrevButton isFilterButton={false} />
-      </div>
+      <Header title="계정 설정" isPrevButton isFilterButton={false} />
       <div
         className={`relative flex-1 overflow-y-auto flex flex-col items-center w-full ${
           isModalOpen ? 'bg-black bg-opacity-50' : ''

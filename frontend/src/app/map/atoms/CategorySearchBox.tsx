@@ -2,8 +2,10 @@
 
 'use client';
 
+/* 카테고리 검색 페이지 구현 */
+
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { getShopData } from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 
@@ -12,7 +14,7 @@ import searchResultAtom from '@/store/atoms/searchResultAtom';
  */
 export default function SimpleSearchBox() {
   const [inputValue, setInputValue] = useState('');
-  const setSearchResult = useSetAtom(searchResultAtom);
+  const [searchResult, setSearchResult] = useAtom(searchResultAtom);
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
 
   const autocompletedShopList = useCallback(

@@ -1,44 +1,27 @@
-/* eslint-disable consistent-return */
+import { fetchGet, fetchPost } from '@/util/api';
 
-const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT;
+export const getShopData = async (word: string | number) =>
+  fetchPost({ url: `/autocomplete?word=${word}`, isAuth: true });
 
-export default async function getShopData(word: string | number) {
-  const res = await fetch(`${ENDPOINT}/autocomplete?word=${word}`, {
-    method: 'POST',
-  });
-  const data = await res.json();
-  return data;
-}
-
-export async function getCategoryShop(
+export const getCategoryShop = (
   category: string,
   latitude: number,
   longitude: number
-) {
-  const res = await fetch(
-    `${ENDPOINT}/map/category?category=${category}&latitude=${latitude}&longitude=${longitude}&userId=test1234`,
-    {
-      method: 'GET',
-    }
-  );
-  const data = await res.json();
-  return data;
-}
+) =>
+  fetchGet({
+    url: `/map/category?category=${category}&latitude=${latitude}&longitude=${longitude}`,
+    isAuth: true,
+  });
 
-export async function getSearchedPlace(
+export const getSearchedPlace = (
   keyword: string,
   latitude: number,
   longitude: number
-) {
-  const res = await fetch(
-    `${ENDPOINT}/map/shops?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&userId=test1234`,
-    {
-      method: 'GET',
-    }
-  );
-  const data = await res.json();
-  return data;
-}
+) =>
+  fetchGet({
+    url: `/map/shops?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}`,
+    isAuth: true,
+  });
 
 /* 브랜드 로고 API [S] 호출 횟수 제한으로 임시 주석 처리 */
 // export async function getLogoImage() {
@@ -104,5 +87,6 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
     return data;
   } catch (error) {
     console.error('Error:', error);
+    return error;
   }
 }

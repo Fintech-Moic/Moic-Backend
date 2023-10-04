@@ -35,7 +35,7 @@ const Picker: React.FC<WheelPickerProps> = ({ options }) => {
 
   return (
     <div className="flex h-[300px] justify-center items-center focus:outline-none">
-      <div className="flex flex-col items-center gap-3 cursor-pointer">
+      <div className="flex flex-col items-center gap-3.5 cursor-pointer">
         {options.map((option, index) => (
           <div
             key={option}

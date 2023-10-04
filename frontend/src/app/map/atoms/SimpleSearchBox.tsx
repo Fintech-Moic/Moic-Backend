@@ -39,7 +39,7 @@ export default function SimpleSearchBox() {
   /** Debounce -> 검색 타이머 초기화 -> 기존 검색어 요청 대기 상태 초기화
    */
   useEffect(() => {
-    const delay = 500;
+    const delay = 300;
     const timerId = setTimeout(() => {
       if (inputValue) {
         listOfShop(inputValue);

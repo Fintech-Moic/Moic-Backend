@@ -24,7 +24,7 @@ export default function Page() {
     <>
       <Header title="위치 검색" isPrevButton isFilterButton={false} />
       <Image src={banner} alt="배너 광고" className="w-full top-0 h-16" />
-      <div className="flex flex-col space-y-9">
+      <div className="flex flex-col space-y-6">
         <div className="mt-7 flex justify-center mx-14 shadow-md rounded-[10px] focus:outline-none">
           <button
             className="text-center text-Primary font-suit text-xl mx-auto h-14 focus:outline-none"

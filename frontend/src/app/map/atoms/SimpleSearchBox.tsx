@@ -3,7 +3,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import getShopData from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 
@@ -12,7 +12,7 @@ import searchResultAtom from '@/store/atoms/searchResultAtom';
  */
 export default function SimpleSearchBox() {
   const [inputValue, setInputValue] = useState('');
-  const [searchResult, setSearchResult] = useAtom(searchResultAtom);
+  const setSearchResult = useSetAtom(searchResultAtom);
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
 
   const autocompletedShopList = useCallback(

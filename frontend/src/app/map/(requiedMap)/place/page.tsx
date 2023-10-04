@@ -3,7 +3,7 @@
 'use client';
 
 import React, { FormEvent, useState } from 'react';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
@@ -12,8 +12,8 @@ import searchResultAtom from '@/store/atoms/searchResultAtom';
 import { getSearchedPlace, getDirection } from '@/api/map';
 
 export default function Page() {
-  const [searchResult, setSearchResult] = useAtom(searchResultAtom);
-  const [curLoc, setCurLoc] = useAtom<any>(curLocAtom);
+  const searchResult = useAtomValue(searchResultAtom);
+  const curLoc = useAtomValue<any>(curLocAtom);
   const [shopLocs, setShopLocs] = useState([]);
   // const [shopLogo, setShopLogo] = useState([])
   const [selectedShop, setSelectedShop] = useState<any>(null);

@@ -1,14 +1,9 @@
 'use client';
-
-import Image from 'next/image';
-import banner from '@/../../public/GameBanner.png';
 import Header from '@/components/molecules/Header';
 import Picker from '@/components/atoms/CategoryWheelPicker';
 import Map from '@/components/organisms/Map';
-import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const router = useRouter();
   const options = [
     '음식',
     '커피',
@@ -23,13 +18,13 @@ export default function Page() {
   return (
     <>
       <Header title="위치 검색" isPrevButton isFilterButton={false} />
-      <Image src={banner} alt="배너 광고" className="w-full top-0 h-16" />
-      <div className="flex flex-col space-y-9">
-        <div className="mt-7 flex justify-center mx-14 shadow-md rounded-[10px] focus:outline-none">
-          <button
-            className="text-center text-Primary font-suit text-xl mx-auto h-14 focus:outline-none"
-            onClick={() => router.push('/map/place')}
-          >
+      <div class="bg-repeat-x" style="background-image: url(...)"></div>
+      {/* <div>
+              <Image src={banner} alt="banner ads" className="w-100% top-0 h-16" />
+            </div> */}
+      <div className="flex flex-col space-y-12">
+        <div className="mt-6 flex justify-center mx-14 shadow-md rounded-[10px] focus:outline-none">
+          <button className="text-center text-Primary font-suit text-xl mx-auto h-14 focus:outline-none">
             직접 검색해 보세요
           </button>
         </div>

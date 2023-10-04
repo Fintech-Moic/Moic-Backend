@@ -14,6 +14,7 @@ import {
   updatePassword,
   WithdrawalApi,
 } from '@/api/myPage';
+
 export default function Page() {
   const {
     register,
@@ -96,8 +97,11 @@ export default function Page() {
     const response = await WithdrawalApi();
     if (response.message !== null) closeModal();
   };
+
   const confirmPassword = handleSubmit(async (data) => {
-    const response = await checkPassword(data);
+    if (!data || !data.password) return;
+    console.log(data);
+    const response = await checkPassword(data.password);
     if (response.message !== null) {
       if (toUpdate) {
         openPasswordUpdateModal();

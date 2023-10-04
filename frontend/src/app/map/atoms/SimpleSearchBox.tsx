@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
 import { useAtom } from 'jotai';
-import getShopData from '@/api/map';
+import { getShopData } from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 
 /**

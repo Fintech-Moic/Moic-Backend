@@ -25,8 +25,12 @@ export default function Page() {
     const result = await signInApi(data);
     if (result) goingTo('/home');
   });
-  const socialLoginHandle = () => {
-    console.log('소셜로그인');
+  const socialLoginHandle = (isKakao: boolean) => {
+    if (isKakao) {
+      window.location.href = `${process.env.NEXT_PUBLIC_OAUTH_KAKAO}`;
+    } else {
+      window.location.href = `${process.env.NEXT_PUBLIC_OAUTH_GOOGLE}`;
+    }
   };
 
   return (
@@ -34,7 +38,7 @@ export default function Page() {
       <div className="h-1/4 flex items-center">
         <TitleSentence title="로그인" sentence="더 많은 서비스를 누려보세요" />
       </div>
-      <div className="h-3/4  flex flex-col items-center justify-between">
+      <div className="h-3/4 flex flex-col items-center justify-between">
         <SignInForm register={register} errors={errors} onSubmit={onSubmit} />
         <TextButton onClick={() => goingTo('/auth/find')}>
           아이디 혹은 비밀번호를 잊으셨나요?
@@ -50,13 +54,13 @@ export default function Page() {
               width="w-80"
               height="h-12"
               isKakao
-              onClick={socialLoginHandle}
+              onClick={() => socialLoginHandle(true)}
             />
             <SocialLoginButton
               width="w-80"
               height="h-12"
               isKakao={false}
-              onClick={socialLoginHandle}
+              onClick={() => socialLoginHandle(false)}
             />
             <TextButton onClick={() => goingTo('/auth/signUp')}>
               혹시 회원가입을 하지 않으셨나요?

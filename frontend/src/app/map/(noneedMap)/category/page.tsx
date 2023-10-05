@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import banner from '@/../../public/GameBanner.png';
 import Header from '@/components/molecules/Header';
 import Picker from '@/components/atoms/CategoryWheelPicker';
 import Map from '@/components/organisms/Map';
-import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const router = useRouter();
@@ -27,6 +27,7 @@ export default function Page() {
       <div className="flex flex-col space-y-6">
         <div className="mt-7 flex justify-center mx-14 shadow-md rounded-[10px] focus:outline-none">
           <button
+            type="button"
             className="text-center text-Primary font-suit text-xl mx-auto h-14 focus:outline-none"
             onClick={() => router.push('/map/place')}
           >

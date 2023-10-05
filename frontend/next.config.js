@@ -4,8 +4,9 @@ const nextConfig = {};
 const withPWA = require('next-pwa')({
   customWorkerDir: 'src/worker',
   dest: 'public',
-})
+});
 
+module.exports = withPWA(nextConfig);
 
 module.exports = {
   output: 'standalone',
@@ -21,5 +22,3 @@ module.exports = {
     ],
   },
 };
-
-module.exports = withPWA(nextConfig);

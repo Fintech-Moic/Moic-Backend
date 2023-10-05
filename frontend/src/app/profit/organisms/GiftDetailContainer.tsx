@@ -1,17 +1,22 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import useCustomQuery from '@/hooks/useCustomQuery';
 import { getMyGift } from '@/api/giftCard';
 import GiftCard from '@/types/giftCard';
 
 export default function GiftDetailContainer({ giftId }: { giftId: string }) {
-  const { data: giftData, isLoading } = useQuery({
-    queryKey: ['getMyGift'],
-    queryFn: () => getMyGift(),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const router = useRouter();
+  const { data: giftData, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getMyGift'],
+      queryFn: () => getMyGift(),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
 
   if (isLoading) {
     return (

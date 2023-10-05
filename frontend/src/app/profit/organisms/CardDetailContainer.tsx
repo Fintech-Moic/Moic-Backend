@@ -1,11 +1,12 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import CardBenefitList from '../molecules/CardBenefitList';
 import CardTitleGroup from '../molecules/CardTitleGroup';
 import { CardDetail, CardBenefit } from '../../../types/card';
 import { getCardDetail } from '@/api/card';
+import useCustomQuery from '@/hooks/useCustomQuery';
 
 /** 카드 상세 페이지의 테두리부터 내용까지 렌더링하는 컴포넌트
  * @param {String} cardName 현재 페이지 url의 param
@@ -17,12 +18,16 @@ export default function CardDetailContainer({
 }: {
   cardName: string;
 }) {
-  const { data, isLoading } = useQuery({
-    queryKey: ['getCardDetail', cardName],
-    queryFn: () => getCardDetail(cardName),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const router = useRouter();
+  const { data, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getCardDetail', cardName],
+      queryFn: () => getCardDetail(cardName),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
 
   if (isLoading)
     return (

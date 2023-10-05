@@ -36,7 +36,7 @@ export default function CarouselGiftItem({
         <button
           type="button"
           onClick={onClick}
-          className="border-solid border-2 border-white shadow-md rounded-[10px]"
+          className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px]"
         >
           <Image width={80} height={128} src={giftImage} alt="카드" />
         </button>

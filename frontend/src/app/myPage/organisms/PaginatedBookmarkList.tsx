@@ -3,9 +3,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 import BookmarkButtonGroup from '../molecules/BookmarkTopButtonGroup';
 import BookmarkList from '../molecules/BookmarkList';
 import Pagination from '@/components/molecules/Pagination';
@@ -15,6 +16,7 @@ import { bookmarkDeleteModalAtom } from '@/store/atoms/modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import Shop from '@/types/shop';
+import useCustomQuery from '@/hooks/useCustomQuery';
 
 interface BookmarkShop extends Shop {
   isSelected: boolean;
@@ -30,18 +32,22 @@ interface PaginatedBookmarkListProps {
 export default function PaginatedBookmarkList({
   usePage,
 }: PaginatedBookmarkListProps) {
+  const router = useRouter();
   const [cnt, setCnt] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [listType, setListType] = useState('read');
   const [{ isOpen, selectedBookmarkList }, setBookmarkDeleteModal] = useAtom(
     bookmarkDeleteModalAtom
   );
-  const { data: BookmarkData, isLoading } = useQuery<any>({
-    queryKey: ['getMyBookmark'],
-    queryFn: () => getMyBookmark(),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const { data: BookmarkData, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getMyBookmark'],
+      queryFn: () => getMyBookmark(),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
 
   const [shopList, setShopList] = useState<BookmarkShop[]>([]);
 

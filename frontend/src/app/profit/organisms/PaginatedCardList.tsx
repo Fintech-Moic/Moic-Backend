@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { useAtomValue } from 'jotai';
-import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import CardList from '../molecules/CardList';
 import { Card } from '../../../types/card';
 import Pagination from '@/components/molecules/Pagination';
 import { filterOptionAtom } from '@/store/atoms/header';
 import { getCardSearch } from '@/api/card';
+import useCustomQuery from '@/hooks/useCustomQuery';
 
 /** 페이지네이션과 카드 리스트가 융합된 컴포넌트
  * @param {Array} data CardList를 렌더링하기 위한 서치 데이터의 배열
@@ -23,13 +24,16 @@ function getfilteredCardList(
 export default function PaginatedCardList({ listType }: { listType: string }) {
   const [idx, setIdx] = useState(0);
   const filterOption = useAtomValue(filterOptionAtom);
-
-  const { data, isLoading } = useQuery<any>({
-    queryKey: ['getCardSearch', { ...filterOption }],
-    queryFn: () => getCardSearch({ ...filterOption }),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const router = useRouter();
+  const { data, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getCardSearch', { ...filterOption }],
+      queryFn: () => getCardSearch({ ...filterOption }),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
 
   if (isLoading) {
     return (

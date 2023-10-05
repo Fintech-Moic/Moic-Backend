@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import Switch from '../atoms/Switch';
 import SearchInputBar from '../molecules/SearchInputBar';
 import Dropdown from '@/components/atoms/Dropdown';
@@ -12,18 +12,23 @@ import {
   filterSwitchOpenAtom,
 } from '@/store/atoms/header';
 import { getAllCard } from '@/api/card';
+import useCustomQuery from '@/hooks/useCustomQuery';
 
 /** 헤더의 우측 클릭시, 렌더링되는 필터 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
 
 export default function ProfitFilter() {
-  const { data, isLoading } = useQuery({
-    queryKey: ['getAllCard'],
-    queryFn: () => getAllCard(),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const router = useRouter();
+  const { data, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getAllCard'],
+      queryFn: () => getAllCard(),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
   const filterOpen = useAtomValue(filterOpenAtom);
   const setFilterOption = useSetAtom(filterOptionAtom);
   const [isSwitchOn, setIsSwitchOn] = useAtom(filterSwitchOpenAtom);
@@ -45,7 +50,6 @@ export default function ProfitFilter() {
       return updatedFilter;
     });
   }, [selectedCompany, selectedType, setFilterOption]);
-  const allCardData = data?.data || {};
 
   const handleSubmitSearch = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,6 +71,8 @@ export default function ProfitFilter() {
   }, [setIsSwitchOn]);
 
   if (isLoading) return <div />;
+
+  const allCardData = data?.data || {};
 
   const companyList = [{ id: '카드사', value: '카드사' }];
   if (allCardData && 'companyList' in allCardData) {

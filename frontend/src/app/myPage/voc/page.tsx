@@ -5,7 +5,7 @@ import Navbar from '@/components/molecules/Navbar';
 export default function VocPage() {
   return (
     <>
-      <Header title="전체 카드 조회" isFilterButton isPrevButton />
+      <Header title="VOC 등록" isFilterButton isPrevButton />
       <div className="relative flex-1 overflow-y-auto flex flex-col items-center w-full">
         <VocContainer />
       </div>

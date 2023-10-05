@@ -1,6 +1,7 @@
 import InputForm from '@/app/auth/molecules/InputForm';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { ReactHookFormType } from '@/types/auth';
+import { passwordPattern } from '@/util/validation';
 
 interface ProfilePasswordUpdateModalProps extends ReactHookFormType {
   closeModal: () => void;
@@ -16,7 +17,10 @@ export default function ProfilePasswordUpdateModal({
   register,
   errors,
   onSubmit,
+  watch,
 }: ProfilePasswordUpdateModalProps) {
+  const newPassword = watch('password');
+  const newPasswordCheck = watch('passwordCheck');
   return (
     <section className="w-80 h-1/2 bg-white rounded-[10px]">
       <form
@@ -27,23 +31,27 @@ export default function ProfilePasswordUpdateModal({
         <div className="h-1/2 flex flex-col justify-around">
           <InputForm
             register={register}
+            validation={passwordPattern}
             id="newPassword"
             name="newPassword"
             type="password"
-            placeholder="새로운 비밀번호"
+            placeholder="비밀번호"
             isError={Boolean(errors.password)}
-            notice={errors.password?.message}
+            notice="비밀번호는 8~16자의 영문(대/소문자), 숫자, 특수문자 조합입니다."
             width="w-72"
             height="h-12"
           />
           <InputForm
             register={register}
+            validation={passwordPattern}
             id="newPasswordCheck"
             name="newPasswordCheck"
             type="password"
-            placeholder="새로운 비밀번호 확인"
-            isError={Boolean(errors.password)}
-            notice={errors.password?.message}
+            placeholder="비밀번호 확인"
+            isError={
+              newPassword !== newPasswordCheck || newPasswordCheck === ''
+            }
+            notice="비밀번호와 같은 값을 입력해주세요."
             width="w-72"
             height="h-12"
           />

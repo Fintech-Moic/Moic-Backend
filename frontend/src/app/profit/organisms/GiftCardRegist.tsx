@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import GiftCardRegistTitle from '../atoms/GiftCardRegistTitle';
@@ -16,7 +16,7 @@ export default function GiftCardRegist() {
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [uploadThumbnail, setUploadThumbnail] = useState<string | null>(null);
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const hasUploaded = () => {
     if (uploadFile && uploadThumbnail) return true;
     return false;
@@ -31,7 +31,7 @@ export default function GiftCardRegist() {
   };
 
   const mutation = useMutation({
-    mutationFn: (formData: FormData) => postGiftRegist(formData),
+    mutationFn: (formData: any) => postGiftRegist(formData),
     onSuccess: (data) => {
       if (
         data &&
@@ -41,8 +41,9 @@ export default function GiftCardRegist() {
         Swal.fire({
           icon: 'success',
           title: '기프티콘 등록 성공',
-          text: '등록에 성공했습니다',
+          text: '등록에 성공했습니다!',
         });
+        queryClient.invalidateQueries(['getMyGift']);
         router.back();
         return;
       }

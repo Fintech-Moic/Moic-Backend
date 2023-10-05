@@ -1,10 +1,11 @@
 'use client';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import Swal from 'sweetalert2';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitCardCarousel from '../molecules/ProfitCardCarousel';
 import CardEmptyRegistButton from '../atoms/CardEmptyRegistButton';
@@ -15,22 +16,26 @@ import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { cardDeleteModalAtom } from '@/store/atoms/modal';
 import { ICardDeleteModalAtom } from '@/types/store/modal';
-
+import useCustomQuery from '@/hooks/useCustomQuery';
 /** 내 카드 조회 페이지에서, 현재 순서, 캐러셀, 카드사, 카드명 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
  * @param {any} myCard 내 카드 정보
  * @returns {JSX.Element} 컴포넌트 반환
  */
 export default function MyCardContainer() {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const [currentCardProgress, setCurrentCardProgress] = useState(1);
   const [{ isOpen, deleteCardInfo }, setOpenCardDeleteModal] =
     useAtom(cardDeleteModalAtom);
-  const { data, isLoading } = useQuery({
-    queryKey: ['getMyCard'],
-    queryFn: () => getMyCard(),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const { data, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getMyCard'],
+      queryFn: () => getMyCard(),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
   const cardDeletMutation = useMutation({
     mutationFn: (name: string) => postCardDelete(name),
     onSuccess: () => {

@@ -10,6 +10,7 @@ export interface ReactHookFormType {
   register: UseFormRegister<FieldValues>;
   errors: any;
   onSubmit: () => void;
+  watch?: any;
 }
 /** ProgressBar Component
  * @param {String} percent ProgressBar의 퍼센테이지, width를 이용해 작성

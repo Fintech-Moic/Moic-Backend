@@ -34,7 +34,7 @@ function Picker({ options }: WheelPickerProps) {
   };
 
   return (
-    <div className="flex h-[300px] justify-center items-center">
+    <div className="flex h-[300px] justify-center items-center focus:outline-none">
       <div className="flex flex-col items-center gap-3 cursor-pointer">
         {options.map((option) => (
           <div

@@ -39,7 +39,7 @@ export default function CardListItem({
       {!mine && listType === 'regist' && (
         <Image src={BlackAddIcon} alt="등록아이콘" width={20} height={20} />
       )}
-      <img src={cardImage} className="w-[140px] h-[80px]" alt="카드이미지" />
+      <img src={cardImage} className="w-[140px] h-[88px]" alt="카드이미지" />
       <div className="flex flex-col justify-start items-start">
         <div className="flex flex-row justify-start items-center gap-0.5">
           <span className="h4b">{company}</span>

@@ -1,30 +1,17 @@
 import CardBenefitListItem from '../atoms/CardBenefitListItem';
-
-interface CardBenefit {
-  category: string;
-  shopName: string;
-  content: string;
-  discount: string;
-  point: string;
-  cashBack: string;
-}
+import { CardBenefit } from '@/types/card';
 
 /** 카드 혜택들을 보여주는 리스트
- * @param {React.FormEventHandler<HTMLFormElement>} onSubmit onSubmit 이벤트
+ * @param {Array<CardBenefit>} list 카드 혜택들이 담긴 배열
  * @returns {JSX.Element} 컴포넌트 반환
  */
 interface CardBenefitListProps {
-  cardBenefit: Array<CardBenefit>;
+  list: Array<CardBenefit>;
 }
-export default function CardBenefitList({ cardBenefit }: CardBenefitListProps) {
+export default function CardBenefitList({ list }: CardBenefitListProps) {
   return (
     <ul className="flex flex-col justify-start item-start gap-4">
-      {cardBenefit?.map((curBenefit) => (
-        <CardBenefitListItem
-          benefit={curBenefit}
-          key={`${curBenefit.shopName}_${curBenefit.content}`}
-        />
-      ))}
+      {list?.map((curBenefit) => <CardBenefitListItem benefit={curBenefit} />)}
     </ul>
   );
 }

@@ -58,7 +58,7 @@ function Navbar() {
         height="h-6"
         src={isIncloudePathname('profit/giftCard') ? gifticonOn : gifticon}
         alt="gifticon"
-        onClick={() => navButtonClick('/profit/giftCard/myGiftCard')}
+        onClick={() => navButtonClick('/profit/giftCard')}
       />
     </div>
   );

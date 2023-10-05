@@ -21,11 +21,10 @@ export async function fetchPost({
   ContentType = 'application/json',
 }: FetchProps) {
   const headers: Record<string, string> =
-    ContentType === ''
+    ContentType === '' || url === '/gift/regist'
       ? {}
       : {
-          'Content-type':
-            'multipart/form-data; boundary=----WebKitFormBoundaryVHLD4ajs5mLBfc8n',
+          'Content-type': ContentType,
         };
 
   if (isAuth) {

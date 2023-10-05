@@ -14,12 +14,18 @@ interface FetchOptions {
   credentials: RequestCredentials | undefined;
 }
 
-export async function fetchPost(props: FetchProps) {
-  const { url, data, isAuth, ContentType = 'application/json' } = props;
-
-  const headers: Record<string, string> = {
-    'Content-type': ContentType,
-  };
+export async function fetchPost({
+  url,
+  data,
+  isAuth,
+  ContentType = 'application/json',
+}: FetchProps) {
+  const headers: Record<string, string> =
+    ContentType === '' || url === '/gift/regist'
+      ? {}
+      : {
+          'Content-type': ContentType,
+        };
 
   if (isAuth) {
     const accessToken = localStorage.getItem('access_token');
@@ -31,7 +37,7 @@ export async function fetchPost(props: FetchProps) {
   const options: FetchOptions = {
     method: 'POST',
     headers,
-    body: JSON.stringify(data),
+    body: url === '/gift/regist' ? data : JSON.stringify(data),
     credentials: 'include',
   };
 
@@ -51,7 +57,10 @@ export async function fetchPost(props: FetchProps) {
         if (refreshingRes.message !== 'Refresh') return refreshingRes;
         localStorage.setItem('access_token', refreshingRes.data.token);
         const reResponse: any = await fetchPost({
-          ...props,
+          url,
+          data,
+          isAuth,
+          ContentType,
         });
 
         return reResponse;
@@ -68,8 +77,11 @@ export async function fetchPost(props: FetchProps) {
   }
 }
 
-export async function fetchGet(props: FetchProps) {
-  const { url, isAuth, ContentType = 'application/json' } = props;
+export async function fetchGet({
+  url,
+  isAuth,
+  ContentType = 'application/json',
+}: FetchProps) {
   const headers: Record<string, string> = {
     'Content-type': ContentType,
   };
@@ -101,7 +113,9 @@ export async function fetchGet(props: FetchProps) {
         localStorage.setItem('access_token', refreshingRes.data.token);
 
         const reResponse: any = await fetchPost({
-          ...props,
+          url,
+          isAuth,
+          ContentType,
         });
 
         return reResponse;

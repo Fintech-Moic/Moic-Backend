@@ -1,11 +1,11 @@
-import { fetchGet, fetchPost } from '@/util/api';
+import { fetchGet, fetchPost } from '../util/api';
 
-export const postGiftRegist = async (formData: FormData) =>
+export const postGiftRegist = async (formData: any) =>
   fetchPost({
     url: '/gift/regist',
     data: formData,
     isAuth: true,
-    ContentType: 'multipart/form-data',
+    ContentType: '',
   });
 
 export const getMyGift = async () =>

@@ -31,7 +31,7 @@ export default function GiftCardRegist() {
   };
 
   const mutation = useMutation({
-    mutationFn: (formData: FormData) => postGiftRegist(formData),
+    mutationFn: (formData: any) => postGiftRegist(formData),
     onSuccess: (data) => {
       if (
         data &&

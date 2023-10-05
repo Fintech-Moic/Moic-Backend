@@ -49,6 +49,12 @@ export const getSearchedPlace = (
 // }
 /* 브랜드 로고 API [E] */
 
+export const getBenefit = (shopName: string, shopLocation: string) =>
+  fetchGet({
+    url: `/map/shops/detail?shopName=${shopName}&shopLocation=${shopLocation}`,
+    isAuth: true,
+  });
+
 interface Coordinates {
   lat: number;
   lng: number;

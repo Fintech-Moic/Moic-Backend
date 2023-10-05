@@ -57,11 +57,8 @@ export async function fetchPost(props: FetchProps) {
         return reResponse;
       }
       case 'SE003': {
-        const signOutResult: any = await fetchPost({
-          url: '/user/logout',
-          isAuth: true,
-        });
-        return signOutResult;
+        localStorage.removeItem('access_token');
+        return result;
       }
       default:
         return result;
@@ -110,11 +107,8 @@ export async function fetchGet(props: FetchProps) {
         return reResponse;
       }
       case 'SE003': {
-        const signOutResult: any = await fetchPost({
-          url: '/user/logout',
-          isAuth: true,
-        });
-        return signOutResult;
+        localStorage.removeItem('access_token');
+        return result;
       }
       default:
         return result;

@@ -25,6 +25,9 @@ export default function Page() {
 
   useEffect(() => {
     alert('Finished loading');
+  }, []);
+
+  useEffect(() => {
     const GetUserID = async () => {
       try {
         const data = await fetchProfile();

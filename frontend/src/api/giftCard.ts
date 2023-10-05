@@ -11,6 +11,7 @@ export const getMyGift = async () =>
   fetchGet({
     url: '/gift/mygifts',
     isAuth: true,
+    ContentType: '',
   });
 
 export const postGiftDelete = async (imageUrl: string) =>

@@ -84,7 +84,7 @@ export default function ProfitFilter() {
 
   return (
     filterOpen && (
-      <div className="z-40 top-2 mt-4 p-4 absolute left-1/2 w-[360px] -translate-x-1/2 rounded-[10px] bg-Secondary flex flex-col justify-between gap-4">
+      <div className="z-40 top-2 mt-4 p-4 absolute left-1/2 w-[360px] -translate-x-1/2 rounded-[10px] bg-Tertiary flex flex-col justify-between gap-4">
         <div className="flex justify-start items-center gap-1">
           <span className="p2r">전체 보기</span>
           <Switch isOn={isSwitchOn} onClick={handleClickSwitch} />

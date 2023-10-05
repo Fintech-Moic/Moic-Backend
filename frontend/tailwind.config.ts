@@ -62,6 +62,7 @@ const config: Config = {
         White: '#FFFFFF',
         Annotations: '#F6BE2C',
         CardSubtitle: '#7E7E7E',
+        SwitchBg: '#E8E8E8',
         Warning: '#F00',
       },
       fontFamily: {

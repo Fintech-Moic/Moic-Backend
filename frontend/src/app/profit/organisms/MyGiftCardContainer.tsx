@@ -118,7 +118,7 @@ export default function MyGiftCardContainer() {
       )}
       <NumberProgress
         startTitle="기프티콘 등록이 가능합니다!"
-        maxLength={giftList.length}
+        maxLength={giftList.length - 1}
         currentProgress={currentGiftProgress}
       />
       <ProfitGiftCarousel

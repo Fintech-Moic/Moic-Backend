@@ -114,7 +114,7 @@ export default function MyCardContainer() {
         )}
       <NumberProgress
         startTitle="카드 등록이 가능합니다!"
-        maxLength={cardList.length}
+        maxLength={cardList.length - 1}
         currentProgress={currentCardProgress}
       />
       <ProfitCardCarousel

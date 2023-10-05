@@ -11,7 +11,7 @@ export default function Page() {
     const accessToken = params.get('accessToken');
 
     if (accessToken) {
-      localStorage.setItem('access-token', accessToken);
+      localStorage.setItem('access_token', accessToken);
 
       router.push(`/home`);
     } else {

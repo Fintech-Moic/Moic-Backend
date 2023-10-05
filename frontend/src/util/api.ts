@@ -20,9 +20,12 @@ export async function fetchPost({
   isAuth,
   ContentType = 'application/json',
 }: FetchProps) {
-  const headers: Record<string, string> = {
-    'Content-type': ContentType,
-  };
+  const headers: Record<string, string> =
+    ContentType === '' || url === '/gift/regist'
+      ? {}
+      : {
+          'Content-type': ContentType,
+        };
 
   if (isAuth) {
     const accessToken = localStorage.getItem('access_token');

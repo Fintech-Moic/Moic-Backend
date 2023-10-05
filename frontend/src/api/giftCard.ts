@@ -1,4 +1,4 @@
-import { fetchGet, fetchPost } from '@/util/api';
+import { fetchGet, fetchPost } from '../util/api';
 
 export const postGiftRegist = async (formData: FormData) =>
   fetchPost({

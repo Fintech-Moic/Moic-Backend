@@ -50,7 +50,7 @@ export async function fetchPost(props: FetchProps) {
         });
         if (refreshingRes.statusText !== 200 || refreshingRes.errorCode)
           return refreshingRes;
-
+        localStorage.setItem('access_token', refreshingRes.data.token);
         const reResponse: any = await fetchPost({
           ...props,
         });
@@ -103,6 +103,7 @@ export async function fetchGet(props: FetchProps) {
         });
         if (refreshingRes.statusText !== 200 || refreshingRes.errorCode)
           return refreshingRes;
+        localStorage.setItem('access_token', refreshingRes.data.token);
 
         const reResponse: any = await fetchPost({
           ...props,

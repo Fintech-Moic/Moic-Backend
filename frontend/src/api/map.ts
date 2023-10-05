@@ -89,8 +89,21 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
+
+    const linePath: any = [];
+    data.routes[0].sections[0].roads.forEach((router: { vertexes: any[]; }) => {
+      router.vertexes.forEach((vertex, index) => {
+         // x,y 좌표가 우르르 들어옵니다. 그래서 인덱스가 짝수일 때만 linePath에 넣어봅시다.
+         // 저도 실수한 것인데 lat이 y이고 lng이 x입니다.
+        if (index % 2 === 0) {
+          linePath.push(new kakao.maps.LatLng(router.vertexes[index + 1], router.vertexes[index]));
+        }
+      });
+    });
+
     console.log(data);
-    return data;
+    return { props: {data, linePath}}
+
   } catch (error) {
     console.error('Error:', error);
     return error;

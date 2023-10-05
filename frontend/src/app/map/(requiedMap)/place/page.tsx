@@ -27,17 +27,6 @@ export default function Page() {
     alert('Finished loading');
   }, []);
 
-  useEffect(() => {
-    const GetUserID = async () => {
-      try {
-        const data = await fetchProfile();
-        setUserId(data.data.name);
-      } catch (error) {
-        console.error('유저 아이디 불러오기 실패', error);
-      }
-    };
-  }, [userId]);
-
   const ResultClickEvent = async (result: string) => {
     try {
       const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
@@ -46,6 +35,13 @@ export default function Page() {
       // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
     } catch (error) {
       console.error('가맹점 정보 불러오기 실패', error);
+    }
+
+    try {
+      const data = await fetchProfile();
+      setUserId(data.data.name);
+    } catch (error) {
+      console.error('유저 아이디 불러오기 실패', error);
     }
   };
 

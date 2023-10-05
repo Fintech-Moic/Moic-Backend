@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
 import ProgressBar from '../../atoms/ProgressBar';
 import FindPasswordSendForm from '../../organisms/FindPasswordSendForm';
 import FindPasswordCheckForm from '../../organisms/FindPasswordCheckForm';
@@ -15,8 +14,11 @@ import {
   checkPasswordApi,
   changePasswordApi,
 } from '@/api/auth';
+import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
+import TitleSentence from '@/components/atoms/TitleSentence';
 
 export default function Page() {
+  useAlreadySignInChecker();
   const {
     register,
     handleSubmit,
@@ -24,11 +26,12 @@ export default function Page() {
   } = useForm();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
+  const [sendFormData, setSendFormData] = useState<{} | null>(null);
   const [idData, setIdData] = useState<{} | null>(null);
   const [passwordData, setPasswordData] = useState<{} | null>(null);
-  const [checkForm, setCheckForm] = useState(false);
+  const [checkForm, setCheckForm] = useState<boolean>(false);
   const [showToChangePassword, setShowToChangePassword] = useState(false);
-
+  const [timerKey, setTimerKey] = useState(0);
   const forwardStep = () => {
     setStep(step + 1);
   };
@@ -46,26 +49,32 @@ export default function Page() {
     settingProgress();
   }, [step]);
 
-  const sendPassword = handleSubmit(async (data) => {
-    const result = await sendPasswordApi(data);
-    if (result) {
-      setCheckForm(true);
-    }
+  const sendPassword = handleSubmit((data) => {
+    setSendFormData({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+    });
+    setTimerKey((prev) => prev + 1);
   });
+  useEffect(() => {
+    const passwordSend = async () => {
+      if (sendFormData !== null) {
+        const result = await sendPasswordApi(sendFormData);
+        if (result) {
+          setCheckForm(true);
+        }
+      }
+    };
+    if (sendFormData !== null) passwordSend();
+  }, [sendFormData]);
+
   const checkPassword = handleSubmit((data) => {
     setIdData({
       id: data.id,
       certification: data.certification,
     });
   });
-  const changePassword = handleSubmit((data) => {
-    setPasswordData({
-      ...idData,
-      password: data.password,
-      passwordCheck: data.passwordCheck,
-    });
-  });
-
   useEffect(() => {
     const passwordCheck = async () => {
       if (idData !== null) {
@@ -76,6 +85,13 @@ export default function Page() {
     if (idData !== null) passwordCheck();
   }, [idData]);
 
+  const changePassword = handleSubmit((data) => {
+    setPasswordData({
+      ...idData,
+      password: data.password,
+      passwordCheck: data.passwordCheck,
+    });
+  });
   useEffect(() => {
     const passwordChange = async () => {
       if (passwordData !== null) {
@@ -101,6 +117,7 @@ export default function Page() {
             onSubmit={checkPassword}
             showToChangePassword={showToChangePassword}
             onClick={forwardStep}
+            timerKey={timerKey}
           />
         </div>
       )}
@@ -109,6 +126,7 @@ export default function Page() {
       register={register}
       errors={errors}
       onSubmit={changePassword}
+      timerKey={timerKey}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
       <section className="flex flex-col items-center">
@@ -121,8 +139,14 @@ export default function Page() {
   ];
   return (
     <div className="flex flex-col h-full">
+      <div className="h-1/4 flex items-center">
+        <TitleSentence
+          title="비밀번호 찾기"
+          sentence="인증을 통해 계정 정보를 찾아보세요."
+        />
+      </div>
       <ProgressBar percent={percent} />
-      <div className="h-2/3">{findPasswordContentArr[step]}</div>
+      <div className="h-1/2">{findPasswordContentArr[step]}</div>
     </div>
   );
 }

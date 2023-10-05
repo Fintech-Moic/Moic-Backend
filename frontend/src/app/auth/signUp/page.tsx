@@ -13,8 +13,11 @@ import SignUpAccountForm from '../organisms/SignUpAccountForm';
 import AuthSuccessForm from '../organisms/AuthSuccessForm';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import { signUpApi } from '@/api/auth';
+import { useAlreadySignInChecker } from '@/hooks/useSignInChecker';
+import TitleSentence from '@/components/atoms/TitleSentence';
 
 export default function Page() {
+  useAlreadySignInChecker();
   const {
     register,
     handleSubmit,
@@ -29,6 +32,8 @@ export default function Page() {
     yearOfBirth: string | null;
   }>({ gender: null, yearOfBirth: null });
   const [fillButtonTitle, setFillButtonTitle] = useState('다음으로');
+  const [title, setTitle] = useState('회원가입');
+  const [sentence, setSentence] = useState('약관 동의하기');
   const genderList = ['선택안함', '남성', '여성'];
   const yearsList = [
     '선택안함',
@@ -55,13 +60,23 @@ export default function Page() {
       if (step === 0) {
         setPercent('w-0');
         setFillButtonTitle('다음으로');
+        setTitle('회원가입');
+        setSentence('약관 동의하기');
       } else if (step === 1) {
         setPercent('w-1/3');
         setFillButtonTitle('다음으로');
+        setTitle('회원가입');
+        setSentence('개인정보 입력');
       } else if (step === 2) {
         setPercent('w-2/3');
         setFillButtonTitle('회원가입 하기');
-      } else if (step === 3) setPercent('w-full');
+        setTitle('회원가입');
+        setSentence('계정 정보 입력');
+      } else if (step === 3) {
+        setPercent('w-full');
+        setTitle('회원가입');
+        setSentence('가입 완료');
+      }
     };
     settingProgress();
   }, [step]);
@@ -146,17 +161,22 @@ export default function Page() {
     </AuthSuccessForm>,
   ];
   return (
-    <div className="flex flex-col h-full">
-      <ProgressBar percent={percent} />
-      <div className="h-2/3">{SignUpContentArr[step]}</div>
-      {step < 3 && (
-        <BothButtonGroup
-          leftTitle="이전으로"
-          onClickLeft={prevStep}
-          rightTitle={fillButtonTitle}
-          onClickRight={nextStep}
-        />
-      )}
+    <div className="h-full flex flex-col">
+      <div className="h-1/4 flex items-center">
+        <TitleSentence title={title} sentence={sentence} />
+      </div>
+      <div className="h-3/4">
+        <ProgressBar percent={percent} />
+        <div className="h-2/3">{SignUpContentArr[step]}</div>
+        {step < 3 && (
+          <BothButtonGroup
+            leftTitle="이전으로"
+            onClickLeft={prevStep}
+            rightTitle={fillButtonTitle}
+            onClickRight={nextStep}
+          />
+        )}
+      </div>
     </div>
   );
 }

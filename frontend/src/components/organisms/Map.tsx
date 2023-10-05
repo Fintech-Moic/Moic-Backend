@@ -53,10 +53,6 @@ export default function KakaoMap() {
     appkey: process.env.NEXT_PUBLIC_APPKEY!,
   });
 
-  // useEffect(() => {
-  //   setCurLoc(state.center);
-  // }, [state.center]);
-
   useEffect(() => {
     setCurLoc(state.center);
   }, [state.center, setCurLoc]);

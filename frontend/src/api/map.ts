@@ -23,31 +23,27 @@ export const getSearchedPlace = (
     isAuth: true,
   });
 
-/* 브랜드 로고 API [S] 호출 횟수 제한으로 임시 주석 처리 */
-// export async function getLogoImage() {
-//   const name = 'Starbucks';
-//   const apiUrl = `https://api.api-ninjas.com/v1/logo?name=${name}`;
-//   const apiKey = process.env.NEXT_PUBLIC_LOGO_APPKEY;
+export async function getImageSearchResults(query: string) {
+  const apiUrl = 'https://dapi.kakao.com/v2/search/image';
+  const apiKey = process.env.NEXT_PUBLIC_REST_API_KEY;
 
-//   try {
-//     const response = await fetch(apiUrl, {
-//       headers: {
-//         'X-Api-Key': apiKey
-//       }
-//     });
+  const response = await fetch(
+    `${apiUrl}?query=${encodeURIComponent(query)}&page=1&size=10`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `KakaoAK ${apiKey}`,
+      },
+    }
+  );
 
-//     if (response.status === 200) {
-//       const data = await response.json();
-//       console.log(data);
-//       return data;
-//     } else {
-//       console.error('Error:', response.status, response.statusText);
-//     }
-//   } catch (error) {
-//     console.error('Request failed:', error.message);
-//   }
-// }
-/* 브랜드 로고 API [E] */
+  if (!response.ok) {
+    throw new Error(`이미지 데이터 불러오기 실패: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.documents[0];
+}
 
 export const getBenefit = (shopName: string, shopLocation: string) =>
   fetchGet({

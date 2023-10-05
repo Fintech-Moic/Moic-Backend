@@ -2,15 +2,20 @@
 
 'use client';
 
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
-// import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
-import { getSearchedPlace, getDirection, getBenefit } from '@/api/map';
+import {
+  getSearchedPlace,
+  getDirection,
+  getBenefit,
+  getImageSearchResults,
+} from '@/api/map';
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
 
@@ -18,24 +23,28 @@ export default function Page() {
   const searchResult = useAtomValue(searchResultAtom);
   const curLoc = useAtomValue<any>(curLocAtom);
   const [shopLocs, setShopLocs] = useState([]);
-  // const [shopLogo, setShopLogo] = useState([])
   const [selectedShop, setSelectedShop] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
   const [mapPath, setMapPath] = useState([]);
   const [far, setFar] = useState('');
+  const [imageURL, setImageURL] = useState('');
 
   useEffect(() => {
-    alert('Finished loading');
+    Swal.fire(
+      '혜택 지도 페이지는 위치 정보를 필수로 수집합니다',
+      '동의하지 않을 시 서비스 사용이 불가합니다',
+      'warning'
+    );
   }, []);
 
   const ResultClickEvent = async (result: string) => {
     try {
       const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
-      // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
       setShopLocs(data.data.shopList);
-      // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
+      const logo = await getImageSearchResults(`${result} 로고 고화질`);
+      setImageURL(logo.image_url);
     } catch (error) {
       console.error('가맹점 정보 불러오기 실패', error);
     }
@@ -48,18 +57,6 @@ export default function Page() {
     }
   };
 
-  // interface LinePath {
-  //   La: number;
-  //   Ma: number;
-  // }
-
-  // interface Posts {
-  //   props: {
-  //     duration: number;
-  //     linePath: LinePath[];
-  //   };
-  // }
-
   const handleMarkerClick = async (shop: any) => {
     setSelectedShop(shop);
 
@@ -67,7 +64,8 @@ export default function Page() {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
       const posts: any = await getDirection(str, fin);
-      setFar(posts.props.howfar);
+      const distance: any = posts.props.howfar / 1000;
+      setFar(distance);
 
       const newMapPath = posts.props.linePath.map((item: any) => ({
         lng: item.La,
@@ -182,12 +180,13 @@ export default function Page() {
             <div className="flex flex-row justify-center">
               <div>
                 <img
-                  alt="Logo"
-                  src="https://logodownload.org/wp-content/uploads/2017/10/Starbucks-logo.png"
-                  className="w-[84px]"
+                  referrerPolicy="no-referrer"
+                  src={imageURL}
+                  alt="로고"
+                  width="64"
+                  height="64"
                 />
               </div>
-              {/* <img src={shopLogo[0].image} className="w-[60px]" />  로고 API 사용 여부 확정 후 주석 해제 */}
 
               <div className="flex-col ml-5">
                 <div>
@@ -203,7 +202,7 @@ export default function Page() {
                 </div>
 
                 <div className="flex flex-row mt-1">
-                  <div className="flex bg-g6 w-7 rounded-[5px] justify-center items-center text-white text-[4px] font-['SUIT']">
+                  <div className="flex bg-g6 w-7 rounded-[5px] justify-center items-center text-white text-xs font-['SUIT']">
                     <p>혜택</p>
                   </div>
 
@@ -217,7 +216,7 @@ export default function Page() {
                     }}
                     role="presentation"
                   >
-                    피바다 {userId}님을 위한 혜택 보러 가기
+                    {userId}님을 위한 혜택 보러 가기
                   </span>
                 </div>
                 <div className="mt-1 text-black text-base text-Primary font-['SUIT']">
@@ -232,7 +231,7 @@ export default function Page() {
                       alt="거리 핀"
                     />
                   </span>{' '}
-                  내 위치에서 {far}m 거리에 있어요
+                  내 위치에서 {far}km 거리에 있어요
                 </div>
               </div>
             </div>

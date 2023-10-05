@@ -29,6 +29,7 @@ export default function VocContainer() {
           text: '정상적으로 서버로 제출되었습니다!',
         });
         router.back();
+        return;
       }
       Swal.fire({
         icon: 'error',

@@ -5,13 +5,13 @@ export const postGiftRegist = async (formData: FormData) =>
     url: '/gift/regist',
     data: formData,
     isAuth: true,
+    ContentType: '',
   });
 
 export const getMyGift = async () =>
   fetchGet({
     url: '/gift/mygifts',
     isAuth: true,
-    ContentType: '',
   });
 
 export const postGiftDelete = async (imageUrl: string) =>

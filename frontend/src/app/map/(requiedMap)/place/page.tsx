@@ -4,7 +4,7 @@
 
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
@@ -22,6 +22,7 @@ export default function Page() {
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
+  const [mapPath, setMapPath] = useState([]);
 
   useEffect(() => {
     alert('Finished loading');
@@ -45,14 +46,31 @@ export default function Page() {
     }
   };
 
+  // interface LinePath {
+  //   La: number;
+  //   Ma: number;
+  // }
+
+  // interface Posts {
+  //   props: {
+  //     duration: number;
+  //     linePath: LinePath[];
+  //   };
+  // }
+
   const handleMarkerClick = async (shop: any) => {
     setSelectedShop(shop);
 
     try {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
-      const data = await getDirection(str, fin);
-      console.log(data);
+      const posts: any = await getDirection(str, fin);
+
+      const newMapPath = posts.props.linePath.map((item: any) => ({
+        lng: item.La,
+        lat: item.Ma,
+      }));
+      setMapPath(newMapPath);
     } catch (error) {
       console.error('경로 정보 불러오기 실패', error);
     }
@@ -108,11 +126,19 @@ export default function Page() {
           />
         </div>
 
-        <div className="bg-Annotations rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
+        <Polyline
+          path={[mapPath]}
+          strokeWeight={5}
+          strokeColor='#2EC4B6'
+          strokeOpacity={0.9}
+          strokeStyle='solid'
+        />
+
+        <div className="bg-white shadow-md rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
           {searchResult.map((result, index) => (
             <div
               key={result + 1}
-              className="px-2 py-2 cursor-pointer"
+              className="px-2 py-2 cursor-pointer ml-3"
               onClick={() => {
                 ResultClickEvent(result);
               }}

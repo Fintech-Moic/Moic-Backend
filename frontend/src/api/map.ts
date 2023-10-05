@@ -61,7 +61,7 @@ interface Coordinates {
 }
 
 export async function getDirection(str: Coordinates, fin: Coordinates) {
-  const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
+  const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
   const origin = `${str.lng},${str.lat}`;
@@ -89,8 +89,22 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    console.log(data);
-    return data;
+
+    const linePath: any = [];
+    data.routes[0].sections[0].roads.forEach((router: { vertexes: any[] }) => {
+      router.vertexes.forEach((vertex, index) => {
+        if (index % 2 === 0) {
+          linePath.push(
+            new kakao.maps.LatLng(
+              router.vertexes[index + 1],
+              router.vertexes[index]
+            )
+          );
+        }
+      });
+    });
+    const time = data.routes[0].sections[0].duration;
+    return { props: { time, linePath } };
   } catch (error) {
     console.error('Error:', error);
     return error;

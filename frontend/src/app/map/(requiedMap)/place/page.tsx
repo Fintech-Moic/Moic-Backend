@@ -23,20 +23,19 @@ export default function Page() {
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
 
-  useEffect(() => {
-    alert('Finished loading');
-    GetUserID();
-  }, [userId]);
-
   const GetUserID = async () => {
     try {
       const data = await fetchProfile();
-      console.log(data.data.name);
       setUserId(data.data.name);
     } catch (error) {
       console.error('유저 아이디 불러오기 실패', error);
     }
   };
+
+  useEffect(() => {
+    alert('Finished loading');
+    GetUserID();
+  }, [userId]);
 
   const ResultClickEvent = async (result: string) => {
     try {
@@ -55,8 +54,8 @@ export default function Page() {
     try {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
-      // const data = await getDirection(str, fin);
-      // console.log(data);
+      const data = await getDirection(str, fin);
+      console.log(data);
     } catch (error) {
       console.error('경로 정보 불러오기 실패', error);
     }
@@ -161,30 +160,31 @@ export default function Page() {
                 <img
                   alt="Logo"
                   src="https://logodownload.org/wp-content/uploads/2017/10/Starbucks-logo.png"
-                  className="w-[60px]"
+                  className="w-[84px]"
                 />
               </div>
               {/* <img src={shopLogo[0].image} className="w-[60px]" />  로고 API 사용 여부 확정 후 주석 해제 */}
 
               <div className="flex-col ml-5">
                 <div>
-                  <span className="align-bottom text-black text-base font-bold font-['SUIT']">
+                  <span className="align-bottom text-black text-xl font-bold font-['SUIT']">
                     {selectedShop.shopName}
                   </span>
-                  <span className="ml-1 align-bottom text-black text-base font-bold font-['SUIT']">
+                  <span className="ml-1 align-bottom text-black text-xl font-bold font-['SUIT']">
                     {selectedShop.shopLocation}
                   </span>
-                  <span className="ml-1 align-middle text-Secondary text-xs font-light font-['SUIT']">
+                  <span className="ml-1 align-middle text-Secondary text-base font-light font-['SUIT']">
                     {selectedShop.category}
                   </span>
                 </div>
 
-                <div className="flex flex-row mt-0.5">
-                  <div className="bg-g6 w-7 h-[16px] rounded-[5px] text-center text-white text-[8px] font-semibold font-['SUIT']">
-                    혜택
+                <div className="flex flex-row mt-1">
+                  <div className="flex bg-g6 w-7 rounded-[5px] justify-center items-center text-white text-[4px] font-['SUIT']">
+                    <p>혜택</p>
                   </div>
+
                   <span
-                    className="ml-1 text-g6 text-xs font-semibold font-['SUIT'] cursor-pointer"
+                    className="ml-1 text-g6 text-base font-semibold font-['SUIT'] cursor-pointer"
                     onClick={() => {
                       BenefitClick(selectedShop);
                     }}
@@ -196,17 +196,17 @@ export default function Page() {
                     피바다 {userId}님을 위한 혜택 보러 가기
                   </span>
                 </div>
-                <div className="mt-1 text-black text-xs font-light font-['SUIT']">
+                <div className="mt-1 text-black text-base text-Primary font-['SUIT']">
                   {selectedShop.address}
                 </div>
               </div>
             </div>
 
-              {showDetails && (
-                <div className="mt-2 flex justify-center">
-                  <CardCarousel key={benefitInfo + 1} data={benefitInfo} />
-                </div>
-              )}
+            {showDetails && (
+              <div className="mt-2 flex justify-center">
+                <CardCarousel key={benefitInfo + 1} data={benefitInfo} />
+              </div>
+            )}
           </div>
         </div>
       )}

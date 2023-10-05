@@ -67,7 +67,8 @@ export default function Page() {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
       const posts: any = await getDirection(str, fin);
-      setFar(posts.props.howfar);
+      const distance: any = posts.props.howfar/10
+      setFar(distance);
 
       const newMapPath = posts.props.linePath.map((item: any) => ({
         lng: item.La,

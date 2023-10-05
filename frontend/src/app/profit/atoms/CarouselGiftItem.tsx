@@ -33,12 +33,12 @@ export default function CarouselGiftItem({
             <Image src={RedDeleteIcon} alt="카드삭제" width={20} height={20} />
           </button>
         )}
-        <button type="button" onClick={onClick}>
-          <img
-            className="border-solid border-2 border-white shadow-md rounded-[10px] w-20 h-32"
-            src={giftImage}
-            alt="카드"
-          />
+        <button
+          type="button"
+          onClick={onClick}
+          className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px]"
+        >
+          <Image width={80} height={128} src={giftImage} alt="카드" />
         </button>
       </h3>
     </div>

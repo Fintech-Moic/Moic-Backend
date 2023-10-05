@@ -8,7 +8,9 @@ import Swal from 'sweetalert2';
 import GiftCardRegistTitle from '../atoms/GiftCardRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
 import { postGiftRegist } from '@/api/giftCard';
-
+import BlackFileUploadIcon from '@/../public/assets/BlackFileUploadIcon.svg';
+import Modal from '@/components/atoms/Modal';
+import Spinner from '@/../public/assets/images/spinner.gif';
 /** 기프티콘 이미지를 통한 등록을 지원하는 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
@@ -30,7 +32,7 @@ export default function GiftCardRegist() {
     setUploadFile(currentUploadImages[0]);
   };
 
-  const mutation = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: (formData: any) => postGiftRegist(formData),
     onSuccess: (data) => {
       if (
@@ -71,11 +73,16 @@ export default function GiftCardRegist() {
       return;
     const formData = new FormData();
     formData.append('file', uploadFile);
-    mutation.mutate(formData);
+    mutate(formData);
   };
 
   return (
     <>
+      {isLoading && (
+        <Modal haveContainer={false}>
+          <Image src={Spinner} width={40} height={40} alt="로딩" />
+        </Modal>
+      )}
       <GiftCardRegistTitle
         isTrue={hasUploaded()}
         trueText="기프티콘 업로드에 성공했습니다."
@@ -94,7 +101,7 @@ export default function GiftCardRegist() {
           />
         ) : (
           <Image
-            src="/assets/BlackFileUploadIcon.svg"
+            src={BlackFileUploadIcon}
             alt="파일업로드"
             width={104}
             height={104}

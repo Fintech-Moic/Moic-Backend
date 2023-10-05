@@ -1,18 +1,31 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import useCustomQuery from '@/hooks/useCustomQuery';
 import { getMyGift } from '@/api/giftCard';
 import GiftCard from '@/types/giftCard';
 
 export default function GiftDetailContainer({ giftId }: { giftId: string }) {
-  const { data: giftData, isLoading } = useQuery({
-    queryKey: ['getMyGift'],
-    queryFn: () => getMyGift(),
-    staleTime: 1000 * 60 * 100,
-    refetchOnWindowFocus: false,
-  });
+  const router = useRouter();
+  const { data: giftData, isLoading } = useCustomQuery(
+    {
+      queryKey: ['getMyGift'],
+      queryFn: () => getMyGift(),
+      staleTime: 1000 * 60 * 100,
+      refetchOnWindowFocus: false,
+    },
+    router
+  );
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="h-full shadow-md flex flex-col justify-center items-center gap-8 rounded-3xl bg-white">
+        <div className="w-[240px] h-6 bg-Skeleton rounded-lg" />
+        <div className="w-[240px] h-[240px] bg-Skeleton rounded-lg" />
+      </div>
+    );
+  }
 
   const currentGift = giftData.data.find(
     (curGift: GiftCard) => curGift.id === giftId
@@ -35,10 +48,11 @@ export default function GiftDetailContainer({ giftId }: { giftId: string }) {
       {currentGift ? (
         <>
           <h2 className="h4b">{calculateDaysRemaining(currentGift.dueDate)}</h2>
-          <img
+          <Image
             src={currentGift.imageUrl}
             alt="기프티콘 이미지"
-            className="w-60 h-96"
+            width={240}
+            height={384}
           />
         </>
       ) : (

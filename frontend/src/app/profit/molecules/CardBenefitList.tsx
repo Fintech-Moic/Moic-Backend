@@ -11,7 +11,12 @@ interface CardBenefitListProps {
 export default function CardBenefitList({ list }: CardBenefitListProps) {
   return (
     <ul className="flex flex-col justify-start item-start gap-4">
-      {list?.map((curBenefit) => <CardBenefitListItem benefit={curBenefit} />)}
+      {list?.map((curBenefit) => (
+        <CardBenefitListItem
+          key={JSON.stringify(curBenefit)}
+          benefit={curBenefit}
+        />
+      ))}
     </ul>
   );
 }

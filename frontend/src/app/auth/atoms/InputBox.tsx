@@ -9,6 +9,7 @@ type InputBoxProps = {
   name: string;
   type: string;
   placeholder: string;
+  pattern?: string;
 };
 
 /** InputBox Component
@@ -24,7 +25,16 @@ type InputBoxProps = {
 
 const InputBox = forwardRef(
   (
-    { width, height, register, id, name, type, placeholder }: InputBoxProps,
+    {
+      width,
+      height,
+      register,
+      id,
+      name,
+      type,
+      placeholder,
+      pattern,
+    }: InputBoxProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -35,6 +45,7 @@ const InputBox = forwardRef(
         ref={ref}
         name={name}
         type={type}
+        pattern={pattern}
         placeholder={placeholder}
       />
     );

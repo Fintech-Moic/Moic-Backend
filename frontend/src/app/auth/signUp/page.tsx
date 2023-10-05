@@ -20,6 +20,7 @@ export default function Page() {
   useAlreadySignInChecker();
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -138,6 +139,7 @@ export default function Page() {
       ref={personalFormRef}
       register={register}
       errors={errors}
+      watch={watch}
       dropDownData={dropDownData}
       onSubmit={onSubmit}
       setSelectedData={setSelectedData}
@@ -146,6 +148,7 @@ export default function Page() {
       ref={accountFormRef}
       register={register}
       errors={errors}
+      watch={watch}
       onSubmit={onSubmit}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">

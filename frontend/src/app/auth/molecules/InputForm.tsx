@@ -11,6 +11,7 @@ type InputFormProps = {
   isError: boolean;
   width: string;
   height: string;
+  validation?: { value: RegExp; message: string };
   notice?: string;
 };
 
@@ -29,6 +30,7 @@ type InputFormProps = {
 
 export default function InputForm({
   register,
+  validation,
   width,
   height,
   id,
@@ -39,9 +41,9 @@ export default function InputForm({
   placeholder,
 }: InputFormProps) {
   return (
-    <>
+    <div className={`${width} flex flex-col`}>
       <InputBox
-        {...register(name)}
+        {...register(name, { pattern: validation })}
         id={id}
         name={name}
         type={type}
@@ -53,6 +55,6 @@ export default function InputForm({
       {notice && (
         <InputNoticeMessage isError={isError}>{notice}</InputNoticeMessage>
       )}
-    </>
+    </div>
   );
 }

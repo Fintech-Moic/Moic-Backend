@@ -29,6 +29,30 @@ const signUpApi = async (data: FieldValues) => {
   return null;
 };
 
+const checkDuplicateId = async (data: string) => {
+  const result = await fetchPost({
+    url: '/user/check/id',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return result;
+  }
+  return null;
+};
+
+const checkDuplicateEmail = async (data: string) => {
+  const result = await fetchPost({
+    url: '/user/check/email',
+    data,
+    isAuth: false,
+  });
+  if (result.message !== undefined) {
+    return result;
+  }
+  return null;
+};
+
 const signOutApi = async () => {
   if (localStorage.getItem('access_token') !== undefined) {
     const result = await fetchPost({ url: '/user/logout', isAuth: true });
@@ -125,6 +149,8 @@ const changePasswordApi = async (data: FieldValues) => {
 export {
   signInApi,
   signUpApi,
+  checkDuplicateId,
+  checkDuplicateEmail,
   signOutApi,
   findIdApi,
   sendPasswordApi,

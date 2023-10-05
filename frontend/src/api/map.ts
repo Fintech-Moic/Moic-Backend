@@ -90,18 +90,22 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
     }
     const data = await response.json();
 
-    const linePath: any = [];
-    data.routes[0].sections[0].roads.forEach((router: { vertexes: any[]; }) => {
+    const path: any = [];
+    data.routes[0].sections[0].roads.forEach((router: { vertexes: any[] }) => {
       router.vertexes.forEach((vertex, index) => {
         if (index % 2 === 0) {
-          linePath.push(new kakao.maps.LatLng(router.vertexes[index + 1], router.vertexes[index]));
+          linePath.push(
+            new kakao.maps.LatLng(
+              router.vertexes[index + 1],
+              router.vertexes[index]
+            )
+          );
         }
       });
     });
-
-    console.log(data);
-    return { props: {data, linePath}}
-
+    const duration = data.routes[0].sections[0].duration;
+    const linePath = path.map((item: any) => item[1]);
+    return { props: { duration, linePath } };
   } catch (error) {
     console.error('Error:', error);
     return error;

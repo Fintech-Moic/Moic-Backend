@@ -46,13 +46,26 @@ export default function Page() {
     }
   };
 
+  interface LinePath {
+    La: number;
+    Ma: number;
+  }
+
+  interface Posts {
+    props: {
+      duration: number;
+      linePath: LinePath[];
+    };
+  }
+
   const handleMarkerClick = async (shop: any) => {
     setSelectedShop(shop);
 
     try {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
-      const posts: unknown = await getDirection(str, fin);
+      const posts: Posts = await getDirection(str, fin);
+      console.log('확인', typeof(posts.props.linePath));
 
       // posts.props.linePath를 가지고 mapPath를 업데이트
       const newMapPath = posts.props.linePath.map((item: any) => ({

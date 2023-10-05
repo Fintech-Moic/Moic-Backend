@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';

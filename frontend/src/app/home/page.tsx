@@ -58,7 +58,7 @@ export default function Page() {
       sentence: '오늘은 어디갈까? 저희가 추천해드릴게요!',
     },
     {
-      going: 'profit/giftCard/myGiftCard',
+      going: 'profit/giftCard',
       imgSrc: mainGiftCard,
       title: '기프티콘',
       sentence: '기프티콘을 등록하고 관리해보세요',

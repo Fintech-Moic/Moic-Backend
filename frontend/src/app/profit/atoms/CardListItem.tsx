@@ -33,7 +33,7 @@ export default function CardListItem({
 }: CardListItemProps) {
   return (
     <div
-      className="flex flex-row align-center gap-4 justify-center cursor-pointer"
+      className="CardListItem flex flex-row align-center gap-4 justify-center cursor-pointer"
       id={name}
     >
       {!mine && listType === 'regist' && (

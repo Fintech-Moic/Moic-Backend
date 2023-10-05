@@ -5,6 +5,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
+import Image from 'next/image';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
@@ -23,6 +24,7 @@ export default function Page() {
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
   const [mapPath, setMapPath] = useState([]);
+  const [far, setFar] = useState('');
 
   useEffect(() => {
     alert('Finished loading');
@@ -65,6 +67,7 @@ export default function Page() {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
       const posts: any = await getDirection(str, fin);
+      setFar(posts.props.howfar);
 
       const newMapPath = posts.props.linePath.map((item: any) => ({
         lng: item.La,
@@ -129,9 +132,9 @@ export default function Page() {
         <Polyline
           path={[mapPath]}
           strokeWeight={5}
-          strokeColor='#2EC4B6'
+          strokeColor="#2EC4B6"
           strokeOpacity={0.9}
-          strokeStyle='solid'
+          strokeStyle="solid"
         />
 
         <div className="bg-white shadow-md rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
@@ -163,18 +166,16 @@ export default function Page() {
               />
             );
           }
-          return null; // loc.benefits 또는 loc.gifts가 false인 경우 마커를 표시하지 않음
+          return null;
         })}
       </Map>
-      {/* 선택된 가게의 상세 정보 하단 표시 */}
 
       {selectedShop && (
-        // <div className="w-full h-[200px] absolute inset-x-0 bottom-0 z-0 bg-white rounded-tl-[22px] rounded-tr-[22px] shadow">
         <div
           className={`${
             showDetails
               ? 'w-full h-[400px] absolute inset-x-0 bottom-0 z-0 bg-white rounded-tl-[22px] rounded-tr-[22px] shadow'
-              : 'w-full h-[200px] absolute inset-x-0 bottom-0 z-0 bg-white rounded-tl-[22px] rounded-tr-[22px] shadow'
+              : 'w-full h-[240px] absolute inset-x-0 bottom-0 z-0 bg-white rounded-tl-[22px] rounded-tr-[22px] shadow'
           }`}
         >
           <div className="flex flex-col justify-center mt-7">
@@ -221,6 +222,17 @@ export default function Page() {
                 </div>
                 <div className="mt-1 text-black text-base text-Primary font-['SUIT']">
                   {selectedShop.address}
+                </div>
+                <div className="flex flex-row mt-1 text-base text-Primary font-['SUIT']">
+                  <span>
+                    <Image
+                      src="/DistancePin.png"
+                      width="20"
+                      height="20"
+                      alt="거리 핀"
+                    />
+                  </span>{' '}
+                  내 위치에서 {far}m 거리에 있어요
                 </div>
               </div>
             </div>

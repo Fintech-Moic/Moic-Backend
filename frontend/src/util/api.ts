@@ -55,7 +55,7 @@ export async function fetchPost({
           data: { accessToken: localStorage.getItem('access_token') as string },
         });
         if (refreshingRes.message !== 'Refresh') return refreshingRes;
-        localStorage.setItem('access_token', refreshingRes.data.accessToken);
+        localStorage.setItem('access_token', refreshingRes.data.token);
         const reResponse: any = await fetchPost({
           url,
           data,
@@ -110,7 +110,7 @@ export async function fetchGet({
           data: { accessToken: localStorage.getItem('access_token') as string },
         });
         if (refreshingRes.message !== 'Refresh') return refreshingRes;
-        localStorage.setItem('access_token', refreshingRes.data.accessToken);
+        localStorage.setItem('access_token', refreshingRes.data.token);
 
         const reResponse: any = await fetchPost({
           url,

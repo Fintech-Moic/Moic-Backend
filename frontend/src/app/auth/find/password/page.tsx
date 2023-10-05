@@ -23,6 +23,7 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   const [percent, setPercent] = useState('w-0');
   const [step, setStep] = useState(0);
@@ -110,7 +111,7 @@ export default function Page() {
         onSubmit={sendPassword}
       />
       {checkForm && (
-        <div className="h-1/3 flex flex-col justify-between">
+        <div className="h-1/2 flex flex-col justify-between">
           <FindPasswordCheckForm
             register={register}
             errors={errors}
@@ -127,6 +128,7 @@ export default function Page() {
       errors={errors}
       onSubmit={changePassword}
       timerKey={timerKey}
+      watch={watch}
     />,
     <AuthSuccessForm buttonTitle="로그인하기" goingTo="auth/signIn">
       <section className="flex flex-col items-center">
@@ -138,7 +140,7 @@ export default function Page() {
     </AuthSuccessForm>,
   ];
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-80">
       <div className="h-1/4 flex items-center">
         <TitleSentence
           title="비밀번호 찾기"
@@ -146,7 +148,7 @@ export default function Page() {
         />
       </div>
       <ProgressBar percent={percent} />
-      <div className="h-1/2">{findPasswordContentArr[step]}</div>
+      <div className="h-2/3">{findPasswordContentArr[step]}</div>
     </div>
   );
 }

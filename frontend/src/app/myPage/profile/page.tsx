@@ -20,6 +20,7 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
   const [profileData, setProfileData] = useState<{
     name: string;
@@ -158,6 +159,7 @@ export default function Page() {
               register={register}
               errors={errors}
               onSubmit={modifyPassword}
+              watch={watch}
             />
           )}
         </div>

@@ -2,8 +2,11 @@
 
 import { forwardRef, useEffect, useState } from 'react';
 import InputForm from '../molecules/InputForm';
+import CheckDuplicateText from '../atoms/CheckDuplicateText';
 import { ReactHookFormType } from '@/types/auth';
 import Dropdown from '@/components/atoms/Dropdown';
+import { emailPattern } from '@/util/validation';
+import { checkDuplicateEmail } from '@/api/auth';
 
 /** SignUpPersonalForm Components
  * @todo dropDownData 타입 변경
@@ -27,6 +30,7 @@ const SignUpPersonalForm = forwardRef(
       onSubmit,
       dropDownData,
       setSelectedData,
+      watch,
     }: SignUpPersonalFormProps,
     ref: React.Ref<HTMLFormElement>
   ) => {
@@ -38,6 +42,8 @@ const SignUpPersonalForm = forwardRef(
       id: string;
       value: string;
     } | null>(null);
+    const [emailCheckMessage, setEmailCheckMessage] = useState('');
+    const email: string = watch('email');
 
     useEffect(() => {
       let genderValue: string | null = null;
@@ -50,18 +56,27 @@ const SignUpPersonalForm = forwardRef(
       } else if (selectedGender?.value === '여성') {
         genderValue = 'female';
       }
-
       if (selectedYear?.value === '선택안함') {
         yearValue = null;
       } else if (selectedYear?.value !== undefined) {
         yearValue = selectedYear.value;
       }
-
       setSelectedData({
         gender: genderValue,
         yearOfBirth: yearValue,
       });
     }, [selectedGender, selectedYear, setSelectedData]);
+
+    useEffect(() => {
+      const delay = 500;
+      const timerId = setTimeout(async () => {
+        if (email) {
+          const result = await checkDuplicateEmail(email);
+          setEmailCheckMessage(result.message);
+        }
+      }, delay);
+      return () => clearTimeout(timerId);
+    }, [email]);
 
     const genderList = dropDownData.genderList.map(
       (cur: string, idx: number) => {
@@ -79,28 +94,36 @@ const SignUpPersonalForm = forwardRef(
         onSubmit={onSubmit}
         className="w-full h-full flex flex-col justify-evenly"
       >
-        <InputForm
-          register={register}
-          id="name"
-          name="name"
-          type="text"
-          placeholder="이름"
-          isError={Boolean(errors.name)}
-          notice={errors.name?.message}
-          width="w-80"
-          height="h-12"
-        />
-        <InputForm
-          register={register}
-          id="email"
-          name="email"
-          type="text"
-          placeholder="이메일"
-          isError={Boolean(errors.email)}
-          notice={errors.email?.message}
-          width="w-80"
-          height="h-12"
-        />
+        <div className="h-24 flex flex-col justify-around">
+          <InputForm
+            register={register}
+            id="name"
+            name="name"
+            type="text"
+            placeholder="이름"
+            isError={Boolean(errors.name)}
+            notice={errors.name?.message}
+            width="w-80"
+            height="h-12"
+          />
+        </div>
+        <div className="h-24 flex flex-col justify-around">
+          <InputForm
+            register={register}
+            validation={emailPattern}
+            id="email"
+            name="email"
+            type="text"
+            placeholder="이메일"
+            isError={Boolean(errors.email)}
+            notice="올바른 이메일을 입력해주세요."
+            width="w-80"
+            height="h-12"
+          />
+          {email && emailCheckMessage !== '' && (
+            <CheckDuplicateText>{emailCheckMessage}</CheckDuplicateText>
+          )}
+        </div>
         <div className="flex w-full justify-between items-center">
           <p className="p3b">성별</p>
           <Dropdown

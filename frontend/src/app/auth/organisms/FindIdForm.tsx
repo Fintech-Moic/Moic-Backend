@@ -1,6 +1,7 @@
 import InputForm from '../molecules/InputForm';
 import FillButton from '@/components/atoms/FillButton';
 import { ReactHookFormType } from '@/types/auth';
+import { emailPattern } from '@/util/validation';
 
 interface FindIdFormProps extends ReactHookFormType {}
 
@@ -34,12 +35,13 @@ export default function FindIdForm({
         />
         <InputForm
           register={register}
+          validation={emailPattern}
           id="email"
           name="email"
           type="text"
           placeholder="이메일"
           isError={Boolean(errors.email)}
-          notice={errors.email?.message}
+          notice="올바른 이메일을 입력해주세요."
           width="w-80"
           height="h-12"
         />

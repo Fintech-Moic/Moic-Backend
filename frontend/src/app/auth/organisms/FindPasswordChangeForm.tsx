@@ -2,6 +2,7 @@ import Timer from '../atoms/Timer';
 import InputForm from '../molecules/InputForm';
 import FillButton from '@/components/atoms/FillButton';
 import { ReactHookFormType } from '@/types/auth';
+import { passwordPattern } from '@/util/validation';
 
 interface FindPasswordChangeFormProps extends ReactHookFormType {
   timerKey: number;
@@ -17,7 +18,10 @@ export default function FindPasswordChangeForm({
   errors,
   onSubmit,
   timerKey,
+  watch,
 }: FindPasswordChangeFormProps) {
+  const password = watch('password');
+  const passwordCheck = watch('passwordCheck');
   return (
     <form
       onSubmit={onSubmit}
@@ -28,24 +32,26 @@ export default function FindPasswordChangeForm({
           <Timer key={timerKey} />
           <InputForm
             register={register}
+            validation={passwordPattern}
             id="password"
             name="password"
             type="password"
             placeholder="비밀번호"
             isError={Boolean(errors.password)}
-            notice={errors.password?.message}
+            notice="비밀번호는 8~16자의 영문(대/소문자), 숫자, 특수문자 조합입니다."
             width="w-80"
             height="h-12"
           />
         </div>
         <InputForm
           register={register}
+          validation={passwordPattern}
           id="passwordCheck"
           name="passwordCheck"
           type="password"
           placeholder="비밀번호 확인"
-          isError={Boolean(errors.password)}
-          notice={errors.password?.message}
+          isError={password !== passwordCheck || passwordCheck === ''}
+          notice="비밀번호와 같은 값을 입력해주세요."
           width="w-80"
           height="h-12"
         />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useAtomValue } from 'jotai';
-import { useRouter } from 'next/navigation';
 import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
@@ -13,7 +12,6 @@ interface WheelPickerProps {
 function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
-  const router = useRouter();
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
   };

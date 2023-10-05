@@ -59,7 +59,7 @@ export default function Page() {
         lng: item.La,
         lat: item.Ma,
       }));
-      setMapPath(newMapPath); // 또는 기존 상태를 업데이트하는 방법에 따라 다름
+      setMapPath(newMapPath);
     } catch (error) {
       console.error('경로 정보 불러오기 실패', error);
     }

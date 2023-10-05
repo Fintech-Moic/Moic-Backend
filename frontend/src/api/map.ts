@@ -23,31 +23,61 @@ export const getSearchedPlace = (
     isAuth: true,
   });
 
-/* 브랜드 로고 API [S] 호출 횟수 제한으로 임시 주석 처리 */
-// export async function getLogoImage() {
-//   const name = 'Starbucks';
-//   const apiUrl = `https://api.api-ninjas.com/v1/logo?name=${name}`;
-//   const apiKey = process.env.NEXT_PUBLIC_LOGO_APPKEY;
+export async function getImageSearchResults(query: string) {
+  const apiUrl = 'https://dapi.kakao.com/v2/search/image';
+  const apiKey = process.env.NEXT_PUBLIC_REST_API_KEY;
 
-//   try {
-//     const response = await fetch(apiUrl, {
-//       headers: {
-//         'X-Api-Key': apiKey
-//       }
-//     });
+  const response = await fetch(
+    `${apiUrl}?query=${encodeURIComponent(query)}&page=1&size=10`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `KakaoAK ${apiKey}`,
+      },
+    }
+  );
 
-//     if (response.status === 200) {
-//       const data = await response.json();
-//       console.log(data);
-//       return data;
-//     } else {
-//       console.error('Error:', response.status, response.statusText);
-//     }
-//   } catch (error) {
-//     console.error('Request failed:', error.message);
-//   }
-// }
-/* 브랜드 로고 API [E] */
+  if (!response.ok) {
+    throw new Error(`이미지 데이터 불러오기 실패: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.documents[0];
+}
+
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export async function getImageSearchResult(
+  result: string,
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const query = result;
+  const displaySize = 1;
+  const apiUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(
+    query
+  )}&display=${displaySize}`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      headers: {
+        'X-Naver-Client-Id': process.env.NAVER_API_KEY,
+        'X-Naver-Client-Secret': process.env.NAVER_API_SECRET,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`네이버 API 요청 실패: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('네이버 API 오류:', error);
+    res.status(500).json({ error: '네이버 API 오류 발생' });
+  }
+}
 
 export const getBenefit = (shopName: string, shopLocation: string) =>
   fetchGet({

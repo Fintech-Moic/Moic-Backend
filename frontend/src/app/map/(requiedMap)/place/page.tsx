@@ -23,18 +23,16 @@ export default function Page() {
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
 
-  const GetUserID = async () => {
-    try {
-      const data = await fetchProfile();
-      setUserId(data.data.name);
-    } catch (error) {
-      console.error('유저 아이디 불러오기 실패', error);
-    }
-  };
-
   useEffect(() => {
     alert('Finished loading');
-    GetUserID();
+    const GetUserID = async () => {
+      try {
+        const data = await fetchProfile();
+        setUserId(data.data.name);
+      } catch (error) {
+        console.error('유저 아이디 불러오기 실패', error);
+      }
+    };
   }, [userId]);
 
   const ResultClickEvent = async (result: string) => {

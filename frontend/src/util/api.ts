@@ -17,9 +17,13 @@ interface FetchOptions {
 export async function fetchPost(props: FetchProps) {
   const { url, data, isAuth, ContentType = 'application/json' } = props;
 
-  const headers: Record<string, string> = {
+  let headers: Record<string, string> = {
     'Content-type': ContentType,
   };
+
+  if (url === '/gift/regist') {
+    headers = {};
+  }
 
   if (isAuth) {
     const accessToken = localStorage.getItem('access_token');

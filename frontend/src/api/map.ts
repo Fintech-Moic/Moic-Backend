@@ -61,7 +61,7 @@ interface Coordinates {
 }
 
 export async function getDirection(str: Coordinates, fin: Coordinates) {
-  const REST_API_KEY = process.env.NEXT_PUBLIC_APPKEY;
+  const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
   const url = 'https://apis-navi.kakaomobility.com/v1/directions';
 
   const origin = `${str.lng},${str.lat}`;

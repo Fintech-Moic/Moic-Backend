@@ -22,7 +22,7 @@ export default function Page() {
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
   const [userId, setUserId] = useState('');
-  let [mapPath, setMapPath] = useState([]);
+  const [mapPath, setMapPath] = useState([]);
 
   useEffect(() => {
     alert('Finished loading');
@@ -46,17 +46,17 @@ export default function Page() {
     }
   };
 
-  interface LinePath {
-    La: number;
-    Ma: number;
-  }
+  // interface LinePath {
+  //   La: number;
+  //   Ma: number;
+  // }
 
-  interface Posts {
-    props: {
-      duration: number;
-      linePath: LinePath[];
-    };
-  }
+  // interface Posts {
+  //   props: {
+  //     duration: number;
+  //     linePath: LinePath[];
+  //   };
+  // }
 
   const handleMarkerClick = async (shop: any) => {
     setSelectedShop(shop);
@@ -64,10 +64,8 @@ export default function Page() {
     try {
       const str = { lat: curLoc.lat, lng: curLoc.lng };
       const fin = { lat: shop.latitude, lng: shop.longitude };
-      const posts: Posts = await getDirection(str, fin);
-      console.log('확인', typeof(posts.props.linePath));
+      const posts: any = await getDirection(str, fin);
 
-      // posts.props.linePath를 가지고 mapPath를 업데이트
       const newMapPath = posts.props.linePath.map((item: any) => ({
         lng: item.La,
         lat: item.Ma,
@@ -131,9 +129,9 @@ export default function Page() {
         <Polyline
           path={[mapPath]}
           strokeWeight={5}
-          strokeColor={'#2EC4B6'}
+          strokeColor='#2EC4B6'
           strokeOpacity={0.9}
-          strokeStyle={'solid'}
+          strokeStyle='solid'
         />
 
         <div className="bg-white shadow-md rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">

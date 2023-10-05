@@ -90,7 +90,7 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
     }
     const data = await response.json();
 
-    const path: any = [];
+    const linePath: any = [];
     data.routes[0].sections[0].roads.forEach((router: { vertexes: any[] }) => {
       router.vertexes.forEach((vertex, index) => {
         if (index % 2 === 0) {
@@ -103,9 +103,8 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
         }
       });
     });
-    const duration = data.routes[0].sections[0].duration;
-    const linePath = path.map((item: any) => item[1]);
-    return { props: { duration, linePath } };
+    const time = data.routes[0].sections[0].duration;
+    return { props: { time, linePath } };
   } catch (error) {
     console.error('Error:', error);
     return error;

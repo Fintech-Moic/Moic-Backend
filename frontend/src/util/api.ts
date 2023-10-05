@@ -21,7 +21,7 @@ export async function fetchPost({
   ContentType = 'application/json',
 }: FetchProps) {
   const headers: Record<string, string> = {
-    'Content-type': ContentType,
+    'Content-Type': ContentType,
   };
 
   if (isAuth) {
@@ -80,7 +80,7 @@ export async function fetchGet({
   ContentType = 'application/json',
 }: FetchProps) {
   const headers: Record<string, string> = {
-    'Content-type': ContentType,
+    'Content-Type': ContentType,
   };
 
   if (isAuth) {

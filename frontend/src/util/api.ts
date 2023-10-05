@@ -21,7 +21,7 @@ export async function fetchPost({
   ContentType = 'application/json',
 }: FetchProps) {
   const headers: Record<string, string> =
-    ContentType === ''
+    ContentType === '' || url === '/gift/regist'
       ? {}
       : {
           'Content-type': ContentType,

@@ -1,6 +1,7 @@
 import InputForm from '../molecules/InputForm';
 import FillButton from '@/components/atoms/FillButton';
 import { ReactHookFormType } from '@/types/auth';
+import { idPattern, emailPattern } from '@/util/validation';
 
 interface FindPasswordSendFormProps extends ReactHookFormType {}
 
@@ -31,25 +32,27 @@ export default function FindPasswordSendForm({
       />
       <InputForm
         register={register}
+        validation={idPattern}
         id="id"
         name="id"
         type="text"
         placeholder="아이디"
         isError={Boolean(errors.id)}
-        notice={errors.id?.message}
+        notice="6자 이상 ~ 12자 이하, 영문(소문자), 숫자의 조합을 입력해주세요."
         width="w-80"
         height="h-12"
       />
       <div className="flex w-full justify-between">
         <InputForm
           register={register}
+          validation={emailPattern}
           id="email"
           name="email"
           type="text"
           placeholder="이메일"
           isError={Boolean(errors.email)}
-          notice={errors.email?.message}
-          width="w-56"
+          notice="올바른 이메일을 입력해주세요."
+          width="w-54"
           height="h-12"
         />
         <FillButton

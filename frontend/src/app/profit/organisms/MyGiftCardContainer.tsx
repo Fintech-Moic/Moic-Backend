@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
+import Swal from 'sweetalert2';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitGiftCarousel from '../molecules/ProfitGiftCarousel';
 import GiftCardEmptyRegistButton from '../atoms/GiftCardEmptyRegistButton';
@@ -44,7 +45,11 @@ export default function MyGiftCardContainer() {
 
         return;
       }
-      alert('기프티콘 삭제 실패! 다시, 시도해주세요');
+      Swal.fire({
+        icon: 'error',
+        title: '기프티콘 삭제 실패',
+        text: '삭제에 실패했습니다. 다시 시도해주세요!',
+      });
     },
     onError() {
       setOpenGiftDeleteModal((prev) => ({
@@ -52,7 +57,11 @@ export default function MyGiftCardContainer() {
         isOpen: false,
         deleteCardInfo: {},
       }));
-      alert('기프티콘 삭제 실패! 다시, 시도해주세요');
+      Swal.fire({
+        icon: 'error',
+        title: '기프티콘 삭제 실패',
+        text: '삭제에 실패했습니다. 다시 시도해주세요!',
+      });
     },
   });
 
@@ -79,7 +88,9 @@ export default function MyGiftCardContainer() {
   };
 
   const handleClickCardDelete = () => {
-    giftDeletMutation.mutate(deleteGiftInfo.imageUrl);
+    if (deleteGiftInfo && deleteGiftInfo.imageUrl) {
+      giftDeletMutation.mutate(deleteGiftInfo.imageUrl);
+    }
   };
   return giftList.length === 0 ? (
     <GiftCardEmptyRegistButton />

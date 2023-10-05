@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import Swal from 'sweetalert2';
 import TextArea from '../atoms/TextArea';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
 import TitleSentence from '@/components/atoms/TitleSentence';
@@ -22,13 +23,25 @@ export default function VocContainer() {
         !Object.keys(data).includes('errorCode') &&
         !Object.keys(data).includes('status')
       ) {
-        alert('서버로 제출되었습니다!');
+        Swal.fire({
+          icon: 'success',
+          title: '제출 성공',
+          text: '정상적으로 서버로 제출되었습니다!',
+        });
         router.back();
       }
-      alert('제출 실패하였습니다! 네트워크 상태를 확인해주세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '제출 실패',
+        text: '제출에 실패했습니다! 다시 시도해주세요!',
+      });
     },
     onError: () => {
-      alert('제출 실패하였습니다! 네트워크 상태를 확인해주세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '제출 실패',
+        text: '제출에 실패했습니다! 다시 시도해주세요!',
+      });
     },
   });
   const handleClickPrev = useCallback(() => {
@@ -40,7 +53,11 @@ export default function VocContainer() {
     const textAreaEl = textAreaRef.current as HTMLTextAreaElement;
     const suggestedText = textAreaEl.value;
     if (suggestedText.length === 0) {
-      alert('문의사항을 입력 후, 제출해주세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '제출 실패',
+        text: '문의사항을 입력 후, 제출해주세요!',
+      });
       return;
     }
     mutation.mutate(suggestedText);

@@ -4,18 +4,11 @@ import { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { useQuery } from '@tanstack/react-query';
 import CardList from '../molecules/CardList';
+import { Card } from '../../../types/card';
 import Pagination from '@/components/molecules/Pagination';
 import { filterOptionAtom } from '@/store/atoms/header';
 import { getCardSearch } from '@/api/card';
 
-interface Card {
-  id: string;
-  company: string;
-  type: string;
-  name: string;
-  cardImage: string;
-  mine: boolean;
-}
 /** 페이지네이션과 카드 리스트가 융합된 컴포넌트
  * @param {Array} data CardList를 렌더링하기 위한 서치 데이터의 배열
  * @returns {JSX.Element} 컴포넌트 반환
@@ -48,8 +41,17 @@ export default function PaginatedCardList({ listType }: { listType: string }) {
     <div className="flex flex-col items-center h-full pb-6 justify-between gap-8 pt-14">
       {totalPageLength === 0 ? (
         <div className="h3b text-black opacity-50 h-full flex items-center flex-col justify-center break-words">
-          <span>추가할 카드가 없어요!</span>
-          <span>모든 카드를 다 가지고 계시군요!</span>
+          {listType === 'read' ? (
+            <>
+              <span>검색된 카드가 없어요!</span>
+              <span>다른 검색어를 입력해볼까요?</span>
+            </>
+          ) : (
+            <>
+              <span>추가할 카드가 없어요!</span>
+              <span>모든 카드를 다 가지고 계시군요!</span>
+            </>
+          )}
         </div>
       ) : (
         <>

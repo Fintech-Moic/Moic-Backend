@@ -6,23 +6,20 @@ import { Fragment, useEffect, useState } from 'react';
 import { useSetAtom } from 'jotai';
 import BookmarkListItem from '../atoms/BookmarkListItem';
 import { bookmarkDeleteModalAtom } from '@/store/atoms/modal';
+import Shop from '@/types/shop';
+import { IBookmarkDeleteModalAtom } from '@/types/store/modal';
 
-interface Bookmark {
-  category: string;
-  shopName: string;
-  shopLocation: string;
-  address: string;
-  latitude: string;
-  longitude: string;
+interface BookmarkShop extends Shop {
   isSelected: boolean;
 }
 
 interface CardListProps {
-  list: Bookmark[];
+  list: BookmarkShop[];
   currentPage: number;
   listType: string;
   listItemCount: number;
 }
+
 /** 북마크 아이템으로 구성된 리스트 컴포넌트
  * @param {Array} list 북마크 response의 array
  * @param {Number} currentPage 현재 페이지를 나타내는 정수
@@ -36,7 +33,7 @@ export default function BookmarkList({
   currentPage,
   listItemCount,
 }: CardListProps) {
-  const [currentList, setCurrentList] = useState<Bookmark[]>([]);
+  const [currentList, setCurrentList] = useState<BookmarkShop[]>([]);
   const setBookmarkDeleteModal = useSetAtom(bookmarkDeleteModalAtom);
 
   useEffect(() => {
@@ -50,10 +47,18 @@ export default function BookmarkList({
       selectedBookmarkList: [
         ...curPageList
           .filter((cur) => cur.isSelected)
-          .map(({ shopName, shopLocation }) => ({
-            shopName,
-            shopLocation,
-          })),
+          .map(
+            ({
+              shopName,
+              shopLocation,
+            }: {
+              shopName: string;
+              shopLocation: string;
+            }) => ({
+              shopName,
+              shopLocation,
+            })
+          ),
       ],
     }));
   }, [currentPage, list]);
@@ -74,7 +79,7 @@ export default function BookmarkList({
     });
 
     setCurrentList(newCurrentList);
-    setBookmarkDeleteModal((prev) => ({
+    setBookmarkDeleteModal((prev: IBookmarkDeleteModalAtom) => ({
       ...prev,
       selectedBookmarkList: [
         ...newCurrentList

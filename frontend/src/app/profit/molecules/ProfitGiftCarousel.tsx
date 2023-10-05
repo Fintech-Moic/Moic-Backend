@@ -15,16 +15,11 @@ import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
 import { giftDeleteModalAtom } from '@/store/atoms/modal';
 import CardRegist from '@/../public/CardRegist.png';
-
-interface DetailGiftData {
-  id: string;
-  imageUrl: string;
-  dueDate: string;
-}
+import GiftCard from '@/types/giftCard';
 
 interface ProfitGiftCarouselProps {
   [x: string]: any;
-  data: DetailGiftData[];
+  data: GiftCard[];
   canDelete: boolean;
   onClickNext: () => void;
   onClickPrev: () => void;
@@ -109,7 +104,7 @@ export default function ProfitGiftCarousel({
   const handleClickGift = (id: string) => {
     router.push(`/profit/giftCard/detail/${id}`);
   };
-  const handleClickGiftDelete = (props: DetailGiftData) => {
+  const handleClickGiftDelete = (props: GiftCard) => {
     setOpenGiftDeleteModal((prev) => ({
       ...prev,
       isOpen: true,
@@ -141,7 +136,7 @@ export default function ProfitGiftCarousel({
             alt="기프티콘등록"
           />
         </h3>
-        {data.map(({ id, imageUrl, dueDate }: DetailGiftData) => (
+        {data.map(({ id, imageUrl, dueDate }: GiftCard) => (
           <CarouselGiftItem
             key={`CarouselGiftItem_${imageUrl}`}
             canDelete={canDelete}

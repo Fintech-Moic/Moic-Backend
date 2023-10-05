@@ -10,6 +10,7 @@ import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
 // import { getSearchedPlace, getLogoImage, getDirection } from '@/api/map';
 import { getSearchedPlace, getDirection, getBenefit } from '@/api/map';
+import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
 
 export default function Page() {
@@ -20,14 +21,23 @@ export default function Page() {
   const [selectedShop, setSelectedShop] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
+  const [userId, setUserId] = useState('');
 
   useEffect(() => {
     alert('Finished loading');
-  }, []);
+    GetUserID();
+  }, [userId]);
 
-  /**
-   * 검색어 클릭 시 가맹점 정보 불러오기
-   */
+  const GetUserID = async () => {
+    try {
+      const data = await fetchProfile();
+      console.log(data.data.name);
+      setUserId(data.data.name);
+    } catch (error) {
+      console.error('유저 아이디 불러오기 실패', error);
+    }
+  };
+
   const ResultClickEvent = async (result: string) => {
     try {
       const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
@@ -145,16 +155,18 @@ export default function Page() {
               : 'w-full h-[200px] absolute inset-x-0 bottom-0 z-0 bg-white rounded-tl-[22px] rounded-tr-[22px] shadow'
           }`}
         >
-          <div className="flex flex-row justify-center mt-7">
-            <div>
-              <img
-                alt="Logo"
-                src="https://logodownload.org/wp-content/uploads/2017/10/Starbucks-logo.png"
-                className="w-[60px]"
-              />
+          <div className="flex flex-col justify-center mt-7">
+            <div className="flex flex-row justify-center">
+              <div>
+                <img
+                  alt="Logo"
+                  src="https://logodownload.org/wp-content/uploads/2017/10/Starbucks-logo.png"
+                  className="w-[60px]"
+                />
+              </div>
               {/* <img src={shopLogo[0].image} className="w-[60px]" />  로고 API 사용 여부 확정 후 주석 해제 */}
 
-              <div className="flex flex-col ml-5">
+              <div className="flex-col ml-5">
                 <div>
                   <span className="align-bottom text-black text-base font-bold font-['SUIT']">
                     {selectedShop.shopName}
@@ -181,20 +193,20 @@ export default function Page() {
                     }}
                     role="presentation"
                   >
-                    강남구 불주먹님을 위한 혜택 보러 가기
+                    피바다 {userId}님을 위한 혜택 보러 가기
                   </span>
                 </div>
                 <div className="mt-1 text-black text-xs font-light font-['SUIT']">
                   {selectedShop.address}
                 </div>
               </div>
+            </div>
 
               {showDetails && (
-                <div>
+                <div className="mt-2 flex justify-center">
                   <CardCarousel key={benefitInfo + 1} data={benefitInfo} />
                 </div>
               )}
-            </div>
           </div>
         </div>
       )}

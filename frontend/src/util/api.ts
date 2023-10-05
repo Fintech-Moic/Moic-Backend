@@ -34,6 +34,7 @@ export async function fetchPost(props: FetchProps) {
     body: JSON.stringify(data),
     credentials: 'include',
   };
+  console.log(options);
 
   try {
     const response = await fetch(`${ENDPOINT}${url}`, options);
@@ -49,7 +50,7 @@ export async function fetchPost(props: FetchProps) {
           data: { accessToken: localStorage.getItem('access_token') as string },
         });
         if (refreshingRes.message !== 'Refresh') return refreshingRes;
-        localStorage.setItem('access_token', refreshingRes.data.token);
+        localStorage.setItem('access_token', refreshingRes.data.accessToken);
         const reResponse: any = await fetchPost({
           ...props,
         });

@@ -36,7 +36,7 @@ const signOutApi = async () => {
       localStorage.clear();
       sessionStorage.clear();
       Swal.fire({
-        icon: 'error',
+        icon: 'success',
         title: '로그아웃에 성공하였습니다.',
         text: '다음에 만나요!',
       });

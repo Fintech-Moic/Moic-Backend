@@ -13,7 +13,9 @@ interface TextBoxProps {
 
 export default function TextBox({ width, height, children }: TextBoxProps) {
   return (
-    <article className={`${width} ${height} border-2 border-Secondary p-2`}>
+    <article
+      className={`${width} ${height} border-2 border-Secondary p-2 rounded-[10px]`}
+    >
       {children}
     </article>
   );

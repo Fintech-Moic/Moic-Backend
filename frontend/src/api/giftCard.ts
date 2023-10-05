@@ -5,7 +5,7 @@ export const postGiftRegist = async (formData: FormData) =>
     url: '/gift/regist',
     data: formData,
     isAuth: true,
-    ContentType: 'multipart/form-data',
+    ContentType: '',
   });
 
 export const getMyGift = async () =>

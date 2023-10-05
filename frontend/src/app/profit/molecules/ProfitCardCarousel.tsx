@@ -115,7 +115,7 @@ export default function ProfitCardCarousel({
     cardImage: string,
     company: string
   ) => {
-    setOpenCardDeleteModal((prev) => ({
+    setOpenCardDeleteModal((prev: any) => ({
       ...prev,
       isOpen: true,
       deleteCardInfo: { name, cardImage, company },

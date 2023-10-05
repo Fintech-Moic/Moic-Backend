@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
+import Swal from 'sweetalert2';
 import BookmarkButtonGroup from '../molecules/BookmarkTopButtonGroup';
 import BookmarkList from '../molecules/BookmarkList';
 import Pagination from '@/components/molecules/Pagination';
@@ -13,14 +14,9 @@ import Modal from '@/components/atoms/Modal';
 import { bookmarkDeleteModalAtom } from '@/store/atoms/modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
+import Shop from '@/types/shop';
 
-interface Bookmark {
-  category: string;
-  shopName: string;
-  shopLocation: string;
-  address: string;
-  latitude: string;
-  longitude: string;
+interface BookmarkShop extends Shop {
   isSelected: boolean;
 }
 
@@ -45,7 +41,9 @@ export default function PaginatedBookmarkList({
     staleTime: 1000 * 60 * 100,
     refetchOnWindowFocus: false,
   });
-  const [shopList, setShopList] = useState<Bookmark[]>([]);
+
+  const [shopList, setShopList] = useState<BookmarkShop[]>([]);
+
   const bookmarkDeleteMutation = useMutation({
     mutationFn: () =>
       postBookmarkDelete({
@@ -63,32 +61,35 @@ export default function PaginatedBookmarkList({
           isOpen: false,
           selectedBookmarkList: [],
         }));
+        Swal.fire({
+          icon: 'success',
+          title: '북마크 삭제 성공',
+          text: '성공적으로 삭제했습니다!',
+        });
         return;
       }
       setBookmarkDeleteModal((prev) => ({
         ...prev,
         isOpen: false,
       }));
-      alert('북마크 삭제 실패! 다시, 시도해주세요');
+      Swal.fire({
+        icon: 'error',
+        title: '북마크 삭제 실패',
+        text: '다시 시도해주세요!',
+      });
     },
     onError: () => {
       setBookmarkDeleteModal((prev) => ({
         ...prev,
         isOpen: false,
       }));
-      alert('삭제에 실패했습니다! 다시 시도해보세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '북마크 삭제 실패',
+        text: '다시 시도해주세요!',
+      });
     },
   });
-
-  useEffect(() => {
-    if (!BookmarkData) return;
-    setShopList([
-      ...BookmarkData.data.shopList.map((cur: any) => ({
-        ...cur,
-        isSelected: false,
-      })),
-    ]);
-  }, []);
 
   useEffect(() => {
     setBookmarkDeleteModal((prev) => ({
@@ -102,6 +103,13 @@ export default function PaginatedBookmarkList({
   }, [currentPage]);
 
   if (isLoading) return <div>로딩중...</div>;
+
+  setShopList([
+    ...BookmarkData.data.shopList.map((cur: Shop) => ({
+      ...cur,
+      isSelected: false,
+    })),
+  ]);
 
   const listItemCount = usePage === 'myPage' ? 5 : 4;
   const totalPageLength = Math.ceil(shopList.length / listItemCount);
@@ -125,7 +133,11 @@ export default function PaginatedBookmarkList({
 
   const handleClickModalOpen = () => {
     if (selectedBookmarkList.length === 0) {
-      alert('최소 1개 이상의 북마크를 선택해주세요!');
+      Swal.fire({
+        icon: 'error',
+        title: '북마크 삭제 실패',
+        text: '최소 1개 이상의 북마크를 선택해주세요!',
+      });
       return;
     }
     setBookmarkDeleteModal((prev) => ({ ...prev, isOpen: true }));

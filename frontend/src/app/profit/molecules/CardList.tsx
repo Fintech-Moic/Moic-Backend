@@ -4,17 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import CardListItem from '../atoms/CardListItem';
+import { Card } from '../../../types/card';
 import { postCardRegist } from '@/api/card';
 import { filterOptionAtom } from '@/store/atoms/header';
 
-interface Card {
-  id: string;
-  company: string;
-  type: string;
-  name: string;
-  cardImage: string;
-  mine: boolean;
-}
 interface CardListProps {
   list: Array<Card>;
   currentPage: number;
@@ -78,7 +71,7 @@ export default function CardList({
   };
   return (
     <div
-      className="flex flex-col gap-10 justify-center items-start"
+      className="flex flex-col gap-14 justify-center items-start"
       onClick={handleClickCardItem}
       aria-hidden="true"
     >

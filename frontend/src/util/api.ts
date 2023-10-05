@@ -48,8 +48,7 @@ export async function fetchPost(props: FetchProps) {
           isAuth: false,
           data: { accessToken: localStorage.getItem('access_token') as string },
         });
-        if (refreshingRes.statusText !== 200 || refreshingRes.errorCode)
-          return refreshingRes;
+        if (refreshingRes.message !== 'Refresh') return refreshingRes;
         localStorage.setItem('access_token', refreshingRes.data.token);
         const reResponse: any = await fetchPost({
           ...props,
@@ -101,8 +100,7 @@ export async function fetchGet(props: FetchProps) {
           isAuth: false,
           data: { accessToken: localStorage.getItem('access_token') as string },
         });
-        if (refreshingRes.statusText !== 200 || refreshingRes.errorCode)
-          return refreshingRes;
+        if (refreshingRes.message !== 'Refresh') return refreshingRes;
         localStorage.setItem('access_token', refreshingRes.data.token);
 
         const reResponse: any = await fetchPost({

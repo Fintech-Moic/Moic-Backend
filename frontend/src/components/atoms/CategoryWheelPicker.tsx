@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useAtomValue } from 'jotai';
+import { useRouter } from 'next/navigation';
 import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
 
 interface WheelPickerProps {
   options: string[];
@@ -13,7 +13,6 @@ interface WheelPickerProps {
 function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
-  const [categoryShop, setCategoryShop] = useState({});
   const router = useRouter();
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -28,12 +27,6 @@ function Picker({ options }: WheelPickerProps) {
           curLoc.lng
         );
         console.log(selectedOption, data);
-        router.push('/map/place')
-
-        router.push({
-          pathname: `/map/categoryResult`,
-          query: { categoryShop: JSON.stringify(data) },
-        });
       } else {
         Swal.fire('옵션이 선택되지 않았어요');
       }

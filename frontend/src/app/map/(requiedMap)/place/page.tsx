@@ -2,10 +2,11 @@
 
 'use client';
 
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
@@ -13,11 +14,10 @@ import {
   getSearchedPlace,
   getDirection,
   getBenefit,
-  getImageSearchResults
+  getImageSearchResults,
 } from '@/api/map';
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
-import Swal from 'sweetalert2';
 
 export default function Page() {
   const searchResult = useAtomValue(searchResultAtom);
@@ -30,29 +30,13 @@ export default function Page() {
   const [mapPath, setMapPath] = useState([]);
   const [far, setFar] = useState('');
   const [imageURL, setImageURL] = useState('');
-  let timerInterval: any;
 
   useEffect(() => {
-    Swal.fire({
-      title: '혜택 지도를 불러오고 있어요',
-      html: '혜택을 받을 수 있는 가맹점을 검색해보세요',
-      timer: 1000,
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-        const b = Swal.getHtmlContainer().querySelector('b');
-        timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      },
-    }).then((result) => {
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log('I was closed by the timer');
-      }
-    });
+    Swal.fire(
+      '혜택 지도 페이지는 위치 정보를 필수로 수집합니다',
+      '동의하지 않을 시 서비스 사용이 불가합니다',
+      'warning'
+    );
   }, []);
 
   const ResultClickEvent = async (result: string) => {

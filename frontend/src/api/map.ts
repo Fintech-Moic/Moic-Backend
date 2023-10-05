@@ -103,8 +103,8 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
         }
       });
     });
-    const time = data.routes[0].sections[0].duration;
-    return { props: { time, linePath } };
+    const howfar = data.routes[0].sections[0].distance;
+    return { props: { howfar, linePath } };
   } catch (error) {
     console.error('Error:', error);
     return error;

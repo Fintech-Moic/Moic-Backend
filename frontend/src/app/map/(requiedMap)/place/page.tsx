@@ -2,7 +2,7 @@
 
 'use client';
 
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import SearchBox from '../../molecules/FunctionalSearchBox';
@@ -21,14 +21,16 @@ export default function Page() {
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
 
+  useEffect(() => {
+    alert('Finished loading');
+  }, []);
+
   /**
    * 검색어 클릭 시 가맹점 정보 불러오기
    */
   const ResultClickEvent = async (result: string) => {
     try {
       const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
-      console.log(data);
-      console.log(result);
       // const logo = await getLogoImage(); 로고 API 사용 여부 확정 후 주석 해제
       setShopLocs(data.data.shopList);
       // setShopLogo(logo) 로고 API 사용 여부 확정 후 주석 해제
@@ -71,7 +73,6 @@ export default function Page() {
     try {
       const MyBenefitInfo = await getBenefit(shop.shopName, shop.shopLocation);
       const data: CardData = MyBenefitInfo.data.benefits;
-      console.log(data);
       setBenefitInfo(data);
     } catch (error) {
       console.error('혜택 정보 불러오기 실패');

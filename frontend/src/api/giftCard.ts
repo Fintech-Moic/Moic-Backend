@@ -1,6 +1,6 @@
 import { fetchGet, fetchPost } from '../util/api';
 
-export const postGiftRegist = async (formData: FormData) =>
+export const postGiftRegist = async (formData: any) =>
   fetchPost({
     url: '/gift/regist',
     data: formData,

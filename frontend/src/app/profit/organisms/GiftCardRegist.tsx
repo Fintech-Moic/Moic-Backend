@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import GiftCardRegistTitle from '../atoms/GiftCardRegistTitle';
 import FillButton from '@/components/atoms/FillButton';
 import { postGiftRegist } from '@/api/giftCard';
-
+import BlackFileUploadIcon from '@/../public/assets/BlackFileUploadIcon.svg';
 /** 기프티콘 이미지를 통한 등록을 지원하는 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
@@ -39,13 +39,18 @@ export default function GiftCardRegist() {
         !Object.keys(data).includes('status')
       ) {
         Swal.fire({
-          icon: 'error',
-          title: '기프티콘 등록 실패',
-          text: '등록에 실패했습니다. 다시 시도해주세요!',
+          icon: 'success',
+          title: '기프티콘 등록 성공',
+          text: '등록에 성공했습니다',
         });
+        router.back();
         return;
       }
-      router.back();
+      Swal.fire({
+        icon: 'error',
+        title: '기프티콘 등록 실패',
+        text: '등록에 실패했습니다. 다시 시도해주세요!',
+      });
     },
     onError: () => {
       Swal.fire({
@@ -88,7 +93,7 @@ export default function GiftCardRegist() {
           />
         ) : (
           <Image
-            src="/assets/BlackFileUploadIcon.svg"
+            src={BlackFileUploadIcon}
             alt="파일업로드"
             width={104}
             height={104}

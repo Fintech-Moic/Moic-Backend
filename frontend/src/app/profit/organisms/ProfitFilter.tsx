@@ -66,7 +66,7 @@ export default function ProfitFilter() {
     setIsSwitchOn((prev) => !prev);
   }, [setIsSwitchOn]);
 
-  if (isLoading) return <div>loading ...</div>;
+  if (isLoading) return <div />;
 
   const companyList = [{ id: '카드사', value: '카드사' }];
   if (allCardData && 'companyList' in allCardData) {

@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import Swal from 'sweetalert2';
+import Image from 'next/image';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitCardCarousel from '../molecules/ProfitCardCarousel';
 import CardEmptyRegistButton from '../atoms/CardEmptyRegistButton';
@@ -53,8 +54,18 @@ export default function MyCardContainer() {
       });
     },
   });
-
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center flex-col gap-5">
+        <div className="w-8 h-5 bg-Skeleton rounded-lg" />
+        <div className="w-80 h-32 bg-Skeleton rounded-lg" />
+        <div className="flex justify-center items-center flex-col gap-1">
+          <div className="w-5 h-4 bg-Skeleton rounded-lg" />
+          <div className="w-[116px] h-[26px] bg-Skeleton rounded-lg" />
+        </div>
+      </div>
+    );
+  }
   const { cardList } = data.data;
 
   if (cardList.length === 0) return <CardEmptyRegistButton />;
@@ -93,10 +104,11 @@ export default function MyCardContainer() {
             <div className="flex flex-col gap-16 justify-center items-center w-full h-full">
               <TitleSentence title="" sentence="이 카드를 삭제하실 건가요?" />
               <div className="flex flex-col justify-center items-center gap-4">
-                <img
+                <Image
+                  width={128}
+                  height={80}
                   src={deleteCardInfo.cardImage}
                   alt="삭제카드이미지"
-                  className="w-32 h-20"
                 />
                 <CarouselTitleSentence
                   firstTitle={deleteCardInfo.company}

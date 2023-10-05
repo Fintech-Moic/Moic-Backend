@@ -30,6 +30,7 @@ interface PaginatedBookmarkListProps {
 export default function PaginatedBookmarkList({
   usePage,
 }: PaginatedBookmarkListProps) {
+  const [cnt, setCnt] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [listType, setListType] = useState('read');
   const [{ isOpen, selectedBookmarkList }, setBookmarkDeleteModal] = useAtom(
@@ -47,7 +48,6 @@ export default function PaginatedBookmarkList({
   const bookmarkDeleteMutation = useMutation({
     mutationFn: () =>
       postBookmarkDelete({
-        userId: 'test1234',
         shopList: selectedBookmarkList,
       }),
     onSuccess: (data) => {
@@ -103,13 +103,16 @@ export default function PaginatedBookmarkList({
   }, [currentPage]);
 
   if (isLoading) return <div>로딩중...</div>;
-
-  setShopList([
-    ...BookmarkData.data.shopList.map((cur: Shop) => ({
-      ...cur,
-      isSelected: false,
-    })),
-  ]);
+  const { shopList: serverShopList } = BookmarkData.data;
+  if (cnt === 0) {
+    setShopList(() => [
+      ...serverShopList.map((cur: Shop) => ({
+        ...cur,
+        isSelected: false,
+      })),
+    ]);
+    setCnt((prev) => prev + 1);
+  }
 
   const listItemCount = usePage === 'myPage' ? 5 : 4;
   const totalPageLength = Math.ceil(shopList.length / listItemCount);
@@ -155,7 +158,7 @@ export default function PaginatedBookmarkList({
         </div>
       ) : (
         <>
-          {isOpen && selectedBookmarkList && (
+          {isOpen && selectedBookmarkList && shopList && (
             <Modal>
               <div className="flex flex-col justify-center gap-20 items-center w-full">
                 <TitleSentence

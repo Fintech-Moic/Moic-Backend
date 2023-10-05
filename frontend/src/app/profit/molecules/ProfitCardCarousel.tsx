@@ -14,6 +14,7 @@ import CarouselCardItem from '../atoms/CarouselCardItem';
 import BlackLeftArrowIcon from '@/../public/assets/BlackLeftArrowIcon.svg';
 import BlackRightArrowIcon from '@/../public/assets/BlackRightArrowIcon.svg';
 import { cardDeleteModalAtom } from '@/store/atoms/modal';
+import CardRegistImage from '@/../public/CardRegist.png';
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any }) {
   const { className, style, onClick } = props;
@@ -125,11 +126,13 @@ export default function ProfitCardCarousel({
     <div className="w-80 h-32 cursor-pointer [&_.slick-slide]:w-20 [&_.slick-slide]:h-32 [&_.slick-slide]:relative">
       <Slider {...settings}>
         <h3>
-          <img
-            className="w-20 h-32 border-solid border-2 border-white shadow-md rounded-[10px] transform"
-            src="/CardRegist.png"
-            onClick={handleClickRegist}
+          <Image
+            width={80}
+            height={128}
+            src={CardRegistImage}
             alt="카드등록"
+            className="border-solid border-2 border-white shadow-md rounded-[10px] transform"
+            onClick={handleClickRegist}
           />
         </h3>
 

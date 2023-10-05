@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAtom } from 'jotai';
 import Swal from 'sweetalert2';
+import Image from 'next/image';
 import NumberProgress from '../atoms/NumberProgress';
 import ProfitGiftCarousel from '../molecules/ProfitGiftCarousel';
 import GiftCardEmptyRegistButton from '../atoms/GiftCardEmptyRegistButton';
@@ -12,7 +13,6 @@ import Modal from '@/components/atoms/Modal';
 import TitleSentence from '@/components/atoms/TitleSentence';
 import { giftDeleteModalAtom } from '@/store/atoms/modal';
 import BothButtonGroup from '@/components/molecules/BothButtonGroup';
-
 /** 내 기프티콘 조회 페이지에서, 현재 순서, 캐러셀 또는 빈 기프티콘 페이지임을 보여주는 organisms 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
@@ -65,7 +65,14 @@ export default function MyGiftCardContainer() {
     },
   });
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center flex-col gap-5">
+        <div className="w-8 h-5 bg-Skeleton rounded-lg" />
+        <div className="w-80 h-32 bg-Skeleton rounded-lg" />
+      </div>
+    );
+  }
 
   const giftList = giftData.data;
 
@@ -101,10 +108,11 @@ export default function MyGiftCardContainer() {
           <div className="flex flex-col gap-16 justify-center items-center w-full h-full">
             <TitleSentence title="" sentence="이 기프티콘을 삭제하실 건가요?" />
             <div className="flex flex-col justify-center items-center gap-4">
-              <img
+              <Image
+                width={160}
+                height={240}
                 src={deleteGiftInfo.imageUrl}
                 alt="삭제기프티콘이미지"
-                className="w-40 h-60"
               />
             </div>
             <BothButtonGroup

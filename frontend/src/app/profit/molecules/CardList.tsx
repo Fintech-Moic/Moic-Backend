@@ -30,8 +30,8 @@ export default function CardList({
   });
   const queryClient = useQueryClient();
 
-  const handleClickCardItem = async (e: React.MouseEvent<HTMLDivElement>) => {
-    const closestCardItem = (e.target as HTMLDivElement).closest('div');
+  const handleClickCardItem = async (e: React.MouseEvent<HTMLElement>) => {
+    const closestCardItem = (e.target as HTMLElement).closest('.CardListItem');
     if (!closestCardItem) return;
     const curCardName = closestCardItem.id as string;
     switch (listType) {
@@ -62,6 +62,7 @@ export default function CardList({
                 },
               })
             );
+            queryClient.invalidateQueries(['getMyCard']);
           },
         });
         break;

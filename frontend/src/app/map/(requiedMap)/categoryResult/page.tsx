@@ -8,7 +8,6 @@ import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
 import SearchBox from '../../molecules/FunctionalSearchBox';
 import curLocAtom from '@/store/atoms/curLocAtom';
-import searchResultAtom from '@/store/atoms/searchResultAtom';
 import {
   getSearchedPlace,
   getDirection,
@@ -18,11 +17,11 @@ import {
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
-  const searchResult = useAtomValue(searchResultAtom);
   const curLoc = useAtomValue<any>(curLocAtom);
-  const [shopLocs, setShopLocs] = useState([]);
+  // const [shopLocs, setShopLocs] = useState([]);
   const [selectedShop, setSelectedShop] = useState<any>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [benefitInfo, setBenefitInfo] = useState<any>([]);
@@ -54,11 +53,13 @@ export default function Page() {
       }
     });
   }, []);
-
-  const ResultClickEvent = async (result: string) => {
+  const router = useRouter();
+  const { categoryShop } = router.query;
+  const categoryShopData = JSON.parse(categoryShop as string);
+  const GetShopDetail = async (result: string) => {
     try {
-      const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
-      setShopLocs(data.data.shopList);
+      // const data = await getSearchedPlace(result, curLoc.lat, curLoc.lng);
+      // setShopLocs(data.data.shopList);
       const logo = await getImageSearchResults(`${result} 로고 고화질`);
       setImageURL(logo.image_url);
     } catch (error) {
@@ -72,6 +73,12 @@ export default function Page() {
       console.error('유저 아이디 불러오기 실패', error);
     }
   };
+
+
+
+
+
+
 
   const handleMarkerClick = async (shop: any) => {
     setSelectedShop(shop);
@@ -120,6 +127,8 @@ export default function Page() {
     }
   };
 
+  console.log(categoryResult)
+
   return (
     <>
       <Map
@@ -135,13 +144,13 @@ export default function Page() {
         }}
         level={4}
       >
-        <div className="mt-7 flex justify-center">
+        {/* <div className="mt-7 flex justify-center">
           <SearchBox
             onSubmit={(event: FormEvent<HTMLFormElement>) => {
               throw new Error('검색 과정에서 오류가 발생하였습니다.');
             }}
           />
-        </div>
+        </div> */}
 
         <Polyline
           path={[mapPath]}
@@ -151,7 +160,7 @@ export default function Page() {
           strokeStyle="solid"
         />
 
-        <div className="bg-white shadow-md rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
+        {/* <div className="bg-white shadow-md rounded-[10px] w-10/12 mx-auto mt-2 font-suit text-xl">
           {searchResult.map((result, index) => (
             <div
               key={result + 1}
@@ -167,10 +176,10 @@ export default function Page() {
               {result}
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* 인포 메시지 */}
-        {shopLocs.map((loc: any, index) => {
+        {categoryResult.map((loc: any, index) => {
           if (loc.benefits || loc.gifts) {
             return (
               <MapMarker

@@ -3,6 +3,8 @@ import { useAtomValue } from 'jotai';
 import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 interface WheelPickerProps {
   options: string[];
@@ -11,7 +13,8 @@ interface WheelPickerProps {
 function Picker({ options }: WheelPickerProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
-
+  const [categoryShop, setCategoryShop] = useState({});
+  const router = useRouter();
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
   };
@@ -25,8 +28,14 @@ function Picker({ options }: WheelPickerProps) {
           curLoc.lng
         );
         console.log(selectedOption, data);
+        router.push('/map/place')
+
+        router.push({
+          pathname: `/map/categoryResult`,
+          query: { categoryShop: JSON.stringify(data) },
+        });
       } else {
-        console.error('옵션이 선택되지 않았습니다.');
+        Swal.fire('옵션이 선택되지 않았어요');
       }
     } catch (error) {
       console.error('데이터 가져오기 오류', error);

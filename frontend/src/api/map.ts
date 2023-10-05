@@ -45,40 +45,6 @@ export async function getImageSearchResults(query: string) {
   return data.documents[0];
 }
 
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export async function getImageSearchResult(
-  result: string,
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const query = result;
-  const displaySize = 1;
-  const apiUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(
-    query
-  )}&display=${displaySize}`;
-
-  try {
-    const response = await fetch(apiUrl, {
-      headers: {
-        'X-Naver-Client-Id': process.env.NAVER_API_KEY,
-        'X-Naver-Client-Secret': process.env.NAVER_API_SECRET,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`네이버 API 요청 실패: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    res.status(200).json(data);
-  } catch (error) {
-    console.error('네이버 API 오류:', error);
-    res.status(500).json({ error: '네이버 API 오류 발생' });
-  }
-}
-
 export const getBenefit = (shopName: string, shopLocation: string) =>
   fetchGet({
     url: `/map/shops/detail?shopName=${shopName}&shopLocation=${shopLocation}`,

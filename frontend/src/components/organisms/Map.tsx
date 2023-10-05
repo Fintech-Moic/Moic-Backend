@@ -19,35 +19,35 @@ export default function KakaoMap() {
   /**
    * 현 위치 찾기
    */
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setState((prev) => ({
-            ...prev,
-            center: {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            },
-            isLoading: false,
-          }));
-        },
-        (err) => {
-          setState((prev) => ({
-            ...prev,
-            errMsg: err.message,
-            isLoading: false,
-          }));
-        }
-      );
-    } else {
-      setState((prev) => ({
-        ...prev,
-        errMsg: '일시적인 오류로 내 위치 찾기 기능을 사용할 수 없습니다',
-        isLoading: false,
-      }));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setState((prev) => ({
+  //           ...prev,
+  //           center: {
+  //             lat: position.coords.latitude,
+  //             lng: position.coords.longitude,
+  //           },
+  //           isLoading: false,
+  //         }));
+  //       },
+  //       (err) => {
+  //         setState((prev) => ({
+  //           ...prev,
+  //           errMsg: err.message,
+  //           isLoading: false,
+  //         }));
+  //       }
+  //     );
+  //   } else {
+  //     setState((prev) => ({
+  //       ...prev,
+  //       errMsg: '일시적인 오류로 내 위치 찾기 기능을 사용할 수 없습니다',
+  //       isLoading: false,
+  //     }));
+  //   }
+  // }, []);
 
   const { error }: any = useKakaoLoader({
     appkey: process.env.NEXT_PUBLIC_APPKEY!,

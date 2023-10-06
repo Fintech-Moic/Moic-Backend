@@ -8,7 +8,11 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  title: 'moic',
+  description: '이익이 모인다. 모익!',
   manifest: '/manifest.json',
+  icons: { apple: '/icon-192x192.png' },
+  themeColor: '#fff',
 };
 
 export default function RootLayout({

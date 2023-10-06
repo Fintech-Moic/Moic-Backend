@@ -1,12 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const withPWA = require('next-pwa');
+const nextConfig = {
+  ...withPWA({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+    customWorkerDir: 'src/worker',
+  }),
+};
 
-const withPWA = require('next-pwa')({
-  customWorkerDir: 'src/worker',
-  dest: 'public',
-});
-
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig;
 
 module.exports = {
   output: 'standalone',

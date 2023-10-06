@@ -18,6 +18,7 @@ import {
 } from '@/api/map';
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
+import DispatchPin from '@/../public/DistancePin.png';
 
 export default function Page() {
   const searchResult = useAtomValue(searchResultAtom);
@@ -179,7 +180,7 @@ export default function Page() {
           <div className="flex flex-col justify-center mt-7">
             <div className="flex flex-row justify-center">
               <div>
-                <img
+                <Image
                   referrerPolicy="no-referrer"
                   src={imageURL}
                   alt="로고"
@@ -225,7 +226,7 @@ export default function Page() {
                 <div className="flex flex-row mt-1 text-base text-Primary font-['SUIT']">
                   <span>
                     <Image
-                      src="/DistancePin.png"
+                      src={DispatchPin}
                       width="20"
                       height="20"
                       alt="거리 핀"

@@ -35,7 +35,6 @@ function Picker({ options }: WheelPickerProps) {
           curLoc.lat,
           curLoc.lng
         );
-        console.log(selectedOption, data);
         if (data.shopList) {
           Swal.fire(
             '혜택을 받을 수 있는 카테고리가 없네요',

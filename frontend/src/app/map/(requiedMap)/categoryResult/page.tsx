@@ -48,7 +48,6 @@ export default function Page() {
 
   // const cache = useQueryClient();
   // const data = cache.getQueryData(['getCategoryShop']) as any;
-  // console.log(data)
 
   const ResultClickEvent = async (result: string) => {
     try {

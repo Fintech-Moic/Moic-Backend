@@ -1,5 +1,18 @@
 ![header](https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=Moi'c&fontSize=90)
 
+# :green_heart: 팀원 역할 및 소개
+| Backend | 역할 | 담당 |
+| --- | --- | --- |
+| 임혜지 | 팀장 | Jira, Entity 작성, 카드/지도/북마크 api, Redis GeoOperations 활용, QueryDSL 적용 |
+| 김성재 | 팀원 | Backend 환경, Infra, 기프티콘 api, Redis Z-Set기반 자동완성, 기타 캐싱 처리, 네이버 클로바 OCR 및 챗 GPT 외부 api 연동 |
+| 김태현 | 팀원 | SpringSecurity적용 JWT 기반 회원 관리 기능 구현, OAuth2 및 SMTP 적용 및 구현 |
+
+| Frontend | 역할 | 담당 |
+| --- | --- | --- |
+| 김수환 | 팀원 | 카드, 기프티콘 전체-상세 조회, 추가, 삭제 , 북마크 조회, 삭제 |
+| 배희진 | 팀원 | 지도, 모빌리티(길찾기) API, 가맹점 혜택 상세 조회 컴포넌트 |
+| 이의찬 | 팀원 | 로그인, 회원가입, 아이디/비밀번호 찾기, 마이페이지 등 회원관리 및 보안 |
+
 ## :blush: 컨셉
 ### 잊고 지나치는 혜택들을 간편하게 "모아모아"
 

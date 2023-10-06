@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
+// import { useRouter } from 'next/navigation';
 import { useAtomValue } from 'jotai';
 import Swal from 'sweetalert2';
 import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import useCustomQuery from '@/hooks/useCustomQuery';
 
 interface WheelPickerProps {
   options: string[];
 }
 
 function Picker({ options }: WheelPickerProps) {
+  // const mutation = useMutation({mutationKey : ["getCategoryShop"], mutationFn : (selectedOption: any, lat: any, lng: any) => getCategoryShop(selectedOption as string, lat, lng)})
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
+  // const router = useRouter()
 
   const handleConfirmButtonClick = async () => {
+    //   const {data, isLoading} = useCustomQuery({
+    //     queryKey: ['getCategoryShop', id],
+    //     queryFn: () => getCategoryShop(selectedOption as string, curLoc.lat, curLoc.lng),
+    //     staleTime: 1000 * 60 * 100,
+    //     refetchOnWindowFocus: false,
+    //     enabled: !!id,
+    // }, router
+    // )
+
     try {
       if (selectedOption) {
         const data = await getCategoryShop(
@@ -22,7 +36,7 @@ function Picker({ options }: WheelPickerProps) {
           curLoc.lng
         );
         console.log(selectedOption, data);
-        if (!data.shopList) {
+        if (data.shopList) {
           Swal.fire(
             '혜택을 받을 수 있는 카테고리가 없네요',
             '다른 카테고리를 선택해주세요',

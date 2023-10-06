@@ -108,11 +108,11 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
 }
 
 export const addMyBookmark = async (data: {
-  shopName: string,
-  shopLocation: string,
+  shopName: string;
+  shopLocation: string;
 }) =>
   fetchPost({
     url: `/bkm/regist`,
-    data: data,
+    data,
     isAuth: true,
   });

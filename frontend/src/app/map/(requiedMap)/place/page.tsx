@@ -4,7 +4,7 @@
 
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useSetAtom, useAtomValue } from 'jotai';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
@@ -17,6 +17,7 @@ import {
   getDirection,
   getBenefit,
   getImageSearchResults,
+  addMyBookmark,
 } from '@/api/map';
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
@@ -37,7 +38,7 @@ export default function Page() {
   const [far, setFar] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [isMount, setIsMount] = useState(false);
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     setIsMount(true);
@@ -65,6 +66,21 @@ export default function Page() {
       setUserId(data.data.name);
     } catch (error) {
       console.error('유저 아이디 불러오기 실패', error);
+    }
+  };
+
+  const BookmarkClick = async (shop: any) => {
+    try {
+      const { address, benefits, bookmark, category, gifts, latitude, longitude, shopLocation, shopName } = shop;
+      await addMyBookmark({shopName, shopLocation});
+      Swal.fire(
+        '북마크 등록이 완료되었어요',
+        '북마크 리스트를 확인해보세요',
+        'success'
+      );
+      router.push('/myPage/bookMark')
+    } catch (error) {
+      console.error('Error adding bookmark', error);
     }
   };
 
@@ -235,7 +251,13 @@ export default function Page() {
                     {userId}님을 위한 혜택 보러 가기
                   </span>
                   <span>
-                    <button onClick={() => router.push('/myPage/bookMark')}>
+                    <button
+                      onClick={() => {
+                        BookmarkClick(selectedShop);
+                      }}
+                      onKeyDown={() => {
+                        BookmarkClick(selectedShop);
+                      }}>
                       북마크
                     </button>
                   </span>

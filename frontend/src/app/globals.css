@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'SUIT';
+  src: url(../../public/assets/font/SUIT-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SUIT';
+  src: url(../../public/assets/font/SUIT-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'JALNAN';
+  src: url(../../public/assets/font/Jalnan.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@layer components {
+  .t1 {
+    @apply font-jalnan text-80 font-normal leading-120;
+  }
+
+  .t2 {
+    @apply font-jalnan text-36 font-normal leading-120;
+  }
+
+  .t3 {
+    @apply font-jalnan text-28 font-normal leading-120;
+  }
+
+  .t4 {
+    @apply font-jalnan text-24 font-normal leading-120;
+  }
+
+  .h1b {
+    @apply font-suit text-32 font-semibold leading-120;
+  }
+
+  .h1r {
+    @apply font-suit text-32 font-normal leading-120;
+  }
+
+  .h2b {
+    @apply font-suit text-28 font-semibold leading-120;
+  }
+
+  .h2r {
+    @apply font-suit text-28 font-normal leading-120;
+  }
+
+  .h3b {
+    @apply font-suit text-24 font-semibold leading-120;
+  }
+
+  .h3r {
+    @apply font-suit text-24 font-normal leading-120;
+  }
+
+  .h4b {
+    @apply font-suit text-20 font-semibold leading-130;
+  }
+
+  .h4r {
+    @apply font-suit text-20 font-normal leading-130;
+  }
+
+  .p1b {
+    @apply font-suit text-18 font-semibold leading-140;
+  }
+
+  .p1r {
+    @apply font-suit text-18 font-normal leading-140;
+  }
+
+  .p2b {
+    @apply font-suit text-16 font-semibold leading-140;
+  }
+
+  .p2r {
+    @apply font-suit text-16 font-normal leading-140;
+  }
+
+  .p3b {
+    @apply font-suit text-14 font-semibold leading-140;
+  }
+
+  .p3r {
+    @apply font-suit text-14 font-normal leading-140;
+  }
+
+  .captionb {
+    @apply font-suit text-12 font-semibold leading-140;
+  }
+
+  .captionr {
+    @apply font-suit text-12 font-normal leading-140;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+::-webkit-scrollbar-track {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  padding-right: 5px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-clip: padding-box;
+  background-color: hsla(0, 0%, 42%, 0.29);
+  border: 3px solid transparent;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-prev {
+  left: 3% !important;
+  z-index: 1;
+} */
+
+/* 지원한다면 div-button-next/Image 으로 수정 */
+/* .slick-next {
+  right: 3% !important;
+  z-index: 1;
+} */
+
+ @-webkit-keyframes shadow-drop-2-tb {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+    -webkit-box-shadow: 0 -12px 20px -12px rgba(0, 0, 0, 0.35), 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 -12px 20px -12px rgba(0, 0, 0, 0.35), 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+@keyframes shadow-drop-2-tb {
+  0% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-transform: translateZ(50px);
+            transform: translateZ(50px);
+    -webkit-box-shadow: 0 -12px 20px -12px rgba(0, 0, 0, 0.35), 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 -12px 20px -12px rgba(0, 0, 0, 0.35), 0 12px 20px -12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+* {
+  -webkit-tap-highlight-color : transparent;
+}

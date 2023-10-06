@@ -101,7 +101,7 @@ export default function Page() {
 
   const confirmPassword = handleSubmit(async (data) => {
     const result = await checkPassword(data);
-    if (result) {
+    if (result !== null) {
       if (toUpdate) {
         openPasswordUpdateModal();
       } else {

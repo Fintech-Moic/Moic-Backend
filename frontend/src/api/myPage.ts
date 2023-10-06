@@ -27,18 +27,31 @@ export const updateProfile = async (data: {
       title: '회원 정보 수정에 성공하였습니다.',
       text: '그렇습니다.',
     });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '회원 정보 수정에 실패하였습니다.',
+      text: '다시 시도해주세요.',
+    });
   }
-  Swal.fire({
-    icon: 'error',
-    title: '회원 정보 수정에 실패하였습니다.',
-    text: '다시 시도해주세요.',
-  });
   return result;
 };
 
 export const checkPassword = async (data: FieldValues) => {
-  const result = fetchPost({ url: '/user/check/password', data, isAuth: true });
-  return result;
+  const result = await fetchPost({
+    url: '/user/check/password',
+    data,
+    isAuth: true,
+  });
+  if (result.message !== undefined) {
+    return result;
+  }
+  Swal.fire({
+    icon: 'error',
+    title: '잘못된 비밀번호입니다.',
+    text: '다시 시도해주세요.',
+  });
+  return null;
 };
 
 export const updatePassword = async (data: FieldValues) => {
@@ -53,12 +66,14 @@ export const updatePassword = async (data: FieldValues) => {
       title: '비밀번호 변경에 성공하였습니다.',
       text: '그렇습니다.',
     });
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: '비밀번호 변경에 실패하였습니다.',
+      text: '다시 시도해주세요.',
+    });
   }
-  Swal.fire({
-    icon: 'error',
-    title: '비밀번호 변경에 실패하였습니다.',
-    text: '다시 시도해주세요.',
-  });
+
   return result;
 };
 

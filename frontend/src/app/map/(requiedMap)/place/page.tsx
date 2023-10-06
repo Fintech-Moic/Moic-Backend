@@ -21,6 +21,8 @@ import {
 import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
 import DispatchPin from '@/../public/DistancePin.png';
+import Modal from '@/components/atoms/Modal';
+import Spinner from '@/../public/assets/images/spinner.gif';
 
 export default function Page() {
   const setSelectedResult = useSetAtom(selectedResultAtom);
@@ -34,14 +36,11 @@ export default function Page() {
   const [mapPath, setMapPath] = useState([]);
   const [far, setFar] = useState('');
   const [imageURL, setImageURL] = useState('');
+  const [isMount, setIsMount] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    Swal.fire(
-      '혜택 지도 페이지는 위치 정보를 필수로 수집합니다',
-      '동의하지 않을 시 서비스 사용이 불가합니다',
-      'warning'
-    );
+    setIsMount(true);
   }, []);
 
   const ResultClickEvent = async (result: string) => {
@@ -118,6 +117,11 @@ export default function Page() {
 
   return (
     <>
+      {!isMount && (
+        <Modal haveContainer={false}>
+          <Image src={Spinner} width={40} height={40} alt="로딩" />
+        </Modal>
+      )}
       <Map
         center={{
           lat: 37.50135,

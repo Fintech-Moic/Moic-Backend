@@ -41,34 +41,44 @@
 | 목업 | https://www.figma.com/file/HjKzbmqABJ1DIyrdBsxyKp/A208-Mockup?type=design&node-id=0%3A1&mode=design&t=uuPyU7XmuUxtSoTx-1 |
 
 ## :ski: [기술 스택](https://ssafy-fintech.notion.site/eafdde71c7ee4bc7bbb84aea3c13c108?pvs=4)
-> ### :bullettrain_front: Front-end
-> - Next.js v13.4.19
-> - Typescript v5.1
-> - Tailwind CSS v3.3.2
-> - Next.js (v13.4.19)
-> - Typescript (v5.1)
-> - Tailwind CSS (v3.3.2)
-> - TurboPack
-> - pnpm v8.7.1
-> - React Query v4.33
-> - Jotai v2.4.1
-> - Framer-Motion v10.16.4
-> - pnpm (v8.7.1)
-> - React Query (v4.33)
-> - Jotai (v2.4.1)
-> - Framer-Motion (v10.16.4)
-> - Eslint
-> - Prettier
+### 인프라
 
-> ### :bullettrain_front: Back-end
-> - Spring Boot v3.1.3
-> - JDK v17
-> - MariaDB v11.1.2
-> - Redis
-> - JPA
-> - QueryDSL
+![Untitled (5)](https://github.com/ssjjaa-algo/AlgoAndMySQL/assets/57981401/54c76aca-f80e-4eb5-979c-6864fc1e5e3e)
 
-### 시연 시나리오
+- EC2 (Ubuntu 20.04.6)
+- docker (24.0.5)
+- jenkins (jenkins/jenkins:jdk17)
+- nginx (1.18.0 Ubuntu)
+- S3
+
+### 관리 툴
+
+![Untitled (6)](https://github.com/ssjjaa-algo/AlgoAndMySQL/assets/57981401/6bb1b1a3-6145-4e0f-a476-44bd6989dab7)
+
+### 백엔드
+
+![Untitled (7)](https://github.com/ssjjaa-algo/AlgoAndMySQL/assets/57981401/f216084b-9eae-4bb7-8c84-ca39af97fe33)
+
+- Springboot 3.1.3
+- SpringSecurity 6.1.3
+- MariaDB 11.1.2
+- Redis 7.2.1
+- QueryDSL 5.0.0
+
+### 프론트엔드
+
+![Untitled (8)](https://github.com/ssjjaa-algo/AlgoAndMySQL/assets/57981401/1bc6b4ef-ab40-4da4-8f1c-d20d3cfd6c96)
+
+
+- Next.js 13. 4.19
+- Typescript 5.1
+- Tailwind CSS 3.3.2
+- React Query 4.33
+- Jotai 2.4.1
+- Framer-Motion 10.16.4
+
+
+## :star2: 시나리오
 
 <table>
     <tr align="center">

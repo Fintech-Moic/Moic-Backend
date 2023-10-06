@@ -35,7 +35,6 @@ export default function BookmarkList({
 }: CardListProps) {
   const [currentList, setCurrentList] = useState<BookmarkShop[]>([]);
   const setBookmarkDeleteModal = useSetAtom(bookmarkDeleteModalAtom);
-
   useEffect(() => {
     const curPageList = list.slice(
       (currentPage - 1) * listItemCount,

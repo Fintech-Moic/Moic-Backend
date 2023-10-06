@@ -6,7 +6,9 @@ const useCustomQuery = (options: any, router: any) => {
   if (
     data &&
     'errorCode' in data &&
-    (data.errorCode === 'SE005' || data.errorCode === 'SE003')
+    (data.errorCode === 'SE005' ||
+      data.errorCode === 'SE003' ||
+      data.errorCode === 'SE002')
   ) {
     router.replace('/auth/signIn');
   }

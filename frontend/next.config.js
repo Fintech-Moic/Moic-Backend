@@ -4,15 +4,29 @@ const nextConfig = {};
 const withPWA = require('next-pwa')({
   customWorkerDir: 'src/worker',
   dest: 'public',
-})
+});
 
+module.exports = withPWA(nextConfig);
 
 module.exports = {
-  reactStrictMode: true,
   output: 'standalone',
   experimental: {
     appDir: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.s3.ap-northeast-2.amazonaws.com',
+      },
+      {
+        protocol: 'http',
+        hostname: '*',
+      },
+      {
+        protocol: 'https',
+        hostname: '*',
+      },
+    ],
+  },
 };
-
-module.exports = withPWA(nextConfig);

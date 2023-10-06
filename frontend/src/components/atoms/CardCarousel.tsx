@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Image from 'next/image';
+import CardRegistImage from '@/../public/CardRegist.png';
 
 function SampleNextArrow(props: { className: any; style: any; onClick: any }) {
   const { className, style, onClick } = props;
@@ -82,9 +84,11 @@ export default function Page({ data }: { data: CardData }) {
     <div className="w-56 h-32 cursor-pointer z-50">
       <Slider {...settings}>
         <div>
-          <img
-            className="w-36 h-32 border-solid border-2 border-white shadow-md rounded-[10px]"
-            src="/CardRegist.png"
+          <Image
+            width={144}
+            height={128}
+            className="border-solid border-2 border-white shadow-md rounded-[10px]"
+            src={CardRegistImage}
             onClick={handleClick}
             alt="카드등록"
           />
@@ -99,7 +103,7 @@ export default function Page({ data }: { data: CardData }) {
           }) => (
             <div key={cardImageList.id}>
               <h3 className="origin-top-left rotate-90 w-32">
-                <img
+                <Image
                   className="border-solid border-2 border-white shadow-md rounded-[10px]"
                   src={cardImageList.cardImage}
                   alt="카드사진"

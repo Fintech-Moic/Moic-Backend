@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import CardSubTitle from './CardSubTitle';
-
+import GrayCardIcon from '@/../public/assets/GrayCardIcon.svg';
 /** 내 기프티콘 조회 페이지에서, 내 기프티콘이 없을 시 보여주는 컴포넌트
  * @returns {JSX.Element} 컴포넌트 반환
  */
@@ -20,7 +20,7 @@ export default function GiftCardEmptyRegistButton() {
       onClick={handleClick}
     >
       <Image
-        src="/assets/GrayCardIcon.svg"
+        src={GrayCardIcon}
         alt="빈기프티콘이미지"
         width={196}
         height={160}

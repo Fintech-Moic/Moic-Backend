@@ -4,6 +4,7 @@
 
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useSetAtom, useAtomValue } from 'jotai';
+import { useRouter } from 'next/router';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
@@ -33,6 +34,7 @@ export default function Page() {
   const [mapPath, setMapPath] = useState([]);
   const [far, setFar] = useState('');
   const [imageURL, setImageURL] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     Swal.fire(
@@ -227,6 +229,11 @@ export default function Page() {
                     role="presentation"
                   >
                     {userId}님을 위한 혜택 보러 가기
+                  </span>
+                  <span>
+                    <button onClick={() => router.push('/myPage/bookMark')}>
+                      북마크
+                    </button>
                   </span>
                 </div>
                 <div className="mt-1 text-black text-base text-Primary font-['SUIT']">

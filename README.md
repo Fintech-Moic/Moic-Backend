@@ -67,3 +67,214 @@
 > - Redis
 > - JPA
 > - QueryDSL
+
+### 시연 시나리오
+
+<table>
+    <tr align="center">
+        <td><B>스플래시</B></td>
+        <td><B>로그인</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![스플래시](https://github.com/Hyeon0706/imageRepository/assets/83438780/a3fdf1af-be01-44f3-8312-71b77191c296)
+        </td>
+        <td>
+            ![로그인](https://github.com/Hyeon0706/imageRepository/assets/83438780/31932f9a-c113-4372-837b-ad4c34124510)
+        </td>
+    </tr>
+</table>
+
+1. 최초에는 로그인 페이지로 이동하게 됩니다.
+    
+    로그인은 `회원가입/카카오/구글` 세가지 중 하나를 택할 수 있습니다.
+    
+    시연에서는 회원가입을 통한 로그인을 해보겠습니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>약관동의</B></td>
+        <td><B>정보입력</B></td>
+        <td><B>비밀번호 입력</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![회원가입1](https://github.com/Hyeon0706/imageRepository/assets/83438780/5758873e-73ca-4360-aa35-1787ab5f410b)
+        </td>
+        <td>
+            ![회원가입2](https://github.com/Hyeon0706/imageRepository/assets/83438780/e4725afb-47d3-483b-bc12-7628fb42bb59)
+        </td>
+        <td>
+            ![회원가입3](https://github.com/Hyeon0706/imageRepository/assets/83438780/79f869aa-ecd3-4151-8d15-6c688015f239)
+        </td>
+    </tr>
+</table>
+
+2. 회원가입 페이지는 위와 같습니다.
+    
+    성별과 년도를 제외하고는 모두 필수로 응답해야 합니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>회원 정보 찾기</B></td>
+        <td><B>아이디 찾기</B></td>
+        <td><B>비밀번호 찾기</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![아이디찾기1](https://github.com/Hyeon0706/imageRepository/assets/83438780/e37e4508-f4c3-4ec5-86a6-9a4957452446)
+        </td>
+        <td>
+            ![아이디찾기2](https://github.com/Hyeon0706/imageRepository/assets/83438780/591ba2e8-0352-4c69-aedf-556ef7be305d)
+        </td>
+        <td>
+            ![아이디찾기3](https://github.com/Hyeon0706/imageRepository/assets/83438780/e29625d1-8eb2-4f93-a693-28f3cb4c8752)
+        </td>
+    </tr>
+</table>
+
+3. 만약 아이디와 비밀번호를 잊어버렸다면, 찾기가 가능합니다.
+    
+    `비밀번호 찾기`의 경우에는 이메일 인증 번호 발송을 통한 본인 인증 후 비밀번호 변경이 가능합니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>메인 화면</B></td>
+        <td><B>우측 상단 메뉴</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![메인1](https://github.com/Hyeon0706/imageRepository/assets/83438780/d4a52d9d-c0a5-4eef-a123-f669f4d93313)
+        </td>
+        <td>
+            ![메인2](https://github.com/Hyeon0706/imageRepository/assets/83438780/aa4e987a-7e08-4788-b48d-8e41ba52cdd0)
+        </td>
+    </tr>
+</table>
+
+4. 로그인 이후 페이지입니다.
+    
+    홈에서는 `지도/경로 추천/기프티콘/카드` 페이지로 이동할 수 있습니다.
+    
+    드롭바에서는 `마이페이지/북마크 관리/VOC` 로 이동할 수 있습니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>회원 정보 확인</B></td>
+        <td><B>비밀번호 수정 1</B></td>
+        <td><B>비밀번호 수정 2</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![회원정보1](https://github.com/Hyeon0706/imageRepository/assets/83438780/e42da023-4d2b-4de6-9c9f-29d7a5aaf689)
+        </td>
+        <td>
+            ![회원정보2](https://github.com/Hyeon0706/imageRepository/assets/83438780/0d976389-a5a8-444a-9900-c5b219143a0c)
+        </td>
+        <td>
+            ![회원정보3](https://github.com/Hyeon0706/imageRepository/assets/83438780/b2e9903a-ff77-4618-b5ef-471887b88f0e)
+        </td>
+    </tr>
+</table>
+
+5. 마이페이지에서는 `회원정보 수정/비밀번호 수정/회원 탈퇴` 가 가능합니다.
+
+<table>
+    <tr align="center">
+        <td><B>북마크</B></td>
+        <td><B>문의사항</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![북마크](https://github.com/Hyeon0706/imageRepository/assets/83438780/2e0d118d-3952-4cf0-b3ce-6bdc7448e4c9)
+        </td>
+        <td>
+            ![문의](https://github.com/Hyeon0706/imageRepository/assets/83438780/73fa5d1a-e29a-4579-ad93-e4f385de2d9e)
+        </td>
+    </tr>
+</table>
+
+6. `북마크 조회`의 경우, 내가 설정한 북마크 리스트를 확인하고 수정할 수 있습니다.
+    
+    `VOC 등록`의 경우, 건의한 내용이 관리자 이메일로 발송됩니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>카드 등록</B></td>
+        <td><B>내 카드 목록</B></td>
+        <td><B>카드 상세 정보</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![카드1](https://github.com/Hyeon0706/imageRepository/assets/83438780/7429f61b-68e8-4f6a-946c-c6d2eea7eca3)
+        </td>
+        <td>
+            ![카드2](https://github.com/Hyeon0706/imageRepository/assets/83438780/b928cbd5-a304-43db-b379-f600e2e0d656)
+        </td>
+        <td>
+            ![카드3](https://github.com/Hyeon0706/imageRepository/assets/83438780/98aa4d0e-0a66-4783-9514-b82383aab222)
+        </td>
+    </tr>
+</table>
+
+7. `카드` 페이지에서는 `전체 카드 조회/내 카드 추가 및 삭제/카드별 혜택 확인`이 가능합니다.
+
+<table>
+    <tr align="center">
+        <td><B>카테고리 선택</B></td>
+        <td><B>자동완성</B></td>
+        <td><B>가맹점 상세 정보</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![지도1](https://github.com/Hyeon0706/imageRepository/assets/83438780/52906356-9abd-4e9a-8cc9-d0f6bdfba54e)
+        </td>
+        <td>
+            ![지도2](https://github.com/Hyeon0706/imageRepository/assets/83438780/8a9ed5b3-2be6-402b-b1c9-4424ad39dd98)
+        </td>
+        <td>
+            ![지도3](https://github.com/Hyeon0706/imageRepository/assets/83438780/aa13e357-c54a-4bd5-9dc6-5da2d2232d08)
+        </td>
+    </tr>
+</table>
+
+8. `지도` 페이지에서는 `카테고리별 조회/혜택 가맹점 검색/가맹점 상세조회`가 가능합니다.
+    
+    혜택 보러 가기를 클릭하면 카드와 혜택을 확인할 수 있습니다.
+    
+
+<table>
+    <tr align="center">
+        <td><B>내 기프티콘 목록</B></td>
+        <td><B>기프티콘 등록 1</B></td>
+        <td><B>기프티콘 등록 2</B></td>
+        <td><B>기프티콘 등록 성공</B></td>
+        <td><B>기프티콘 상세 조회</B></td>
+    </tr>
+    <tr align="center">
+        <td>
+            ![기프티콘1](https://github.com/Hyeon0706/imageRepository/assets/83438780/7b3656f5-84c8-45ba-861f-da9b3640dfb4)
+        </td>
+        <td>
+            ![기프티콘2](https://github.com/Hyeon0706/imageRepository/assets/83438780/f8308b4b-dca1-4609-b52a-9722195942da)
+        </td>
+        <td>
+            ![기프티콘3](https://github.com/Hyeon0706/imageRepository/assets/83438780/7e5231d0-7d58-4df9-8f60-6bc6d131ded3)
+        </td>
+        <td>
+            ![기프티콘4](https://github.com/Hyeon0706/imageRepository/assets/83438780/0fbf8763-f45d-4493-aa99-0cd92dccefe5)
+        </td>
+        <td>
+            ![기프티콘5](https://github.com/Hyeon0706/imageRepository/assets/83438780/c68f58b3-45bc-4d1d-885a-bdfd3b4494e9)
+        </td>
+    </tr>
+</table>
+
+9. `기프티콘` 페이지에서는 `내 기프티콘 조회/등록/삭제/상세조회`가 가능합니다.
+    
+    기프티콘 등록의 경우, 이미지 업로드를 통해 이루어집니다.

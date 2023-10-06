@@ -3,9 +3,10 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtom } from 'jotai';
 import { getShopData } from '@/api/map';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
+import selectedResultAtom from '@/store/atoms/selectedResultAtom';
 
 /**
  * 검색어 입력 및 검색 결과 출력 함수
@@ -13,6 +14,7 @@ import searchResultAtom from '@/store/atoms/searchResultAtom';
 export default function SimpleSearchBox() {
   const [inputValue, setInputValue] = useState('');
   const setSearchResult = useSetAtom(searchResultAtom);
+  const [selectedResult] = useAtom(selectedResultAtom);
   let debounceTimer: string | number | NodeJS.Timeout | undefined;
 
   const autocompletedShopList = useCallback(
@@ -49,6 +51,12 @@ export default function SimpleSearchBox() {
     }, delay);
     return () => clearTimeout(timerId);
   }, [inputValue, listOfShop, setSearchResult]);
+
+  useEffect(() => {
+    if (selectedResult !== null) {
+      setInputValue(selectedResult);
+    }
+  }, [selectedResult]);
 
   return (
     <input

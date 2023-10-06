@@ -43,7 +43,6 @@ export default function FunctionalSearchBox({
 
       <div className="mx-4 mt-1">
         <IconButton
-          type="submit"
           src={PrimarySearchIcon}
           alt="검색버튼"
           width="w-8"

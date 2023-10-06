@@ -3,13 +3,14 @@
 'use client';
 
 import React, { FormEvent, useEffect, useState } from 'react';
-import { useAtomValue } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
 import SearchBox from '../../molecules/FunctionalSearchBox';
-import curLocAtom from '@/store/atoms/curLocAtom';
+import selectedResultAtom from '@/store/atoms/selectedResultAtom';
 import searchResultAtom from '@/store/atoms/searchResultAtom';
+import curLocAtom from '@/store/atoms/curLocAtom';
 import {
   getSearchedPlace,
   getDirection,
@@ -20,6 +21,7 @@ import { fetchProfile } from '@/api/myPage';
 import CardCarousel from '@/components/atoms/CardCarousel';
 
 export default function Page() {
+  const setSelectedResult = useSetAtom(selectedResultAtom);
   const searchResult = useAtomValue(searchResultAtom);
   const curLoc = useAtomValue<any>(curLocAtom);
   const [shopLocs, setShopLocs] = useState([]);
@@ -45,8 +47,15 @@ export default function Page() {
       setShopLocs(data.data.shopList);
       const logo = await getImageSearchResults(`${result} 로고 고화질`);
       setImageURL(logo.image_url);
+      setSelectedResult(result);
     } catch (error) {
       console.error('가맹점 정보 불러오기 실패', error);
+      setSelectedResult(result);
+      Swal.fire(
+        '혜택을 받을 수 있는 가맹점이 없어요',
+        '다른 가맹점을 검색해보세요 (ex. 스타벅스)',
+        'warning'
+      );
     }
 
     try {

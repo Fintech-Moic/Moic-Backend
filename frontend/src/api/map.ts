@@ -106,3 +106,13 @@ export async function getDirection(str: Coordinates, fin: Coordinates) {
     return error;
   }
 }
+
+export const addMyBookmark = async (data: {
+  shopName: string;
+  shopLocation: string;
+}) =>
+  fetchPost({
+    url: `/bkm/regist`,
+    data,
+    isAuth: true,
+  });

@@ -24,6 +24,7 @@ import CardCarousel from '@/components/atoms/CardCarousel';
 import DispatchPin from '@/../public/DistancePin.png';
 import Modal from '@/components/atoms/Modal';
 import Spinner from '@/../public/assets/images/spinner.gif';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function Page() {
   const setSelectedResult = useSetAtom(selectedResultAtom);
@@ -39,10 +40,15 @@ export default function Page() {
   const [imageURL, setImageURL] = useState('');
   const [isMount, setIsMount] = useState(false);
   const router = useRouter();
+  // const mutation = useMutation({mutationKey : ["getCategoryShop"], mutationFn : })
 
   useEffect(() => {
     setIsMount(true);
   }, []);
+
+  // const cache = useQueryClient();
+  // const data = cache.getQueryData(['getCategoryShop']) as any;
+  // console.log(data)
 
   const ResultClickEvent = async (result: string) => {
     try {

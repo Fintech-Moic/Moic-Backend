@@ -1,22 +1,33 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2';
+// import { useRouter } from 'next/navigation';
 import { useAtomValue } from 'jotai';
+import Swal from 'sweetalert2';
 import OutlineButton from './OutlineButton';
 import { getCategoryShop } from '@/api/map';
 import curLocAtom from '@/store/atoms/curLocAtom';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import useCustomQuery from '@/hooks/useCustomQuery';
 
 interface WheelPickerProps {
   options: string[];
 }
 
 function Picker({ options }: WheelPickerProps) {
+  // const mutation = useMutation({mutationKey : ["getCategoryShop"], mutationFn : (selectedOption: any, lat: any, lng: any) => getCategoryShop(selectedOption as string, lat, lng)})
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const curLoc = useAtomValue<any>(curLocAtom);
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
-  };
+  // const router = useRouter()
 
   const handleConfirmButtonClick = async () => {
+    //   const {data, isLoading} = useCustomQuery({
+    //     queryKey: ['getCategoryShop', id],
+    //     queryFn: () => getCategoryShop(selectedOption as string, curLoc.lat, curLoc.lng),
+    //     staleTime: 1000 * 60 * 100,
+    //     refetchOnWindowFocus: false,
+    //     enabled: !!id,
+    // }, router
+    // )
+
     try {
       if (selectedOption) {
         const data = await getCategoryShop(
@@ -25,12 +36,26 @@ function Picker({ options }: WheelPickerProps) {
           curLoc.lng
         );
         console.log(selectedOption, data);
+        if (data.shopList) {
+          Swal.fire(
+            '혜택을 받을 수 있는 카테고리가 없네요',
+            '다른 카테고리를 선택해주세요',
+            'warning'
+          );
+        } else {
+          // 이동 코드 구현
+        }
       } else {
         Swal.fire('옵션이 선택되지 않았어요');
       }
     } catch (error) {
       console.error('데이터 가져오기 오류', error);
+      Swal.fire('일시적 오류', '다시 시도해주세요', 'warning');
     }
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
   return (
